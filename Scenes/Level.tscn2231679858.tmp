@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://216kvumeoqpb"]
+
+[ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/mousefollow.tscn" id="1_8rbpu"]
+[ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Gamescene.tscn" id="1_vsvp5"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/interface.tscn" id="1_xylue"]
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="2_8rbpu"]
+[ext_resource type="PackedScene" uid="uid://bo1gabovpt4cb" path="res://Scenes/enemy.tscn" id="4_fuudy"]
+
+[sub_resource type="Environment" id="Environment_8rbpu"]
+background_mode = 3
+tonemap_exposure = 1.05
+glow_enabled = true
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 2.97
+glow_bloom = 0.09
+glow_blend_mode = 1
+glow_hdr_threshold = 0.4
+fog_density = 0.084
+adjustment_enabled = true
+adjustment_brightness = 0.68
+adjustment_contrast = 1.18
+adjustment_saturation = 1.23
+
+[node name="Level" type="Node2D"]
+
+[node name="Interface" parent="." instance=ExtResource("1_xylue")]
+
+[node name="Mousefollow" parent="." instance=ExtResource("1_8rbpu")]
+z_index = 4
+
+[node name="Scene" parent="." instance=ExtResource("1_vsvp5")]
+StageScene = null
+
+[node name="Player" parent="." instance=ExtResource("2_8rbpu")]
+position = Vector2(-3, 3)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8rbpu")
+
+[node name="Enemy" parent="." instance=ExtResource("4_fuudy")]
+position = Vector2(-112, -126)
+
+[node name="AmmoSpawnMarker" type="Marker2D" parent="."]

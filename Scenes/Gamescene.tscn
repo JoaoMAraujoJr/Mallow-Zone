@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=3 uid="uid://j6ha40as0s3t"]
+
+[ext_resource type="Script" uid="uid://bbtne4sdjjpti" path="res://Scripts/GameScene.gd" id="1_n03b8"]
+[ext_resource type="PackedScene" uid="uid://ccdp414dq4f1w" path="res://Scenes/stages/stage_chess.tscn" id="2_urbuv"]
+[ext_resource type="Script" uid="uid://cmrm53qn3csqo" path="res://Scripts/trigger.gd" id="4_cxw4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urbuv"]
+size = Vector2(402, 403)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxw4p"]
+size = Vector2(50, 401.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmaar"]
+
+[node name="Scene" type="Node2D"]
+script = ExtResource("1_n03b8")
+ChessBiome = ExtResource("2_urbuv")
+
+[node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_urbuv")
+debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
+
+[node name="EnemySpawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_urbuv")
+debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="StageLeftPosition" type="Marker2D" parent="Positions"]
+position = Vector2(-410, 0)
+
+[node name="StageUpPosition" type="Marker2D" parent="Positions"]
+position = Vector2(0, -410)
+
+[node name="StageDownPosition" type="Marker2D" parent="Positions"]
+position = Vector2(0, 410)
+
+[node name="StageRightPosition" type="Marker2D" parent="Positions"]
+position = Vector2(410, 0)
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="Trigger_Right" type="Area2D" parent="Triggers" groups=["Trigger"]]
+script = ExtResource("4_cxw4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Right"]
+position = Vector2(177, 1.25)
+shape = SubResource("RectangleShape2D_cxw4p")
+debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
+
+[node name="Trigger_Up" type="Area2D" parent="Triggers" groups=["Trigger"]]
+rotation = -1.5707964
+script = ExtResource("4_cxw4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Up"]
+position = Vector2(177, 1.25)
+shape = SubResource("RectangleShape2D_cxw4p")
+debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
+
+[node name="Trigger_Left" type="Area2D" parent="Triggers" groups=["Trigger"]]
+rotation = 3.1415925
+script = ExtResource("4_cxw4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Left"]
+position = Vector2(177, 1.25)
+shape = SubResource("RectangleShape2D_cxw4p")
+debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
+
+[node name="Trigger_Down" type="Area2D" parent="Triggers" groups=["Trigger"]]
+rotation = 1.5707964
+script = ExtResource("4_cxw4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Down"]
+position = Vector2(177, 1.25)
+shape = SubResource("RectangleShape2D_cxw4p")
+debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
+
+[node name="Checkers" type="Node2D" parent="."]
+
+[node name="StageCheckerLeft" type="Area2D" parent="Checkers" groups=["Checker"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerLeft"]
+position = Vector2(-410, 0)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_jmaar")
+
+[node name="StageCheckerUp" type="Area2D" parent="Checkers" groups=["Checker"]]
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerUp"]
+position = Vector2(-410, 0)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_jmaar")
+
+[node name="StageCheckerRight" type="Area2D" parent="Checkers" groups=["Checker"]]
+rotation = 3.1415927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerRight"]
+position = Vector2(-410, 0)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_jmaar")
+
+[node name="StageCheckerDown" type="Area2D" parent="Checkers" groups=["Checker"]]
+rotation = 4.712389
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerDown"]
+position = Vector2(-410, 0)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_jmaar")
+
+[node name="AmmoSpawnMarker" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="Triggers/Trigger_Right" to="." method="_on_trigger_right_entered"]
+[connection signal="body_entered" from="Triggers/Trigger_Up" to="." method="_on_trigger_up_entered"]
+[connection signal="body_entered" from="Triggers/Trigger_Left" to="." method="_on_trigger_left_entered"]
+[connection signal="body_entered" from="Triggers/Trigger_Down" to="." method="_on_trigger_down_entered"]

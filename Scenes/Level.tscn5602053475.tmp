@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://216kvumeoqpb"]
+
+[ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/mousefollow.tscn" id="1_8rbpu"]
+[ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Gamescene.tscn" id="1_vsvp5"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/interface.tscn" id="1_xylue"]
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="2_8rbpu"]
+[ext_resource type="PackedScene" uid="uid://bo1gabovpt4cb" path="res://Scenes/enemy.tscn" id="4_fuudy"]
+[ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/ammo.tscn" id="4_tj5wv"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Interface" parent="." instance=ExtResource("1_xylue")]
+
+[node name="Mousefollow" parent="." instance=ExtResource("1_8rbpu")]
+z_index = 4
+
+[node name="Scene" parent="." instance=ExtResource("1_vsvp5")]
+StageScene = ExtResource("1_vsvp5")
+AmmoScene = ExtResource("4_tj5wv")
+EnemyScene = ExtResource("4_fuudy")
+isthisroot = true
+
+[node name="Player" parent="." instance=ExtResource("2_8rbpu")]
+position = Vector2(-3, 3)
+
+[node name="Enemy" parent="." instance=ExtResource("4_fuudy")]
+position = Vector2(-112, -126)

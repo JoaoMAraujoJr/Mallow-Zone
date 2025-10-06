@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://ccdp414dq4f1w"]
+
+[ext_resource type="Texture2D" uid="uid://dmnoi65rgtqp1" path="res://Assets/floor/floortexture.png" id="1_a6xb7"]
+[ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_vpc23"]
+[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_m518n"]
+[ext_resource type="Texture2D" uid="uid://bq41yr8kvcqdb" path="res://Assets/floor/walltexture.png" id="2_vpc23"]
+[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_r4p5m"]
+[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_r4p5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
+size = Vector2(411, 412)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idggg"]
+shader = ExtResource("2_m518n")
+shader_parameter/noise_tex = ExtResource("3_r4p5m")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
+shader_parameter/edge_width = 0.05
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_u3665"]
+diffuse_texture = ExtResource("1_a6xb7")
+texture_filter = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4p5m"]
+shader = ExtResource("2_m518n")
+shader_parameter/noise_tex = ExtResource("3_r4p5m")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
+shader_parameter/edge_width = 0.05
+
+[node name="StageChess" type="Node2D"]
+script = ExtResource("1_vpc23")
+
+[node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
+z_index = -2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
+z_index = -2
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_a6xb7")
+
+[node name="EnemySpawnArea" type="Area2D" parent="."]
+z_index = -2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+z_index = -2
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_a6xb7")
+debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
+
+[node name="top" type="Sprite2D" parent="."]
+z_index = -3
+material = SubResource("ShaderMaterial_idggg")
+scale = Vector2(0.4011719, 0.4011719)
+texture = SubResource("CanvasTexture_u3665")
+script = ExtResource("5_r4p5m")
+
+[node name="bottom" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.41960785)
+z_index = -6
+material = SubResource("ShaderMaterial_r4p5m")
+position = Vector2(-0.39999998, 307.2)
+scale = Vector2(0.4011719, 0.19960937)
+texture = ExtResource("2_vpc23")
+script = ExtResource("5_r4p5m")

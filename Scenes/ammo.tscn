@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctgqpxo0oqo8t"]
+
+[ext_resource type="Texture2D" uid="uid://bdx16w1p88exn" path="res://Assets/player/ammo.png" id="1_mq6ge"]
+[ext_resource type="Script" uid="uid://bac8p0wlsel7l" path="res://Scripts/ammo.gd" id="1_pncbt"]
+[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_7r188"]
+[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uunpu"]
+[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_uunpu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j57vc"]
+shader = ExtResource("2_7r188")
+shader_parameter/noise_tex = ExtResource("3_uunpu")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
+shader_parameter/edge_width = 0.05
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pncbt"]
+radius = 40.012497
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pncbt"]
+polygon = PackedVector2Array(-27, 14, -22, 18, 21, 18, 27, 14, 27, -18, 23, -22, -24, -22, -28, -18)
+
+[node name="ammo" type="Node2D"]
+script = ExtResource("1_pncbt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_j57vc")
+scale = Vector2(1.9885328, 1.9885328)
+texture = ExtResource("1_mq6ge")
+offset = Vector2(-0.09226676, -3.1095665)
+script = ExtResource("5_uunpu")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pncbt")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_pncbt")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

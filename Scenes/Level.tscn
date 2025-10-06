@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://216kvumeoqpb"]
+
+[ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/level.gd" id="1_tj5wv"]
+[ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Gamescene.tscn" id="1_vsvp5"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/interface.tscn" id="1_xylue"]
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="2_8rbpu"]
+
+[sub_resource type="Gradient" id="Gradient_xylue"]
+offsets = PackedFloat32Array(0, 0.4041096, 0.7226027, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.033529483, 0.13237768, 0.038184483, 1, 0.41960785, 0.5019608, 0.1882353, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tj5wv"]
+gradient = SubResource("Gradient_xylue")
+
+[sub_resource type="Environment" id="Environment_xylue"]
+background_mode = 3
+tonemap_exposure = 1.3
+glow_enabled = true
+glow_levels/1 = 0.95
+glow_levels/2 = 2.85
+glow_levels/3 = 3.48
+glow_levels/4 = 3.8
+glow_normalized = true
+glow_bloom = 0.29
+glow_blend_mode = 1
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_tj5wv")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj5wv"]
+blend_mode = 3
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_tj5wv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xylue")
+
+[node name="Interface" parent="." instance=ExtResource("1_xylue")]
+
+[node name="Scene" parent="." instance=ExtResource("1_vsvp5")]
+StageScene = null
+MedikitScene = null
+AmmoScene = null
+EnemyScene = null
+BHScene = null
+isthisroot = true
+
+[node name="Player" parent="." instance=ExtResource("2_8rbpu")]
+position = Vector2(-3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("CanvasItemMaterial_tj5wv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.91363955, 0.27235112, 1)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

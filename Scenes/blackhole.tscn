@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo4itjsycgk4x"]
+
+[ext_resource type="Shader" uid="uid://dkjmqwpv5ql48" path="res://Scripts/shaders/blackhole.gdshader" id="1_xl8aw"]
+[ext_resource type="Texture2D" uid="uid://bug5w7nfiuu82" path="res://Assets/objects/blackhole.png" id="2_xl8aw"]
+[ext_resource type="Texture2D" uid="uid://chbghrjef56v5" path="res://Assets/objects/blackhole2.png" id="2_xnsgi"]
+
+[sub_resource type="Curve" id="Curve_xl8aw"]
+_data = [Vector2(0.0049504973, 0.47431022), 0.0, 0.0, 0, 0, Vector2(0.12376237, 0.1960038), 1.5900012, -0.40674445, 0, 0, Vector2(0.23514852, 0.87012374), 0.0, -10.448575, 0, 0, Vector2(0.28960395, 0.9690771), -9.577869, -4.420551, 0, 0, Vector2(0.5247525, 0.53615606), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_xnsgi"]
+curve = SubResource("Curve_xl8aw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hko3c"]
+shader = ExtResource("1_xl8aw")
+shader_parameter/curve = SubResource("CurveTexture_xnsgi")
+shader_parameter/rotation_speed = 1.0
+
+[node name="Blackhole" type="Node2D"]
+z_index = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_hko3c")
+scale = Vector2(0.5776042, 0.5776042)
+texture = ExtResource("2_xnsgi")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Sprite2D"]
+copy_mode = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = 3
+scale = Vector2(0.6348227, 0.6348227)
+texture = ExtResource("2_xl8aw")

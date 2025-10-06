@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://bodu84frg2ffg"]
+
+[ext_resource type="Script" uid="uid://b4t1028gcnf1d" path="res://Scripts/objects/medkit.gd" id="1_ifbh6"]
+[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_odgc7"]
+[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_2en3g"]
+[ext_resource type="Texture2D" uid="uid://cj0axrp7ocdlm" path="res://Assets/objects/hp.png" id="4_ifbh6"]
+[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_pdwmb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j57vc"]
+shader = ExtResource("2_odgc7")
+shader_parameter/noise_tex = ExtResource("3_2en3g")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
+shader_parameter/edge_width = 0.05
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pncbt"]
+radius = 40.012497
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pncbt"]
+polygon = PackedVector2Array(-33, 18, -30, 20, 26, 20, 30, 18, 30, -25, 27, -28, -31, -28, -33, -26)
+
+[node name="medkit" type="Node2D"]
+script = ExtResource("1_ifbh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_j57vc")
+position = Vector2(-1.9999999, 0.99999994)
+scale = Vector2(1.9885328, 1.9885328)
+texture = ExtResource("4_ifbh6")
+offset = Vector2(-0.09226676, -3.1095665)
+script = ExtResource("5_pdwmb")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_pncbt")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_pncbt")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

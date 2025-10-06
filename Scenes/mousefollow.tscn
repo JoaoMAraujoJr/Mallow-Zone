@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dykkt314can4l"]
+
+[ext_resource type="Script" uid="uid://d4iycqdfuokf8" path="res://Scripts/mousefollow.gd" id="1_iojfn"]
+[ext_resource type="Texture2D" uid="uid://wjpy8iuq5q2b" path="res://Assets/player/mouse.png" id="1_k8g02"]
+
+[node name="Mousefollow" type="Sprite2D"]
+texture = ExtResource("1_k8g02")
+script = ExtResource("1_iojfn")
