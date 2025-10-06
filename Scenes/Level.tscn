@@ -39,11 +39,6 @@ environment = SubResource("Environment_xylue")
 [node name="Interface" parent="." instance=ExtResource("1_xylue")]
 
 [node name="Scene" parent="." instance=ExtResource("1_vsvp5")]
-StageScene = null
-MedikitScene = null
-AmmoScene = null
-EnemyScene = null
-BHScene = null
 isthisroot = true
 
 [node name="Player" parent="." instance=ExtResource("2_8rbpu")]

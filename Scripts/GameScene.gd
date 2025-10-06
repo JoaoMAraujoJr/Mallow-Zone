@@ -25,7 +25,7 @@ extends Node2D
 
 # ===== BIOMES =====
 @export var ChessBiome: PackedScene
-@export var StageScene: PackedScene = preload("res://Scenes/Gamescene.tscn")
+var StageScene: PackedScene = preload("res://Scenes/Gamescene.tscn")
 #==== SPAWNABLES =====
 @export var MedikitScene: PackedScene = preload("res://Scenes/medikit.tscn")
 @export var AmmoScene: PackedScene = preload("res://Scenes/ammo.tscn")
@@ -146,18 +146,17 @@ func _spawn_stage_at_deferred(position: Vector2, trigger: Area2D) -> void:
 		get_tree().current_scene.add_child(medkit)
 		print("medkit spawnada em: ", medkit.global_position)
 		
+	# Spawn enemy
+	if rng.randf() <= 0.5 and !isthisroot:
+		var enemy = EnemyScene.instantiate()
+		enemy.global_position = _get_random_point_in_stage(new_stage)
+		get_tree().current_scene.add_child(enemy)
+		print("Inimigo spawnado em: ", enemy.global_position)
 		
-		# Spawn enemy
-		if rng.randf() <= 0.5 and !isthisroot:
-			var enemy = EnemyScene.instantiate()
-			enemy.global_position = _get_random_point_in_stage(new_stage)
-			get_tree().current_scene.add_child(enemy)
-			print("Inimigo spawnado em: ", enemy.global_position)
-		
-		#Spawn de BH
-		if rng.randf() <= 0.1 and !isthisroot:
-			if (Global.player_x > 10000.0 or Global.player_x < -10000.0 or Global.player_y > 10000.0 or Global.player_y < -10000.0) :
-				var BH = BHScene.instantiate()
-				BH.global_position = _get_random_point_in_stage(new_stage)
-				get_tree().current_scene.add_child(BH)
-				print("Inimigo spawnado em: ", BH.global_position)
+	#Spawn de BH
+	if rng.randf() <= 0.1 and !isthisroot:
+		if (Global.player_x > 10000.0 or Global.player_x < -10000.0 or Global.player_y > 10000.0 or Global.player_y < -10000.0) :
+			var BH = BHScene.instantiate()
+			BH.global_position = _get_random_point_in_stage(new_stage)
+			get_tree().current_scene.add_child(BH)
+			print("Inimigo spawnado em: ", BH.global_position)
