@@ -21,7 +21,6 @@ var bloodscene = preload('res://Scenes/particles.tscn')
 
 var knockbackvelocity : Vector2 = Vector2.ZERO
 var pushingforce: Vector2 = Vector2.ZERO
-var isbeingpushed: bool = false
 var followMode: bool = false
 var SPEED: float = 0
 
@@ -38,14 +37,12 @@ func _physics_process(delta: float) -> void:
 	if followMode:
 		var bodies = _vision.get_overlapping_bodies()
 		for body in bodies:
-			if body.is_in_group("PlayerArea"):
+			if body.has_method("addToPushingVelocity"):
 				var direction = (body.global_position - global_position).normalized()
 
 				# movimento do buraco negro
-				if !isbeingpushed:
-					velocity = direction * SPEED + knockbackvelocity
-				else:
-					velocity = direction * SPEED + knockbackvelocity + pushingforce
+
+				velocity = direction * SPEED + knockbackvelocity
 
 				# força de sucção no player
 				var offset: Vector2 = global_position - body.global_position
@@ -54,6 +51,13 @@ func _physics_process(delta: float) -> void:
 				body.addToPushingVelocity(offset.normalized() * force)
 				break
 				
+		var enemy_areas= _hitbox.get_overlapping_areas()
+		for area in enemy_areas:		
+			if area.is_in_group("Enemy"):
+				var enemy = area.get_parent()
+				if enemy.has_method("setHealth"):
+					enemy.setHealth(-10)
+					
 		if can_damage:
 			var hit_bodies = _hitbox.get_overlapping_bodies()
 			for body in hit_bodies:

@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 		_isbackwards = mouse_dir.y < 0
 		
 		_gunsprite.flip_v = _isbackwards
-		_gunsprite.z_index = -1 if _isbackwards else 1
+		_gunsprite.z_index = -1 if _isbackwards else 0
 		
 			
 			#calcula o recoil velocity do tiro

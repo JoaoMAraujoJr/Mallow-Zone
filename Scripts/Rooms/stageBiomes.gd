@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var stage_area = $StageArea
 @onready var enemy_spawn_area = $EnemySpawnArea
+@onready var _isroot = false
 
 func _ready() -> void:
 	pass

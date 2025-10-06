@@ -1,3 +1,4 @@
+class_name Stage
 extends Node2D
 
 # ===== NODES =====
@@ -25,6 +26,7 @@ extends Node2D
 
 # ===== BIOMES =====
 @export var ChessBiome: PackedScene
+@export var GrassBiome: PackedScene
 var StageScene: PackedScene = preload("res://Scenes/Gamescene.tscn")
 #==== SPAWNABLES =====
 @export var MedikitScene: PackedScene = preload("res://Scenes/medikit.tscn")
@@ -62,9 +64,17 @@ func _ready() -> void:
 			get_tree().current_scene.add_child.call_deferred(plataform)
 			StageArea = plataform.get_stage_area()
 			EnemySpawnArea = plataform.get_enemy_area()
-			
-		
-		
+			if isthisroot:
+				plataform._isroot = true
+		"grasslands":
+			var plataform = GrassBiome.instantiate()
+			plataform. global_position = global_position
+			get_tree().current_scene.add_child.call_deferred(plataform)
+			StageArea = plataform.get_stage_area()
+			EnemySpawnArea = plataform.get_enemy_area()
+			if isthisroot:
+				plataform._isroot = true
+				
 # ===== TRIGGERS =====
 func _on_trigger_left_entered(body):
 	if !isLeftTriggered and body.is_in_group("PlayerArea"):
@@ -103,11 +113,11 @@ func _get_random_point_in_stage(stage: Node2D) -> Vector2:
 		return area.global_position
 
 # ===== SPAWN STAGE =====
-func _spawn_stage_at_deferred(position: Vector2, trigger: Area2D) -> void:
+func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 	if trigger.is_queued_for_deletion():
 		return
 	trigger.queue_free()
-	print("Tentando spawn em: ", position, " trigger: ", trigger.name)
+	print("Tentando spawn em: ", markerposition, " trigger: ", trigger.name)
 
 	# Choose the checker
 	var checker: Area2D
@@ -127,36 +137,40 @@ func _spawn_stage_at_deferred(position: Vector2, trigger: Area2D) -> void:
 				return
 
 	# Instantiate new stage
-	var new_stage = StageScene.instantiate()
-	new_stage.position = position
+	var new_stage : Stage = StageScene.instantiate()
+	new_stage.position = markerposition
 	add_child(new_stage)
 	trigger.queue_free()
 	print("Stage spawnada em: ", new_stage.global_position)
+	
+	_spawn_entities_at_Stage(new_stage)
 
+
+func _spawn_entities_at_Stage(stage : Stage):
 	# Spawn ammo inside stage
 	if rng.randf() <= 0.8 and !isthisroot:
 		var ammo = AmmoScene.instantiate()
-		ammo.global_position = _get_random_point_in_stage(new_stage)
+		ammo.global_position = _get_random_point_in_stage(stage)
 		get_tree().current_scene.add_child(ammo)
 		print("Munição spawnada em: ", ammo.global_position)
 
 	if rng.randf() <= 0.05 and !isthisroot:
 		var medkit = MedikitScene.instantiate()
-		medkit.global_position = _get_random_point_in_stage(new_stage)
+		medkit.global_position = _get_random_point_in_stage(stage)
 		get_tree().current_scene.add_child(medkit)
 		print("medkit spawnada em: ", medkit.global_position)
 		
 	# Spawn enemy
 	if rng.randf() <= 0.5 and !isthisroot:
 		var enemy = EnemyScene.instantiate()
-		enemy.global_position = _get_random_point_in_stage(new_stage)
+		enemy.global_position = _get_random_point_in_stage(stage)
 		get_tree().current_scene.add_child(enemy)
 		print("Inimigo spawnado em: ", enemy.global_position)
 		
 	#Spawn de BH
 	if rng.randf() <= 0.1 and !isthisroot:
-		if (Global.player_x > 10000.0 or Global.player_x < -10000.0 or Global.player_y > 10000.0 or Global.player_y < -10000.0) :
+		if (Global.currentbiome == "chess") :
 			var BH = BHScene.instantiate()
-			BH.global_position = _get_random_point_in_stage(new_stage)
+			BH.global_position = _get_random_point_in_stage(stage)
 			get_tree().current_scene.add_child(BH)
 			print("Inimigo spawnado em: ", BH.global_position)

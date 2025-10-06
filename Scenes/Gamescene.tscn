@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://j6ha40as0s3t"]
+[gd_scene load_steps=8 format=3 uid="uid://j6ha40as0s3t"]
 
 [ext_resource type="Script" uid="uid://bbtne4sdjjpti" path="res://Scripts/GameScene.gd" id="1_n03b8"]
 [ext_resource type="PackedScene" uid="uid://ccdp414dq4f1w" path="res://Scenes/stages/stage_chess.tscn" id="2_urbuv"]
+[ext_resource type="PackedScene" uid="uid://fsdix0jl7nvw" path="res://Scenes/stages/stage_grass.tscn" id="3_cxw4p"]
 [ext_resource type="Script" uid="uid://cmrm53qn3csqo" path="res://Scripts/trigger.gd" id="4_cxw4p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urbuv"]
@@ -15,6 +16,7 @@ size = Vector2(50, 401.5)
 [node name="Scene" type="Node2D"]
 script = ExtResource("1_n03b8")
 ChessBiome = ExtResource("2_urbuv")
+GrassBiome = ExtResource("3_cxw4p")
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 
