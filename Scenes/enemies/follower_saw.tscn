@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdvi88e42jjsb"]
+
+[ext_resource type="Script" uid="uid://ysjkink7woy0" path="res://Scripts/enemies/follower_saw.gd" id="1_nq37f"]
+
+[node name="FollowerSaw" type="Node2D"]
+script = ExtResource("1_nq37f")
+
+[node name="startimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

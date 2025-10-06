@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bo1gabovpt4cb"]
 
-[ext_resource type="Script" uid="uid://cblkcpos51yeu" path="res://Scripts/enemy.gd" id="1_hghv2"]
+[ext_resource type="Script" uid="uid://cblkcpos51yeu" path="res://Scripts/enemies/enemy.gd" id="1_hghv2"]
 [ext_resource type="Texture2D" uid="uid://wkmj7ds68ym" path="res://Assets/player/monster.png" id="2_afpow"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/player/proto_light_2.png" id="3_afpow"]
 
@@ -11,6 +11,7 @@ radius = 487.45258
 radius = 29.274563
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_afpow"]
+cull_mode = 1
 polygon = PackedVector2Array(-13, 15, -16, 12, -17, 10, -19, 6, -20, 1, -19, -6, -16, -12, -12, -16, -6, -19, 0, -20, 6, -19, 12, -16, 15, -13, 18, -8, 20, -1, 19, 6, 17, 10, 13, 15, 8, 18, 0, 20, -8, 18)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_287tu"]

@@ -29,10 +29,10 @@ extends Node2D
 @export var GrassBiome: PackedScene
 var StageScene: PackedScene = preload("res://Scenes/Gamescene.tscn")
 #==== SPAWNABLES =====
-@export var MedikitScene: PackedScene = preload("res://Scenes/medikit.tscn")
-@export var AmmoScene: PackedScene = preload("res://Scenes/ammo.tscn")
-@export var EnemyScene: PackedScene = preload("res://Scenes/enemy.tscn")
-@export var BHScene: PackedScene = preload("res://Scenes/blackhole_enemy.tscn")
+@export var MedikitScene: PackedScene = preload("res://Scenes/objects/medikit.tscn")
+@export var AmmoScene: PackedScene = preload("res://Scenes/objects/ammo.tscn")
+@export var EnemyScene: PackedScene = preload("res://Scenes/enemies/enemy.tscn")
+@export var BHScene: PackedScene = preload("res://Scenes/enemies/blackhole_enemy.tscn")
 # ===== FLAGS =====
 var isLeftTriggered := false
 var isRightTriggered := false

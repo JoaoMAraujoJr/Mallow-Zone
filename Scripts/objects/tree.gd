@@ -1,8 +1,10 @@
 extends StaticBody2D
 
 @onready var leafs : LightOccluder2D = $leafs
+@onready var _animplayer : AnimationPlayer = $AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_animplayer.play("treemovement")
 	pass # Replace with function body.
 
 

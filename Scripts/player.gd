@@ -1,7 +1,7 @@
 # Attach this script to a CharacterBody2D node
 extends CharacterBody2D
 
-var bulletscene = preload('res://Scenes/bullet.tscn')
+var bulletscene = preload('res://Scenes/objects/bullet.tscn')
 var bulletParticle = preload("res://Scenes/bullet_particle.tscn")
 
 @onready var _iswalking : bool = false

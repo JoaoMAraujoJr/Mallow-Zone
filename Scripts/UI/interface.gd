@@ -30,6 +30,8 @@ func _on_button_pressed() -> void:
 	Global.kills= 0
 	Global.enemySpeed= 50.0
 	Global.ammo= Global.ammoMax
+	Global.player_x = 0.0
+	Global.player_y = 0.0
 	Global.currentbiome="grasslands"
 	get_tree().change_scene_to_file("res://Scenes/Level.tscn")
 	pass # Replace with function body.

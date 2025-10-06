@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bbvngwwmb0afo"]
 
-[ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/interface.gd" id="1_j00uw"]
+[ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
 [ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
 [ext_resource type="Texture2D" uid="uid://cb44i5ksnihh7" path="res://Assets/button/reset_button.png" id="4_yg6la"]

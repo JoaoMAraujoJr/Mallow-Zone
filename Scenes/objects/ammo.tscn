@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctgqpxo0oqo8t"]
 
 [ext_resource type="Texture2D" uid="uid://bdx16w1p88exn" path="res://Assets/player/ammo.png" id="1_mq6ge"]
-[ext_resource type="Script" uid="uid://bac8p0wlsel7l" path="res://Scripts/ammo.gd" id="1_pncbt"]
+[ext_resource type="Script" uid="uid://bac8p0wlsel7l" path="res://Scripts/objects/ammo.gd" id="1_pncbt"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_7r188"]
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uunpu"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_uunpu"]

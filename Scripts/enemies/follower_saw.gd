@@ -9,9 +9,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func _on_enemy_timer_timeout() -> void:
-	if Global.enemySpeed < 500.0:
-		Global.enemySpeed +=10.0
-	pass # Replace with function body.
