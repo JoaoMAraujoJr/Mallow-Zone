@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 		var hit_bodies = _damageHitbox.get_overlapping_bodies()
 		for body in hit_bodies:
 			if body.is_in_group("PlayerArea"):
-				_deleteItSelf.start(0.0)
 				if can_damage:
 					if body.has_method("addToHealth"):
 						body.addToHealth(damage)
@@ -103,3 +102,14 @@ func _StopSaw() -> void:
 func _on_time_to_stop_timeout() -> void:
 	_animplay.play("stopRotation")
 	pass # Replace with function body.
+
+
+func _on_player_detector_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerArea"):
+		_deleteItSelf.stop()
+
+func _on_player_detector_body_exited(body: Node2D) -> void:
+	if body.is_in_group("PlayerArea"):
+		if is_inside_tree() and is_instance_valid(_deleteItSelf):
+			if _deleteItSelf.is_inside_tree():
+				_deleteItSelf.start()
