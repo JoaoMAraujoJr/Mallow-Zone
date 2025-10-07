@@ -14,7 +14,7 @@ var canChase: bool = false
 var Dir: Vector2 = Vector2.ZERO
 @onready var hitCounter := 0
 @onready var can_damage : bool = false
-
+@onready var _itstoped : bool = false
 
 @export var SPEED: float = 500.0
 
@@ -37,9 +37,16 @@ func _physics_process(delta: float) -> void:
 		_sawSprite.texture.diffuse_texture = preload("res://Assets/objects/saw/saw_blooded.png")
 	elif hitCounter >= 2:
 		_sawSprite.texture.diffuse_texture = preload("res://Assets/objects/saw/saw_blooded_level2.png")
-		
+	
+	if _itstoped:
+		canChase = false
+		SPEED = lerp(SPEED, 0.0, delta * 2.0)  # o "2.0" controla a rapidez com que para
+		if SPEED < 1.0:
+			SPEED = 0.0  # garante que zere totalmente	
 	if canChase:
+
 		velocity = Dir * SPEED
+		
 		move_and_slide()
 
 		var hit_bodies = _damageHitbox.get_overlapping_bodies()
@@ -86,4 +93,13 @@ func _on_damage_timer_timeout() -> void:
 func _on_deleteit_self_timer_timeout() -> void:
 	print("saw deleted for being too far")
 	queue_free()
+	pass # Replace with function body.
+
+func _StopSaw() -> void:
+	_itstoped = true
+	
+
+
+func _on_time_to_stop_timeout() -> void:
+	_animplay.play("stopRotation")
 	pass # Replace with function body.

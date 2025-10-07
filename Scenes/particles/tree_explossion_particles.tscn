@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7xbhtxd03xn4"]
+
+[ext_resource type="Script" uid="uid://bfpfh5q8n3err" path="res://Scripts/effects/particles.gd" id="1_k6j3c"]
+[ext_resource type="Texture2D" uid="uid://cm0sua2ppph2m" path="res://Assets/objects/tree_leaves.png" id="1_oeaq8"]
+
+[sub_resource type="Curve" id="Curve_k6j3c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7803738, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k6j3c"]
+curve = SubResource("Curve_k6j3c")
+
+[sub_resource type="Curve" id="Curve_45x7y"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.0112361), 0.0, 0.0, 0, 0, Vector2(1, 1.6404495), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vmj2t"]
+curve = SubResource("Curve_45x7y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tosjq"]
+lifetime_randomness = 0.09
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+direction = Vector3(0, -1, 0)
+spread = 14.324
+initial_velocity_min = 94.93
+initial_velocity_max = 261.97998
+angular_velocity_min = -55.380016
+angular_velocity_max = 55.379982
+gravity = Vector3(0, 98, 0)
+scale_min = 3.1999998
+scale_max = 3.1999998
+scale_curve = SubResource("CurveTexture_vmj2t")
+alpha_curve = SubResource("CurveTexture_k6j3c")
+
+[node name="treeExplossionParticles" type="Node2D"]
+script = ExtResource("1_k6j3c")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = ExtResource("1_oeaq8")
+lifetime = 4.05
+one_shot = true
+explosiveness = 0.44
+randomness = 0.51
+process_material = SubResource("ParticleProcessMaterial_tosjq")

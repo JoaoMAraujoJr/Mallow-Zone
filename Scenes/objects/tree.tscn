@@ -169,6 +169,9 @@ collision_mask = 2
 position = Vector2(6.5854554, -0.28632414)
 polygon = PackedVector2Array(-41.803326, 26.914469, -77.021194, -30.923008, -36.64949, 22.046959, -13.743559, 23.478579, 4.2948627, 24.337551, 23.47858, 22.046959, 68.14514, -38.940083, 26.914469, 27.773441)
 
+[node name="ParticleSpawnerMarker" type="Marker2D" parent="."]
+position = Vector2(0, -26.91447)
+
 [connection signal="body_entered" from="leafArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="leafArea" to="." method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="shootDetector" to="." method="_on_shoot_detector_body_entered"]
+[connection signal="area_entered" from="shootDetector" to="." method="_on_shoot_detector_area_entered"]

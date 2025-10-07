@@ -20,6 +20,7 @@ radius = 40.012497
 polygon = PackedVector2Array(-27, 14, -22, 18, 21, 18, 27, 14, 27, -18, 23, -22, -24, -22, -28, -18)
 
 [node name="ammo" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_pncbt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
