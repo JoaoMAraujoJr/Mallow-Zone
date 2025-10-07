@@ -11,7 +11,7 @@ height = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
 radius = 8.062258
 
-[node name="bullet" type="CharacterBody2D"]
+[node name="bullet" type="CharacterBody2D" groups=["Bullet"]]
 script = ExtResource("1_xjght")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

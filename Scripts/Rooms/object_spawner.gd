@@ -10,4 +10,5 @@ func _ready():
 			if random_scene == null:
 				return
 			var instance = random_scene.instantiate()
-			add_child(instance)
+			instance .global_position = global_position
+			get_tree().current_scene.add_child(instance)

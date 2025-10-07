@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccdp414dq4f1w"]
+[gd_scene load_steps=12 format=3 uid="uid://ccdp414dq4f1w"]
 
 [ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_vpc23"]
 [ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_idggg"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_m518n"]
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_r4p5m"]
+[ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="3_yjv11"]
 [ext_resource type="Texture2D" uid="uid://dmnoi65rgtqp1" path="res://Assets/floor/chess/floortexture.png" id="4_r4p5m"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_r4p5m"]
 [ext_resource type="Texture2D" uid="uid://bq41yr8kvcqdb" path="res://Assets/floor/chess/walltexture.png" id="6_r4p5m"]
@@ -29,9 +30,10 @@ shader_parameter/edge_width = 0.05
 script = ExtResource("1_vpc23")
 
 [node name="objectSpawner" type="Node2D" parent="."]
-position = Vector2(-0.39999998, 307.2)
+position = Vector2(-0.39999998, 6.1035156e-05)
 scale = Vector2(0.4011719, 0.19960937)
 script = ExtResource("2_idggg")
+SpawnableObjectList = Array[PackedScene]([ExtResource("3_yjv11"), null, null, null])
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 z_index = -2

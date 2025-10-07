@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fsdix0jl7nvw"]
+[gd_scene load_steps=13 format=3 uid="uid://fsdix0jl7nvw"]
 
 [ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_42ut7"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_22vud"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_ilyrf"]
 [ext_resource type="PackedScene" uid="uid://cbf4muc7d60h" path="res://Scenes/objects/tree.tscn" id="3_ytrwr"]
 [ext_resource type="Texture2D" uid="uid://cvx7qhxej7ak3" path="res://Assets/floor/grass/Grassfloortexture.png" id="4_t23bk"]
+[ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="4_xsqpy"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1fha2"]
 [ext_resource type="Texture2D" uid="uid://6q2esd6l67ao" path="res://Assets/floor/grass/Grassfloortexture_bottom.png" id="6_sd4kd"]
 
@@ -31,7 +32,7 @@ script = ExtResource("1_42ut7")
 
 [node name="objectSpawner" type="Node2D" parent="."]
 script = ExtResource("2_bmnd4")
-SpawnableObjectList = Array[PackedScene]([ExtResource("3_ytrwr"), null, null, null, null])
+SpawnableObjectList = Array[PackedScene]([ExtResource("3_ytrwr"), null, null, ExtResource("4_xsqpy"), null])
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 z_index = -2

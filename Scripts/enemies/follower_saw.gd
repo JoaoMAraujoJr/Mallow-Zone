@@ -1,11 +1,89 @@
-extends Node2D
+extends CharacterBody2D
+
+@onready var _startTimer: Timer = $StartTimer
+@onready var _animplay: AnimationPlayer = $AnimationPlayer
+@onready var _playerDetector: Area2D = $PlayerDetector
+@onready var _damageHitbox : Area2D = $damagehitbox
+@onready var _damage_timer: Timer = $DamageTimer 
+@onready var _deleteItSelf: Timer = $DeleteitSelfTimer
+@onready var _sawSprite : Sprite2D = $Saw
+
+@export var damage = -20
+
+var canChase: bool = false
+var Dir: Vector2 = Vector2.ZERO
+@onready var hitCounter := 0
+@onready var can_damage : bool = false
 
 
-# Called when the node enters the scene tree for the first time.
+@export var SPEED: float = 500.0
+
+# Texturas independentes (carregadas uma vez)
+const NORMAL_TEXTURE = preload("res://Assets/objects/saw/saw.png")
+const BLOODED_TEXTURE = preload("res://Assets/objects/saw/saw_blooded.png")
+const BLOODED_LVL2_TEXTURE = preload("res://Assets/objects/saw/saw_blooded_level2.png")
+
 func _ready() -> void:
+	# Faz uma cópia da textura do Sprite para não afetar o modelo base
+	_sawSprite.texture = _sawSprite.texture.duplicate()
+	_startTimer.start()
+
+
+func _physics_process(delta: float) -> void:
+	
+	_update_texture()
+	
+	if hitCounter == 1 :
+		_sawSprite.texture.diffuse_texture = preload("res://Assets/objects/saw/saw_blooded.png")
+	elif hitCounter >= 2:
+		_sawSprite.texture.diffuse_texture = preload("res://Assets/objects/saw/saw_blooded_level2.png")
+		
+	if canChase:
+		velocity = Dir * SPEED
+		move_and_slide()
+
+		var hit_bodies = _damageHitbox.get_overlapping_bodies()
+		for body in hit_bodies:
+			if body.is_in_group("PlayerArea"):
+				_deleteItSelf.start(0.0)
+				if can_damage:
+					if body.has_method("addToHealth"):
+						body.addToHealth(damage)
+						hitCounter +=1
+						# inicia cooldown
+						can_damage = false
+						_damage_timer.start()
+
+			elif body.has_method("setHealth"):
+				hitCounter +=1
+				body.setHealth(-30)
+
+
+func _update_texture() -> void:
+	match hitCounter:
+		1:
+			_sawSprite.texture.diffuse_texture = BLOODED_TEXTURE
+		2, _ when hitCounter > 2:
+			_sawSprite.texture.diffuse_texture = BLOODED_LVL2_TEXTURE
+		_:
+			_sawSprite.texture.diffuse_texture = NORMAL_TEXTURE
+
+func _on_startimer_timeout() -> void:
+	canChase = true
+	can_damage = true
+	_animplay.play("rotating")
+
+	var bodies = _playerDetector.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("PlayerArea"):
+			Dir = (body.global_position - global_position).normalized()
+
+
+func _on_damage_timer_timeout() -> void:
+	can_damage = true
+
+
+func _on_deleteit_self_timer_timeout() -> void:
+	print("saw deleted for being too far")
+	queue_free()
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

@@ -17,6 +17,11 @@ func _physics_process(delta: float) -> void:
 			var body = area.get_parent()
 			body.setHealth(-1)
 			queue_free()
+		elif area.is_in_group("Interactable"):
+			var Interactable = area.get_parent()
+			Interactable.TurnedOn = true
+			queue_free()
+		
 
 
 func set_direction(dir: Vector2) -> void:

@@ -23,7 +23,6 @@ extends Node2D
 @onready var CheckerRight: Area2D = $Checkers/StageCheckerRight
 @onready var CheckerUp: Area2D = $Checkers/StageCheckerUp
 @onready var CheckerDown: Area2D = $Checkers/StageCheckerDown
-
 # ===== BIOMES =====
 @export var ChessBiome: PackedScene
 @export var GrassBiome: PackedScene
@@ -79,21 +78,25 @@ func _ready() -> void:
 func _on_trigger_left_entered(body):
 	if !isLeftTriggered and body.is_in_group("PlayerArea"):
 		isLeftTriggered = true
+		TriggerLeft.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageLeftPosition.position, TriggerLeft)
 
 func _on_trigger_right_entered(body):
 	if !isRightTriggered and body.is_in_group("PlayerArea"):
 		isRightTriggered = true
+		TriggerRight.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageRightPosition.position, TriggerRight)
 
 func _on_trigger_up_entered(body):
 	if !isUpTriggered and body.is_in_group("PlayerArea"):
 		isUpTriggered = true
+		TriggerUp.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageUpPosition.position, TriggerUp)
 
 func _on_trigger_down_entered(body):
 	if !isDownTriggered and body.is_in_group("PlayerArea"):
 		isDownTriggered = true
+		TriggerDown.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageDownPosition.position, TriggerDown)
 
 # ===== HELPER =====

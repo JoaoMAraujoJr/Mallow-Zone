@@ -39,6 +39,8 @@ folder_colors={
 PlayerArea=""
 Enemy=""
 Stage=""
+Bullet=""
+Interactable=""
 
 [input]
 

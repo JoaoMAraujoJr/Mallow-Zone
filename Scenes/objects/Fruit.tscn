@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://kdb60air4lgi"]
+
+[ext_resource type="Texture2D" uid="uid://bapqgfvn777lj" path="res://Assets/objects/apple.png" id="1_bt3ef"]
+[ext_resource type="Script" uid="uid://bj1ia0j41y0uw" path="res://Scripts/objects/fruit.gd" id="1_x50lt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bt3ef"]
+rough = true
+bounce = 0.03
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x50lt"]
+radius = 17.464249
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bt3ef"]
+radius = 28.01785
+
+[node name="Fruit" type="RigidBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_bt3ef")
+script = ExtResource("1_x50lt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5390823, 1.5390823)
+texture = ExtResource("1_bt3ef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_x50lt")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_bt3ef")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
