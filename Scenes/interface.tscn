@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=16 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/mousefollow.tscn" id="5_r04jc"]
 [ext_resource type="Texture2D" uid="uid://xbsw0258yluo" path="res://Assets/button/reset_button_pressed.png" id="5_uwsgx"]
 [ext_resource type="Texture2D" uid="uid://bbjp1fswxcn8u" path="res://Assets/button/reset_button_hover.png" id="6_r04jc"]
+[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
 shader = ExtResource("2_uwsgx")
@@ -42,6 +43,23 @@ unicode = 107
 
 [sub_resource type="Shortcut" id="Shortcut_aq0n2"]
 events = [SubResource("InputEventKey_hbxki")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq0n2"]
+shader = ExtResource("9_hbxki")
+shader_parameter/resolution = Vector2(1280, 720)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [node name="Interface" type="CanvasLayer"]
 layer = 2
@@ -152,5 +170,13 @@ stretch_mode = 0
 z_index = 4
 position = Vector2(190, 110.000015)
 scale = Vector2(0.6910793, 0.6910793)
+
+[node name="CRT" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_aq0n2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

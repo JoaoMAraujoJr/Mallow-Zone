@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D noise_tex : source_color, repeat_enable; // your noise texture
 uniform float threshold : hint_range(0.0, 1.0) = 0.0; // controls dissolve progress
-uniform vec4 edge_color : source_color = vec4(1.0, 0.5, 0.1, 1.0); // glowing edge color
+uniform vec4 edge_color : source_color = vec4(1.0, 1.0,  1.0, 1.0); // glowing edge color
 uniform float edge_width : hint_range(0.0, 0.5) = 0.05; // edge thickness
 
 void fragment() {

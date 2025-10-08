@@ -1,29 +1,30 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccdp414dq4f1w"]
+[gd_scene load_steps=13 format=3 uid="uid://ccdp414dq4f1w"]
 
 [ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_vpc23"]
 [ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_idggg"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_m518n"]
-[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_r4p5m"]
 [ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="3_yjv11"]
 [ext_resource type="Texture2D" uid="uid://dmnoi65rgtqp1" path="res://Assets/floor/chess/floortexture.png" id="4_r4p5m"]
+[ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="5_40mwk"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_r4p5m"]
 [ext_resource type="Texture2D" uid="uid://bq41yr8kvcqdb" path="res://Assets/floor/chess/walltexture.png" id="6_r4p5m"]
+[ext_resource type="PackedScene" uid="uid://bo4itjsycgk4x" path="res://Scenes/blackhole.tscn" id="9_40mwk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
 size = Vector2(411, 412)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_idggg"]
 shader = ExtResource("2_m518n")
-shader_parameter/noise_tex = ExtResource("3_r4p5m")
+shader_parameter/noise_tex = ExtResource("5_40mwk")
 shader_parameter/threshold = 1.0
-shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
+shader_parameter/edge_color = Color(1, 1, 1, 1)
 shader_parameter/edge_width = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r4p5m"]
 shader = ExtResource("2_m518n")
-shader_parameter/noise_tex = ExtResource("3_r4p5m")
+shader_parameter/noise_tex = ExtResource("5_40mwk")
 shader_parameter/threshold = 1.0
-shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
+shader_parameter/edge_color = Color(1, 1, 1, 1)
 shader_parameter/edge_width = 0.05
 
 [node name="StageChess" type="Node2D"]
@@ -67,3 +68,6 @@ position = Vector2(-0.39999998, 307.2)
 scale = Vector2(0.4011719, 0.19960937)
 texture = ExtResource("6_r4p5m")
 script = ExtResource("5_r4p5m")
+
+[node name="Blackhole" parent="." instance=ExtResource("9_40mwk")]
+position = Vector2(-106, -89)

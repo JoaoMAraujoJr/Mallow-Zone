@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://btsnqmg6ydpwl"
+path="res://.godot/imported/Wood Crash.wav-298f95695851026b51c39dc45181ffa7.sample"
+
+[deps]
+
+source_file="res://Assets/sounds/Wood Crash.wav"
+dest_files=["res://.godot/imported/Wood Crash.wav-298f95695851026b51c39dc45181ffa7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
