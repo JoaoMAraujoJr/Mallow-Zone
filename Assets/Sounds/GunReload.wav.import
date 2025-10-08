@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://btsnqmg6ydpwl"
-path="res://.godot/imported/Wood Crash.wav-855b9eeec5c2159bbd070e76e7e7e6bb.sample"
+uid="uid://bulrjkjyplxbg"
+path="res://.godot/imported/GunReload.wav-322d5471253ebd7c744ed18d982a179b.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Wood Crash.wav"
-dest_files=["res://.godot/imported/Wood Crash.wav-855b9eeec5c2159bbd070e76e7e7e6bb.sample"]
+source_file="res://Assets/Sounds/GunReload.wav"
+dest_files=["res://.godot/imported/GunReload.wav-322d5471253ebd7c744ed18d982a179b.sample"]
 
 [params]
 

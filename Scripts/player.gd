@@ -17,6 +17,7 @@ var bulletParticle = preload("res://Scenes/bullet_particle.tscn")
 @onready var _gunsprite : Sprite2D = $gun
 @onready var _gunpoint : Marker2D = $gun/gunpoint
 @onready var _animplayer : AnimatedSprite2D = $AnimatedSprite2D
+@onready var _shootAudiStream : AudioStreamPlayer2D = $ShootAudioStream
 #bools go here i guess:
 @onready var can_shoot : bool = true
 @onready var isbeingpushed: bool = false
@@ -74,6 +75,7 @@ func _physics_process(delta: float) -> void:
 			
 			#calcula o recoil velocity do tiro
 		if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0:
+
 			var bulletPart = bulletParticle.instantiate()
 			bulletPart.global_position = _gunpoint.global_position
 			get_tree().current_scene.add_child(bulletPart)
@@ -87,6 +89,12 @@ func _physics_process(delta: float) -> void:
 			var recoil_direction = ( global_position - mouse_pos ).normalized()
 			recoil_velocity = recoil_direction * recoil_strength
 			print("this is being recoiled")
+			
+			_shootAudiStream.pitch_scale = randf_range(0.8, 1.2)
+			_shootAudiStream.play()
+			_shootAudiStream.bus="Reverb"
+			
+
 		
 		#movement and mouse treatment:
 		if Input.is_action_just_pressed("UnlockMouse"):

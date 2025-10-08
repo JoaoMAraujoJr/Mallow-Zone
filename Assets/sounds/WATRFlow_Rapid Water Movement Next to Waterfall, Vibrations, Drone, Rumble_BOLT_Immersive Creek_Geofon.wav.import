@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bjfn62yw0yhfk"
-path="res://.godot/imported/WATRFlow_Rapid Water Movement Next to Waterfall, Vibrations, Drone, Rumble_BOLT_Immersive Creek_Geofon.wav-1d238563babdd9366e47f341df1b393d.sample"
+path="res://.godot/imported/WATRFlow_Rapid Water Movement Next to Waterfall, Vibrations, Drone, Rumble_BOLT_Immersive Creek_Geofon.wav-f0c305fadf2a55ba7264d36269c6792d.sample"
 
 [deps]
 
-source_file="res://Assets/sounds/WATRFlow_Rapid Water Movement Next to Waterfall, Vibrations, Drone, Rumble_BOLT_Immersive Creek_Geofon.wav"
-dest_files=["res://.godot/imported/WATRFlow_Rapid Water Movement Next to Waterfall, Vibrations, Drone, Rumble_BOLT_Immersive Creek_Geofon.wav-1d238563babdd9366e47f341df1b393d.sample"]
+source_file="res://Assets/Sounds/WATRFlow_Rapid Water Movement Next to Waterfall, Vibrations, Drone, Rumble_BOLT_Immersive Creek_Geofon.wav"
+dest_files=["res://.godot/imported/WATRFlow_Rapid Water Movement Next to Waterfall, Vibrations, Drone, Rumble_BOLT_Immersive Creek_Geofon.wav-f0c305fadf2a55ba7264d36269c6792d.sample"]
 
 [params]
 

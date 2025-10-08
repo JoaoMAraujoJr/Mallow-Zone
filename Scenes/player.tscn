@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cb5khyq6wnglo"]
+[gd_scene load_steps=23 format=3 uid="uid://cb5khyq6wnglo"]
 
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dn8vwwpkwveo0" path="res://Assets/player/player.png" id="2_3smsa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/player/barunder.png" id="6_3smsa"]
 [ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/player/bar.png" id="7_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="8_8erm5"]
+[ext_resource type="AudioStream" uid="uid://8ps7hm6xp1xv" path="res://Assets/Sounds/ShootSoundOGG.ogg" id="8_f1ek2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
 atlas = ExtResource("2_3smsa")
@@ -192,5 +193,10 @@ autostart = true
 z_index = -2
 position = Vector2(0, 21)
 texture = ExtResource("8_8erm5")
+
+[node name="ShootAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_f1ek2")
+volume_db = -80.0
+bus = &"Reverb"
 
 [connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]
