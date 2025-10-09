@@ -20,7 +20,7 @@ var bulletParticle = preload("res://Scenes/bullet_particle.tscn")
 @onready var _shootAudiStream : AudioStreamPlayer2D = $ShootAudioStream
 #bools go here i guess:
 @onready var can_shoot : bool = true
-@onready var isbeingpushed: bool = false
+@onready var isbeingpulled: bool = false
 
 
 @export var recoil_strength: float = 100.0  # tweak this value for push force
@@ -29,6 +29,7 @@ var bulletParticle = preload("res://Scenes/bullet_particle.tscn")
 @export_range(0, 100, 1) var health: int = 100
 
 var pushingforce: Vector2 = Vector2.ZERO
+var pullforce: Vector2 = Vector2.ZERO
 var recoil_velocity: Vector2 = Vector2.ZERO
 var max_speed :float = 400.0 
 @export var max_camzoom :float = 0.4
@@ -115,16 +116,18 @@ func _physics_process(delta: float) -> void:
 		else:
 			_iswalking = false
 
-		if isbeingpushed:
-			velocity = (input_vector * speed + recoil_velocity +pushingforce)
+		if isbeingpulled:
+			velocity = (input_vector * speed + recoil_velocity + pushingforce + pullforce)
 		else:
-			velocity = (input_vector * speed + recoil_velocity)
+			velocity = (input_vector * speed + recoil_velocity + pushingforce)
 		
 		if velocity.length() > max_speed:
 			velocity = velocity.normalized() * max_speed
 		
 		recoil_velocity = recoil_velocity.move_toward(Vector2.ZERO, recoil_decay*delta)
-
+		pushingforce = pushingforce.move_toward(Vector2.ZERO, pushingforce.length() * 3 *delta)
+		
+		
 		move_and_slide()
 
 func  addToHealth(i:int) -> void:
@@ -137,13 +140,16 @@ func  addToHealth(i:int) -> void:
 	
 	Global.player_health = health
 	
-func addToPushingVelocity(pushingVector : Vector2):
-	pushingforce += pushingVector
-	isbeingpushed = true
+func addToPullVelocity(pullingVector : Vector2): #metodo de puxar o jogador
+	pullforce += pullingVector
+	isbeingpulled = true # precisa ser desativado ao sair da area do objeto puxador, use resetPulling()
 
-func resetPushing():
-	pushingforce = Vector2.ZERO
-	isbeingpushed = false
+func addtoPushVelocity(pushingVector : Vector2): #metodo de empurrar o jogador
+	pushingforce += pushingVector
+
+func resetPulling():
+	pullforce = Vector2.ZERO
+	isbeingpulled = false
 
 func _on_regen_timer_timeout() -> void:
 	if health < 100 :

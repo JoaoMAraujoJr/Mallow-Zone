@@ -68,6 +68,7 @@ autostart = true
 color = Color(0.65012825, 0.6501283, 0.65012825, 1)
 
 [node name="CarBoss" parent="." instance=ExtResource("5_xylue")]
-position = Vector2(315, -223)
+position = Vector2(106, -173)
+rotationOffset = 90.0
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

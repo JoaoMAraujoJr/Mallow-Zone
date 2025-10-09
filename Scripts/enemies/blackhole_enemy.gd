@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	if followMode:
 		var bodies = _vision.get_overlapping_bodies()
 		for body in bodies:
-			if body.has_method("addToPushingVelocity"):
+			if body.has_method("addToPullVelocity"):
 				var direction = (body.global_position - global_position).normalized()
 
 				# movimento do buraco negro
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 				var offset: Vector2 = global_position - body.global_position
 				var distance = max(offset.length(), 1.0) # evita divisão por zero
 				var force = clamp(100.0 / distance, 2, 400) # limite mínimo e máximo
-				body.addToPushingVelocity(offset.normalized() * force)
+				body.addToPullVelocity(offset.normalized() * force)
 				break
 				
 		var enemy_areas= _hitbox.get_overlapping_areas()
@@ -85,9 +85,8 @@ func _on_enemy_vision_body_entered(body: Node2D) -> void:
 
 func _on_enemy_vision_body_exited(body: Node2D) -> void:
 	if body.is_in_group("PlayerArea"):
-		body.isbeingpushed = false
-		if body.has_method("resetPushing"):
-			body.resetPushing()
+		if body.has_method("resetPulling"):
+			body.resetPulling()
 		followMode = false
 
 func _on_damage_timer_timeout() -> void:

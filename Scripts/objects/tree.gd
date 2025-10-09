@@ -76,6 +76,6 @@ func _spawn_fruit() -> void:
 
 
 func _on_shoot_detector_area_entered(area: Area2D) -> void:
-	if area.is_in_group("SawArea"):
+	if area.is_in_group("SawArea") or area.is_in_group("Car"):
 		isBeingTrimmed=true
 	pass # Replace with function body.
