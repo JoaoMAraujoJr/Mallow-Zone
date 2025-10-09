@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://dkjmqwpv5ql48" path="res://Scripts/shaders/blackhole.gdshader" id="1_xl8aw"]
 [ext_resource type="Texture2D" uid="uid://bug5w7nfiuu82" path="res://Assets/objects/blackhole.png" id="2_xl8aw"]
 [ext_resource type="Texture2D" uid="uid://chbghrjef56v5" path="res://Assets/objects/blackhole2.png" id="2_xnsgi"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/player/proto_light_2.png" id="4_hko3c"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_hko3c"]
 
 [sub_resource type="Curve" id="Curve_wy13b"]
 _limits = [-1.0, 1.0, 0.0, 1.0]

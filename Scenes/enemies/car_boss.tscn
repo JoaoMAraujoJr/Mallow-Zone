@@ -1,13 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://siudy2wrjg83"]
+[gd_scene load_steps=11 format=3 uid="uid://siudy2wrjg83"]
 
 [ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/Carboss.gd" id="1_78rw5"]
 [ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/objects/car/car.png" id="1_htj82"]
+[ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emmiter.tscn" id="3_2ougs"]
+[ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/LightTextures/directLightpoint_blurred.png" id="4_dyahk"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_psh8h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_78rw5"]
 radius = 1107.5531
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_78rw5"]
-size = Vector2(200, 462.85724)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ougs"]
+radius = 111.42857
+height = 480.5716
 
 [sub_resource type="Animation" id="Animation_78rw5"]
 resource_name = "driving"
@@ -37,6 +41,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [120.0, 150.0, 143.9306353032589, 340.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lights/PointLight2D:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.2, 2.3799999, 2.47, 2.6, 2.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9999997, 0.10126803, 0.08898608, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lights/PointLight2D2:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.18, 2.36, 2.5666666, 2.6799998, 3.04),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.71225244, 0.049173497, 0, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lights:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5383817, 2.0403118, 2.454404, 2.9500601, 3.433168, 3.9476464),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4)]
+}
 
 [sub_resource type="Animation" id="Animation_2ougs"]
 length = 0.001
@@ -63,6 +103,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [120.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lights/PointLight2D:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lights/PointLight2D2:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lights:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dyahk"]
@@ -100,9 +176,9 @@ position = Vector2(0, -39.100014)
 shape = SubResource("CircleShape2D_78rw5")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -39.100014)
+position = Vector2(-1, -37)
 scale = Vector2(0.35, 0.34999993)
-shape = SubResource("RectangleShape2D_78rw5")
+shape = SubResource("CapsuleShape2D_2ougs")
 
 [node name="carSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -39.100014)
@@ -118,13 +194,60 @@ autoplay = "driving"
 [node name="Forward" type="Marker2D" parent="."]
 position = Vector2(0, 93)
 
-[node name="CooldownTopickRotation" type="Timer" parent="."]
+[node name="Particles" type="Node2D" parent="."]
+z_index = -1
+
+[node name="TireTrackParticleBack" parent="Particles" instance=ExtResource("3_2ougs")]
+position = Vector2(-27, -119)
+
+[node name="TireTrackParticleBack2" parent="Particles" instance=ExtResource("3_2ougs")]
+position = Vector2(23, -119)
+
+[node name="TireTrackParticleFront" parent="Particles" instance=ExtResource("3_2ougs")]
+position = Vector2(-27, 40)
+
+[node name="TireTrackParticleFront2" parent="Particles" instance=ExtResource("3_2ougs")]
+position = Vector2(23, 40)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CooldownTopickRotation" type="Timer" parent="Timers"]
 wait_time = 0.4
 
-[node name="CooldownTopickDirection" type="Timer" parent="."]
+[node name="CooldownTopickDirection" type="Timer" parent="Timers"]
 wait_time = 2.0
+
+[node name="ToAddDrift" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="Lights" type="Node2D" parent="."]
+position = Vector2(-1, -37)
+scale = Vector2(0.35, 0.34999993)
+
+[node name="Farol" type="PointLight2D" parent="Lights"]
+position = Vector2(-71.15008, 223.99101)
+scale = Vector2(0.15776736, 0.15776736)
+color = Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)
+texture = ExtResource("4_psh8h")
+
+[node name="Farol2" type="PointLight2D" parent="Lights"]
+position = Vector2(71.15008, 223.99101)
+scale = Vector2(0.15776736, 0.15776736)
+color = Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)
+texture = ExtResource("4_psh8h")
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(-74.28571, 625.7144)
+color = Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)
+texture = ExtResource("4_dyahk")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(80, 625.7144)
+color = Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)
+texture = ExtResource("4_dyahk")
 
 [connection signal="body_entered" from="backwardsDetector" to="." method="_on_backwards_detector_body_entered"]
 [connection signal="body_exited" from="backwardsDetector" to="." method="_on_backwards_detector_body_exited"]
-[connection signal="timeout" from="CooldownTopickRotation" to="." method="_on_cooldown_topick_rotation_timeout"]
-[connection signal="timeout" from="CooldownTopickDirection" to="." method="_on_cooldown_topick_direction_timeout"]
+[connection signal="timeout" from="Timers/CooldownTopickRotation" to="." method="_on_cooldown_topick_rotation_timeout"]
+[connection signal="timeout" from="Timers/CooldownTopickDirection" to="." method="_on_cooldown_topick_direction_timeout"]
+[connection signal="timeout" from="Timers/ToAddDrift" to="." method="_on_to_add_drift_timeout"]

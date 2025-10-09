@@ -3,19 +3,20 @@ extends CharacterBody2D
 @onready var _carSprite := $carSprite
 @onready var _playerdetectArea := $PlayerDetectorArea
 @onready var _hitdetectArea := $PlayerHitArea
-@onready var _cooldownTopickRotation := $CooldownTopickRotation
 @onready var _forwardmarker := $Forward
 @onready var _backwardmarker :=$Backward
-@onready var _dirtogo := "forward"
-@onready var _canChangeDirection := true
-@onready var _cooldownTopickDir := $CooldownTopickDirection
-@onready var _backwardsDetector := $backwardsDetector
 
+@onready var _cooldownTopickDir := $Timers/CooldownTopickDirection
+@onready var _cooldownTopickRotation := $Timers/CooldownTopickRotation
+@onready var _backwardsDetector := $backwardsDetector
+@onready var _canChangeDirection := true
+
+@onready var _dirtogo := "forward"
 
 var Playerdir : Vector2 = Vector2.ZERO
 @export var Speed : float = 120.0
 @onready var PushStrenght : float= Speed*4
-@export var Dirfting : float = 0.9
+@export var Drifting : float = 0.9
 
 @onready var _toberotation:float
 @onready var rotationOffset :float
@@ -49,17 +50,17 @@ func _GoinDirection() ->void:
 	var dirVector :Vector2
 	if _dirtogo == "forward":
 		dirVector = (_forwardmarker.global_position - global_position).normalized()
-		velocity = dirVector * Speed
+		velocity = dirVector * Speed  * Drifting
 		rotationOffset = deg_to_rad(-90)
 	elif _dirtogo == "backward":
 		dirVector = (_backwardmarker.global_position - global_position).normalized()
-		velocity = dirVector * Speed * 0.8
+		velocity = dirVector * Speed * Drifting * 0.8
 		rotationOffset = deg_to_rad(90)
 
 func _updateCarRotation(delta: float) -> void:
 	if not _canpickPlayerLocation:
 		# continua ajustando lentamente até chegar na rotação desejada
-		rotation = lerp_angle(rotation, _toberotation, delta * Dirfting) # pode ajustar a velocidade
+		rotation = lerp_angle(rotation, _toberotation, delta * Drifting) # pode ajustar a velocidade
 		return
 
 	for body in _playerdetectArea.get_overlapping_bodies():
@@ -85,7 +86,7 @@ func _getHitsApplied() -> void:
 			print_debug("%s não tem o método addtoPushVelocity()" % body.name)
 			
 func _updateStrenght():
-	PushStrenght= Speed*4
+	PushStrenght= Speed*Drifting*3
 
 
 func _updateDirection() -> void:
@@ -120,4 +121,10 @@ func _on_cooldown_topick_rotation_timeout() -> void:
 
 func _on_cooldown_topick_direction_timeout() -> void:
 	_canChangeDirection = true
+	pass # Replace with function body.
+
+
+func _on_to_add_drift_timeout() -> void:
+	if Drifting < 2.0:
+		Drifting += 0.1
 	pass # Replace with function body.

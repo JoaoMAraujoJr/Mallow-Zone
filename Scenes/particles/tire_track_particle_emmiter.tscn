@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmliicxgfmc8h"]
+
+[ext_resource type="Texture2D" uid="uid://0yjl1tc88bg8" path="res://Assets/particle/TireTrack.png" id="1_biumi"]
+
+[sub_resource type="Curve" id="Curve_biumi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6c05l"]
+curve = SubResource("Curve_biumi")
+
+[sub_resource type="Curve" id="Curve_6c05l"]
+_data = [Vector2(0, 0.516854), 0.0, 0.0, 0, 0, Vector2(1, 0.25842702), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lcqbf"]
+curve = SubResource("Curve_6c05l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6c05l"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_lcqbf")
+alpha_curve = SubResource("CurveTexture_6c05l")
+
+[node name="TireTrackParticleEmmiter" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 90
+texture = ExtResource("1_biumi")
+lifetime = 6.0
+process_material = SubResource("ParticleProcessMaterial_6c05l")

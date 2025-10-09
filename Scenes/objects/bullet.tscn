@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwms633t47x1t" path="res://Scripts/objects/bullet.gd" id="1_xjght"]
 [ext_resource type="Texture2D" uid="uid://bwy1yk26573bi" path="res://Assets/player/bullet.png" id="2_oduel"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/player/proto_light_2.png" id="3_ycag2"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_ycag2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oduel"]
 radius = 2.0
