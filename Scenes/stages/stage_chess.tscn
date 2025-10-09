@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccdp414dq4f1w"]
+[gd_scene load_steps=12 format=3 uid="uid://ccdp414dq4f1w"]
 
 [ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_vpc23"]
 [ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_idggg"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="5_40mwk"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_r4p5m"]
 [ext_resource type="Texture2D" uid="uid://bq41yr8kvcqdb" path="res://Assets/floor/chess/walltexture.png" id="6_r4p5m"]
-[ext_resource type="PackedScene" uid="uid://bo4itjsycgk4x" path="res://Scenes/blackhole.tscn" id="9_40mwk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
 size = Vector2(411, 412)
@@ -68,6 +67,3 @@ position = Vector2(-0.39999998, 307.2)
 scale = Vector2(0.4011719, 0.19960937)
 texture = ExtResource("6_r4p5m")
 script = ExtResource("5_r4p5m")
-
-[node name="Blackhole" parent="." instance=ExtResource("9_40mwk")]
-position = Vector2(-106, -89)

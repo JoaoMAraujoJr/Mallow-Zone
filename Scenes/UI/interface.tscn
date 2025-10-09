@@ -1,0 +1,183 @@
+[gd_scene load_steps=16 format=3 uid="uid://bbvngwwmb0afo"]
+
+[ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
+[ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
+[ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
+[ext_resource type="Texture2D" uid="uid://cb44i5ksnihh7" path="res://Assets/button/reset_button.png" id="4_yg6la"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
+[ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/mousefollow.tscn" id="5_r04jc"]
+[ext_resource type="Texture2D" uid="uid://xbsw0258yluo" path="res://Assets/button/reset_button_pressed.png" id="5_uwsgx"]
+[ext_resource type="Texture2D" uid="uid://bbjp1fswxcn8u" path="res://Assets/button/reset_button_hover.png" id="6_r04jc"]
+[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
+shader = ExtResource("2_uwsgx")
+shader_parameter/inner_radius = 0.23
+shader_parameter/outer_radius = 0.455
+shader_parameter/vignette_strength = 0.89
+shader_parameter/dither_strength = 0.125
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wpqjx"]
+font = ExtResource("2_75fju")
+font_size = 32
+outline_size = 6
+outline_color = Color(1.269618, 1.269618, 1.269618, 0.3137255)
+shadow_size = 10
+shadow_color = Color(2.454227, 2.454227, 2.454227, 0.29803923)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x2tka"]
+font = ExtResource("5_hbxki")
+font_size = 182
+outline_size = 24
+outline_color = Color(1, 1, 1, 0.52156866)
+shadow_size = 46
+shadow_color = Color(1.469, 1.469, 1.469, 0.329)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="InputEventKey" id="InputEventKey_hbxki"]
+device = -1
+keycode = 75
+unicode = 107
+
+[sub_resource type="Shortcut" id="Shortcut_aq0n2"]
+events = [SubResource("InputEventKey_hbxki")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq0n2"]
+shader = ExtResource("9_hbxki")
+shader_parameter/resolution = Vector2(1280, 720)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[node name="Interface" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_j00uw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_r04jc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Ammo" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.82000005
+anchor_top = 0.106000006
+anchor_right = 0.82000005
+anchor_bottom = 0.106000006
+offset_left = -98.880005
+offset_top = -31.896002
+offset_right = 163.36737
+offset_bottom = 45.42507
+grow_horizontal = 0
+scale = Vector2(0.6910793, 0.6910793)
+text = "Ammo: 0/25"
+label_settings = SubResource("LabelSettings_wpqjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Kills" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.156
+anchor_top = 0.105000004
+anchor_right = 0.156
+anchor_bottom = 0.105000004
+offset_left = -90.90399
+offset_top = -33.68
+offset_right = 125.95074
+offset_bottom = 43.641075
+grow_horizontal = 0
+scale = Vector2(0.6967743, 0.6967743)
+text = "0 kills"
+label_settings = SubResource("LabelSettings_wpqjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="xy" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -94.0
+offset_top = 19.0
+offset_right = 122.85477
+offset_bottom = 594.0
+grow_horizontal = 2
+scale = Vector2(0.06302245, 0.06302245)
+text = "x:
+Y:"
+label_settings = SubResource("LabelSettings_x2tka")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Coordinates" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.08400001
+anchor_right = 0.448
+anchor_bottom = 0.08400001
+offset_left = -36.064026
+offset_top = -17.288002
+offset_right = 1870.2139
+offset_bottom = 557.712
+grow_horizontal = 2
+scale = Vector2(0.06302245, 0.06302245)
+text = "x
+y"
+label_settings = SubResource("LabelSettings_x2tka")
+vertical_alignment = 1
+autowrap_mode = 3
+uppercase = true
+
+[node name="Mousefollow" parent="." instance=ExtResource("5_r04jc")]
+z_index = 4
+position = Vector2(190, 110.000015)
+scale = Vector2(0.6910793, 0.6910793)
+
+[node name="Button" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -13.0
+offset_right = 129.79999
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3734264, 0.3734264)
+shortcut = SubResource("Shortcut_aq0n2")
+texture_normal = ExtResource("4_yg6la")
+texture_pressed = ExtResource("5_uwsgx")
+texture_hover = ExtResource("6_r04jc")
+stretch_mode = 0
+
+[node name="CRT" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_aq0n2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

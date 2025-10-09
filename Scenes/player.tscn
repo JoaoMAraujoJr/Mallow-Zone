@@ -115,6 +115,9 @@ height = 40.0
 [node name="Player" type="CharacterBody2D" groups=["PlayerArea"]]
 script = ExtResource("1_cvnsp")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-5.9604645e-08, -2.3841858e-07)
 scale = Vector2(1.4789339, 1.4789339)
@@ -196,7 +199,11 @@ texture = ExtResource("8_8erm5")
 
 [node name="ShootAudioStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_f1ek2")
-volume_db = -80.0
-bus = &"Reverb"
+pitch_scale = 0.5
+attenuation = 3.605001
+max_polyphony = 4
+bus = &"SFXReverb"
+
+[node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]

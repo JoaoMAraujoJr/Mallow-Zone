@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://216kvumeoqpb"]
+[gd_scene load_steps=9 format=3 uid="uid://216kvumeoqpb"]
 
 [ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/level.gd" id="1_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Gamescene.tscn" id="1_vsvp5"]
-[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/interface.tscn" id="1_xylue"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_xylue"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="2_8rbpu"]
-[ext_resource type="PackedScene" uid="uid://d4l10dhcecdou" path="res://Scenes/UI/CardScene.tscn" id="5_xylue"]
-[ext_resource type="PackedScene" uid="uid://bo4itjsycgk4x" path="res://Scenes/blackhole.tscn" id="6_tj5wv"]
 
 [sub_resource type="Gradient" id="Gradient_xylue"]
 offsets = PackedFloat32Array(0, 0.4041096, 0.7226027, 1)
@@ -67,10 +65,5 @@ autostart = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.65012825, 0.6501283, 0.65012825, 1)
-
-[node name="Node2D" parent="." instance=ExtResource("5_xylue")]
-
-[node name="Blackhole" parent="." instance=ExtResource("6_tj5wv")]
-position = Vector2(-128, -126)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var _damageHitbox : Area2D = $damagehitbox
 @onready var _damage_timer: Timer = $DamageTimer 
 @onready var _deleteItSelf: Timer = $DeleteitSelfTimer
+@onready var _audioStream : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var _sawSprite : Sprite2D = $Saw
 
 @export var damage = -20
@@ -78,7 +79,8 @@ func _on_startimer_timeout() -> void:
 	canChase = true
 	can_damage = true
 	_animplay.play("rotating")
-
+	_audioStream.pitch_scale = randf_range(0.3, 0.8)
+	_audioStream.play()
 	var bodies = _playerDetector.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("PlayerArea"):

@@ -38,6 +38,7 @@ var max_speed :float = 400.0
 @onready var cur_camzoom :float = target_zoom
 
 func _ready():
+	_shootAudiStream.max_polyphony = 5
 	Global.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
@@ -89,10 +90,9 @@ func _physics_process(delta: float) -> void:
 			var recoil_direction = ( global_position - mouse_pos ).normalized()
 			recoil_velocity = recoil_direction * recoil_strength
 			print("this is being recoiled")
-			
 			_shootAudiStream.pitch_scale = randf_range(0.8, 1.2)
 			_shootAudiStream.play()
-			_shootAudiStream.bus="Reverb"
+
 			
 
 		

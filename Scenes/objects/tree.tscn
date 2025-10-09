@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbf4muc7d60h"]
+[gd_scene load_steps=15 format=3 uid="uid://cbf4muc7d60h"]
 
 [ext_resource type="Script" uid="uid://b1q8sm0ok75hi" path="res://Scripts/objects/tree.gd" id="1_0yjm6"]
 [ext_resource type="Texture2D" uid="uid://b0417p1208j21" path="res://Assets/objects/tree.png" id="1_uvtpv"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_n5ney"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="3_j8h35"]
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uopmo"]
+[ext_resource type="AudioStream" uid="uid://btsnqmg6ydpwl" path="res://Assets/Sounds/Wood Crash.wav" id="6_ryksv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryksv"]
 shader = ExtResource("2_n5ney")
@@ -171,6 +172,13 @@ polygon = PackedVector2Array(-41.803326, 26.914469, -77.021194, -30.923008, -36.
 
 [node name="ParticleSpawnerMarker" type="Marker2D" parent="."]
 position = Vector2(0, -26.91447)
+
+[node name="TreeCutterAudioStream" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -26.914467)
+scale = Vector2(0.9999999, 0.9999999)
+stream = ExtResource("6_ryksv")
+volume_db = -2.0
+bus = &"SFXReverb"
 
 [connection signal="body_entered" from="leafArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="leafArea" to="." method="_on_area_2d_body_exited"]

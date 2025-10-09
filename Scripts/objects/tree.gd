@@ -5,10 +5,13 @@ extends StaticBody2D
 @onready var _leafsLightOcludder : LightOccluder2D = $leafs
 @onready var _rootLightOcludder : LightOccluder2D = $log
 @onready var _fruitSpawnerMarker:Marker2D = $Sprite2D/fruitSpawnLocation
+@onready var _TreeCutterAudioStream : AudioStreamPlayer2D = $TreeCutterAudioStream
+@onready var _ParticleSpawnerMarker := $ParticleSpawnerMarker
+
 @export var fruitScene : PackedScene = preload("res://Scenes/objects/Fruit.tscn")
 @export var rootTexture := preload("res://Assets/objects/tree_root.png")
 @export var TreeParticles : PackedScene = preload("res://Scenes/particles/tree_explossion_particles.tscn")
-@onready var _ParticleSpawnerMarker := $ParticleSpawnerMarker
+
 var fruitCounter:= 0
 var maxfruits := 2
 var TurnedOn := false
@@ -31,6 +34,8 @@ func _process(delta: float) -> void:
 				
 	if isBeingTrimmed and !isTrimmed:
 		_spawnTreeParticles()
+		_TreeCutterAudioStream.pitch_scale = randf_range(0.3, 2.0)
+		_TreeCutterAudioStream.play()
 		isTrimmed = true
 		_treeSprite.texture = rootTexture
 	pass
