@@ -6,14 +6,18 @@ extends CharacterBody2D
 @onready var _colorchangetimer : Timer = $SelfModulateTimer
 @onready var _lightcolor : PointLight2D = $PointLight2D
 @onready var _sprite2d : Sprite2D = $Sprite2D
+@onready var _deathAudioStream : AudioStreamPlayer2D = $DeathAudioStream
+@onready var _damageAudioStream : AudioStreamPlayer2D = $DamageAudioStream
 
 @onready var can_damage : bool = true
+@onready var is_dead : bool = false
 @export var damage: int = -10
 
 var bloodscene = preload('res://Scenes/particles.tscn')
 
 
 @export var hp: int = 3
+@onready var maxHp:int = hp
 
 var knockbackvelocity : Vector2 = Vector2.ZERO
 var followMode: bool = false
@@ -21,23 +25,16 @@ var SPEED: float = Global.enemySpeed
 
 
 func _physics_process(delta: float) -> void:
-	if hp <= 0:
-		var bloods = bloodscene.instantiate()
-		bloods.global_position = global_position
-		get_tree().current_scene.add_child(bloods)
-		Global.kills += 1 
-
-		queue_free()
 	if followMode:
 		# exemplo simples: ir em direção ao primeiro corpo na visão
 		var bodies = _vision.get_overlapping_bodies()
 		for body in bodies:
-			if body.is_in_group("PlayerArea"):
+			if body.is_in_group("PlayerArea") and !is_dead:
 				var direction = (body.global_position - global_position).normalized()
 				velocity = direction * SPEED + knockbackvelocity
 				break
 				
-		if can_damage:
+		if can_damage and !is_dead:
 			var hit_bodies = _hitbox.get_overlapping_bodies()
 			for body in hit_bodies:
 				if body.is_in_group("PlayerArea"):
@@ -69,17 +66,59 @@ func _on_damage_timer_timeout() -> void:
 	can_damage = true
 
 
-func setHealth(damage : int)-> void:
-	hp = hp + damage
-	_colorchangetimer.start()
-	_lightcolor.color = Color(1.0, 1.0, 1.0, 0.392)
+func setHealth(addedAmount : int)-> void:
+	hp += addedAmount
+	
+	if hp <= 0 and !is_dead:
+		is_dead = true
+		can_damage = false
+
+		# spawn blood
+		var bloods = bloodscene.instantiate()
+		bloods.global_position = global_position
+		get_tree().current_scene.add_child(bloods)
+
+		#remove visuasl
+		_lightcolor.queue_free()
+		_sprite2d.queue_free()
+		$LightOccluder2D.queue_free()
+		$CollisionShape2D.queue_free()
+		# increase kill count
+		Global.kills += 1 
+
+		# play death sound
+		_deathAudioStream.pitch_scale = randf_range(0.9, 1.9)
+		_deathAudioStream.play()
+
+		# connect signal to free after sound
+		_deathAudioStream.connect("finished", Callable(self, "_killSelf"))
+		return
+		
+	_damageAudioStream.pitch_scale = randf_range(0.2,1.2)
+	_damageAudioStream.play()
+
 	var bloods = bloodscene.instantiate()
 	bloods.global_position = global_position
 	get_tree().current_scene.add_child(bloods)
-	_sprite2d.texture = load("res://Assets/player/monster_damaged.png")# pinta de branco
+	
+	if _lightcolor != null:
+		_colorchangetimer.start()
+		_lightcolor.color = Color(1.0, 1.0, 1.0, 0.392)
+	if _sprite2d != null:
+		_sprite2d.texture = load("res://Assets/player/monster_damaged.png")# pinta de branco
 	
 	
 func _on_self_modulate_timer_timeout() -> void:
+	if _lightcolor == null:
+		return
 	_lightcolor.color = Color(1.0, 0.0, 0.0, 0.686)
 	_sprite2d.texture=  load("res://Assets/player/monster.png")
+	pass # Replace with function body.
+
+func _killSelf ():
+	queue_free()
+
+
+func _on_death_audio_stream_finished() -> void:
+	_killSelf()
 	pass # Replace with function body.

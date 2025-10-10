@@ -11,15 +11,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	velocity = direction * speed * 100 * delta
 	move_and_slide()
-	var areas = _area.get_overlapping_areas()
-	for area in areas: 
-		if area.is_in_group("Enemy"):
-			var body = area.get_parent()
+	var bodies = _area.get_overlapping_bodies()
+	for body in bodies: 
+		if body.has_method("setHealth"):
 			body.setHealth(-1)
 			queue_free()
-		elif area.is_in_group("Interactable"):
-			var Interactable = area.get_parent()
-			Interactable.TurnedOn = true
+		elif body.is_in_group("Interactable"):
+			body.TurnedOn = true
 			queue_free()
 		
 

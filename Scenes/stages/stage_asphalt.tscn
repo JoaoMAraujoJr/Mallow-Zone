@@ -1,0 +1,68 @@
+[gd_scene load_steps=13 format=3 uid="uid://cku80l75hewae"]
+
+[ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_3rfqm"]
+[ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_mc4p6"]
+[ext_resource type="PackedScene" uid="uid://cbf4muc7d60h" path="res://Scenes/objects/tree.tscn" id="3_y5yrp"]
+[ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="4_avtp1"]
+[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="5_frws6"]
+[ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="6_bepr7"]
+[ext_resource type="Texture2D" uid="uid://bhdoo1ynkxbo7" path="res://Assets/floor/asphalt/AsphaltfloorTexture.png" id="7_3rfqm"]
+[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="8_xh7u3"]
+[ext_resource type="Texture2D" uid="uid://bv4yq10oeb3yj" path="res://Assets/floor/asphalt/AsphaltfloorTexture_bottom.png" id="9_mc4p6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
+size = Vector2(411, 412)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_idggg"]
+shader = ExtResource("5_frws6")
+shader_parameter/noise_tex = ExtResource("6_bepr7")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(0.29803923, 0.5019608, 0.101960786, 1)
+shader_parameter/edge_width = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4p5m"]
+shader = ExtResource("5_frws6")
+shader_parameter/noise_tex = ExtResource("6_bepr7")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(0.09307846, 0.07433962, 0.038723517, 1)
+shader_parameter/edge_width = 0.05
+
+[node name="StageAsphalt" type="Node2D"]
+script = ExtResource("1_3rfqm")
+
+[node name="objectSpawner" type="Node2D" parent="."]
+script = ExtResource("2_mc4p6")
+SpawnableObjectList = Array[PackedScene]([ExtResource("3_y5yrp"), ExtResource("3_y5yrp"), null, null, ExtResource("4_avtp1"), null])
+
+[node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
+z_index = -2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
+z_index = -2
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_a6xb7")
+
+[node name="EnemySpawnArea" type="Area2D" parent="."]
+z_index = -2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+z_index = -2
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_a6xb7")
+debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
+
+[node name="top" type="Sprite2D" parent="."]
+z_index = -3
+material = SubResource("ShaderMaterial_idggg")
+scale = Vector2(0.4011719, 0.4011719)
+texture = ExtResource("7_3rfqm")
+script = ExtResource("8_xh7u3")
+
+[node name="bottom" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.41960785)
+z_index = -6
+material = SubResource("ShaderMaterial_r4p5m")
+position = Vector2(-0.39999998, 307.2)
+scale = Vector2(0.4011719, 0.19960937)
+texture = ExtResource("9_mc4p6")
+script = ExtResource("8_xh7u3")

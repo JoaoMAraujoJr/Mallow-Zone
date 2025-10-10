@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bo1gabovpt4cb"]
+[gd_scene load_steps=10 format=3 uid="uid://bo1gabovpt4cb"]
 
 [ext_resource type="Script" uid="uid://cblkcpos51yeu" path="res://Scripts/enemies/enemy.gd" id="1_hghv2"]
 [ext_resource type="Texture2D" uid="uid://wkmj7ds68ym" path="res://Assets/player/monster.png" id="2_afpow"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_afpow"]
+[ext_resource type="AudioStream" uid="uid://b2m4hy4ulb3pj" path="res://Assets/Sounds/EnemyDamage.ogg" id="4_slefu"]
+[ext_resource type="AudioStream" uid="uid://brpjub5yv36hm" path="res://Assets/Sounds/bloodSplatter.ogg" id="4_we58l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
 radius = 487.45258
@@ -62,8 +64,17 @@ wait_time = 0.195
 one_shot = true
 
 [node name="DamageAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_slefu")
+volume_db = -10.0
+bus = &"SFXReverb"
+
+[node name="DeathAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_we58l")
+volume_db = -8.0
+bus = &"SFXReverb"
 
 [connection signal="body_entered" from="EnemyVision" to="." method="_on_enemy_vision_body_entered"]
 [connection signal="body_exited" from="EnemyVision" to="." method="_on_enemy_vision_body_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="SelfModulateTimer" to="." method="_on_self_modulate_timer_timeout"]
+[connection signal="finished" from="DeathAudioStream" to="." method="_on_death_audio_stream_finished"]

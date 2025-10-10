@@ -26,6 +26,7 @@ extends Node2D
 # ===== BIOMES =====
 @export var ChessBiome: PackedScene
 @export var GrassBiome: PackedScene
+@export var AsphaltBiome:PackedScene
 var StageScene: PackedScene = preload("res://Scenes/Gamescene.tscn")
 #==== SPAWNABLES =====
 @export var MedikitScene: PackedScene = preload("res://Scenes/objects/medikit.tscn")
@@ -58,21 +59,14 @@ func _ready() -> void:
 		
 	match biome:
 		"chess":
-			var plataform = ChessBiome.instantiate()
-			plataform. global_position = global_position
-			get_tree().current_scene.add_child.call_deferred(plataform)
-			StageArea = plataform.get_stage_area()
-			EnemySpawnArea = plataform.get_enemy_area()
-			if isthisroot:
-				plataform._isroot = true
+			var plataform :Biome= ChessBiome.instantiate()
+			_setbiome(plataform)
 		"grasslands":
-			var plataform = GrassBiome.instantiate()
-			plataform. global_position = global_position
-			get_tree().current_scene.add_child.call_deferred(plataform)
-			StageArea = plataform.get_stage_area()
-			EnemySpawnArea = plataform.get_enemy_area()
-			if isthisroot:
-				plataform._isroot = true
+			var plataform:Biome = GrassBiome.instantiate()
+			_setbiome(plataform)
+		"asphalt":
+			var plataform = AsphaltBiome.instantiate()
+			_setbiome(plataform)
 				
 # ===== TRIGGERS =====
 func _on_trigger_left_entered(body):
@@ -148,7 +142,6 @@ func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 	
 	_spawn_entities_at_Stage(new_stage)
 
-
 func _spawn_entities_at_Stage(stage : Stage):
 	# Spawn ammo inside stage
 	if rng.randf() <= 0.8 and !isthisroot:
@@ -177,3 +170,11 @@ func _spawn_entities_at_Stage(stage : Stage):
 			BH.global_position = _get_random_point_in_stage(stage)
 			get_tree().current_scene.add_child(BH)
 			print("Inimigo spawnado em: ", BH.global_position)
+
+func _setbiome(plataform : Biome):
+		plataform. global_position = global_position
+		get_tree().current_scene.add_child.call_deferred(plataform)
+		StageArea = plataform.get_stage_area()
+		EnemySpawnArea = plataform.get_enemy_area()
+		if isthisroot:
+			plataform._isroot = true

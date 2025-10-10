@@ -31,6 +31,7 @@ var _playerInBackward := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.currentbiome = "asphalt"
 	pass # Replace with function body.
 
 
@@ -90,6 +91,8 @@ func _getHitsApplied() -> void:
 			body.addtoPushVelocity(push_vector)
 			_canhit = false
 			$Timers/DamageCoolDown.start()
+		elif body.has_method("setHealth"):
+			body.setHealth( - int(Speed/10 * 2))
 		else:
 			print_debug("%s não tem o método addtoPushVelocity()" % body.name)
 			
@@ -138,7 +141,7 @@ func _on_cooldown_topick_direction_timeout() -> void:
 
 
 func _on_to_add_drift_timeout() -> void:
-	if Drifting < 2.0:
+	if Drifting < 3.2:
 		Drifting += 0.1
 	pass # Replace with function body.
 
