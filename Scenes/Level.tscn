@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Gamescene.tscn" id="1_vsvp5"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_xylue"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="2_8rbpu"]
-[ext_resource type="PackedScene" uid="uid://siudy2wrjg83" path="res://Scenes/enemies/car_boss.tscn" id="5_xylue"]
+[ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="6_tj5wv"]
 
 [sub_resource type="Gradient" id="Gradient_xylue"]
 offsets = PackedFloat32Array(0, 0.4041096, 0.7226027, 1)
@@ -47,6 +47,13 @@ isthisroot = true
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, 17)
+recoil_strength = null
+recoil_decay = null
+speed = null
+health = null
+max_camzoom = null
+min_camzoom = null
+zoom_speed = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -67,7 +74,10 @@ autostart = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.65012825, 0.6501283, 0.65012825, 1)
 
-[node name="CarBoss" parent="." instance=ExtResource("5_xylue")]
-position = Vector2(254, -366)
+[node name="RifleDropped" parent="." instance=ExtResource("6_tj5wv")]
+position = Vector2(-114, -46)
+
+[node name="RifleDropped2" parent="." instance=ExtResource("6_tj5wv")]
+position = Vector2(81, -46)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+#spawnable
+@export var SpawnAtFixedPosition : bool = false
+
 @onready var _vision: Area2D = $EnemyVision
 @onready var _hitbox: Area2D = $EnemyHitbox
 @onready var _damage_timer: Timer = $DamageTimer 
@@ -118,7 +121,10 @@ func _on_self_modulate_timer_timeout() -> void:
 func _killSelf ():
 	queue_free()
 
-
 func _on_death_audio_stream_finished() -> void:
 	_killSelf()
 	pass # Replace with function body.
+
+
+func _getSpawnAtFixedPosition() ->bool:
+	return SpawnAtFixedPosition

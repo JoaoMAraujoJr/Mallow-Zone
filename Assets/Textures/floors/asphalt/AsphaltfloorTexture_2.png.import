@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmnoi65rgtqp1"
-path="res://.godot/imported/floortexture.png-2e64fe8d0d6364cc40525936b988fe42.ctex"
+uid="uid://cmnykb4t0kdpn"
+path="res://.godot/imported/AsphaltfloorTexture_2.png-4f87e7c8e22b6cead4329ad682e9a39d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/floor/chess/floortexture.png"
-dest_files=["res://.godot/imported/floortexture.png-2e64fe8d0d6364cc40525936b988fe42.ctex"]
+source_file="res://Assets/Textures/floors/asphalt/AsphaltfloorTexture_2.png"
+dest_files=["res://.godot/imported/AsphaltfloorTexture_2.png-4f87e7c8e22b6cead4329ad682e9a39d.ctex"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_3rfqm"]
 [ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_mc4p6"]
-[ext_resource type="PackedScene" uid="uid://cbf4muc7d60h" path="res://Scenes/objects/tree.tscn" id="3_y5yrp"]
-[ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="4_avtp1"]
+[ext_resource type="Texture2D" uid="uid://cmnykb4t0kdpn" path="res://Assets/Textures/floors/asphalt/AsphaltfloorTexture_2.png" id="3_mc4p6"]
+[ext_resource type="PackedScene" uid="uid://bt4npa70t2vd6" path="res://Scenes/objects/asphalt/connedAmmo.tscn" id="5_3rfqm"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="5_frws6"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="6_bepr7"]
-[ext_resource type="Texture2D" uid="uid://bhdoo1ynkxbo7" path="res://Assets/floor/asphalt/AsphaltfloorTexture.png" id="7_3rfqm"]
+[ext_resource type="Texture2D" uid="uid://bhdoo1ynkxbo7" path="res://Assets/Textures/floors/asphalt/AsphaltfloorTexture.png" id="7_3rfqm"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="8_xh7u3"]
-[ext_resource type="Texture2D" uid="uid://bv4yq10oeb3yj" path="res://Assets/floor/asphalt/AsphaltfloorTexture_bottom.png" id="9_mc4p6"]
+[ext_resource type="Texture2D" uid="uid://bv4yq10oeb3yj" path="res://Assets/Textures/floors/asphalt/AsphaltfloorTexture_bottom.png" id="9_mc4p6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
 size = Vector2(411, 412)
@@ -29,10 +29,14 @@ shader_parameter/edge_width = 0.05
 
 [node name="StageAsphalt" type="Node2D"]
 script = ExtResource("1_3rfqm")
+_canSpawnMedkit = false
+_canSpawnAmmo = false
+_canSpawnEnemies = false
+_topTextureVariants = Array[Texture2D]([ExtResource("7_3rfqm"), ExtResource("3_mc4p6")])
 
 [node name="objectSpawner" type="Node2D" parent="."]
 script = ExtResource("2_mc4p6")
-SpawnableObjectList = Array[PackedScene]([ExtResource("3_y5yrp"), ExtResource("3_y5yrp"), null, null, ExtResource("4_avtp1"), null])
+SpawnableObjectList = Array[PackedScene]([null, null, ExtResource("5_3rfqm"), ExtResource("5_3rfqm"), null])
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 z_index = -2

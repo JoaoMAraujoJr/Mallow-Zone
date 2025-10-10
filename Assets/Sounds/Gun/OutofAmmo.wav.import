@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bulrjkjyplxbg"
-path="res://.godot/imported/GunReload.wav-322d5471253ebd7c744ed18d982a179b.sample"
+uid="uid://yvfg5cl1j23"
+path="res://.godot/imported/OutofAmmo.wav-7d092303e16c63964063f59a67386c80.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/GunReload.wav"
-dest_files=["res://.godot/imported/GunReload.wav-322d5471253ebd7c744ed18d982a179b.sample"]
+source_file="res://Assets/Sounds/Gun/OutofAmmo.wav"
+dest_files=["res://.godot/imported/OutofAmmo.wav-7d092303e16c63964063f59a67386c80.sample"]
 
 [params]
 

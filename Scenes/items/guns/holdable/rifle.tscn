@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dox2op73mb8du"]
 
 [ext_resource type="Script" uid="uid://cbw0oaryl85kx" path="res://Scenes/items/guns/holdable/gun.gd" id="1_0xk6x"]
-[ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/player/gun.png" id="1_v4uw3"]
+[ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/Textures/items/guns/rifle.png" id="1_v4uw3"]
 [ext_resource type="PackedScene" uid="uid://0hmhkrf3c44n" path="res://Scenes/items/guns/bullets/rifleBullet.tscn" id="2_hpt7h"]
 
 [node name="Gun" type="Node2D"]

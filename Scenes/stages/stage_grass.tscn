@@ -4,10 +4,10 @@
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_22vud"]
 [ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_bmnd4"]
 [ext_resource type="PackedScene" uid="uid://cbf4muc7d60h" path="res://Scenes/objects/tree.tscn" id="3_ytrwr"]
-[ext_resource type="Texture2D" uid="uid://cvx7qhxej7ak3" path="res://Assets/floor/grass/Grassfloortexture.png" id="4_t23bk"]
+[ext_resource type="Texture2D" uid="uid://cvx7qhxej7ak3" path="res://Assets/Textures/floors/grass/Grassfloortexture.png" id="4_t23bk"]
 [ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="4_xsqpy"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1fha2"]
-[ext_resource type="Texture2D" uid="uid://6q2esd6l67ao" path="res://Assets/floor/grass/Grassfloortexture_bottom.png" id="6_sd4kd"]
+[ext_resource type="Texture2D" uid="uid://6q2esd6l67ao" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom.png" id="6_sd4kd"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="6_xsqpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]

@@ -1,13 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://cb5khyq6wnglo"]
+[gd_scene load_steps=25 format=3 uid="uid://cb5khyq6wnglo"]
 
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dn8vwwpkwveo0" path="res://Assets/player/player.png" id="2_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/player/barunder.png" id="6_3smsa"]
 [ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/player/bar.png" id="7_8erm5"]
+[ext_resource type="AudioStream" uid="uid://c4jymt15nn1kw" path="res://Assets/Sounds/Gun/ShootSoundOGG.ogg" id="7_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="8_8erm5"]
-[ext_resource type="AudioStream" uid="uid://8ps7hm6xp1xv" path="res://Assets/Sounds/ShootSoundOGG.ogg" id="8_f1ek2"]
+[ext_resource type="AudioStream" uid="uid://yvfg5cl1j23" path="res://Assets/Sounds/Gun/OutofAmmo.wav" id="8_gymyn"]
 [ext_resource type="AudioStream" uid="uid://bqx2jk7kpk6l7" path="res://Assets/Sounds/Steps_grass.ogg" id="8_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
 atlas = ExtResource("2_3smsa")
@@ -191,10 +193,23 @@ position = Vector2(0, 21)
 texture = ExtResource("8_8erm5")
 
 [node name="ShootAudioStream" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_f1ek2")
+stream = ExtResource("7_f1ek2")
 pitch_scale = 0.5
 attenuation = 3.605001
 max_polyphony = 4
+bus = &"SFXReverb"
+
+[node name="NeedsAmmoAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_gymyn")
+volume_db = -15.167
+pitch_scale = 0.33
+attenuation = 3.605001
+bus = &"SFXReverb"
+
+[node name="ReloadAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_tx1dd")
+volume_db = -7.944
+pitch_scale = 0.81
 bus = &"SFXReverb"
 
 [node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="."]

@@ -100,7 +100,6 @@ func _StopSaw() -> void:
 	_itstoped = true
 	
 
-
 func _on_time_to_stop_timeout() -> void:
 	_animplay.play("stopRotation")
 	pass # Replace with function body.
@@ -115,3 +114,4 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 		if is_inside_tree() and is_instance_valid(_deleteItSelf):
 			if _deleteItSelf.is_inside_tree():
 				_deleteItSelf.start()
+				

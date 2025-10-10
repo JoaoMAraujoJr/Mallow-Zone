@@ -15,7 +15,9 @@ extends CharacterBody2D
 var _gun : Node2D 
 @onready var _gunPivot : Marker2D = $GunPivot
 @onready var _animplayer : AnimatedSprite2D = $AnimatedSprite2D
-@onready var _shootAudiStream : AudioStreamPlayer2D = $ShootAudioStream
+@onready var _shootAudioStream : AudioStreamPlayer2D = $ShootAudioStream
+@onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $NeedsAmmoAudioStream
+@onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $ReloadAudioStream
 #bools go here i guess:
 @onready var can_shoot : bool = true
 @onready var isbeingpulled: bool = false
@@ -38,7 +40,7 @@ var max_speed :float = 400.0
 
 func _ready():
 	call_deferred("_equipGun")
-	_shootAudiStream.max_polyphony = 5
+	_shootAudioStream.max_polyphony = 5
 	Global.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
@@ -75,16 +77,17 @@ func _physics_process(delta: float) -> void:
 		
 			
 			#calcula o recoil velocity e som do tiro
-		if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0 and Global.currentEquipedWeaponType != "none":
+		if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0 and Global.currentEquipedWeaponType != "none" and _gun != null:
 			
 			var recoil_direction = ( global_position - mouse_pos ).normalized()
 			recoil_velocity = recoil_direction * recoil_strength
 			print("this is being recoiled")
-			_shootAudiStream.pitch_scale = randf_range(0.8, 1.2)
-			_shootAudiStream.play()
-
-		
-		
+			_shootAudioStream.pitch_scale = randf_range(0.8, 1.2)
+			_shootAudioStream.play()
+		elif Input.is_action_just_pressed("Mouse_left") and Global.ammo <= 0 :
+			_outofAmmoAudioStream.play()
+		elif Input.is_action_just_pressed("DropAction") and Global.currentEquipedWeaponType != "none" and _gun != null:
+			_dropGun()
 		#movement and mouse treatment:
 		if Input.is_action_just_pressed("UnlockMouse"):
 			if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
@@ -158,16 +161,40 @@ func adjustCameraZoom(delta):
 	camera.zoom = Vector2.ONE * cur_camzoom
 
 func _equipGun():
+	_playReloadSound()
+	
+	if _gun and is_instance_valid(_gun):
+		_gun.queue_free()
+		_gun = null
+		
+	if(Global.currentEquipedWeaponType == null or Global.currentEquipedWeaponType == "none" ):
+		return
+		
 	var currentGunType = Global.currentEquipedWeaponType
 	var currentGun = ItemData.weapons[currentGunType]
+	_gun = null
 	_gun = currentGun["weapon_scene"].instantiate()
 	_gun.position = _gunPivot.position
 	add_child(_gun)
 	
+func _dropGun():
+	var droppedgunKey: String = Global.currentEquipedWeaponType
+	Global.currentEquipedWeaponType = "none"
+	_equipGun()
+	var newdroppedgun = preload("res://Scenes/items/guns/pickable/droppedGun.tscn").instantiate()
+	newdroppedgun.global_position = global_position
+	newdroppedgun._setWeaponKey(droppedgunKey)
+	newdroppedgun._reloadTexture()
+	get_tree().current_scene.add_child(newdroppedgun)
+	
+	
 func _playFootstepSound():
 	$FootstepsAudioStream.pitch_scale = randf_range(0.8, 1.2)
 	$FootstepsAudioStream.play()
-
+	
+func _playReloadSound():
+	_reloadGunAudioStream.pitch_scale = randf_range(0.5, 0.8)
+	_reloadGunAudioStream.play()
 
 func _on_animated_sprite_2d_frame_changed() -> void:
 	if _animplayer.animation == "walk_foward" and (_animplayer.frame == 0 or _animplayer.frame == 2):

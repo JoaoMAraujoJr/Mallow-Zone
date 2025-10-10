@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt4npa70t2vd6"]
+
+[ext_resource type="PackedScene" uid="uid://bcdu0hfcb5b2i" path="res://Scenes/objects/asphalt/traffic_cone.tscn" id="1_q2p2o"]
+[ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="2_x2g3p"]
+
+[node name="ConnedAmmo" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(30, -8)
+
+[node name="Traffic Cone" parent="Node2D" instance=ExtResource("1_q2p2o")]
+position = Vector2(-30, -56)
+
+[node name="Traffic Cone2" parent="Node2D" instance=ExtResource("1_q2p2o")]
+position = Vector2(-50, -48)
+
+[node name="Traffic Cone3" parent="Node2D" instance=ExtResource("1_q2p2o")]
+position = Vector2(-70, -40)
+
+[node name="Traffic Cone4" parent="Node2D" instance=ExtResource("1_q2p2o")]
+position = Vector2(-88, -30)
+
+[node name="Traffic Cone5" parent="Node2D" instance=ExtResource("1_q2p2o")]
+position = Vector2(-104, -19)
+
+[node name="ammo" parent="." instance=ExtResource("2_x2g3p")]
+
+[node name="Node2D2" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(112, 70)
+
+[node name="Traffic Cone10" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-88, -126)
+
+[node name="Traffic Cone11" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-70, -118)
+
+[node name="Traffic Cone12" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-54, -108)
+
+[node name="Traffic Cone13" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-38, -92)
+
+[node name="Traffic Cone14" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-30, -76)
+
+[node name="Traffic Cone" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-30, -56)
+
+[node name="Traffic Cone2" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-50, -48)
+
+[node name="Traffic Cone3" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-70, -40)
+
+[node name="Traffic Cone4" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-88, -30)
+
+[node name="Traffic Cone5" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-104, -19)
+
+[node name="Traffic Cone6" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-128, -27)
+
+[node name="Traffic Cone9" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-194, -72)
+
+[node name="Traffic Cone7" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-154, -40)
+
+[node name="Traffic Cone8" parent="Node2D2" instance=ExtResource("1_q2p2o")]
+position = Vector2(-178, -51)

@@ -1,0 +1,119 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3tikolqywyoa"]
+
+[ext_resource type="Script" uid="uid://dmdabebpqmyqt" path="res://Scenes/items/guns/pickable/weapon_dropped.gd" id="1_aoykg"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="3_y5f0o"]
+
+[sub_resource type="Animation" id="Animation_y5f0o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.9374999, 0.9477566)]
+}
+
+[sub_resource type="Animation" id="Animation_bjfpq"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gun:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gun:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.56666666, 1.1800001, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.13962634, 0.0, 0.16057029118347813, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96666664, 1.94),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.9374999, 0.9477566), Vector2(1.452, 0.723), Vector2(1.9374999, 0.9477566)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnjce"]
+_data = {
+&"RESET": SubResource("Animation_y5f0o"),
+&"new_animation": SubResource("Animation_bjfpq")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjfpq"]
+radius = 25.495098
+
+[node name="weaponDropped" type="Node2D"]
+script = ExtResource("1_aoykg")
+weaponKey = "rifle"
+
+[node name="gun" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1.7690611, 1.7690611)
+
+[node name="shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2.3841858e-07, 16)
+scale = Vector2(1.9374999, 0.9477566)
+texture = ExtResource("3_y5f0o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xnjce")
+}
+autoplay = "new_animation"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bjfpq")

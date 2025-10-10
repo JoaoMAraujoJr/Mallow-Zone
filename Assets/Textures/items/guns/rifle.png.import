@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq41yr8kvcqdb"
-path="res://.godot/imported/walltexture.png-147111791871492b5f7c772a75917d98.ctex"
+uid="uid://c7psppskhr7yr"
+path="res://.godot/imported/rifle.png-445c7b7eeb5c5044986890f3fda7e412.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/floor/chess/walltexture.png"
-dest_files=["res://.godot/imported/walltexture.png-147111791871492b5f7c772a75917d98.ctex"]
+source_file="res://Assets/Textures/items/guns/rifle.png"
+dest_files=["res://.godot/imported/rifle.png-445c7b7eeb5c5044986890f3fda7e412.ctex"]
 
 [params]
 

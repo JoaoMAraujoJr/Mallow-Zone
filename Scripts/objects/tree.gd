@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+
+
 @onready var _treeSprite : Sprite2D = $Sprite2D
 @onready var _animplayer : AnimationPlayer = $AnimationPlayer
 @onready var _leafsLightOcludder : LightOccluder2D = $leafs

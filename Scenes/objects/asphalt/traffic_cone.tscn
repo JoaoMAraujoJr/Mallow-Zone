@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcdu0hfcb5b2i"]
+[gd_scene load_steps=10 format=3 uid="uid://bcdu0hfcb5b2i"]
 
 [ext_resource type="Texture2D" uid="uid://bf4b4qxug4rqt" path="res://Assets/objects/trafficCone/cone_spr.png" id="1_0jg7e"]
 [ext_resource type="Script" uid="uid://duvqijlcmf8iq" path="res://Scripts/objects/traffic_cone.gd" id="1_pjyrb"]
 [ext_resource type="PackedScene" uid="uid://b1aafxbj0lfsn" path="res://Scenes/particles/TrafficCone_particle.tscn" id="2_8klj0"]
+[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="3_wgqpb"]
+[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="4_j6qyd"]
+[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="6_w3vwp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8klj0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7j2i"]
+shader = ExtResource("3_wgqpb")
+shader_parameter/noise_tex = ExtResource("4_j6qyd")
+shader_parameter/threshold = 1.0
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/edge_width = 0.05
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0jg7e"]
 radius = 29.427877
@@ -19,7 +29,9 @@ shape = SubResource("CircleShape2D_8klj0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_q7j2i")
 texture = ExtResource("1_0jg7e")
+script = ExtResource("6_w3vwp")
 
 [node name="Area2D" type="Area2D" parent="."]
 

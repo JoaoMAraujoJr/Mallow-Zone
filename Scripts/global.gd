@@ -1,5 +1,5 @@
 extends Node
-var ammoMax : int = 35
+var ammoMax : int = 0
 var ammo : int = ammoMax
 var kills : int = 0
 var player_x: float = 0
@@ -8,7 +8,7 @@ var enemySpeed: float = 50.0
 var player_health : int = 100
 
 var currentbiome : String = "grasslands"
-var currentEquipedWeaponType : String = "rifle"
+var currentEquipedWeaponType : String = "none"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
