@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://siudy2wrjg83"]
+[gd_scene load_steps=12 format=3 uid="uid://siudy2wrjg83"]
 
 [ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/Carboss.gd" id="1_78rw5"]
 [ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/objects/car/car.png" id="1_htj82"]
-[ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emmiter.tscn" id="3_2ougs"]
+[ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emitter.tscn" id="3_2ougs"]
 [ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/LightTextures/directLightpoint_blurred.png" id="4_dyahk"]
+[ext_resource type="PackedScene" uid="uid://cacpu75j0o7gv" path="res://Scenes/particles/car_smoke_particle_emitter.tscn" id="4_ikkge"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_psh8h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_78rw5"]
@@ -12,6 +13,69 @@ radius = 1107.5531
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ougs"]
 radius = 111.42857
 height = 480.5716
+
+[sub_resource type="Animation" id="Animation_2ougs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("carSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:Speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [120.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lights/PointLight2D:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lights/PointLight2D2:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lights:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993)]
+}
 
 [sub_resource type="Animation" id="Animation_78rw5"]
 resource_name = "driving"
@@ -78,69 +142,6 @@ tracks/4/keys = {
 "values": [Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4)]
 }
 
-[sub_resource type="Animation" id="Animation_2ougs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.35, 0.34999993)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:Speed")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [120.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Lights/PointLight2D:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Lights/PointLight2D2:color")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Lights:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.35, 0.34999993)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dyahk"]
 _data = {
 &"RESET": SubResource("Animation_2ougs"),
@@ -150,12 +151,14 @@ _data = {
 [node name="CarBoss" type="CharacterBody2D" groups=["Car"]]
 z_index = 1
 y_sort_enabled = true
+disable_mode = 2
 script = ExtResource("1_78rw5")
 
 [node name="backwardsDetector" type="Area2D" parent="."]
+position = Vector2(0, 1234)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="backwardsDetector"]
-polygon = PackedVector2Array(0, -79, -412, -289, -817, -419, -667, -667, -402, -753, 1, -817, 675, -671, 857, -392, 380, -259)
+polygon = PackedVector2Array(-37, -1348, -688, -1399, -852, -1179, -1083, -1274, -1087, -1559, -856, -1965, -557, -2224, 9, -2376, 564, -2224, 899, -1881, 1077, -1528, 1112, -1289, 891, -1190, 625, -1418, 36, -1348)
 
 [node name="Backward" type="Marker2D" parent="."]
 position = Vector2(0, -167)
@@ -209,6 +212,10 @@ position = Vector2(-27, 40)
 [node name="TireTrackParticleFront2" parent="Particles" instance=ExtResource("3_2ougs")]
 position = Vector2(23, 40)
 
+[node name="carSmoke_particle_emitter" parent="Particles" instance=ExtResource("4_ikkge")]
+position = Vector2(23, -125)
+rotation = -1.5707964
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="CooldownTopickRotation" type="Timer" parent="Timers"]
@@ -219,6 +226,8 @@ wait_time = 2.0
 
 [node name="ToAddDrift" type="Timer" parent="Timers"]
 autostart = true
+
+[node name="DamageCoolDown" type="Timer" parent="Timers"]
 
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-1, -37)
@@ -251,3 +260,4 @@ texture = ExtResource("4_dyahk")
 [connection signal="timeout" from="Timers/CooldownTopickRotation" to="." method="_on_cooldown_topick_rotation_timeout"]
 [connection signal="timeout" from="Timers/CooldownTopickDirection" to="." method="_on_cooldown_topick_direction_timeout"]
 [connection signal="timeout" from="Timers/ToAddDrift" to="." method="_on_to_add_drift_timeout"]
+[connection signal="timeout" from="Timers/DamageCoolDown" to="." method="_on_damage_cool_down_timeout"]

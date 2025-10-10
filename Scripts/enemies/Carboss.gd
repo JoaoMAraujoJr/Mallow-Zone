@@ -11,12 +11,15 @@ extends CharacterBody2D
 @onready var _backwardsDetector := $backwardsDetector
 @onready var _canChangeDirection := true
 
+
+
 @onready var _dirtogo := "forward"
 
 var Playerdir : Vector2 = Vector2.ZERO
 @export var Speed : float = 120.0
 @onready var PushStrenght : float= Speed*4
 @export var Drifting : float = 0.9
+@onready var _cooldownmodifier := 1.0
 
 @onready var _toberotation:float
 @onready var rotationOffset :float
@@ -35,26 +38,29 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_updateDirection()  # nova função
 	_updateStrenght()
-	_GoinDirection()
+	_GoinDirection(delta)
 	
 	if _canhit:
 		_getHitsApplied()
 	else:
-		Speed = -20
+		_cooldownmodifier = lerp( _cooldownmodifier , 0.0 , delta * 2)
+		velocity =(_forwardmarker.global_position - global_position).normalized() * Speed  * Drifting * _cooldownmodifier
 	
 	_updateCarRotation(delta)
 	move_and_slide()
 
 	
-func _GoinDirection() ->void:
+func _GoinDirection(delta:float) ->void:
 	var dirVector :Vector2
 	if _dirtogo == "forward":
 		dirVector = (_forwardmarker.global_position - global_position).normalized()
-		velocity = dirVector * Speed  * Drifting
+		var _newvelocity = dirVector * Speed  * Drifting
+		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(-90)
 	elif _dirtogo == "backward":
 		dirVector = (_backwardmarker.global_position - global_position).normalized()
-		velocity = dirVector * Speed * Drifting * 0.8
+		var _newvelocity  = dirVector * Speed * Drifting * 0.8
+		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(90)
 
 func _updateCarRotation(delta: float) -> void:
@@ -82,6 +88,8 @@ func _getHitsApplied() -> void:
 		if body.has_method("addtoPushVelocity"):
 			var push_vector: Vector2 = (body.global_position - global_position).normalized() * PushStrenght
 			body.addtoPushVelocity(push_vector)
+			_canhit = false
+			$Timers/DamageCoolDown.start()
 		else:
 			print_debug("%s não tem o método addtoPushVelocity()" % body.name)
 			
@@ -94,6 +102,11 @@ func _updateDirection() -> void:
 		return
 	
 	var player_detected := false
+	for body in _backwardsDetector.get_overlapping_bodies():
+		if body.is_in_group("PlayerArea"):
+			player_detected = true
+			break
+	
 	for body in _backwardsDetector.get_overlapping_bodies():
 		if body.is_in_group("PlayerArea"):
 			player_detected = true
@@ -127,4 +140,10 @@ func _on_cooldown_topick_direction_timeout() -> void:
 func _on_to_add_drift_timeout() -> void:
 	if Drifting < 2.0:
 		Drifting += 0.1
+	pass # Replace with function body.
+
+
+func _on_damage_cool_down_timeout() -> void:
+	_canhit = true
+	_cooldownmodifier = 1.0
 	pass # Replace with function body.

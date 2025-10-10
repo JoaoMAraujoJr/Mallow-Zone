@@ -30,8 +30,6 @@ func set_direction(dir: Vector2) -> void:
 	$Sprite2D.rotate(dir.angle())
 
 
-
-
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 	pass # Replace with function body.

@@ -25,7 +25,9 @@ alpha_curve = SubResource("CurveTexture_6c05l")
 [node name="TireTrackParticleEmmiter" type="Node2D"]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 90
+z_index = -1
+amount = 150
 texture = ExtResource("1_biumi")
-lifetime = 6.0
+lifetime = 3.17
+trail_lifetime = 6.09
 process_material = SubResource("ParticleProcessMaterial_6c05l")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=18 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -8,7 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/mousefollow.tscn" id="5_r04jc"]
 [ext_resource type="Texture2D" uid="uid://xbsw0258yluo" path="res://Assets/button/reset_button_pressed.png" id="5_uwsgx"]
 [ext_resource type="Texture2D" uid="uid://bbjp1fswxcn8u" path="res://Assets/button/reset_button_hover.png" id="6_r04jc"]
+[ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7l867"]
+shader = ExtResource("9_7l867")
+shader_parameter/use_screen = true
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/strength = 2.0
+shader_parameter/radius = 1.32800006308
+shader_parameter/zoom = 0.3850000182875
+shader_parameter/aspect = 1.5000000679901202
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
 shader = ExtResource("2_uwsgx")
@@ -64,6 +74,17 @@ shader_parameter/pixel_strength = -2.0
 [node name="Interface" type="CanvasLayer"]
 layer = 2
 script = ExtResource("1_j00uw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="eyefish" type="ColorRect" parent="CanvasLayer"]
+z_index = 1
+material = SubResource("ShaderMaterial_7l867")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_r04jc")
@@ -147,11 +168,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 uppercase = true
 
-[node name="Mousefollow" parent="." instance=ExtResource("5_r04jc")]
-z_index = 4
-position = Vector2(190, 110.000015)
-scale = Vector2(0.6910793, 0.6910793)
-
 [node name="Button" type="TextureButton" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,6 +186,11 @@ texture_normal = ExtResource("4_yg6la")
 texture_pressed = ExtResource("5_uwsgx")
 texture_hover = ExtResource("6_r04jc")
 stretch_mode = 0
+
+[node name="Mousefollow" parent="." instance=ExtResource("5_r04jc")]
+z_index = 4
+position = Vector2(190, 110.000015)
+scale = Vector2(0.6910793, 0.6910793)
 
 [node name="CRT" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_aq0n2")

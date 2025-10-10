@@ -1,8 +1,6 @@
 # Attach this script to a CharacterBody2D node
 extends CharacterBody2D
 
-var bulletscene = preload('res://Scenes/objects/bullet.tscn')
-var bulletParticle = preload("res://Scenes/bullet_particle.tscn")
 
 @onready var _iswalking : bool = false
 @onready var _isbackwards: bool= false
@@ -14,8 +12,8 @@ var bulletParticle = preload("res://Scenes/bullet_particle.tscn")
 @onready var _PlayerCollision : CollisionShape2D = $PlayerCollisionShape
 @onready var _flashlight: Node2D = $flashlight
 @onready var _lifebar : TextureProgressBar= $LifeBar
-@onready var _gunsprite : Sprite2D = $gun
-@onready var _gunpoint : Marker2D = $gun/gunpoint
+var _gun : Node2D 
+@onready var _gunPivot : Marker2D = $GunPivot
 @onready var _animplayer : AnimatedSprite2D = $AnimatedSprite2D
 @onready var _shootAudiStream : AudioStreamPlayer2D = $ShootAudioStream
 #bools go here i guess:
@@ -39,6 +37,7 @@ var max_speed :float = 400.0
 @onready var cur_camzoom :float = target_zoom
 
 func _ready():
+	call_deferred("_equipGun")
 	_shootAudiStream.max_polyphony = 5
 	Global.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
@@ -66,27 +65,17 @@ func _physics_process(delta: float) -> void:
 		var mouse_pos = get_global_mouse_position()
 		var flashlightdirection = mouse_pos-_flashlight.global_position
 		_flashlight.global_rotation = flashlightdirection.angle()
-		_gunsprite.global_rotation= flashlightdirection.angle()
 			
 		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		_isbackwards = mouse_dir.y < 0
 		
-		_gunsprite.flip_v = _isbackwards
-		_gunsprite.z_index = -1 if _isbackwards else 0
+		if _gun:
+			_gun._getSprite().flip_v = _isbackwards
+			_gun.z_index = -1 if _isbackwards else 0
 		
 			
-			#calcula o recoil velocity do tiro
-		if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0:
-
-			var bulletPart = bulletParticle.instantiate()
-			bulletPart.global_position = _gunpoint.global_position
-			get_tree().current_scene.add_child(bulletPart)
-			var newbullet = bulletscene.instantiate()
-			newbullet.position = _gunpoint.global_position
-			var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-			newbullet.set_direction(bulletdirection)
-			Global.ammo -= 1
-			get_tree().current_scene.add_child(newbullet)
+			#calcula o recoil velocity e som do tiro
+		if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0 and Global.currentEquipedWeaponType != "none":
 			
 			var recoil_direction = ( global_position - mouse_pos ).normalized()
 			recoil_velocity = recoil_direction * recoil_strength
@@ -94,8 +83,7 @@ func _physics_process(delta: float) -> void:
 			_shootAudiStream.pitch_scale = randf_range(0.8, 1.2)
 			_shootAudiStream.play()
 
-			
-
+		
 		
 		#movement and mouse treatment:
 		if Input.is_action_just_pressed("UnlockMouse"):
@@ -157,7 +145,6 @@ func _on_regen_timer_timeout() -> void:
 	else:
 		health=100
 
-
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_UP and event.pressed:
@@ -169,3 +156,22 @@ func _input(event):
 func adjustCameraZoom(delta):
 	cur_camzoom = lerp(cur_camzoom, target_zoom, 10 * delta)  # 10 é a velocidade do lerp, ajuste como quiser
 	camera.zoom = Vector2.ONE * cur_camzoom
+
+func _equipGun():
+	var currentGunType = Global.currentEquipedWeaponType
+	var currentGun = ItemData.weapons[currentGunType]
+	_gun = currentGun["weapon_scene"].instantiate()
+	_gun.position = _gunPivot.position
+	add_child(_gun)
+	
+func _playFootstepSound():
+	$FootstepsAudioStream.pitch_scale = randf_range(0.8, 1.2)
+	$FootstepsAudioStream.play()
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if _animplayer.animation == "walk_foward" and (_animplayer.frame == 0 or _animplayer.frame == 2):
+		_playFootstepSound()
+	if _animplayer.animation == "walk_backward" and (_animplayer.frame == 0 or _animplayer.frame == 2):
+		_playFootstepSound()
+	pass # Replace with function body.

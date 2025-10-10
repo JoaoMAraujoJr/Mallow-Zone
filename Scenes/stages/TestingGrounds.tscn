@@ -8,6 +8,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="floor" type="Sprite2D" parent="."]
+z_index = -10
 scale = Vector2(15.489016, 11.009016)
 texture = ExtResource("1_5kihk")
 

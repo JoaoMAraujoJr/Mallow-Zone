@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://0hmhkrf3c44n"]
 
-[ext_resource type="Script" uid="uid://dwms633t47x1t" path="res://Scripts/objects/bullet.gd" id="1_xjght"]
-[ext_resource type="Texture2D" uid="uid://bwy1yk26573bi" path="res://Assets/player/bullet.png" id="2_oduel"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_ycag2"]
+[ext_resource type="Script" uid="uid://dwms633t47x1t" path="res://Scenes/items/guns/bullets/riflebullet.gd" id="1_wnwga"]
+[ext_resource type="Texture2D" uid="uid://bwy1yk26573bi" path="res://Assets/player/bullet.png" id="2_uostt"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_bhd26"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oduel"]
 radius = 2.0
@@ -12,10 +12,10 @@ height = 12.0
 radius = 8.062258
 
 [node name="bullet" type="CharacterBody2D" groups=["Bullet"]]
-script = ExtResource("1_xjght")
+script = ExtResource("1_wnwga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_oduel")
+texture = ExtResource("2_uostt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 3
@@ -32,6 +32,6 @@ disabled = true
 shape = SubResource("CircleShape2D_oduel")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-texture = ExtResource("3_ycag2")
+texture = ExtResource("3_bhd26")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

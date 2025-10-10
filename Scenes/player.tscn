@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dn8vwwpkwveo0" path="res://Assets/player/player.png" id="2_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/player/gun.png" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/player/barunder.png" id="6_3smsa"]
 [ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/player/bar.png" id="7_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="8_8erm5"]
 [ext_resource type="AudioStream" uid="uid://8ps7hm6xp1xv" path="res://Assets/Sounds/ShootSoundOGG.ogg" id="8_f1ek2"]
+[ext_resource type="AudioStream" uid="uid://bqx2jk7kpk6l7" path="res://Assets/Sounds/Steps_grass.ogg" id="8_tx1dd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
 atlas = ExtResource("2_3smsa")
@@ -122,7 +122,7 @@ current = true
 position = Vector2(-5.9604645e-08, -2.3841858e-07)
 scale = Vector2(1.4789339, 1.4789339)
 sprite_frames = SubResource("SpriteFrames_fd4e3")
-animation = &"idle_backward"
+animation = &"walk_backward"
 
 [node name="flashlight" type="Node2D" parent="."]
 z_index = -1
@@ -147,15 +147,8 @@ rotation = 1.5980113
 scale = Vector2(0.99999994, 0.99999994)
 occluder = SubResource("OccluderPolygon2D_6t5aa")
 
-[node name="gun" type="Sprite2D" parent="."]
-y_sort_enabled = true
+[node name="GunPivot" type="Marker2D" parent="."]
 position = Vector2(0, 7)
-scale = Vector2(1.5, 1.25)
-texture = ExtResource("4_vgqql")
-offset = Vector2(16, -1.5999997)
-
-[node name="gunpoint" type="Marker2D" parent="gun"]
-position = Vector2(23.333332, -2.4)
 
 [node name="PlayerArea2D" type="Area2D" parent="." groups=["PlayerArea"]]
 scale = Vector2(0.14770508, 0.14770508)
@@ -205,5 +198,10 @@ max_polyphony = 4
 bus = &"SFXReverb"
 
 [node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_tx1dd")
+volume_db = -6.0
+max_polyphony = 4
+bus = &"SFXReverb"
 
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]

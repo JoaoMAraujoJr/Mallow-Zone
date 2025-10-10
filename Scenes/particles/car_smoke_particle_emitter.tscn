@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://cacpu75j0o7gv"]
+
+[ext_resource type="Texture2D" uid="uid://b7st847w5fu7c" path="res://Assets/particle/smoke.png" id="1_tvim6"]
+
+[sub_resource type="Curve" id="Curve_ynp3f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dx2u5"]
+curve = SubResource("Curve_ynp3f")
+
+[sub_resource type="Curve" id="Curve_md3r1"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 279.10117), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_njg57"]
+curve = SubResource("Curve_md3r1")
+
+[sub_resource type="Gradient" id="Gradient_fublk"]
+offsets = PackedFloat32Array(0, 0.07978723, 0.4574468)
+colors = PackedColorArray(0.9846522, 0.7437955, 0.22832283, 1, 0.8094778, 0.3355949, 0, 1, 0.27387273, 0.27387273, 0.27387273, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_73gyb"]
+gradient = SubResource("Gradient_fublk")
+
+[sub_resource type="Curve" id="Curve_4hcdm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3370787), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rkwiv"]
+curve = SubResource("Curve_4hcdm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_262th"]
+particle_flag_disable_z = true
+angle_min = -70.79999
+angle_max = 71.10001
+angle_curve = SubResource("CurveTexture_njg57")
+direction = Vector3(0, 0, 0)
+spread = 16.967
+initial_velocity_min = 96.15
+initial_velocity_max = 96.15
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -21.920002
+radial_accel_max = 13.209997
+scale_min = 0.099999994
+scale_curve = SubResource("CurveTexture_rkwiv")
+color_ramp = SubResource("GradientTexture1D_73gyb")
+alpha_curve = SubResource("CurveTexture_dx2u5")
+
+[node name="carSmoke_particle_emitter" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = -1
+amount = 20
+texture = ExtResource("1_tvim6")
+lifetime = 2.11
+explosiveness = 0.48
+randomness = 0.69
+trail_lifetime = 6.09
+process_material = SubResource("ParticleProcessMaterial_262th")

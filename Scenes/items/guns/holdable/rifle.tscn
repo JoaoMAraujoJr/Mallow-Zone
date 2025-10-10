@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dox2op73mb8du"]
+
+[ext_resource type="Script" uid="uid://cbw0oaryl85kx" path="res://Scenes/items/guns/holdable/gun.gd" id="1_0xk6x"]
+[ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/player/gun.png" id="1_v4uw3"]
+[ext_resource type="PackedScene" uid="uid://0hmhkrf3c44n" path="res://Scenes/items/guns/bullets/rifleBullet.tscn" id="2_hpt7h"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_0xk6x")
+_Type = "rifle"
+bulletScene = ExtResource("2_hpt7h")
+
+[node name="gun" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -1.1920929e-07)
+scale = Vector2(1.5, 1.25)
+texture = ExtResource("1_v4uw3")
+offset = Vector2(16, -0.7999996)
+
+[node name="gunpoint" type="Marker2D" parent="gun"]
+position = Vector2(23.333332, -2.4)
