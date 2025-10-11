@@ -1,17 +1,32 @@
 extends CharacterBody2D
 
-@onready var _carSprite := $carSprite
+signal change_on_boss_status(BossName:String ,IsOnBoss:bool, IsBossDefeated: bool)
+
+@onready var _carSprite :Sprite2D= $carSprite
+@onready var _brainSprite : Sprite2D = $BrainMask/Sprite2D
+@onready var maxHp : int = 50
+@onready var currentHp:= maxHp
+
+const CarSpriteTextures = {
+	"BOTH_CLOSED": preload("res://Assets/objects/car/car.png"),
+	"FRONT_OPENED": preload("res://Assets/objects/car/car_front_opened.png"),
+	"BACK_OPENED": preload("res://Assets/objects/car/car_back_opened.png"),
+	"BOTH_OPENED": preload("res://Assets/objects/car/car_both_opened.png"),
+}
+
+var _isFrontOpened: bool = false
+var _isBackOpened: bool = false
+
 @onready var _playerdetectArea := $PlayerDetectorArea
 @onready var _hitdetectArea := $PlayerHitArea
 @onready var _forwardmarker := $Forward
 @onready var _backwardmarker :=$Backward
+@onready var _animplayer_brain:=$BrainAnimationPlayer
 
 @onready var _cooldownTopickDir := $Timers/CooldownTopickDirection
 @onready var _cooldownTopickRotation := $Timers/CooldownTopickRotation
 @onready var _backwardsDetector := $backwardsDetector
 @onready var _canChangeDirection := true
-
-
 
 @onready var _dirtogo := "forward"
 
@@ -29,13 +44,16 @@ var _canhit : bool = true
 var _playerInBackward := false
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	$DamageDetector.monitoring=false
+	$Timers/TimerTillOpenFront.start()
 	Global.currentbiome = "asphalt"
+	self.change_on_boss_status.connect(Global.change_on_boss_status_received)
+	emit_signal("change_on_boss_status","Ominous Car",true,false)
+	
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_updateDirection()  # nova função
 	_updateStrenght()
@@ -50,7 +68,7 @@ func _process(delta: float) -> void:
 	_updateCarRotation(delta)
 	move_and_slide()
 
-	
+#===MOVEMENT===
 func _GoinDirection(delta:float) ->void:
 	var dirVector :Vector2
 	if _dirtogo == "forward":
@@ -63,42 +81,6 @@ func _GoinDirection(delta:float) ->void:
 		var _newvelocity  = dirVector * Speed * Drifting * 0.8
 		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(90)
-
-func _updateCarRotation(delta: float) -> void:
-	if not _canpickPlayerLocation:
-		# continua ajustando lentamente até chegar na rotação desejada
-		rotation = lerp_angle(rotation, _toberotation, delta * Drifting) # pode ajustar a velocidade
-		return
-
-	for body in _playerdetectArea.get_overlapping_bodies():
-		if body.is_in_group("PlayerArea"):
-			Playerdir = (body.global_position - global_position).normalized()
-			if Playerdir != Vector2.ZERO:
-				_toberotation = Playerdir.angle() + rotationOffset
-				_canpickPlayerLocation = false
-				_cooldownTopickRotation.start()
-			break
-
-	
-
-func _getHitsApplied() -> void:
-	var bodies = _hitdetectArea.get_overlapping_bodies()
-	for body in bodies:
-		if body == self:
-			continue
-		if body.has_method("addtoPushVelocity"):
-			var push_vector: Vector2 = (body.global_position - global_position).normalized() * PushStrenght
-			body.addtoPushVelocity(push_vector)
-			_canhit = false
-			$Timers/DamageCoolDown.start()
-		elif body.has_method("setHealth"):
-			body.setHealth( - int(Speed/10 * 2))
-		else:
-			print_debug("%s não tem o método addtoPushVelocity()" % body.name)
-			
-func _updateStrenght():
-	PushStrenght= Speed*Drifting*3
-
 
 func _updateDirection() -> void:
 	if not _canChangeDirection:
@@ -129,24 +111,100 @@ func _updateDirection() -> void:
 		_canChangeDirection = false
 		_cooldownTopickDir.start()
 
+func _updateCarRotation(delta: float) -> void:
+	if not _canpickPlayerLocation:
+		# continua ajustando lentamente até chegar na rotação desejada
+		rotation = lerp_angle(rotation, _toberotation, delta * Drifting) # pode ajustar a velocidade
+		return
 
+	for body in _playerdetectArea.get_overlapping_bodies():
+		if body.is_in_group("PlayerArea"):
+			Playerdir = (body.global_position - global_position).normalized()
+			if Playerdir != Vector2.ZERO:
+				_toberotation = Playerdir.angle() + rotationOffset
+				_canpickPlayerLocation = false
+				_cooldownTopickRotation.start()
+			break
+
+#===DAMAGE===
+func _getHitsApplied() -> void:
+	var bodies = _hitdetectArea.get_overlapping_bodies()
+	for body in bodies:
+		if body == self:
+			continue
+		if body.has_method("addtoPushVelocity"):
+			var push_vector: Vector2 = (body.global_position - global_position).normalized() * PushStrenght
+			body.addtoPushVelocity(push_vector)
+			_canhit = false
+			if body.has_method("addToHealth"):
+				body.addToHealth(-int(Speed/10))
+			$Timers/DamageCoolDown.start()
+		elif body.has_method("setHealth"):
+			body.setHealth( -int(Speed/10 * 2))
+
+func _updateStrenght():
+	PushStrenght= Speed*Drifting*3
+
+#===ACTIONS===
+func openCloseFront():
+	if !_isFrontOpened:
+		_isFrontOpened = true
+		if _isBackOpened:
+			_carSprite.texture=CarSpriteTextures.BOTH_OPENED
+		else:
+			_carSprite.texture=CarSpriteTextures.FRONT_OPENED
+		$DamageDetector.monitoring = true
+		_animplayer_brain.play("brainSpawning")
+		await _animplayer_brain.animation_finished
+		_animplayer_brain.play("brainMode")
+
+	elif _isFrontOpened:
+		_isFrontOpened = false
+		_animplayer_brain.play_backwards("brainSpawning")
+		await _animplayer_brain.animation_finished
+		$DamageDetector.monitoring = false
+		if _isBackOpened:
+			_carSprite.texture=CarSpriteTextures.BACK_OPENED
+		else:
+			_carSprite.texture=CarSpriteTextures.BOTH_CLOSED
+
+#===SIGNALS FROM TIMERS===
 func _on_cooldown_topick_rotation_timeout() -> void:
 	_canpickPlayerLocation = true
 	pass # Replace with function body.
 
-
 func _on_cooldown_topick_direction_timeout() -> void:
 	_canChangeDirection = true
 	pass # Replace with function body.
-
 
 func _on_to_add_drift_timeout() -> void:
 	if Drifting < 3.2:
 		Drifting += 0.1
 	pass # Replace with function body.
 
-
 func _on_damage_cool_down_timeout() -> void:
 	_canhit = true
 	_cooldownmodifier = 1.0
 	pass # Replace with function body.
+
+func _on_timer_till_close_front_timeout() -> void: #USED TO CLOSE CAR HOOD
+	openCloseFront()
+	$Timers/TimerTillOpenFront.start()
+
+func _on_timer_till_open_front_timeout() -> void: #USED TO OPEN CAR HOOD
+	openCloseFront()
+	$Timers/TimerTillCloseFront.start()
+	pass # Replace with function body.
+
+func _on_timer_to_color_modulate_timeout() -> void:
+	_carSprite.material.set_shader_parameter("flash_white", false)
+	_brainSprite.material.set_shader_parameter("flash_white", false)
+
+#===OTHER SIGNALS===
+func _on_damage_detector_area_entered(area: Area2D) -> void: #APPLY DAMAGE
+	if area.is_in_group("Bullet"):
+		_carSprite.material.set_shader_parameter("flash_white", true)
+		_brainSprite.material.set_shader_parameter("flash_white", true)
+		$Timers/TimerToColorModulate.start()
+	pass # Replace with function body.
+	

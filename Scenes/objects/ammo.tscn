@@ -24,7 +24,6 @@ y_sort_enabled = true
 script = ExtResource("1_pncbt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 material = SubResource("ShaderMaterial_j57vc")
 scale = Vector2(1.9885328, 1.9885328)
 texture = ExtResource("1_mq6ge")

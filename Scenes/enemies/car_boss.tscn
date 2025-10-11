@@ -1,11 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://siudy2wrjg83"]
+[gd_scene load_steps=22 format=3 uid="uid://siudy2wrjg83"]
 
 [ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/Carboss.gd" id="1_78rw5"]
 [ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/objects/car/car.png" id="1_htj82"]
+[ext_resource type="Shader" uid="uid://sb648qjmfvdb" path="res://Scripts/shaders/Damaged.gdshader" id="2_hm7pw"]
 [ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emitter.tscn" id="3_2ougs"]
 [ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/LightTextures/directLightpoint_blurred.png" id="4_dyahk"]
 [ext_resource type="PackedScene" uid="uid://cacpu75j0o7gv" path="res://Scenes/particles/car_smoke_particle_emitter.tscn" id="4_ikkge"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_psh8h"]
+[ext_resource type="Texture2D" uid="uid://br24f7x3ljov3" path="res://Assets/objects/car/brainmask.png" id="7_83ax7"]
+[ext_resource type="Texture2D" uid="uid://dg6ckt8uxs3pv" path="res://Assets/objects/car/carbrains.png" id="8_hm7pw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hm7pw"]
+size = Vector2(231.42859, 220.00002)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_78rw5"]
 radius = 1107.5531
@@ -13,6 +19,10 @@ radius = 1107.5531
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ougs"]
 radius = 111.42857
 height = 480.5716
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ksav"]
+shader = ExtResource("2_hm7pw")
+shader_parameter/flash_white = false
 
 [sub_resource type="Animation" id="Animation_2ougs"]
 length = 0.001
@@ -148,6 +158,101 @@ _data = {
 &"driving": SubResource("Animation_78rw5")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm7pw"]
+shader = ExtResource("2_hm7pw")
+shader_parameter/flash_white = false
+
+[sub_resource type="Animation" id="Animation_4ksav"]
+resource_name = "brainSpawning"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BrainMask/Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6766667, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1.443, 143.739), Vector2(-1.443, 8.85), Vector2(-1.443, 13.445)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BrainMask/Sprite2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 0.9266667, 1.1966667, 1.5, 1.7666667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.34531972, 0.6108957), Vector2(0.345, 0.706), Vector2(0.34531972, 0.6108957), Vector2(0.37, 0.646), Vector2(0.345, 0.701), Vector2(0.37, 0.646), Vector2(0.34531972, 0.6108957)]
+}
+
+[sub_resource type="Animation" id="Animation_6n6a6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BrainMask/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4.7683716e-07, 121.1402)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BrainMask/Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.45992854, 0.81364703)]
+}
+
+[sub_resource type="Animation" id="Animation_d4hdx"]
+resource_name = "brainMode"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BrainMask/Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.54, 1.03, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1.443, 18.34), Vector2(-1.443, 14.12), Vector2(-1.443, 18.34), Vector2(-1.443, 14.12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BrainMask/Sprite2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.55, 1.03, 1.53),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.375, 0.611), Vector2(0.345, 0.696), Vector2(0.375, 0.611), Vector2(0.345, 0.696)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m2gaa"]
+_data = {
+&"RESET": SubResource("Animation_6n6a6"),
+&"brainMode": SubResource("Animation_d4hdx"),
+&"brainSpawning": SubResource("Animation_4ksav")
+}
+
 [node name="CarBoss" type="CharacterBody2D" groups=["Car"]]
 z_index = 1
 y_sort_enabled = true
@@ -172,6 +277,15 @@ polygon = PackedVector2Array(-34, 102, -50, 91, -41, 7, -31, 19, -28, 71, 30, 72
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PlayerHitArea"]
 polygon = PackedVector2Array(-31, 16, -46, -41, -43, -81, -34, -95, 33, -94, 41, -84, 44, -37, 34, 16, 19, -65, -20, -65)
 
+[node name="DamageDetector" type="Area2D" parent="."]
+position = Vector2(-1, -37)
+scale = Vector2(0.35, 0.34999993)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
+position = Vector2(1.4285702, 144.28577)
+shape = SubResource("RectangleShape2D_hm7pw")
+debug_color = Color(0.9372549, 0.21960784, 0.3254902, 0.7882353)
+
 [node name="PlayerDetectorArea" type="Area2D" parent="."]
 position = Vector2(0, -39.100014)
 
@@ -184,6 +298,7 @@ scale = Vector2(0.35, 0.34999993)
 shape = SubResource("CapsuleShape2D_2ougs")
 
 [node name="carSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4ksav")
 position = Vector2(0, -39.100014)
 scale = Vector2(0.35, 0.34999993)
 texture = ExtResource("1_htj82")
@@ -229,6 +344,15 @@ autostart = true
 
 [node name="DamageCoolDown" type="Timer" parent="Timers"]
 
+[node name="TimerTillOpenFront" type="Timer" parent="Timers"]
+wait_time = 5.0
+
+[node name="TimerTillCloseFront" type="Timer" parent="Timers"]
+wait_time = 10.0
+
+[node name="TimerToColorModulate" type="Timer" parent="Timers"]
+wait_time = 0.5
+
 [node name="Lights" type="Node2D" parent="."]
 position = Vector2(-1, -37)
 scale = Vector2(0.35, 0.34999993)
@@ -255,9 +379,31 @@ position = Vector2(80, 625.7144)
 color = Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)
 texture = ExtResource("4_dyahk")
 
+[node name="BrainMask" type="Sprite2D" parent="."]
+clip_children = 1
+position = Vector2(0.4999962, 7.000002)
+scale = Vector2(1.0119048, 0.5)
+texture = ExtResource("7_83ax7")
+
+[node name="Sprite2D" type="Sprite2D" parent="BrainMask"]
+material = SubResource("ShaderMaterial_hm7pw")
+position = Vector2(4.7683716e-07, 121.1402)
+scale = Vector2(0.45992854, 0.81364703)
+texture = ExtResource("8_hm7pw")
+
+[node name="BrainAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m2gaa")
+}
+
 [connection signal="body_entered" from="backwardsDetector" to="." method="_on_backwards_detector_body_entered"]
 [connection signal="body_exited" from="backwardsDetector" to="." method="_on_backwards_detector_body_exited"]
+[connection signal="area_entered" from="DamageDetector" to="." method="_on_damage_detector_area_entered"]
+[connection signal="body_entered" from="DamageDetector" to="." method="_on_damage_detector_body_entered"]
 [connection signal="timeout" from="Timers/CooldownTopickRotation" to="." method="_on_cooldown_topick_rotation_timeout"]
 [connection signal="timeout" from="Timers/CooldownTopickDirection" to="." method="_on_cooldown_topick_direction_timeout"]
 [connection signal="timeout" from="Timers/ToAddDrift" to="." method="_on_to_add_drift_timeout"]
 [connection signal="timeout" from="Timers/DamageCoolDown" to="." method="_on_damage_cool_down_timeout"]
+[connection signal="timeout" from="Timers/TimerTillOpenFront" to="." method="_on_timer_till_open_front_timeout"]
+[connection signal="timeout" from="Timers/TimerTillCloseFront" to="." method="_on_timer_till_close_front_timeout"]
+[connection signal="timeout" from="Timers/TimerToColorModulate" to="." method="_on_timer_to_color_modulate_timeout"]
