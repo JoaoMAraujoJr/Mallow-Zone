@@ -50,6 +50,8 @@ alpha_curve = SubResource("CurveTexture_dx2u5")
 
 [node name="carSmoke_particle_emitter" type="Node2D"]
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = -1
 amount = 20

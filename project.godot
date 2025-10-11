@@ -21,8 +21,9 @@ buses/default_bus_layout="uid://dvwibohyco07e"
 
 [autoload]
 
-Global="*res://Scripts/global.gd"
-ItemData="*res://Scripts/ItemData.gd"
+Global="*res://Scripts/Singletons/global.gd"
+ItemData="*res://Scripts/Singletons/ItemData.gd"
+BossManager="*res://Scripts/Singletons/boss_manager.gd"
 
 [display]
 

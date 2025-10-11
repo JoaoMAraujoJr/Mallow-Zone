@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
-signal change_on_boss_status(BossName:String ,IsOnBoss:bool, IsBossDefeated: bool)
+signal change_on_boss_status(BossName:String  ,currentHP:int ,IsOnBoss:bool, IsBossDefeated: bool)
 
 @onready var _carSprite :Sprite2D= $carSprite
+@onready var _motorAudio:AudioStreamPlayer2D = $MotorSoundStream
 @onready var _brainSprite : Sprite2D = $BrainMask/Sprite2D
-@onready var maxHp : int = 50
+@onready var maxHp : int = BossManager.BossList["Ominous Car"]["maxHP"]
 @onready var currentHp:= maxHp
+
+@export var ExplosioParticle : PackedScene
 
 const CarSpriteTextures = {
 	"BOTH_CLOSED": preload("res://Assets/objects/car/car.png"),
@@ -49,8 +52,8 @@ func _ready() -> void:
 	$DamageDetector.monitoring=false
 	$Timers/TimerTillOpenFront.start()
 	Global.currentbiome = "asphalt"
-	self.change_on_boss_status.connect(Global.change_on_boss_status_received)
-	emit_signal("change_on_boss_status","Ominous Car",true,false)
+	self.change_on_boss_status.connect(BossManager.change_on_boss_status_received)
+	emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
 	
 	pass # Replace with function body.
 
@@ -145,6 +148,17 @@ func _getHitsApplied() -> void:
 func _updateStrenght():
 	PushStrenght= Speed*Drifting*3
 
+func _updateBossHealth(addto: int):
+	if (currentHp + addto) <= 0:
+		emit_signal("change_on_boss_status","Ominous Car",0,false,true)
+		var explosion = ExplosioParticle.instantiate()
+		explosion.global_position = global_position
+		get_tree().current_scene.add_child(explosion)
+		queue_free()
+	else:
+		currentHp += addto
+		emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
+
 #===ACTIONS===
 func openCloseFront():
 	if !_isFrontOpened:
@@ -203,8 +217,15 @@ func _on_timer_to_color_modulate_timeout() -> void:
 #===OTHER SIGNALS===
 func _on_damage_detector_area_entered(area: Area2D) -> void: #APPLY DAMAGE
 	if area.is_in_group("Bullet"):
+		_updateBossHealth(area.get_parent().damage)
 		_carSprite.material.set_shader_parameter("flash_white", true)
 		_brainSprite.material.set_shader_parameter("flash_white", true)
 		$Timers/TimerToColorModulate.start()
 	pass # Replace with function body.
 	
+
+
+func _on_motor_sound_stream_finished() -> void:
+	_motorAudio.pitch_scale = randf_range(0.4,2.0)
+	_motorAudio.play()
+	pass # Replace with function body.

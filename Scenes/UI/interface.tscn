@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=19 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bbjp1fswxcn8u" path="res://Assets/button/reset_button_hover.png" id="6_r04jc"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
+[ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_apajn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7l867"]
 shader = ExtResource("9_7l867")
@@ -167,6 +168,9 @@ label_settings = SubResource("LabelSettings_x2tka")
 vertical_alignment = 1
 autowrap_mode = 3
 uppercase = true
+
+[node name="BossBar" parent="." instance=ExtResource("10_apajn")]
+mouse_filter = 2
 
 [node name="Button" type="TextureButton" parent="."]
 anchors_preset = 8

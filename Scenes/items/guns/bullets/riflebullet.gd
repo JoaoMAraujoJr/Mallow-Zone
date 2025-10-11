@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var speed: float = 500.0
 @onready var direction: Vector2 
 @onready var _area: Area2D = $damageArea
+@onready var damage := -2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	var bodies = _area.get_overlapping_bodies()
 	for body in bodies: 
 		if body.has_method("setHealth"):
-			body.setHealth(-1)
+			body.setHealth(damage)
 			queue_free()
 		elif body.is_in_group("Interactable"):
 			body.TurnedOn = true

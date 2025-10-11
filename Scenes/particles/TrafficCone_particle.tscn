@@ -53,5 +53,6 @@ stream = ExtResource("3_78ipt")
 volume_db = -10.111
 pitch_scale = 1.54
 autoplay = true
+max_distance = 841.0
 attenuation = 2.4622896
 bus = &"SFXReverb"

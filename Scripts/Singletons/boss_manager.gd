@@ -1,0 +1,60 @@
+extends Node
+
+@onready var _isOnBoss :=false
+@onready var currentBossName : String = ""
+@onready var currentBossHealth : int
+
+var multiplier : int = 1
+
+var Bossbar : BossBar 
+
+
+@onready var defeatedBosses : Array[String]
+
+var BossList := {
+	"Ominous Car":{
+		"name": "The Ominous Car",
+		"maxHP": 20 * multiplier,
+		"isDefeated": false
+	}
+	
+}
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func change_on_boss_status_received(BossName:String ,currentBossHP:int,IsOnBoss:bool, IsBossDefeated: bool):
+	
+	_isOnBoss = IsOnBoss
+	
+	if Bossbar == null:
+		print("bossbar not Founded Yet")
+		return
+	
+	if IsBossDefeated or !IsOnBoss:
+		if BossList.has(currentBossName):
+			currentBossHealth = currentBossHP
+			BossList[currentBossName]["isDefeated"] = true
+			Bossbar.updateBossBar(currentBossHealth,BossList[currentBossName]["maxHP"])
+			Bossbar.changeVisibility(false)
+			print("Boss is Defeated : " + str(BossList[currentBossName]["isDefeated"]))
+	elif !IsBossDefeated and !IsOnBoss:
+		currentBossName = ""
+		Bossbar.changeVisibility(false)
+	else:
+		if BossList.has(BossName):
+			currentBossName = BossName
+			currentBossHealth = currentBossHP
+			Bossbar.updateBossBar(currentBossHealth,BossList[currentBossName]["maxHP"])
+			Bossbar.updateBossName(BossList[currentBossName]["name"])
+			if (Bossbar.isVisible == false):
+				Bossbar.changeVisibility(true)
+
+	print("Boss signal recieved my friend")

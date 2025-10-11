@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk0duer8rigcv"]
+[gd_scene load_steps=7 format=3 uid="uid://bk0duer8rigcv"]
 
-[ext_resource type="Texture2D" uid="uid://dvxlg7hpy280d" path="res://Assets/Textures/Proto/Dark/texture_05.png" id="1_5kihk"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="1_hccwu"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_w2jle"]
 [ext_resource type="PackedScene" uid="uid://siudy2wrjg83" path="res://Scenes/enemies/car_boss.tscn" id="2_lu3d8"]
@@ -9,11 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="7_3kiau"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="floor" type="Sprite2D" parent="."]
-z_index = -10
-scale = Vector2(15.489016, 11.009016)
-texture = ExtResource("1_5kihk")
 
 [node name="Player" parent="." instance=ExtResource("1_hccwu")]
 position = Vector2(0, -5)

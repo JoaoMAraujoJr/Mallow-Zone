@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmpjceleu1vfr"]
+
+[ext_resource type="Texture2D" uid="uid://b7st847w5fu7c" path="res://Assets/particle/smoke.png" id="1_0e1xi"]
+[ext_resource type="Script" uid="uid://bfpfh5q8n3err" path="res://Scripts/effects/particles.gd" id="1_nhyu6"]
+[ext_resource type="AudioStream" uid="uid://c02aprj0ejvtu" path="res://Assets/Sounds/explossionSound.wav" id="3_wb38k"]
+
+[sub_resource type="Curve" id="Curve_nhyu6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5700934, 1), 0.0, 0.0, 0, 0, Vector2(0.7523364, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wb38k"]
+curve = SubResource("Curve_nhyu6")
+
+[sub_resource type="CurveTexture" id="CurveTexture_5sbyd"]
+
+[sub_resource type="Gradient" id="Gradient_ogj2q"]
+offsets = PackedFloat32Array(0, 0.05851064, 0.11170213, 0.25531915)
+colors = PackedColorArray(1, 0.8722543, 0.721554, 1, 1.3426629, 0.56705695, 0, 1, 1.1897365, 0.14869912, 0, 1, 0.46741354, 0.35793182, 0.30954748, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_852bh"]
+gradient = SubResource("Gradient_ogj2q")
+
+[sub_resource type="Curve" id="Curve_py7g0"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.8314607), 0.0, 0.0, 0, 0, Vector2(0.11214953, 1.9775282), 0.0, 0.0, 0, 0, Vector2(0.3598131, 0.6741574), 0.0, 0.0, 0, 0, Vector2(0.5981308, 0.40449452), 0.0, 0.0, 0, 0, Vector2(0.81775695, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_v7wrn"]
+curve = SubResource("Curve_py7g0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o6td6"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+angle_curve = SubResource("CurveTexture_5sbyd")
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 20, 0)
+scale_min = 0.19999999
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_v7wrn")
+color_ramp = SubResource("GradientTexture1D_852bh")
+alpha_curve = SubResource("CurveTexture_wb38k")
+
+[node name="ExplosionParticle" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_nhyu6")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 115
+texture = ExtResource("1_0e1xi")
+lifetime = 4.93
+one_shot = true
+explosiveness = 0.81
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_o6td6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wb38k")
+volume_db = -13.0
+bus = &"SFXReverb"
