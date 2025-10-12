@@ -75,3 +75,9 @@ func shootLogic() -> void:
 				newbullet.set_direction(bulletdirection)
 				Global.ammo -= 1
 				get_tree().current_scene.add_child(newbullet)
+
+func _flipGun(is_backwards: bool):
+	if is_backwards:
+		_sprite.scale.y = -abs(_sprite.scale.y)
+	else:
+		_sprite.scale.y = abs(_sprite.scale.y)

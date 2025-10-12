@@ -6,7 +6,7 @@ class_name EffectHandler
 @onready var _timer: Timer = $Timer
 
 func addEffect(effect:Effect):
-	for i in CurrentEffectsList:
+	for i in range(CurrentEffectsList.size()):
 		if CurrentEffectsList[i].name == effect.name:
 			CurrentEffectsLifetimes[i].start()
 			return
@@ -30,6 +30,7 @@ func removeEffect (effect : Effect , timer : Timer):
 		print("the " + effect.name + " effect wore off")
 		CurrentEffectsList.remove_at(i)
 		CurrentEffectsLifetimes.remove_at(i)
+		resetSpeedDebuff()
 		timer.queue_free()
 
 func applyEffects():
@@ -37,6 +38,8 @@ func applyEffects():
 		return
 	for effect in CurrentEffectsList:
 		applyDamage(- int(effect.damage_per_second))
+		resetSpeedDebuff()
+		applySpeedDebuff(- effect.slow_percent)
 		instantiateParticles( effect.particle)
 
 func applyDamage(damage : int):
@@ -48,6 +51,18 @@ func applyDamage(damage : int):
 		self.get_parent().addToHealth(damage)
 	if self.get_parent().has_method("_updateBossHealth"):
 		self.get_parent()._updateBossHealth(damage)
+
+func applySpeedDebuff(debuff:float):
+	if self.get_parent() == null:
+		return
+	if self.get_parent().has_method("addToSpeed") and self.get_parent().has_method("resetSpeed"):
+		self.get_parent().addToSpeed(debuff)
+
+func resetSpeedDebuff():
+	if self.get_parent() == null:
+		return
+	if self.get_parent().has_method("resetSpeed"):
+		self.get_parent().resetSpeed()
 
 func instantiateParticles(Particles:PackedScene):
 	if Particles == null:

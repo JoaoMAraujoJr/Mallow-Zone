@@ -24,6 +24,9 @@ radius = 22.203604
 y_sort_enabled = true
 disable_mode = 2
 script = ExtResource("1_hghv2")
+SpawnAtFixedPosition = null
+damage = null
+hp = null
 
 [node name="EffectHandler" parent="." instance=ExtResource("2_5d1s0")]
 z_index = 1
@@ -38,7 +41,7 @@ texture = ExtResource("2_afpow")
 shape = SubResource("CircleShape2D_afpow")
 debug_color = Color(0.72217494, 0.45856476, 0.38334653, 0.41960785)
 
-[node name="EnemyHitbox" type="Area2D" parent="." groups=["Enemy"]]
+[node name="EnemyHitbox" type="Area2D" parent="." groups=["Damageble", "Enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 shape = SubResource("CircleShape2D_0830c")

@@ -25,11 +25,12 @@ var bloodscene = preload('res://Scenes/particles.tscn')
 
 var knockbackvelocity : Vector2 = Vector2.ZERO
 var followMode: bool = false
-var SPEED: float = Global.enemySpeed
+
+var OriginalSpeed: float = Global.enemySpeed
+var CurrentSpeed: float = Global.enemySpeed
 
 func _ready() -> void:
-	var burning = preload("res://Scripts/Resources/Effects/burning.tres")
-	addEffect(burning)
+	pass
 
 func _physics_process(delta: float) -> void:
 	if followMode:
@@ -38,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		for body in bodies:
 			if body.is_in_group("PlayerArea") and !is_dead:
 				var direction = (body.global_position - global_position).normalized()
-				velocity = direction * SPEED + knockbackvelocity
+				velocity = direction * CurrentSpeed + knockbackvelocity
 				break
 				
 		if can_damage and !is_dead:
@@ -48,7 +49,7 @@ func _physics_process(delta: float) -> void:
 					var hitdirection =  ( global_position - body.global_position ).normalized()
 					if body.has_method("addToHealth"):
 						body.addToHealth(damage)
-						knockbackvelocity += hitdirection * SPEED  *2
+						knockbackvelocity += hitdirection * CurrentSpeed  *2
 						# inicia cooldown
 						can_damage = false
 						_damage_timer.start()
@@ -56,7 +57,7 @@ func _physics_process(delta: float) -> void:
 					
 	else:
 		velocity = Vector2.ZERO
-	knockbackvelocity = knockbackvelocity.move_toward(Vector2.ZERO, SPEED*delta)
+	knockbackvelocity = knockbackvelocity.move_toward(Vector2.ZERO, CurrentSpeed * delta)
 	
 	move_and_slide()
 
@@ -70,7 +71,6 @@ func _on_enemy_vision_body_exited(body: Node2D) -> void:
 
 func _on_damage_timer_timeout() -> void:
 	can_damage = true
-
 
 func setHealth(addedAmount : int)-> void:
 	hp += addedAmount
@@ -131,5 +131,12 @@ func _on_death_audio_stream_finished() -> void:
 func _getSpawnAtFixedPosition() ->bool:
 	return SpawnAtFixedPosition
 
-func addEffect(effect : Effect):
+func addEffectToSelf(effect : Effect):
 	_effectHandler.addEffect(effect)
+
+func addToSpeed(Added :float):
+	var percentage = 1 + Added
+	CurrentSpeed *= percentage 
+func resetSpeed():
+	if CurrentSpeed != OriginalSpeed:
+		CurrentSpeed = OriginalSpeed

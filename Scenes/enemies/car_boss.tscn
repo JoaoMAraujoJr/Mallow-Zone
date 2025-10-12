@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://siudy2wrjg83"]
+[gd_scene load_steps=25 format=3 uid="uid://siudy2wrjg83"]
 
 [ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/Carboss.gd" id="1_78rw5"]
 [ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/objects/car/car.png" id="1_htj82"]
 [ext_resource type="PackedScene" uid="uid://dmpjceleu1vfr" path="res://Scenes/particles/explosion_particle.tscn" id="2_6n6a6"]
 [ext_resource type="Shader" uid="uid://sb648qjmfvdb" path="res://Scripts/shaders/Damaged.gdshader" id="2_hm7pw"]
 [ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emitter.tscn" id="3_2ougs"]
+[ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="3_d4hdx"]
 [ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/LightTextures/directLightpoint_blurred.png" id="4_dyahk"]
 [ext_resource type="PackedScene" uid="uid://cacpu75j0o7gv" path="res://Scenes/particles/car_smoke_particle_emitter.tscn" id="4_ikkge"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_psh8h"]
@@ -263,14 +264,14 @@ script = ExtResource("1_78rw5")
 ExplosioParticle = ExtResource("2_6n6a6")
 OriginalSpeed = 320.0
 
+[node name="EffectHandler" parent="." instance=ExtResource("3_d4hdx")]
+z_index = 2
+
 [node name="backwardsDetector" type="Area2D" parent="."]
 position = Vector2(0, 1234)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="backwardsDetector"]
 polygon = PackedVector2Array(-37, -1348, -688, -1399, -852, -1179, -1083, -1274, -1087, -1559, -856, -1965, -557, -2224, 9, -2376, 564, -2224, 899, -1881, 1077, -1528, 1112, -1289, 891, -1190, 625, -1418, 36, -1348)
-
-[node name="Backward" type="Marker2D" parent="."]
-position = Vector2(0, -167)
 
 [node name="PlayerHitArea" type="Area2D" parent="." groups=["Car"]]
 position = Vector2(0, -39.100014)
@@ -281,9 +282,11 @@ polygon = PackedVector2Array(-34, 102, -50, 91, -41, 7, -31, 19, -28, 71, 30, 72
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PlayerHitArea"]
 polygon = PackedVector2Array(-31, 16, -46, -41, -43, -81, -34, -95, 33, -94, 41, -84, 44, -37, 34, 16, 19, -65, -20, -65)
 
-[node name="DamageDetector" type="Area2D" parent="."]
+[node name="DamageDetector" type="Area2D" parent="." groups=["Damageble"]]
 position = Vector2(-1, -37)
 scale = Vector2(0.35, 0.34999993)
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
 position = Vector2(1.4285702, 144.28577)
@@ -313,6 +316,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_dyahk")
 }
 autoplay = "driving"
+
+[node name="Backward" type="Marker2D" parent="."]
+position = Vector2(0, -167)
 
 [node name="Forward" type="Marker2D" parent="."]
 position = Vector2(0, 93)

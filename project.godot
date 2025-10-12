@@ -47,6 +47,7 @@ Enemy=""
 Stage=""
 Bullet=""
 Interactable=""
+Damageble=""
 
 [input]
 

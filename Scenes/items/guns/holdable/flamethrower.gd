@@ -6,7 +6,7 @@ extends Node2D
 @export var bulletScene : PackedScene
 @export var bulletParticle : PackedScene = preload("res://Scenes/particles/bullet_particle.tscn")
 @onready var gunWaste : int = 1
-
+@onready var canShoot := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,11 +38,25 @@ func shootLogic() -> void:
 		var bulletPart = bulletParticle.instantiate()
 		bulletPart.global_position = _gunpoint.global_position
 		get_tree().current_scene.add_child(bulletPart)
-		var newbullet = bulletScene.instantiate()
-		newbullet.position = _gunpoint.global_position
-		var bulletdirection :Vector2= (get_global_mouse_position() - newbullet.global_position).normalized()
-		newbullet.global_rotation =bulletdirection.angle()
-		Global.ammo -= 1
-		get_tree().current_scene.add_child(newbullet)
+		if canShoot:
+			canShoot = false
+			var newbullet = bulletScene.instantiate()
+			newbullet.position = _gunpoint.global_position
+			var bulletdirection :Vector2= (get_global_mouse_position() - newbullet.global_position).normalized()
+			newbullet.global_rotation =bulletdirection.angle()
+			Global.ammo -= 1
+			get_tree().current_scene.add_child(newbullet)
+			$Timer.start()
 	else:
 		$FlameParticle.emitting = false
+
+func _flipGun(is_backwards: bool):
+	if is_backwards:
+		_sprite.scale.y = -abs(_sprite.scale.y)
+	else:
+		_sprite.scale.y = abs(_sprite.scale.y)
+
+
+func _on_timer_timeout() -> void:
+	canShoot = true
+	pass # Replace with function body.

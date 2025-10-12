@@ -10,7 +10,6 @@ extends CharacterBody2D
 
 @onready var _PlayerArea : Area2D = $PlayerArea2D
 @onready var _PlayerCollision : CollisionShape2D = $PlayerCollisionShape
-@onready var _flashlight: Node2D = $flashlight
 @onready var _lifebar : TextureProgressBar= $LifeBar
 var _gun : Node2D 
 @onready var _gunPivot : Marker2D = $GunPivot
@@ -65,14 +64,12 @@ func _physics_process(delta: float) -> void:
 		var input_vector = Vector2.ZERO
 			# Pega a posição do mouse na world
 		var mouse_pos = get_global_mouse_position()
-		var flashlightdirection = mouse_pos-_flashlight.global_position
-		_flashlight.global_rotation = flashlightdirection.angle()
 			
 		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		_isbackwards = mouse_dir.y < 0
 		
 		if _gun:
-			_gun._getSprite().flip_v = _isbackwards
+			_gun._flipGun(_isbackwards)
 			_gun.z_index = -1 if _isbackwards else 0
 		
 			

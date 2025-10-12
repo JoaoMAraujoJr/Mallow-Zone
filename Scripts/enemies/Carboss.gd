@@ -7,6 +7,8 @@ signal change_on_boss_status(BossName:String  ,currentHP:int ,IsOnBoss:bool, IsB
 @onready var _brainSprite : Sprite2D = $BrainMask/Sprite2D
 @onready var maxHp : int = BossManager.BossList["Ominous Car"]["maxHP"]
 @onready var currentHp:= maxHp
+@onready var _effectHandler := $EffectHandler
+
 
 @export var ExplosioParticle : PackedScene
 
@@ -35,8 +37,8 @@ var _isBackOpened: bool = false
 
 var Playerdir : Vector2 = Vector2.ZERO
 @export var OriginalSpeed : float = 210.0
-@export var Speed : float = OriginalSpeed
-@onready var PushStrenght : float= Speed*4
+@export var CurrentSpeed : float = OriginalSpeed
+@onready var PushStrenght : float= CurrentSpeed*4
 @export var Drifting : float = 0.9
 @onready var _cooldownmodifier := 1.0
 
@@ -49,12 +51,10 @@ var _isOnBoost = false
 var _playerInBackward := false
 
 
-
 func _ready() -> void:
 	_carSprite.material.set_shader_parameter("flash_white", false)
 	_brainSprite.material.set_shader_parameter("flash_white", false)
 	_carSprite.z_index = 0
-	$DamageDetector.monitoring=false
 	$Timers/TimerTillOpenFront.start()
 	Global.currentbiome = "asphalt"
 	self.change_on_boss_status.connect(BossManager.change_on_boss_status_received)
@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 		_getHitsApplied()
 	else:
 		_cooldownmodifier = lerp( _cooldownmodifier , 0.0 , delta )
-		velocity =(_forwardmarker.global_position - global_position).normalized() * Speed * _cooldownmodifier
+		velocity =(_forwardmarker.global_position - global_position).normalized() * CurrentSpeed * _cooldownmodifier
 	
 	_updateCarRotation(delta)
 	move_and_slide()
@@ -81,12 +81,12 @@ func _GoinDirection(delta:float) ->void:
 	var dirVector :Vector2
 	if _dirtogo == "forward":
 		dirVector = (_forwardmarker.global_position - global_position).normalized()
-		var _newvelocity = dirVector * Speed
+		var _newvelocity = dirVector * CurrentSpeed
 		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(-90)
 	elif _dirtogo == "backward":
 		dirVector = (_backwardmarker.global_position - global_position).normalized()
-		var _newvelocity  = dirVector * Speed * 0.8
+		var _newvelocity  = dirVector * CurrentSpeed * 0.8
 		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(90)
 
@@ -137,10 +137,10 @@ func _updateCarRotation(delta: float) -> void:
 func _boost():
 	if _isOnBoost == false :
 		_isOnBoost = true
-		Speed = OriginalSpeed*2
+		CurrentSpeed = CurrentSpeed*2
 	elif _isOnBoost == true:
 		_isOnBoost= false
-		Speed = OriginalSpeed
+		CurrentSpeed = OriginalSpeed
 		
 #===DAMAGE===
 func _getHitsApplied() -> void:
@@ -152,15 +152,18 @@ func _getHitsApplied() -> void:
 				body.addtoPushVelocity(push_vector)
 				_canhit = false
 				if body.has_method("addToHealth"):
-					body.addToHealth(-int(Speed/10))
+					body.addToHealth(-int(CurrentSpeed/10))
 				$Timers/DamageCoolDown.start()
 			elif body.has_method("setHealth"):
-				body.setHealth( -int(Speed/10 * 2))
+				body.setHealth( -int(CurrentSpeed/10 * 2))
 
 func _updateStrenght():
-	PushStrenght= Speed*3
+	PushStrenght= CurrentSpeed*3
 
 func _updateBossHealth(addto: int):
+	_carSprite.material.set_shader_parameter("flash_white", true)
+	_brainSprite.material.set_shader_parameter("flash_white", true)
+	$Timers/TimerToColorModulate.start()
 	if (currentHp + addto) <= 0:
 		emit_signal("change_on_boss_status","Ominous Car",0,false,true)
 		var explosion = ExplosioParticle.instantiate()
@@ -171,6 +174,18 @@ func _updateBossHealth(addto: int):
 		currentHp += addto
 		emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
 
+#===EFFECTS===
+func addEffectToSelf(effect : Effect):
+	_effectHandler.addEffect(effect)
+
+func addToSpeed(Added :float):
+	var percentage = 1 + Added
+	CurrentSpeed *= percentage 
+func resetSpeed():
+	if CurrentSpeed != OriginalSpeed :
+		CurrentSpeed = OriginalSpeed
+
+
 #===ACTIONS===
 func openCloseFront():
 	if !_isFrontOpened:
@@ -180,6 +195,7 @@ func openCloseFront():
 		else:
 			_carSprite.texture=CarSpriteTextures.FRONT_OPENED
 		$DamageDetector.monitoring = true
+		$DamageDetector.monitorable = true
 		_animplayer_brain.play("brainSpawning")
 		await _animplayer_brain.animation_finished
 		_animplayer_brain.play("brainMode")
@@ -189,6 +205,7 @@ func openCloseFront():
 		_animplayer_brain.play_backwards("brainSpawning")
 		await _animplayer_brain.animation_finished
 		$DamageDetector.monitoring = false
+		$DamageDetector.monitorable = false
 		if _isBackOpened:
 			_carSprite.texture=CarSpriteTextures.BACK_OPENED
 		else:
@@ -230,11 +247,9 @@ func _on_timer_to_color_modulate_timeout() -> void:
 func _on_damage_detector_area_entered(area: Area2D) -> void: #APPLY DAMAGE
 	if area.is_in_group("Bullet"):
 		_updateBossHealth(area.get_parent().damage)
-		_carSprite.material.set_shader_parameter("flash_white", true)
-		_brainSprite.material.set_shader_parameter("flash_white", true)
-		$Timers/TimerToColorModulate.start()
+
 	pass # Replace with function body.
-	
+
 
 func _on_motor_sound_stream_finished() -> void:
 	_motorAudio.pitch_scale = randf_range(0.4,2.0)

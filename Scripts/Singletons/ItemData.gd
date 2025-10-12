@@ -12,11 +12,11 @@ var weapons := {
 	} ,
 	"flamethrower": {
 		"weapon_scene": load("res://Scenes/items/guns/holdable/flamethrower.tscn"),
-		"bullet_scene": load("res://Scenes/particles/flame_particle.tscn"),
-		"texture": load("res://Assets/Textures/items/guns/rifle.png"),
-		"max_ammo": 500,
+		"bullet_scene": load("res://Scenes/items/guns/bullets/fire_bullet.tscn"),
+		"texture": load("res://Assets/Textures/items/guns/flamethrower.png"),
+		"max_ammo": 20,
 		"waste": 1,
-		"ammo_value": 250
+		"ammo_value": 10
 	}
 }
 

@@ -49,6 +49,8 @@ color_ramp = SubResource("GradientTexture1D_x0yn8")
 alpha_curve = SubResource("CurveTexture_ndy5w")
 
 [node name="FlameParticle" type="GPUParticles2D"]
+z_index = 1
+y_sort_enabled = true
 emitting = false
 amount = 3
 texture = ExtResource("1_a7ygh")
