@@ -60,5 +60,6 @@ process_material = SubResource("ParticleProcessMaterial_o6td6")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_wb38k")
-volume_db = -13.0
+volume_db = -5.056
+autoplay = true
 bus = &"SFXReverb"

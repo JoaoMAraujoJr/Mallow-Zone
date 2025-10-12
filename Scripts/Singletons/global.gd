@@ -26,5 +26,7 @@ func _process(_delta: float) -> void:
 
 func UpdateBiome():
 	if !BossManager._isOnBoss:
+		if (player_x < 0.0 or player_x > -0.0 or player_y < 0.0 or player_y > -0.0):
+			currentbiome = "grasslands"
 		if (player_x > 10000.0 or player_x < -10000.0 or player_y > 10000.0 or player_y < -10000.0):
 			currentbiome = "chess"

@@ -7,14 +7,15 @@ extends Node
 var multiplier : int = 1
 
 var Bossbar : BossBar 
-
+@onready var NextMilestone : float = 5000.0
 
 @onready var defeatedBosses : Array[String]
 
 var BossList := {
 	"Ominous Car":{
 		"name": "The Ominous Car",
-		"maxHP": 20 * multiplier,
+		"BossScene": preload("res://Scenes/enemies/car_boss.tscn"),
+		"maxHP": 50 * multiplier,
 		"isDefeated": false
 	}
 	
@@ -41,9 +42,10 @@ func change_on_boss_status_received(BossName:String ,currentBossHP:int,IsOnBoss:
 	if IsBossDefeated or !IsOnBoss:
 		if BossList.has(currentBossName):
 			currentBossHealth = currentBossHP
-			BossList[currentBossName]["isDefeated"] = true
+			BossList[currentBossName]["isDefeated"] = true #<===== é essa aqui BURRO
 			Bossbar.updateBossBar(currentBossHealth,BossList[currentBossName]["maxHP"])
 			Bossbar.changeVisibility(false)
+			NextMilestone += 2000.0
 			print("Boss is Defeated : " + str(BossList[currentBossName]["isDefeated"]))
 	elif !IsBossDefeated and !IsOnBoss:
 		currentBossName = ""

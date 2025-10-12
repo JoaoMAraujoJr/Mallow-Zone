@@ -18,10 +18,7 @@ func updateBossName(BossName : String):
 
 func updateBossBar(CurrentHP:int , MaxHp:int):
 	_progressionBar.max_value = MaxHp
-	var tween := create_tween()
-	tween.tween_property(
-		_progressionBar, "value", CurrentHP, 0.2
-	)
+	_progressionBar.value = CurrentHP
 
 func changeVisibility( ShouldBeVisible : bool):
 		if ShouldBeVisible == true:

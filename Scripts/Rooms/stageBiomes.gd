@@ -79,3 +79,20 @@ func _spawn_entities_at_Stage():
 			BH.global_position =  _get_random_point_in_area()
 			get_tree().current_scene.add_child(BH)
 			print("Inimigo spawnado em: ", BH.global_position)
+	if !BossManager._isOnBoss:
+		EntityspawnerAtMilestone(BossManager.NextMilestone)
+
+func EntityspawnerAtMilestone(milestoneCoords : float ):
+	var Entity : PackedScene
+	for Boss in BossManager.BossList:
+		if !BossManager.BossList[Boss]["isDefeated"]:
+			Entity = BossManager.BossList[Boss]["BossScene"]
+			break
+	if Entity != null:
+		if (Global.player_x > milestoneCoords or Global.player_x < -milestoneCoords or Global.player_y > milestoneCoords or Global.player_y < -milestoneCoords ):
+			var newEntity = Entity.instantiate()
+			newEntity.global_position = global_position
+			get_tree().current_scene.add_child(newEntity)
+		else:return
+	else :
+		print ("não ta dando")

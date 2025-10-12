@@ -34,7 +34,8 @@ var _isBackOpened: bool = false
 @onready var _dirtogo := "forward"
 
 var Playerdir : Vector2 = Vector2.ZERO
-@export var Speed : float = 120.0
+@export var OriginalSpeed : float = 210.0
+@export var Speed : float = OriginalSpeed
 @onready var PushStrenght : float= Speed*4
 @export var Drifting : float = 0.9
 @onready var _cooldownmodifier := 1.0
@@ -43,12 +44,16 @@ var Playerdir : Vector2 = Vector2.ZERO
 @onready var rotationOffset :float
 
 var _canhit : bool = true
+var _isOnBoost = false
 @onready var _canpickPlayerLocation : bool= true
 var _playerInBackward := false
 
 
 
 func _ready() -> void:
+	_carSprite.material.set_shader_parameter("flash_white", false)
+	_brainSprite.material.set_shader_parameter("flash_white", false)
+	_carSprite.z_index = 0
 	$DamageDetector.monitoring=false
 	$Timers/TimerTillOpenFront.start()
 	Global.currentbiome = "asphalt"
@@ -65,8 +70,8 @@ func _process(delta: float) -> void:
 	if _canhit:
 		_getHitsApplied()
 	else:
-		_cooldownmodifier = lerp( _cooldownmodifier , 0.0 , delta * 2)
-		velocity =(_forwardmarker.global_position - global_position).normalized() * Speed  * Drifting * _cooldownmodifier
+		_cooldownmodifier = lerp( _cooldownmodifier , 0.0 , delta )
+		velocity =(_forwardmarker.global_position - global_position).normalized() * Speed * _cooldownmodifier
 	
 	_updateCarRotation(delta)
 	move_and_slide()
@@ -76,12 +81,12 @@ func _GoinDirection(delta:float) ->void:
 	var dirVector :Vector2
 	if _dirtogo == "forward":
 		dirVector = (_forwardmarker.global_position - global_position).normalized()
-		var _newvelocity = dirVector * Speed  * Drifting
+		var _newvelocity = dirVector * Speed
 		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(-90)
 	elif _dirtogo == "backward":
 		dirVector = (_backwardmarker.global_position - global_position).normalized()
-		var _newvelocity  = dirVector * Speed * Drifting * 0.8
+		var _newvelocity  = dirVector * Speed * 0.8
 		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(90)
 
@@ -129,24 +134,31 @@ func _updateCarRotation(delta: float) -> void:
 				_cooldownTopickRotation.start()
 			break
 
+func _boost():
+	if _isOnBoost == false :
+		_isOnBoost = true
+		Speed = OriginalSpeed*2
+	elif _isOnBoost == true:
+		_isOnBoost= false
+		Speed = OriginalSpeed
+		
 #===DAMAGE===
 func _getHitsApplied() -> void:
 	var bodies = _hitdetectArea.get_overlapping_bodies()
 	for body in bodies:
-		if body == self:
-			continue
-		if body.has_method("addtoPushVelocity"):
-			var push_vector: Vector2 = (body.global_position - global_position).normalized() * PushStrenght
-			body.addtoPushVelocity(push_vector)
-			_canhit = false
-			if body.has_method("addToHealth"):
-				body.addToHealth(-int(Speed/10))
-			$Timers/DamageCoolDown.start()
-		elif body.has_method("setHealth"):
-			body.setHealth( -int(Speed/10 * 2))
+		if body != self:
+			if body.has_method("addtoPushVelocity"):
+				var push_vector: Vector2 = (body.global_position - global_position).normalized() * PushStrenght
+				body.addtoPushVelocity(push_vector)
+				_canhit = false
+				if body.has_method("addToHealth"):
+					body.addToHealth(-int(Speed/10))
+				$Timers/DamageCoolDown.start()
+			elif body.has_method("setHealth"):
+				body.setHealth( -int(Speed/10 * 2))
 
 func _updateStrenght():
-	PushStrenght= Speed*Drifting*3
+	PushStrenght= Speed*3
 
 func _updateBossHealth(addto: int):
 	if (currentHp + addto) <= 0:
@@ -192,7 +204,7 @@ func _on_cooldown_topick_direction_timeout() -> void:
 	pass # Replace with function body.
 
 func _on_to_add_drift_timeout() -> void:
-	if Drifting < 3.2:
+	if Drifting < 1.5:
 		Drifting += 0.1
 	pass # Replace with function body.
 
@@ -223,7 +235,6 @@ func _on_damage_detector_area_entered(area: Area2D) -> void: #APPLY DAMAGE
 		$Timers/TimerToColorModulate.start()
 	pass # Replace with function body.
 	
-
 
 func _on_motor_sound_stream_finished() -> void:
 	_motorAudio.pitch_scale = randf_range(0.4,2.0)
