@@ -60,8 +60,8 @@ func shootLogic() -> void:
 				get_tree().current_scene.add_child(bulletPart)
 				var newbullet = bulletScene.instantiate()
 				newbullet.position = _gunpoint.global_position
-				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-				newbullet.set_direction(bulletdirection)
+				var bulletdirection :Vector2= (get_global_mouse_position() - newbullet.global_position).normalized()
+				newbullet.global_rotation =bulletdirection.angle()
 				Global.ammo -= 1
 				get_tree().current_scene.add_child(newbullet)
 		GunTrigger.RELEASE:

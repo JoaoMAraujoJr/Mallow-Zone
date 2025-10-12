@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Effect" load_steps=3 format=3 uid="uid://dj1lpewutqd3n"]
+
+[ext_resource type="PackedScene" uid="uid://bicx6emeshc36" path="res://Scenes/particles/flame_particle.tscn" id="1_fnu1h"]
+[ext_resource type="Script" uid="uid://b6wh72g6ai3c0" path="res://Scripts/Resources/Effect.gd" id="1_vxq20"]
+
+[resource]
+script = ExtResource("1_vxq20")
+name = "burning"
+duration = 10.0
+damage_per_second = 1
+slow_percent = 30.0
+particle = ExtResource("1_fnu1h")
+metadata/_custom_type_script = "uid://b6wh72g6ai3c0"

@@ -33,13 +33,8 @@ extends Node2D
 @export var ChessBiome: PackedScene
 @export var GrassBiome: PackedScene
 @export var AsphaltBiome:PackedScene
-var StageScene: PackedScene = preload("res://Scenes/Gamescene.tscn")
+var StageScene: PackedScene = preload("res://Scenes/Unique/Gamescene.tscn")
 
-#==== SPAWNABLES =====
-@export var MedikitScene: PackedScene = preload("res://Scenes/objects/medikit.tscn")
-@export var AmmoScene: PackedScene = preload("res://Scenes/objects/ammo.tscn")
-@export var EnemyScene: PackedScene = preload("res://Scenes/enemies/enemy.tscn")
-@export var BHScene: PackedScene = preload("res://Scenes/enemies/blackhole_enemy.tscn")
 # ===== FLAGS =====
 var isLeftTriggered := false
 var isRightTriggered := false

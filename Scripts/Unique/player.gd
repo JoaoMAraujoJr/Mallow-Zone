@@ -187,7 +187,6 @@ func _dropGun():
 	newdroppedgun._reloadTexture()
 	get_tree().current_scene.add_child(newdroppedgun)
 	
-	
 func _playFootstepSound():
 	$FootstepsAudioStream.pitch_scale = randf_range(0.8, 1.2)
 	$FootstepsAudioStream.play()

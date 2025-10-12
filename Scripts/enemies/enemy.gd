@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var _sprite2d : Sprite2D = $Sprite2D
 @onready var _deathAudioStream : AudioStreamPlayer2D = $DeathAudioStream
 @onready var _damageAudioStream : AudioStreamPlayer2D = $DamageAudioStream
+@onready var _effectHandler : EffectHandler = $EffectHandler
 
 @onready var can_damage : bool = true
 @onready var is_dead : bool = false
@@ -26,6 +27,9 @@ var knockbackvelocity : Vector2 = Vector2.ZERO
 var followMode: bool = false
 var SPEED: float = Global.enemySpeed
 
+func _ready() -> void:
+	var burning = preload("res://Scripts/Resources/Effects/burning.tres")
+	addEffect(burning)
 
 func _physics_process(delta: float) -> void:
 	if followMode:
@@ -60,7 +64,6 @@ func _on_enemy_vision_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerArea"):
 		followMode = true
 
-
 func _on_enemy_vision_body_exited(body: Node2D) -> void:
 	if body.is_in_group("PlayerArea"):
 		followMode = false
@@ -77,9 +80,9 @@ func setHealth(addedAmount : int)-> void:
 		can_damage = false
 
 		# spawn blood
-		var bloods = bloodscene.instantiate()
-		bloods.global_position = global_position
-		get_tree().current_scene.add_child(bloods)
+		var bloodsOnDeath = bloodscene.instantiate()
+		bloodsOnDeath.global_position = global_position
+		get_tree().current_scene.add_child(bloodsOnDeath)
 
 		#remove visuasl
 		_lightcolor.queue_free()
@@ -96,7 +99,7 @@ func setHealth(addedAmount : int)-> void:
 		# connect signal to free after sound
 		_deathAudioStream.connect("finished", Callable(self, "_killSelf"))
 		return
-		
+	
 	_damageAudioStream.pitch_scale = randf_range(0.2,1.2)
 	_damageAudioStream.play()
 
@@ -109,8 +112,7 @@ func setHealth(addedAmount : int)-> void:
 		_lightcolor.color = Color(1.0, 1.0, 1.0, 0.392)
 	if _sprite2d != null:
 		_sprite2d.texture = load("res://Assets/player/monster_damaged.png")# pinta de branco
-	
-	
+
 func _on_self_modulate_timer_timeout() -> void:
 	if _lightcolor == null:
 		return
@@ -128,3 +130,6 @@ func _on_death_audio_stream_finished() -> void:
 
 func _getSpawnAtFixedPosition() ->bool:
 	return SpawnAtFixedPosition
+
+func addEffect(effect : Effect):
+	_effectHandler.addEffect(effect)

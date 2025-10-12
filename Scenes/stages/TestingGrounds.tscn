@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://bk0duer8rigcv"]
 
-[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/player.tscn" id="1_hccwu"]
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="1_hccwu"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_w2jle"]
 [ext_resource type="PackedScene" uid="uid://siudy2wrjg83" path="res://Scenes/enemies/car_boss.tscn" id="2_lu3d8"]
 [ext_resource type="PackedScene" uid="uid://bcdu0hfcb5b2i" path="res://Scenes/objects/asphalt/traffic_cone.tscn" id="5_c0g3b"]
-[ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Gamescene.tscn" id="6_ugj8f"]
+[ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="6_ugj8f"]
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="7_3kiau"]
 
 [node name="Node2D" type="Node2D"]

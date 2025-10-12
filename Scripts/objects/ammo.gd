@@ -6,5 +6,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		var player = area.get_parent()
 		if player.has_method("_playReloadSound"):
 			player._playReloadSound()
-		Global.ammo += 5
+		if Global.currentEquipedWeaponType != null and Global.currentEquipedWeaponType != "":
+			Global.ammo += ItemData.weapons[Global.currentEquipedWeaponType]["ammo_value"]
 		queue_free()
