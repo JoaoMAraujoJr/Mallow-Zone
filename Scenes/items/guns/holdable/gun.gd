@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var _sprite = $gun
 @onready var _gunpoint = $gun/gunpoint
+@onready var _ShootSound = $ShootSound
 @export var _Type :String
 @export var bulletScene : PackedScene
 @export var bulletParticle : PackedScene = preload("res://Scenes/particles/bullet_particle.tscn")
@@ -44,6 +45,8 @@ func shootLogic() -> void:
 	match TriggerMode:
 		GunTrigger.PRESS:
 			if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0:
+				_ShootSound.pitch_scale = randf_range(0.8,1.2)
+				_ShootSound.play()
 				var bulletPart = bulletParticle.instantiate()
 				bulletPart.global_position = _gunpoint.global_position
 				get_tree().current_scene.add_child(bulletPart)
@@ -55,6 +58,8 @@ func shootLogic() -> void:
 				get_tree().current_scene.add_child(newbullet)
 		GunTrigger.HOLD:
 			if Input.is_action_pressed("Mouse_left") and Global.ammo > 0:
+				_ShootSound.pitch_scale = randf_range(0.8,1.2)
+				_ShootSound.play()
 				var bulletPart = bulletParticle.instantiate()
 				bulletPart.global_position = _gunpoint.global_position
 				get_tree().current_scene.add_child(bulletPart)
@@ -66,6 +71,8 @@ func shootLogic() -> void:
 				get_tree().current_scene.add_child(newbullet)
 		GunTrigger.RELEASE:
 			if Input.is_action_just_released("Mouse_left") and Global.ammo > 0:
+				_ShootSound.pitch_scale = randf_range(0.8,1.2)
+				_ShootSound.play()
 				var bulletPart = bulletParticle.instantiate()
 				bulletPart.global_position = _gunpoint.global_position
 				get_tree().current_scene.add_child(bulletPart)

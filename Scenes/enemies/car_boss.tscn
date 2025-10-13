@@ -362,6 +362,12 @@ wait_time = 5.0
 [node name="TimerTillCloseFront" type="Timer" parent="Timers"]
 wait_time = 10.0
 
+[node name="TimerTillOpenBack" type="Timer" parent="Timers"]
+wait_time = 14.0
+
+[node name="TimerTillCloseBack" type="Timer" parent="Timers"]
+wait_time = 4.0
+
 [node name="TimerToColorModulate" type="Timer" parent="Timers"]
 wait_time = 0.5
 
@@ -427,5 +433,7 @@ bus = &"SFXReverb"
 [connection signal="timeout" from="Timers/DamageCoolDown" to="." method="_on_damage_cool_down_timeout"]
 [connection signal="timeout" from="Timers/TimerTillOpenFront" to="." method="_on_timer_till_open_front_timeout"]
 [connection signal="timeout" from="Timers/TimerTillCloseFront" to="." method="_on_timer_till_close_front_timeout"]
+[connection signal="timeout" from="Timers/TimerTillOpenBack" to="." method="_on_timer_till_open_back_timeout"]
+[connection signal="timeout" from="Timers/TimerTillCloseBack" to="." method="_on_timer_till_close_back_timeout"]
 [connection signal="timeout" from="Timers/TimerToColorModulate" to="." method="_on_timer_to_color_modulate_timeout"]
 [connection signal="finished" from="MotorSoundStream" to="." method="_on_motor_sound_stream_finished"]

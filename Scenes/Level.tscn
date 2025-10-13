@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://216kvumeoqpb"]
+[gd_scene load_steps=11 format=3 uid="uid://216kvumeoqpb"]
 
 [ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/Unique/level.gd" id="1_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="1_vsvp5"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_xylue"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_8rbpu"]
+[ext_resource type="PackedScene" uid="uid://cdof1lf74pr0c" path="res://Scenes/backgrounds/background.tscn" id="2_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="6_tj5wv"]
 
 [sub_resource type="Gradient" id="Gradient_xylue"]
@@ -34,6 +35,8 @@ blend_mode = 3
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_tj5wv")
+
+[node name="Background" parent="." instance=ExtResource("2_tj5wv")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xylue")

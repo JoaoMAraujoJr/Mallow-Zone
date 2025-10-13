@@ -31,10 +31,6 @@ hp = null
 [node name="EffectHandler" parent="." instance=ExtResource("2_5d1s0")]
 z_index = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.1603798, 1.1603798)
-texture = ExtResource("2_afpow")
-
 [node name="EnemyVision" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyVision"]
@@ -79,6 +75,10 @@ bus = &"SFXReverb"
 stream = ExtResource("4_we58l")
 volume_db = -8.0
 bus = &"SFXReverb"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.1603798, 1.1603798)
+texture = ExtResource("2_afpow")
 
 [connection signal="body_entered" from="EnemyVision" to="." method="_on_enemy_vision_body_entered"]
 [connection signal="body_exited" from="EnemyVision" to="." method="_on_enemy_vision_body_exited"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://rjh4xm252afo"]
+[gd_scene load_steps=9 format=3 uid="uid://rjh4xm252afo"]
 
 [ext_resource type="Script" uid="uid://b3uu1wj2ostvi" path="res://Scenes/items/guns/holdable/flamethrower.gd" id="1_8f050"]
 [ext_resource type="PackedScene" uid="uid://bicx6emeshc36" path="res://Scenes/particles/flame_particle.tscn" id="2_8f050"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_450hh"]
 [ext_resource type="Texture2D" uid="uid://rbc1aemrhq6e" path="res://Assets/Textures/items/guns/flamethrower.png" id="3_f8dng"]
 [ext_resource type="PackedScene" uid="uid://dgnqylesw223s" path="res://Scenes/items/guns/bullets/flamethrower_fire.tscn" id="4_f8dng"]
+[ext_resource type="AudioStream" uid="uid://bsemfjt8owtya" path="res://Assets/Sounds/Gun/IgniteFlamethrower.ogg" id="6_schkd"]
+[ext_resource type="AudioStream" uid="uid://dbbwpwe8f40tn" path="res://Assets/Sounds/Gun/FlameSound.ogg" id="7_qmuyu"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_schkd"]
 polygon = PackedVector2Array(0, -16, -84, -86, 0, 6, 90, -87, 0, -16)
@@ -53,9 +55,26 @@ position = Vector2(36, -4)
 z_index = 1
 y_sort_enabled = true
 position = Vector2(56, -4)
+emitting = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[node name="IgniteAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_schkd")
+pitch_scale = 0.5
+attenuation = 3.605001
+max_polyphony = 4
+bus = &"SFXReverb"
+
+[node name="FlameAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_qmuyu")
+volume_db = -10.0
+pitch_scale = 0.5
+attenuation = 3.605001
+max_polyphony = 4
+bus = &"SFXReverb"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="FlameAudioStream" to="." method="_on_flame_audio_stream_finished"]

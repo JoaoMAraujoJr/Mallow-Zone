@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cvx7qhxej7ak3" path="res://Assets/Textures/floors/grass/Grassfloortexture.png" id="4_t23bk"]
 [ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="4_xsqpy"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1fha2"]
-[ext_resource type="Texture2D" uid="uid://6q2esd6l67ao" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom.png" id="6_sd4kd"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="6_xsqpy"]
+[ext_resource type="Texture2D" uid="uid://pwxt8t11o8en" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom2.png" id="9_xsqpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
 size = Vector2(411, 412)
@@ -64,5 +64,5 @@ z_index = -6
 material = SubResource("ShaderMaterial_r4p5m")
 position = Vector2(-0.39999998, 307.2)
 scale = Vector2(0.4011719, 0.19960937)
-texture = ExtResource("6_sd4kd")
+texture = ExtResource("9_xsqpy")
 script = ExtResource("5_1fha2")

@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dox2op73mb8du"]
+[gd_scene load_steps=7 format=3 uid="uid://dox2op73mb8du"]
 
 [ext_resource type="Script" uid="uid://cbw0oaryl85kx" path="res://Scenes/items/guns/holdable/gun.gd" id="1_0xk6x"]
 [ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/Textures/items/guns/rifle.png" id="1_v4uw3"]
 [ext_resource type="PackedScene" uid="uid://0hmhkrf3c44n" path="res://Scenes/items/guns/bullets/rifleBullet.tscn" id="2_hpt7h"]
+[ext_resource type="AudioStream" uid="uid://c4jymt15nn1kw" path="res://Assets/Sounds/Gun/ShootSoundOGG.ogg" id="4_hpt7h"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_x8ll2"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nhom0"]
+polygon = PackedVector2Array(0, -16, -84, -86, 0, 6, 90, -87, 0, -16)
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_0xk6x")
@@ -16,5 +21,34 @@ scale = Vector2(1.5, 1.25)
 texture = ExtResource("1_v4uw3")
 offset = Vector2(16, -0.7999996)
 
+[node name="flashlight" type="Node2D" parent="gun"]
+z_index = -1
+y_sort_enabled = true
+position = Vector2(6.6666665, -4.8)
+scale = Vector2(0.44444448, 0.6400001)
+
+[node name="light" type="PointLight2D" parent="gun/flashlight"]
+z_index = -1
+y_sort_enabled = true
+position = Vector2(34.60001, 2)
+scale = Vector2(1.48, 1)
+color = Color(1.4687854, 1.4687854, 0.73811597, 0.33333334)
+energy = 4.39
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 3
+texture = ExtResource("4_x8ll2")
+texture_scale = 0.5
+
+[node name="Ocluder" type="LightOccluder2D" parent="gun/flashlight"]
+position = Vector2(11, 4.7683716e-07)
+rotation = 1.5980113
+scale = Vector2(0.99999994, 0.99999994)
+occluder = SubResource("OccluderPolygon2D_nhom0")
+
 [node name="gunpoint" type="Marker2D" parent="gun"]
 position = Vector2(23.333332, -2.4)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hpt7h")
+bus = &"SFXReverb"

@@ -56,6 +56,7 @@ func _ready() -> void:
 	_brainSprite.material.set_shader_parameter("flash_white", false)
 	_carSprite.z_index = 0
 	$Timers/TimerTillOpenFront.start()
+	$Timers/TimerTillOpenBack.start()
 	Global.currentbiome = "asphalt"
 	self.change_on_boss_status.connect(BossManager.change_on_boss_status_received)
 	emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
@@ -201,7 +202,6 @@ func openCloseFront():
 		_animplayer_brain.play("brainMode")
 
 	elif _isFrontOpened:
-		_isFrontOpened = false
 		_animplayer_brain.play_backwards("brainSpawning")
 		await _animplayer_brain.animation_finished
 		$DamageDetector.monitoring = false
@@ -209,6 +209,24 @@ func openCloseFront():
 		if _isBackOpened:
 			_carSprite.texture=CarSpriteTextures.BACK_OPENED
 		else:
+			_carSprite.texture=CarSpriteTextures.BOTH_CLOSED
+		_isFrontOpened = false
+
+func openCloseBack():
+	if !_isBackOpened:
+		_isBackOpened = true
+		if _isFrontOpened:
+			_carSprite.texture=CarSpriteTextures.BOTH_OPENED
+		else:
+			_carSprite.texture=CarSpriteTextures.BACK_OPENED
+
+	elif _isBackOpened:
+		_isBackOpened = false
+		
+		if _isFrontOpened:
+			_carSprite.texture=CarSpriteTextures.FRONT_OPENED
+		elif !_isFrontOpened:
+
 			_carSprite.texture=CarSpriteTextures.BOTH_CLOSED
 
 #===SIGNALS FROM TIMERS===
@@ -254,4 +272,16 @@ func _on_damage_detector_area_entered(area: Area2D) -> void: #APPLY DAMAGE
 func _on_motor_sound_stream_finished() -> void:
 	_motorAudio.pitch_scale = randf_range(0.4,2.0)
 	_motorAudio.play()
+	pass # Replace with function body.
+
+
+func _on_timer_till_open_back_timeout() -> void:
+	pass # Replace with function body.
+	openCloseBack()
+	$Timers/TimerTillCloseBack.start()
+
+
+func _on_timer_till_close_back_timeout() -> void:
+	openCloseBack()
+	$Timers/TimerTillOpenBack.start()
 	pass # Replace with function body.

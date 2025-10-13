@@ -117,6 +117,7 @@ script = ExtResource("1_cvnsp")
 current = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
 position = Vector2(-5.9604645e-08, -2.3841858e-07)
 scale = Vector2(1.4789339, 1.4789339)
 sprite_frames = SubResource("SpriteFrames_fd4e3")

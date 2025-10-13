@@ -19,7 +19,7 @@ shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/strength = 2.0
 shader_parameter/radius = 1.32800006308
 shader_parameter/zoom = 0.3850000182875
-shader_parameter/aspect = 1.5000000679901202
+shader_parameter/aspect = 0.64900002756762
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
 shader = ExtResource("2_uwsgx")

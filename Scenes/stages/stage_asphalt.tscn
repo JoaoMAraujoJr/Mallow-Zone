@@ -16,14 +16,14 @@ size = Vector2(411, 412)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y5yrp"]
 shader = ExtResource("5_frws6")
 shader_parameter/noise_tex = ExtResource("7_mc4p6")
-shader_parameter/threshold = 0.0
+shader_parameter/threshold = 1.0
 shader_parameter/edge_color = Color(0.12955844, 0.12955847, 0.12955844, 1)
 shader_parameter/edge_width = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_avtp1"]
 shader = ExtResource("5_frws6")
 shader_parameter/noise_tex = ExtResource("7_mc4p6")
-shader_parameter/threshold = 0.0
+shader_parameter/threshold = 1.0
 shader_parameter/edge_color = Color(0.06053035, 0.06053035, 0.060530342, 1)
 shader_parameter/edge_width = 0.05
 
@@ -39,6 +39,7 @@ script = ExtResource("2_mc4p6")
 SpawnableObjectList = Array[PackedScene]([null, null, ExtResource("5_3rfqm"), ExtResource("5_3rfqm"), null])
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
+visible = false
 z_index = -2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
@@ -47,6 +48,7 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_a6xb7")
 
 [node name="EnemySpawnArea" type="Area2D" parent="."]
+visible = false
 z_index = -2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]

@@ -79,8 +79,7 @@ func _physics_process(delta: float) -> void:
 			var recoil_direction = ( global_position - mouse_pos ).normalized()
 			recoil_velocity = recoil_direction * recoil_strength
 			print("this is being recoiled")
-			_shootAudioStream.pitch_scale = randf_range(0.8, 1.2)
-			_shootAudioStream.play()
+
 		elif Input.is_action_just_pressed("Mouse_left") and Global.ammo <= 0 :
 			_outofAmmoAudioStream.play()
 		elif Input.is_action_just_pressed("DropAction") and Global.currentEquipedWeaponType != "none" and _gun != null:
