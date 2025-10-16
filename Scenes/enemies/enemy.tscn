@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cblkcpos51yeu" path="res://Scripts/enemies/enemy.gd" id="1_hghv2"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="2_5d1s0"]
 [ext_resource type="Texture2D" uid="uid://wkmj7ds68ym" path="res://Assets/player/monster.png" id="2_afpow"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_afpow"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="3_afpow"]
 [ext_resource type="AudioStream" uid="uid://b2m4hy4ulb3pj" path="res://Assets/Sounds/EnemyDamage.ogg" id="4_slefu"]
 [ext_resource type="AudioStream" uid="uid://brpjub5yv36hm" path="res://Assets/Sounds/bloodSplatter.ogg" id="4_we58l"]
 
@@ -44,6 +44,8 @@ shape = SubResource("CircleShape2D_0830c")
 debug_color = Color(0.6848544, 0.4994082, 0.12076823, 0.41960785)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 7
+visibility_layer = 7
 z_index = -1
 color = Color(1, 0, 0, 0.67058825)
 energy = 2.28
@@ -77,6 +79,7 @@ volume_db = -8.0
 bus = &"SFXReverb"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 7
 scale = Vector2(1.1603798, 1.1603798)
 texture = ExtResource("2_afpow")
 

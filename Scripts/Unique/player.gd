@@ -13,10 +13,11 @@ extends CharacterBody2D
 @onready var _lifebar : TextureProgressBar= $LifeBar
 var _gun : Node2D 
 @onready var _gunPivot : Marker2D = $GunPivot
-@onready var _animplayer : AnimatedSprite2D = $AnimatedSprite2D
-@onready var _shootAudioStream : AudioStreamPlayer2D = $ShootAudioStream
-@onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $NeedsAmmoAudioStream
-@onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $ReloadAudioStream
+@onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $Sounds/NeedsAmmoAudioStream
+@onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
+
+@onready var playerSkin : PlayerSkinManager = $PlayerSkinNode
+
 #bools go here i guess:
 @onready var can_shoot : bool = true
 @onready var isbeingpulled: bool = false
@@ -39,7 +40,6 @@ var max_speed :float = 400.0
 
 func _ready():
 	call_deferred("_equipGun")
-	_shootAudioStream.max_polyphony = 5
 	Global.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
@@ -48,13 +48,17 @@ func _physics_process(delta: float) -> void:
 	adjustCameraZoom(delta)
 	if _canmove:
 		if !_iswalking and !_isbackwards:
-			_animplayer.play("idle_foward")
+			playerSkin._setAction("Idle")
+			playerSkin._setBackwards(false)
 		elif !_iswalking and _isbackwards:
-			_animplayer.play("idle_backward")
+			playerSkin._setAction("Idle")
+			playerSkin._setBackwards(true)
 		elif _iswalking and !_isbackwards:
-			_animplayer.play("walk_foward")
+			playerSkin._setAction("Walking")
+			playerSkin._setBackwards(false)
 		elif _iswalking and _isbackwards:
-			_animplayer.play("walk_backward")
+			playerSkin._setAction("Walking")
+			playerSkin._setBackwards(true)
 			
 		
 		Global.player_x= global_position.x
@@ -183,17 +187,6 @@ func _dropGun():
 	newdroppedgun._reloadTexture()
 	get_tree().current_scene.add_child(newdroppedgun)
 	
-func _playFootstepSound():
-	$FootstepsAudioStream.pitch_scale = randf_range(0.8, 1.2)
-	$FootstepsAudioStream.play()
-	
 func _playReloadSound():
 	_reloadGunAudioStream.pitch_scale = randf_range(0.5, 0.8)
 	_reloadGunAudioStream.play()
-
-func _on_animated_sprite_2d_frame_changed() -> void:
-	if _animplayer.animation == "walk_foward" and (_animplayer.frame == 0 or _animplayer.frame == 2):
-		_playFootstepSound()
-	if _animplayer.animation == "walk_backward" and (_animplayer.frame == 0 or _animplayer.frame == 2):
-		_playFootstepSound()
-	pass # Replace with function body.

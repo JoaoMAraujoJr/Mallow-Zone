@@ -6,9 +6,9 @@
 [ext_resource type="Shader" uid="uid://sb648qjmfvdb" path="res://Scripts/shaders/Damaged.gdshader" id="2_hm7pw"]
 [ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emitter.tscn" id="3_2ougs"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="3_d4hdx"]
-[ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/LightTextures/directLightpoint_blurred.png" id="4_dyahk"]
+[ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/light_textures/directLightpoint_blurred.png" id="4_dyahk"]
 [ext_resource type="PackedScene" uid="uid://cacpu75j0o7gv" path="res://Scenes/particles/car_smoke_particle_emitter.tscn" id="4_ikkge"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_psh8h"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="4_psh8h"]
 [ext_resource type="Texture2D" uid="uid://br24f7x3ljov3" path="res://Assets/objects/car/brainmask.png" id="7_83ax7"]
 [ext_resource type="Texture2D" uid="uid://dg6ckt8uxs3pv" path="res://Assets/objects/car/carbrains.png" id="8_hm7pw"]
 [ext_resource type="AudioStream" uid="uid://b77m4g4xkjbg1" path="res://Assets/Sounds/car motor.wav" id="10_4ksav"]
@@ -376,23 +376,31 @@ position = Vector2(-1, -37)
 scale = Vector2(0.35, 0.34999993)
 
 [node name="Farol" type="PointLight2D" parent="Lights"]
+light_mask = 7
+visibility_layer = 7
 position = Vector2(-71.15008, 223.99101)
 scale = Vector2(0.15776736, 0.15776736)
 color = Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)
 texture = ExtResource("4_psh8h")
 
 [node name="Farol2" type="PointLight2D" parent="Lights"]
+light_mask = 7
+visibility_layer = 7
 position = Vector2(71.15008, 223.99101)
 scale = Vector2(0.15776736, 0.15776736)
 color = Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)
 texture = ExtResource("4_psh8h")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
+light_mask = 7
+visibility_layer = 7
 position = Vector2(-74.28571, 625.7144)
 color = Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)
 texture = ExtResource("4_dyahk")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+light_mask = 7
+visibility_layer = 7
 position = Vector2(80, 625.7144)
 color = Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)
 texture = ExtResource("4_dyahk")

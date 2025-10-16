@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhy36w1sjylc8"
-path="res://.godot/imported/proto_light_2.png-4dc226ceb3b014db3266fdc898da24c7.ctex"
+uid="uid://dj22iklpj8716"
+path="res://.godot/imported/eyes_front_open_spr.png-efcc536cab277e4f19fa81ecdd808c72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/LightTextures/proto_light_2.png"
-dest_files=["res://.godot/imported/proto_light_2.png-4dc226ceb3b014db3266fdc898da24c7.ctex"]
+source_file="res://Assets/Textures/player_skins/red_jim/eyes_front_open_spr.png"
+dest_files=["res://.godot/imported/eyes_front_open_spr.png-efcc536cab277e4f19fa81ecdd808c72.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg5d7fcnukepe"
-path="res://.godot/imported/directLightpoint_blurred.png-19051e9745fd3786e5daae8a702d76e0.ctex"
+uid="uid://t3xmxch2putb"
+path="res://.godot/imported/torso_front.png-eb500fc950514b9b1e2070bf131a71d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/LightTextures/directLightpoint_blurred.png"
-dest_files=["res://.godot/imported/directLightpoint_blurred.png-19051e9745fd3786e5daae8a702d76e0.ctex"]
+source_file="res://Assets/Textures/player_skins/red_jim/torso_front.png"
+dest_files=["res://.godot/imported/torso_front.png-eb500fc950514b9b1e2070bf131a71d3.ctex"]
 
 [params]
 

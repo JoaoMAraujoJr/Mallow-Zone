@@ -10,6 +10,7 @@ var player_health : int = 100
 #current
 var currentbiome : String = "grasslands"
 var currentEquipedWeaponType : String = "none"
+var currentPlayerSkin: String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

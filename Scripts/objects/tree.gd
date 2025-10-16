@@ -4,7 +4,6 @@ extends StaticBody2D
 
 @onready var _treeSprite : Sprite2D = $Sprite2D
 @onready var _animplayer : AnimationPlayer = $AnimationPlayer
-@onready var _leafsLightOcludder : LightOccluder2D = $leafs
 @onready var _rootLightOcludder : LightOccluder2D = $log
 @onready var _fruitSpawnerMarker:Marker2D = $Sprite2D/fruitSpawnLocation
 @onready var _TreeCutterAudioStream : AudioStreamPlayer2D = $TreeCutterAudioStream
@@ -45,28 +44,12 @@ func _process(delta: float) -> void:
 
 func _spawnTreeParticles():
 		var TreePart = TreeParticles.instantiate()
-		_leafsLightOcludder.queue_free()
 		_rootLightOcludder.queue_free()
 		TreePart.global_position = _ParticleSpawnerMarker.global_position
 		get_tree().current_scene.add_child(TreePart)
 
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if isTrimmed:
-		return
-	if body.is_in_group("PlayerArea"):
-		if _leafsLightOcludder!=null:
-			_leafsLightOcludder.visible = true
-	else:
-		return
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group("PlayerArea"):
-		if _leafsLightOcludder!=null:
-			_leafsLightOcludder.visible = false
-	return
 
 
 func _spawn_fruit() -> void:

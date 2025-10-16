@@ -1,107 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://cb5khyq6wnglo"]
+[gd_scene load_steps=10 format=3 uid="uid://cb5khyq6wnglo"]
 
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/Unique/player.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://dn8vwwpkwveo0" path="res://Assets/player/player.png" id="2_3smsa"]
+[ext_resource type="PackedScene" uid="uid://bjxxblvb7g17" path="res://Scenes/Unique/player_skin_node.tscn" id="3_d05bs"]
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/player/barunder.png" id="6_3smsa"]
 [ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/player/bar.png" id="7_8erm5"]
-[ext_resource type="AudioStream" uid="uid://c4jymt15nn1kw" path="res://Assets/Sounds/Gun/ShootSoundOGG.ogg" id="7_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="8_8erm5"]
 [ext_resource type="AudioStream" uid="uid://yvfg5cl1j23" path="res://Assets/Sounds/Gun/OutofAmmo.wav" id="8_gymyn"]
-[ext_resource type="AudioStream" uid="uid://bqx2jk7kpk6l7" path="res://Assets/Sounds/Steps_grass.ogg" id="8_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
-atlas = ExtResource("2_3smsa")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fd4e3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fd4e3")
-}],
-"loop": true,
-"name": &"idle_backward",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3smsa")
-}],
-"loop": true,
-"name": &"idle_foward",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8erm5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f1ek2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tx1dd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gymyn")
-}],
-"loop": true,
-"name": &"walk_backward",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pu2lt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukyrk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7dp3o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h4iuc")
-}],
-"loop": true,
-"name": &"walk_foward",
-"speed": 5.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 250.49918
@@ -113,15 +18,14 @@ height = 40.0
 [node name="Player" type="CharacterBody2D" groups=["PlayerArea"]]
 script = ExtResource("1_cvnsp")
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(0, 24)
+texture = ExtResource("8_8erm5")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-light_mask = 2
-position = Vector2(-5.9604645e-08, -2.3841858e-07)
-scale = Vector2(1.4789339, 1.4789339)
-sprite_frames = SubResource("SpriteFrames_fd4e3")
-animation = &"walk_backward"
+[node name="PlayerSkinNode" parent="." instance=ExtResource("3_d05bs")]
+position = Vector2(0, 2)
+scale = Vector2(0.64923275, 0.64923275)
 
 [node name="GunPivot" type="Marker2D" parent="."]
 position = Vector2(0, 7)
@@ -161,36 +65,22 @@ texture_progress = ExtResource("7_8erm5")
 wait_time = 2.0
 autostart = true
 
-[node name="Shadow" type="Sprite2D" parent="."]
-z_index = -2
-position = Vector2(0, 21)
-texture = ExtResource("8_8erm5")
+[node name="Sounds" type="Node2D" parent="."]
 
-[node name="ShootAudioStream" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_f1ek2")
-pitch_scale = 0.5
-attenuation = 3.605001
-max_polyphony = 4
-bus = &"SFXReverb"
+[node name="AudioListener2D" type="AudioListener2D" parent="Sounds"]
+current = true
 
-[node name="NeedsAmmoAudioStream" type="AudioStreamPlayer2D" parent="."]
+[node name="NeedsAmmoAudioStream" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_gymyn")
 volume_db = -15.167
 pitch_scale = 0.33
 attenuation = 3.605001
 bus = &"SFXReverb"
 
-[node name="ReloadAudioStream" type="AudioStreamPlayer2D" parent="."]
+[node name="ReloadAudioStream" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("9_tx1dd")
 volume_db = -7.944
 pitch_scale = 0.81
 bus = &"SFXReverb"
 
-[node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_tx1dd")
-volume_db = -6.0
-max_polyphony = 4
-bus = &"SFXReverb"
-
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]

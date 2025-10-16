@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvgdu0d6ndo4d"
-path="res://.godot/imported/directLightpoint.png-217bc2316410370e04142ba52309b440.ctex"
+uid="uid://bhy36w1sjylc8"
+path="res://.godot/imported/proto_light_2.png-60e8aa2e231126e04d27e30daac1c0c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/LightTextures/directLightpoint.png"
-dest_files=["res://.godot/imported/directLightpoint.png-217bc2316410370e04142ba52309b440.ctex"]
+source_file="res://Assets/Textures/light_textures/proto_light_2.png"
+dest_files=["res://.godot/imported/proto_light_2.png-60e8aa2e231126e04d27e30daac1c0c2.ctex"]
 
 [params]
 
