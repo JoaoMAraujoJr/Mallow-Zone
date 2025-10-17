@@ -11,9 +11,11 @@ extends Node2D
 @onready var gunWaste : int = 1
 @onready var canShoot := true
 @onready var canFlameSoundLoop := true
-
+@onready var hand_R := $gun/RightHand/hand_R
+@onready var hand_L := $gun/LeftHand/hand_L
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	loadPlayerSkin()
 	if _Type != null :
 		if _Type in ItemData.weapons:
 			var this_weapon = ItemData.weapons[_Type]
@@ -82,3 +84,9 @@ func _on_flame_audio_stream_finished() -> void:
 	else:
 		_FlameAudioStream.stop()
 	pass # Replace with function body.
+	
+func loadPlayerSkin():
+	var thisSkin = Global.currentPlayerSkin
+	if thisSkin in SkinData.PlayerSkins:
+		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
+		hand_R.texture = SkinData.PlayerSkinsthisSkin[thisSkin]["hand"]

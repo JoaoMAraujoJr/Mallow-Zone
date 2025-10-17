@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xrll1n3wr3dg" path="res://Scripts/Unique/player_skin_node.gd" id="1_7iifb"]
 [ext_resource type="Texture2D" uid="uid://5xlg4kwok2x1" path="res://Assets/Textures/player_skins/red_jim/leg_front_spr.png" id="1_jedmq"]
-[ext_resource type="Texture2D" uid="uid://t3xmxch2putb" path="res://Assets/Textures/player_skins/red_jim/torso_front.png" id="2_7iifb"]
+[ext_resource type="Texture2D" uid="uid://bwxuxrf71qlms" path="res://Assets/Textures/player_skins/red_jim/torso_front_spr.png" id="3_7psrb"]
 [ext_resource type="Texture2D" uid="uid://c0c0ryddc0g16" path="res://Assets/Textures/player_skins/red_jim/head_front_spr.png" id="3_koh5w"]
 [ext_resource type="Texture2D" uid="uid://dj22iklpj8716" path="res://Assets/Textures/player_skins/red_jim/eyes_front_open_spr.png" id="4_7psrb"]
 [ext_resource type="AudioStream" uid="uid://bqx2jk7kpk6l7" path="res://Assets/Sounds/Steps_grass.ogg" id="6_koh5w"]
@@ -263,6 +263,7 @@ position = Vector2(-7, 0)
 
 [node name="leg" type="Sprite2D" parent="skin/torso_and_legs/legs/left_leg"]
 light_mask = 6
+visibility_layer = 11
 position = Vector2(0, 7)
 texture = ExtResource("1_jedmq")
 
@@ -278,8 +279,9 @@ texture = ExtResource("1_jedmq")
 
 [node name="torso" type="Sprite2D" parent="skin/torso_and_legs"]
 light_mask = 6
+visibility_layer = 7
 position = Vector2(0, 10)
-texture = ExtResource("2_7iifb")
+texture = ExtResource("3_7psrb")
 
 [node name="head_sprites" type="Node2D" parent="skin"]
 light_mask = 2
@@ -287,11 +289,13 @@ position = Vector2(0, -4)
 
 [node name="head" type="Sprite2D" parent="skin/head_sprites"]
 light_mask = 6
+visibility_layer = 7
 position = Vector2(0, -22)
 texture = ExtResource("3_koh5w")
 
 [node name="eyes" type="Sprite2D" parent="skin/head_sprites"]
 light_mask = 6
+visibility_layer = 7
 position = Vector2(0, -22)
 texture = ExtResource("4_7psrb")
 
@@ -305,9 +309,10 @@ autoplay = "Idle"
 libraries = {
 &"": SubResource("AnimationLibrary_shdt4")
 }
+speed_scale = 2.0
 
 [node name="BlinkTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 10.0
 autostart = true
 
 [node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="."]

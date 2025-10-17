@@ -15,8 +15,8 @@ shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
 shader_parameter/edge_width = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvtpv"]
-radius = 2.2905931
-height = 6.2991314
+radius = 2.8632417
+height = 12.025614
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0yjm6"]
 cull_mode = 1
@@ -85,8 +85,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uopmo"]
-radius = 3.1495657
-height = 25.196526
+radius = 4.0085382
+height = 27.487118
 
 [node name="tree" type="StaticBody2D" groups=["Interactable"]]
 z_index = 1
@@ -107,10 +107,12 @@ position = Vector2(-14.1698265, -53.79228)
 scale = Vector2(0.9999999, 0.9999999)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.28632417, 4.867511)
+position = Vector2(0.28632417, 6.0128074)
 shape = SubResource("CapsuleShape2D_uvtpv")
 
 [node name="log" type="LightOccluder2D" parent="."]
+light_mask = 7
+visibility_layer = 7
 position = Vector2(4.4107437e-06, 4.8675084)
 scale = Vector2(0.99999994, 0.99999994)
 occluder = SubResource("OccluderPolygon2D_0yjm6")

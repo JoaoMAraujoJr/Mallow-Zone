@@ -72,8 +72,9 @@ func _physics_process(delta: float) -> void:
 		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 		_isbackwards = mouse_dir.y < 0
 		
+		var _flipGun = mouse_dir.x <0
 		if _gun:
-			_gun._flipGun(_isbackwards)
+			_gun._flipGun(_flipGun)
 			_gun.z_index = -1 if _isbackwards else 0
 		
 			

@@ -8,6 +8,8 @@ extends Node2D
 @export var bulletParticle : PackedScene = preload("res://Scenes/particles/bullet_particle.tscn")
 @onready var gunWaste : int = 1
 
+@onready var hand_R := $gun/RightHand/hand_R
+@onready var hand_L := $gun/LeftHand/hand_L
 #TriggerType
 enum GunTrigger{
 	PRESS,
@@ -19,6 +21,7 @@ enum GunTrigger{
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+
 	if _Type != null :
 		if _Type in ItemData.weapons:
 			var this_weapon = ItemData.weapons[_Type]
@@ -88,3 +91,9 @@ func _flipGun(is_backwards: bool):
 		_sprite.scale.y = -abs(_sprite.scale.y)
 	else:
 		_sprite.scale.y = abs(_sprite.scale.y)
+
+func loadPlayerSkin():
+	var thisSkin = Global.currentPlayerSkin
+	if thisSkin in SkinData.PlayerSkins:
+		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
+		hand_R.texture = SkinData.PlayerSkinsthisSkin[thisSkin]["hand"]

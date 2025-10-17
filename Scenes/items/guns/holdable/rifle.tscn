@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dox2op73mb8du"]
+[gd_scene load_steps=8 format=3 uid="uid://dox2op73mb8du"]
 
 [ext_resource type="Script" uid="uid://cbw0oaryl85kx" path="res://Scenes/items/guns/holdable/gun.gd" id="1_0xk6x"]
 [ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/Textures/items/guns/rifle.png" id="1_v4uw3"]
 [ext_resource type="PackedScene" uid="uid://0hmhkrf3c44n" path="res://Scenes/items/guns/bullets/rifleBullet.tscn" id="2_hpt7h"]
 [ext_resource type="AudioStream" uid="uid://c4jymt15nn1kw" path="res://Assets/Sounds/Gun/ShootSoundOGG.ogg" id="4_hpt7h"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="4_x8ll2"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="4_x8ll2"]
+[ext_resource type="Texture2D" uid="uid://b8qei0yud7p7u" path="res://Assets/Textures/player_skins/red_jim/hand_spr.png" id="6_nhom0"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nhom0"]
 polygon = PackedVector2Array(0, -16, -84, -86, 0, 6, 90, -87, 0, -16)
@@ -16,7 +17,7 @@ bulletScene = ExtResource("2_hpt7h")
 
 [node name="gun" type="Sprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -1.1920929e-07)
+position = Vector2(-5, 0.24999991)
 scale = Vector2(1.5, 1.25)
 texture = ExtResource("1_v4uw3")
 offset = Vector2(16, -0.7999996)
@@ -49,6 +50,24 @@ occluder = SubResource("OccluderPolygon2D_nhom0")
 [node name="gunpoint" type="Marker2D" parent="gun"]
 position = Vector2(23.333332, -2.4)
 
+[node name="RightHand" type="Node2D" parent="gun"]
+position = Vector2(10.666667, 4.0000005)
+
+[node name="hand_R" type="Sprite2D" parent="gun/RightHand"]
+position = Vector2(3.3333333, -1.0000005)
+scale = Vector2(0.3315387, 0.3315387)
+texture = ExtResource("6_nhom0")
+
+[node name="LeftHand" type="Node2D" parent="gun"]
+position = Vector2(24.666668, 3.8000007)
+rotation = 1.5707964
+
+[node name="hand_L" type="Sprite2D" parent="gun/LeftHand"]
+position = Vector2(-4.200001, 5.9604645e-08)
+scale = Vector2(-0.34313205, 0.34313205)
+texture = ExtResource("6_nhom0")
+
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-5, 0.25)
 stream = ExtResource("4_hpt7h")
 bus = &"SFXReverb"

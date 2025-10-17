@@ -1,0 +1,341 @@
+[gd_scene load_steps=21 format=3 uid="uid://dq7b8pjm2yyqv"]
+
+[ext_resource type="PackedScene" uid="uid://d0l65gkvgd12p" path="res://Scenes/UI/main_menu/Pilar.gltf" id="1_33x18"]
+[ext_resource type="Script" uid="uid://bskia07wrppel" path="res://Scenes/UI/main_menu/main_menu.gd" id="2_17314"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="2_ck62n"]
+[ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="3_ebndi"]
+[ext_resource type="Texture2D" uid="uid://fn3pmog47geq" path="res://Scenes/UI/main_menu/textoverlay.png" id="4_ebndi"]
+[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="5_bghsp"]
+[ext_resource type="AudioStream" uid="uid://e3smry6huri4" path="res://Assets/Sounds/Music/Lullaby.wav" id="6_q3nry"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bghsp"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+grow = true
+grow_amount = 0.03
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3nry"]
+next_pass = SubResource("StandardMaterial3D_bghsp")
+shading_mode = 0
+diffuse_mode = 3
+albedo_color = Color(0, 0, 0, 1)
+stencil_mode = 1
+stencil_flags = 2
+stencil_color = Color(1, 1, 1, 1)
+stencil_outline_thickness = 0.03
+
+[sub_resource type="SphereMesh" id="SphereMesh_17314"]
+material = SubResource("StandardMaterial3D_q3nry")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="Animation" id="Animation_ck62n"]
+resource_name = "rotating"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotatable:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rotatable:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4.0666666, 6.1, 8.017891, 10.017891),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.5193585, -1.3365107, -0.5370121), Vector3(0.5193585, -1.288548, -0.5370121), Vector3(0.5193585, -1.3365107, -0.5370121), Vector3(0.5193585, -1.288548, -0.5370121), Vector3(0.5193585, -1.3365107, -0.5370121), Vector3(0.5193585, -1.288548, -0.5370121)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("rotatable/OmniLight3D:spot_angle")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.3580985, 4.376197, 4.5333333, 4.5514317, 4.6847653, 6.0610733, 6.0791717, 7, 7.1666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [45.0, 45.0, 0.0, 45.0, 0.0, 45.0, 45.0, 0.0, 0.0, 45.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DirectionalLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(5.866667, 6.1, 6.9, 7.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.05, 0.0, 0.0, 0.05]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5023403, 4.4946494, 6.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.3210000152475, 0.3210000152475, 0.6510000309225, 0.3210000152475]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rotatable/MeshInstance3D:mesh")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 6.1074533, 6.2, 6.9362035, 6.99437, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, null, SubResource("SphereMesh_17314"), SubResource("SphereMesh_17314"), null, null]
+}
+
+[sub_resource type="Animation" id="Animation_uj64n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rotatable:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rotatable:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5193585, -1.3365107, -0.5370121)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("rotatable/OmniLight3D:spot_angle")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [45.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DirectionalLight3D:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3210000152475]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rotatable/MeshInstance3D:mesh")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SphereMesh_17314")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebndi"]
+_data = {
+&"RESET": SubResource("Animation_uj64n"),
+&"rotating": SubResource("Animation_ck62n")
+}
+
+[sub_resource type="Environment" id="Environment_bghsp"]
+background_mode = 1
+glow_enabled = true
+glow_intensity = 2.6
+glow_bloom = 0.18
+glow_blend_mode = 1
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.3025
+
+[sub_resource type="LabelSettings" id="LabelSettings_uj64n"]
+line_spacing = -8.685
+font = ExtResource("2_ck62n")
+font_size = 28
+outline_size = 8
+outline_color = Color(1, 1, 1, 0.16470589)
+shadow_size = 16
+shadow_color = Color(1, 1, 1, 0.13333334)
+shadow_offset = Vector2(0, 0)
+stacked_outline_count = 1
+stacked_outline_0/size = 16
+stacked_outline_0/color = Color(1, 1, 1, 0.043137256)
+
+[sub_resource type="Curve" id="Curve_q3nry"]
+_data = [Vector2(0.008849561, 1), 0.0, 0.0, 0, 0, Vector2(0.1460177, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.38495576, 0.47191018), 0.0, 0.0, 0, 0, Vector2(0.50442475, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.6371681, 0), 0.0, 0.0, 0, 0, Vector2(0.88053095, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_17314"]
+curve = SubResource("Curve_q3nry")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwjbn"]
+shader = ExtResource("3_ebndi")
+shader_parameter/curve = SubResource("CurveTexture_17314")
+shader_parameter/rotation_speed = -0.52449197
+shader_parameter/distortion_strength = 0.41200001957
+shader_parameter/iridescence_scale = 3.0
+shader_parameter/iridescence_intensity = 0.3210000152475
+shader_parameter/light_dir = Vector2(0.5, -0.5)
+shader_parameter/scroll = Vector2(0, 0)
+shader_parameter/angle_deg = 0.0
+
+[sub_resource type="Theme" id="Theme_bghsp"]
+default_base_scale = 0.28
+default_font = ExtResource("2_ck62n")
+default_font_size = 14
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3nry"]
+shader = ExtResource("5_bghsp")
+shader_parameter/resolution = Vector2(1280, 720)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.98507935, 0.17210105, 0, -0.17210105, 0.98507935, -0.27695066, 0.8620021, 1.4201503)
+fov = 55.2
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.86016405, 2.074609e-08, -0.5100175, 0.051168505, 0.9949545, 0.08629767, 0.50744426, -0.100326985, 0.85582405, -1.505669, 0.81919813, 2.3725843)
+light_energy = 0.05
+sky_mode = 1
+
+[node name="rotatable" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5193585, -1.3365107, -0.5370121)
+
+[node name="OmniLight3D" type="SpotLight3D" parent="rotatable"]
+transform = Transform3D(1.0000001, 0, 0, 0, -4.3711392e-08, 1, 0, -1.0000001, -4.3711395e-08, 0.01853031, 2.75916, 0.017451823)
+spot_attenuation = 10.0
+spot_angle_attenuation = 4.7568307
+
+[node name="blockbench_export" parent="rotatable" instance=ExtResource("1_33x18")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="rotatable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1977746, 0)
+mesh = SubResource("SphereMesh_17314")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ebndi")
+}
+autoplay = "rotating"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bghsp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_17314")
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="CanvasLayer"]
+stream = ExtResource("6_q3nry")
+volume_db = 10.111
+autoplay = true
+bus = &"Music"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+clip_children = 2
+offset_left = 22.0
+offset_top = 33.0
+offset_right = 208.0
+offset_bottom = 124.0
+scale = Vector2(1.6523669, 1.6523669)
+text = "The
+Backyard"
+label_settings = SubResource("LabelSettings_uj64n")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Label"]
+material = SubResource("ShaderMaterial_lwjbn")
+position = Vector2(39.337513, 23.602505)
+scale = Vector2(0.6051924, 0.6051924)
+texture = ExtResource("4_ebndi")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 17.0
+offset_top = 202.0
+offset_right = 66.0
+offset_bottom = 232.0
+scale = Vector2(1.6756908, 1.6756908)
+focus_mode = 0
+theme = SubResource("Theme_bghsp")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_pressed_color = Color(0.27022174, 0.27022198, 0.27022186, 1)
+theme_override_colors/font_hover_color = Color(0.50534385, 0.505344, 0.505345, 1)
+text = "play"
+
+[node name="CRT" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_q3nry")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="finished" from="CanvasLayer/MenuMusic" to="CanvasLayer" method="_on_menu_music_finished"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]

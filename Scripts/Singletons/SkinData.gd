@@ -10,11 +10,12 @@ var PlayerSkins := {
 		"eyesClosed": load("res://Assets/Textures/player_skins/red_jim/eyes_front_closed_spr.png"),
 		"eyesBack": load("res://Assets/Textures/player_skins/red_jim/eyes_back_spr.png"),
 		#torso
-		"torsoFront": load("res://Assets/Textures/player_skins/red_jim/torso_front.png"), 
-		"torsoBack": load("res://Assets/Textures/player_skins/red_jim/torso_back.png"), 
+		"torsoFront": load("res://Assets/Textures/player_skins/red_jim/torso_front_spr.png"), 
+		"torsoBack": load("res://Assets/Textures/player_skins/red_jim/torso_back_spr.png"), 
 		#legs
 		"legFront": load("res://Assets/Textures/player_skins/red_jim/leg_front_spr.png"),
 		"legBack": load("res://Assets/Textures/player_skins/red_jim/leg_back_spr.png"),
-		#hands
+		#hand
+		"hand": load("res://Assets/Textures/player_skins/red_jim/hand_spr.png")
 	}
 }
