@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4l10dhcecdou"]
+[gd_scene load_steps=15 format=3 uid="uid://d4l10dhcecdou"]
 
 [ext_resource type="Script" uid="uid://6dvksqi14d2b" path="res://Scripts/UI/card_scene.gd" id="1_l7gxn"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="1_rkhd2"]
 [ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="1_wsgrk"]
 [ext_resource type="Texture2D" uid="uid://b3vwrx3svoeei" path="res://Assets/objects/cards/cardmask.png" id="2_wy13b"]
-[ext_resource type="Texture2D" uid="uid://fcqqimudfivq" path="res://Assets/Textures/Proto/Dark/texture_08.png" id="4_rkhd2"]
 [ext_resource type="Texture2D" uid="uid://da0hw1h2ep5pd" path="res://Assets/objects/cards/lightmask.png" id="5_l7gxn"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="7_rkhd2"]
 
@@ -33,23 +32,6 @@ shader_parameter/threshold = 0.0150000007125
 shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
 shader_parameter/edge_width = 0.05
 
-[sub_resource type="Animation" id="Animation_l7gxn"]
-resource_name = "spawn"
-length = 5.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ChromeMask/PointLight2D:color")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.0666667, 2.6, 4.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.77254903, 0, 1, 1), Color(0, 0.5825712, 0.62743205, 1), Color(0.061254323, 0, 0.9241098, 1), Color(0.5099701, 0.0015135196, 0.7020584, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_pprc1"]
 length = 0.001
 tracks/0/type = "value"
@@ -67,6 +49,23 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_wng07"]
 resource_name = "beingCreated"
+
+[sub_resource type="Animation" id="Animation_l7gxn"]
+resource_name = "spawn"
+length = 5.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChromeMask/PointLight2D:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0666667, 2.6, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.77254903, 0, 1, 1), Color(0, 0.5825712, 0.62743205, 1), Color(0.061254323, 0, 0.9241098, 1), Color(0.5099701, 0.0015135196, 0.7020584, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rkhd2"]
 _data = {
@@ -88,7 +87,6 @@ show_behind_parent = true
 material = SubResource("ShaderMaterial_wy13b")
 position = Vector2(0, -11.030089)
 scale = Vector2(0.16847456, 0.16847456)
-texture = ExtResource("4_rkhd2")
 
 [node name="PointLight2D" type="PointLight2D" parent="ChromeMask"]
 show_behind_parent = true
