@@ -57,7 +57,7 @@ func _ready() -> void:
 	_carSprite.z_index = 0
 	$Timers/TimerTillOpenFront.start()
 	$Timers/TimerTillOpenBack.start()
-	Global.currentbiome = "asphalt"
+	GameManager.currentbiome = "asphalt"
 	self.change_on_boss_status.connect(BossManager.change_on_boss_status_received)
 	emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
 	

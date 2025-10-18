@@ -47,7 +47,7 @@ func _getGunPoint() -> Marker2D:
 func shootLogic() -> void:
 	match TriggerMode:
 		GunTrigger.PRESS:
-			if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0:
+			if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0:
 				_ShootSound.pitch_scale = randf_range(0.8,1.2)
 				_ShootSound.play()
 				var bulletPart = bulletParticle.instantiate()
@@ -57,10 +57,10 @@ func shootLogic() -> void:
 				newbullet.position = _gunpoint.global_position
 				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
 				newbullet.set_direction(bulletdirection)
-				Global.ammo -= 1
+				GameManager.ammo -= 1
 				get_tree().current_scene.add_child(newbullet)
 		GunTrigger.HOLD:
-			if Input.is_action_pressed("Mouse_left") and Global.ammo > 0:
+			if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
 				_ShootSound.pitch_scale = randf_range(0.8,1.2)
 				_ShootSound.play()
 				var bulletPart = bulletParticle.instantiate()
@@ -70,10 +70,10 @@ func shootLogic() -> void:
 				newbullet.position = _gunpoint.global_position
 				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
 				newbullet.set_direction(bulletdirection)
-				Global.ammo -= 1
+				GameManager.ammo -= 1
 				get_tree().current_scene.add_child(newbullet)
 		GunTrigger.RELEASE:
-			if Input.is_action_just_released("Mouse_left") and Global.ammo > 0:
+			if Input.is_action_just_released("Mouse_left") and GameManager.ammo > 0:
 				_ShootSound.pitch_scale = randf_range(0.8,1.2)
 				_ShootSound.play()
 				var bulletPart = bulletParticle.instantiate()
@@ -83,7 +83,7 @@ func shootLogic() -> void:
 				newbullet.position = _gunpoint.global_position
 				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
 				newbullet.set_direction(bulletdirection)
-				Global.ammo -= 1
+				GameManager.ammo -= 1
 				get_tree().current_scene.add_child(newbullet)
 
 func _flipGun(is_backwards: bool):
@@ -93,7 +93,7 @@ func _flipGun(is_backwards: bool):
 		_sprite.scale.y = abs(_sprite.scale.y)
 
 func loadPlayerSkin():
-	var thisSkin = Global.currentPlayerSkin
+	var thisSkin = GameManager.currentPlayerSkin
 	if thisSkin in SkinData.PlayerSkins:
 		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
 		hand_R.texture = SkinData.PlayerSkinsthisSkin[thisSkin]["hand"]

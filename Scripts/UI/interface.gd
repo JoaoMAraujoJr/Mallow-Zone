@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var ammo : int = Global.ammo
+@onready var ammo : int = GameManager.ammo
 @onready var _ammolabel: Label = $Ammo
 @onready var _killslabel: Label = $Kills
 @onready var _coords: Label = $Coordinates
@@ -12,13 +12,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Global.player_health <= 0:
+	if GameManager.player_health <= 0:
 		_button.visible = true
 	else : 		_button.visible = false
-	ammo = Global.ammo
-	_ammolabel.text = "Ammo: " + str(ammo) + "/ " + str(Global.ammoMax)
-	_killslabel.text= str(Global.kills) + " Kills"
-	_coords.text = " %.2f \n %.2f" % [Global.player_x, Global.player_y]
+	ammo = GameManager.ammo
+	_ammolabel.text = "Ammo: " + str(ammo) + "/ " + str(GameManager.ammoMax)
+	_killslabel.text= str(GameManager.kills) + " Kills"
+	_coords.text = " %.2f \n %.2f" % [GameManager.player_x, GameManager.player_y]
 	
 
 	
@@ -27,12 +27,12 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	Global.kills= 0
-	Global.enemySpeed= 50.0
-	Global.ammo= Global.ammoMax
-	Global.player_x = 0.0
-	Global.player_y = 0.0
-	Global.currentbiome="grasslands"
+	GameManager.kills= 0
+	GameManager.enemySpeed= 50.0
+	GameManager.ammo= GameManager.ammoMax
+	GameManager.player_x = 0.0
+	GameManager.player_y = 0.0
+	GameManager.currentbiome="grasslands"
 	BossManager._isOnBoss = false
 	BossManager.currentBossName = ""
 	get_tree().change_scene_to_file("res://Scenes/Level.tscn")

@@ -55,10 +55,10 @@ func _ready() -> void:
 	TriggerUp.connect("area_entered", Callable(self, "_on_trigger_up_entered"))
 	TriggerDown.connect("area_entered", Callable(self, "_on_trigger_down_entered"))
 	
-	if Global.currentbiome==null:
+	if GameManager.currentbiome==null:
 		biome="chess"
 	else:
-		biome = Global.currentbiome
+		biome = GameManager.currentbiome
 		
 	match biome:
 		"chess":

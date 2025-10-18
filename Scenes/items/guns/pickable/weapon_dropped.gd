@@ -12,13 +12,13 @@ func _process(delta: float) -> void:
 		if body.is_in_group("PlayerArea"):
 			if Input.is_action_just_pressed("Interact"):
 				var thisgun = weaponKey
-				var oldcurrent = Global.currentEquipedWeaponType
-				var oldMaxammo = Global.ammoMax
+				var oldcurrent = GameManager.currentEquipedWeaponType
+				var oldMaxammo = GameManager.ammoMax
 				_setWeaponKey(oldcurrent)
-				Global.currentEquipedWeaponType = thisgun
-				Global.ammoMax = ItemData.weapons[thisgun]["max_ammo"]
-				if oldcurrent != thisgun and Global.ammoMax != oldMaxammo:
-					Global.ammo = ItemData.weapons[thisgun]["max_ammo"]
+				GameManager.currentEquipedWeaponType = thisgun
+				GameManager.ammoMax = ItemData.weapons[thisgun]["max_ammo"]
+				if oldcurrent != thisgun and GameManager.ammoMax != oldMaxammo:
+					GameManager.ammo = ItemData.weapons[thisgun]["max_ammo"]
 				if body.has_method("_equipGun"):
 					body._equipGun()
 					_reloadTexture()

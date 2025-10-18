@@ -40,7 +40,7 @@ var max_speed :float = 400.0
 
 func _ready():
 	call_deferred("_equipGun")
-	Global.player_health = health
+	GameManager.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 
@@ -61,8 +61,8 @@ func _physics_process(delta: float) -> void:
 			playerSkin._setBackwards(true)
 			
 		
-		Global.player_x= global_position.x
-		Global.player_y= - global_position.y
+		GameManager.player_x= global_position.x
+		GameManager.player_y= - global_position.y
 		
 		_lifebar.value = health
 		var input_vector = Vector2.ZERO
@@ -79,15 +79,15 @@ func _physics_process(delta: float) -> void:
 		
 			
 			#calcula o recoil velocity e som do tiro
-		if Input.is_action_just_pressed("Mouse_left") and Global.ammo > 0 and Global.currentEquipedWeaponType != "none" and _gun != null:
+		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and GameManager.currentEquipedWeaponType != "none" and _gun != null:
 			
 			var recoil_direction = ( global_position - mouse_pos ).normalized()
 			recoil_velocity = recoil_direction * recoil_strength
 			print("this is being recoiled")
 
-		elif Input.is_action_just_pressed("Mouse_left") and Global.ammo <= 0 :
+		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
 			_outofAmmoAudioStream.play()
-		elif Input.is_action_just_pressed("DropAction") and Global.currentEquipedWeaponType != "none" and _gun != null:
+		elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
 			_dropGun()
 		#movement and mouse treatment:
 		if Input.is_action_just_pressed("UnlockMouse"):
@@ -130,7 +130,7 @@ func  addToHealth(i:int) -> void:
 		_canmove = false
 	else : health += i
 	
-	Global.player_health = health
+	GameManager.player_health = health
 	
 func addToPullVelocity(pullingVector : Vector2): #metodo de puxar o jogador
 	pullforce += pullingVector
@@ -168,10 +168,10 @@ func _equipGun():
 		_gun.queue_free()
 		_gun = null
 		
-	if(Global.currentEquipedWeaponType == null or Global.currentEquipedWeaponType == "none" ):
+	if(GameManager.currentEquipedWeaponType == null or GameManager.currentEquipedWeaponType == "none" ):
 		return
 		
-	var currentGunType = Global.currentEquipedWeaponType
+	var currentGunType = GameManager.currentEquipedWeaponType
 	var currentGun = ItemData.weapons[currentGunType]
 	_gun = null
 	_gun = currentGun["weapon_scene"].instantiate()
@@ -179,8 +179,8 @@ func _equipGun():
 	add_child(_gun)
 	
 func _dropGun():
-	var droppedgunKey: String = Global.currentEquipedWeaponType
-	Global.currentEquipedWeaponType = "none"
+	var droppedgunKey: String = GameManager.currentEquipedWeaponType
+	GameManager.currentEquipedWeaponType = "none"
 	_equipGun()
 	var newdroppedgun = preload("res://Scenes/items/guns/pickable/droppedGun.tscn").instantiate()
 	newdroppedgun.global_position = global_position

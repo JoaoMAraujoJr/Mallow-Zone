@@ -41,12 +41,12 @@ func _getGunPoint() -> Marker2D:
 
 func shootLogic() -> void:
 
-	if Input.is_action_just_pressed("Mouse_left")and Global.ammo > 0:
+	if Input.is_action_just_pressed("Mouse_left")and GameManager.ammo > 0:
 		_igniteAudioStream.pitch_scale = randf_range(0.8,1.3)
 		_igniteAudioStream.play()
 		_FlameAudioStream.play()
 		canFlameSoundLoop = true
-	if Input.is_action_pressed("Mouse_left") and Global.ammo > 0:
+	if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
 		_flameParticles.emitting = true
 		var bulletPart = bulletParticle.instantiate()
 		bulletPart.global_position = _gunpoint.global_position
@@ -57,10 +57,10 @@ func shootLogic() -> void:
 			newbullet.position = _gunpoint.global_position
 			var bulletdirection :Vector2= (get_global_mouse_position() - newbullet.global_position).normalized()
 			newbullet.global_rotation =bulletdirection.angle()
-			Global.ammo -= 1
+			GameManager.ammo -= 1
 			get_tree().current_scene.add_child(newbullet)
 			$Timer.start()
-	if Input.is_action_just_released("Mouse_left") or Global.ammo <= 0:
+	if Input.is_action_just_released("Mouse_left") or GameManager.ammo <= 0:
 		canFlameSoundLoop = false
 		_FlameAudioStream.stop()
 		_flameParticles.emitting = false
@@ -86,7 +86,7 @@ func _on_flame_audio_stream_finished() -> void:
 	pass # Replace with function body.
 	
 func loadPlayerSkin():
-	var thisSkin = Global.currentPlayerSkin
+	var thisSkin = GameManager.currentPlayerSkin
 	if thisSkin in SkinData.PlayerSkins:
 		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
 		hand_R.texture = SkinData.PlayerSkinsthisSkin[thisSkin]["hand"]

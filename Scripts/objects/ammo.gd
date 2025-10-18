@@ -6,7 +6,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		var player = area.get_parent()
 		if player.has_method("_playReloadSound"):
 			player._playReloadSound()
-		if Global.currentEquipedWeaponType != null and Global.currentEquipedWeaponType != "":
-			if Global.currentEquipedWeaponType in ItemData.weapons:
-				Global.ammo += ItemData.weapons[Global.currentEquipedWeaponType]["ammo_value"]
+		if GameManager.currentEquipedWeaponType != null and GameManager.currentEquipedWeaponType != "":
+			if GameManager.currentEquipedWeaponType in ItemData.weapons:
+				if GameManager.ammo + ItemData.weapons[GameManager.currentEquipedWeaponType]["ammo_value"] > GameManager.ammoMax:
+					GameManager.ammo = GameManager.ammoMax
+				else:
+					GameManager.ammo += ItemData.weapons[GameManager.currentEquipedWeaponType]["ammo_value"]
+				
 		queue_free()

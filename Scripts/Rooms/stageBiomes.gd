@@ -74,7 +74,7 @@ func _spawn_entities_at_Stage():
 		
 	#Spawn de BH
 	if rng.randf() <= 0.1 :
-		if (Global.currentbiome == "chess") :
+		if (GameManager.currentbiome == "chess") :
 			var BH = BHScene.instantiate()
 			BH.global_position =  _get_random_point_in_area()
 			get_tree().current_scene.add_child(BH)
@@ -89,7 +89,7 @@ func EntityspawnerAtMilestone(milestoneCoords : float ):
 			Entity = BossManager.BossList[Boss]["BossScene"]
 			break
 	if Entity != null:
-		if (Global.player_x > milestoneCoords or Global.player_x < -milestoneCoords or Global.player_y > milestoneCoords or Global.player_y < -milestoneCoords ):
+		if (GameManager.player_x > milestoneCoords or GameManager.player_x < -milestoneCoords or GameManager.player_y > milestoneCoords or GameManager.player_y < -milestoneCoords ):
 			var newEntity = Entity.instantiate()
 			newEntity.global_position = global_position
 			get_tree().current_scene.add_child(newEntity)
