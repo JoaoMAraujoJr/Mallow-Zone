@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=21 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_apajn"]
+[ext_resource type="PackedScene" uid="uid://dwyntrhkd73bo" path="res://Scenes/UI/CoorRadar.tscn" id="12_na5jw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7l867"]
 shader = ExtResource("9_7l867")
@@ -37,6 +38,9 @@ outline_color = Color(1.269618, 1.269618, 1.269618, 0.3137255)
 shadow_size = 10
 shadow_color = Color(2.454227, 2.454227, 2.454227, 0.29803923)
 shadow_offset = Vector2(0, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_na5jw"]
+viewport_path = NodePath("CoordRadarSubViewport")
 
 [sub_resource type="LabelSettings" id="LabelSettings_x2tka"]
 font = ExtResource("5_hbxki")
@@ -72,13 +76,14 @@ shader_parameter/roll_speed = 1.0
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -2.0
 
-[node name="Interface" type="CanvasLayer"]
-layer = 2
+[node name="Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_j00uw")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="FishEyeEffectLayer" type="CanvasLayer" parent="."]
 
-[node name="eyefish" type="ColorRect" parent="CanvasLayer"]
+[node name="eyefish" type="ColorRect" parent="FishEyeEffectLayer"]
 z_index = 1
 material = SubResource("ShaderMaterial_7l867")
 anchors_preset = 15
@@ -86,8 +91,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="InterfaceCanvaLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="InterfaceCanvaLayer"]
 material = SubResource("ShaderMaterial_r04jc")
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,7 +104,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Ammo" type="Label" parent="."]
+[node name="Ammo" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
 anchor_left = 0.82000005
 anchor_top = 0.106000006
@@ -105,7 +113,7 @@ anchor_bottom = 0.106000006
 offset_left = -98.880005
 offset_top = -31.896002
 offset_right = 163.36737
-offset_bottom = 45.42507
+offset_bottom = 45.425068
 grow_horizontal = 0
 scale = Vector2(0.6910793, 0.6910793)
 text = "Ammo: 0/25"
@@ -115,7 +123,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Kills" type="Label" parent="."]
+[node name="Kills" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
 anchor_left = 0.156
 anchor_top = 0.105000004
@@ -123,7 +131,7 @@ anchor_right = 0.156
 anchor_bottom = 0.105000004
 offset_left = -90.90399
 offset_top = -33.68
-offset_right = 125.95074
+offset_right = 125.95073
 offset_bottom = 43.641075
 grow_horizontal = 0
 scale = Vector2(0.6967743, 0.6967743)
@@ -133,14 +141,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="xy" type="Label" parent="."]
+[node name="CoordRadarRect" type="TextureRect" parent="InterfaceCanvaLayer"]
+offset_left = 245.00002
+offset_top = 7.0
+offset_right = 501.0
+offset_bottom = 135.0
+scale = Vector2(0.9260484, 0.9260484)
+texture = SubResource("ViewportTexture_na5jw")
+
+[node name="xy" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -94.0
-offset_top = 19.0
-offset_right = 122.85477
-offset_bottom = 594.0
+offset_left = -74.0
+offset_top = 30.0
+offset_right = 142.85474
+offset_bottom = 605.0
 grow_horizontal = 2
 scale = Vector2(0.06302245, 0.06302245)
 text = "x:
@@ -150,16 +166,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Coordinates" type="Label" parent="."]
+[node name="Coordinates" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
 anchor_left = 0.448
 anchor_top = 0.08400001
 anchor_right = 0.448
 anchor_bottom = 0.08400001
-offset_left = -36.064026
-offset_top = -17.288002
-offset_right = 1870.2139
-offset_bottom = 557.712
+offset_left = -16.064026
+offset_top = -6.288002
+offset_right = 1475.4683
+offset_bottom = 568.712
 grow_horizontal = 2
 scale = Vector2(0.06302245, 0.06302245)
 text = "x
@@ -169,10 +185,10 @@ vertical_alignment = 1
 autowrap_mode = 3
 uppercase = true
 
-[node name="BossBar" parent="." instance=ExtResource("10_apajn")]
+[node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
 mouse_filter = 2
 
-[node name="Button" type="TextureButton" parent="."]
+[node name="Button" type="TextureButton" parent="InterfaceCanvaLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -191,12 +207,12 @@ texture_pressed = ExtResource("5_uwsgx")
 texture_hover = ExtResource("6_r04jc")
 stretch_mode = 0
 
-[node name="Mousefollow" parent="." instance=ExtResource("5_r04jc")]
+[node name="Mousefollow" parent="InterfaceCanvaLayer" instance=ExtResource("5_r04jc")]
 z_index = 4
 position = Vector2(190, 110.000015)
 scale = Vector2(0.6910793, 0.6910793)
 
-[node name="CRT" type="ColorRect" parent="."]
+[node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer"]
 material = SubResource("ShaderMaterial_aq0n2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,4 +221,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="CoordRadarSubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(256, 127)
+size_2d_override = Vector2i(265, 111)
+render_target_update_mode = 4
+
+[node name="CoorRadar" parent="CoordRadarSubViewport" instance=ExtResource("12_na5jw")]
+
+[connection signal="pressed" from="InterfaceCanvaLayer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,308 @@
+[gd_scene load_steps=17 format=3 uid="uid://dwyntrhkd73bo"]
+
+[ext_resource type="Texture2D" uid="uid://bv1hf16orojiv" path="res://Assets/Textures/UI/gear_1.png" id="1_cd8rp"]
+[ext_resource type="Texture2D" uid="uid://co7on84cr45bd" path="res://Assets/Textures/UI/gear_1_normal.png" id="2_pyhp2"]
+[ext_resource type="Texture2D" uid="uid://lke6753f7ddp" path="res://Assets/Textures/UI/gear_3.png" id="3_7rehp"]
+[ext_resource type="Texture2D" uid="uid://cgjmjx3jkuccm" path="res://Assets/Textures/UI/gear_3_normal.png" id="4_173d1"]
+[ext_resource type="Texture2D" uid="uid://w21mh2ed5hg4" path="res://Assets/Textures/UI/gear_2.png" id="5_84ci2"]
+[ext_resource type="Texture2D" uid="uid://dujsalq18sof2" path="res://Assets/Textures/UI/gear_2_normal.png" id="6_iq4qt"]
+[ext_resource type="Texture2D" uid="uid://bl4nc0ploxo84" path="res://Assets/Textures/UI/CoordsLocator.png" id="7_k4ivy"]
+[ext_resource type="Texture2D" uid="uid://bl0ifv4dng78u" path="res://Assets/Textures/UI/CoordsLocator_normal.png" id="8_3vtp7"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="9_pyhp2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_87x3g"]
+diffuse_texture = ExtResource("1_cd8rp")
+normal_texture = ExtResource("2_pyhp2")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1ugkt"]
+diffuse_texture = ExtResource("3_7rehp")
+normal_texture = ExtResource("4_173d1")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jrt7v"]
+diffuse_texture = ExtResource("5_84ci2")
+normal_texture = ExtResource("6_iq4qt")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vxnem"]
+diffuse_texture = ExtResource("7_k4ivy")
+normal_texture = ExtResource("8_3vtp7")
+
+[sub_resource type="Animation" id="Animation_pyhp2"]
+resource_name = "CoordDisplayLoopAnimation"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gearBig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -31.41592653589793]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gearSmall:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.566371]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("gearBig3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 31.41592653589793]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("gearBig3:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.43333334, 1.8, 3, 4.4666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.63569295, 0.63569295), Vector2(0.7, 0.7), Vector2(0.63569295, 0.63569295), Vector2(0.7, 0.7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("lights/gear light2:color")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.4333333, 2.8666666, 4.266667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.60377777, 0.6103506, 1), Color(0.77485275, 0.42373765, 0.11974233, 1), Color(0.85607785, 6.738305e-07, 0.4378982, 1), Color(0, 0.40254176, 0.6901166, 1), Color(0, 0.60377777, 0.6103506, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("gearBig2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -31.415926]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("lights/display:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(264.1548, 458.79492), Vector2(-3517.4275, 458.79492)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("lights/turnedon:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0666666, 2.2666667, 2.44, 2.6, 2.7666667, 2.9666667, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.6150225, 0.033228893, 1), Color(0, 0.6150225, 0.033228893, 1), Color(0, 0.62, 0.030999972, 0), Color(0.89, 0.7416667, 0, 1), Color(0, 0.62, 0.030999972, 0), Color(0.9279566, 0.13149849, 0, 1), Color(0, 0.6150225, 0.033228893, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7rehp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gearBig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gearSmall:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("gearBig3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("gearBig3:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.63569295, 0.63569295)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("lights/gear light2:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.60377777, 0.6103506, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("gearBig2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("lights/display:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1598.8306, 222.44601)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("lights/turnedon:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.6150225, 0.033228893, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_173d1"]
+_data = {
+&"CoordDisplayLoopAnimation": SubResource("Animation_pyhp2"),
+&"RESET": SubResource("Animation_7rehp")
+}
+
+[node name="CoorRadar" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="gearBig" type="Sprite2D" parent="."]
+position = Vector2(-97, 23.999998)
+scale = Vector2(0.4571136, 0.4571136)
+texture = SubResource("CanvasTexture_87x3g")
+
+[node name="gearBig2" type="Sprite2D" parent="."]
+position = Vector2(83, -3.9999998)
+scale = Vector2(0.46580675, 0.46580675)
+texture = SubResource("CanvasTexture_1ugkt")
+
+[node name="gearBig3" type="Sprite2D" parent="."]
+position = Vector2(83, -3.9999998)
+scale = Vector2(0.63569295, 0.63569295)
+texture = SubResource("CanvasTexture_1ugkt")
+
+[node name="gearSmall" type="Sprite2D" parent="."]
+position = Vector2(-10, 43)
+scale = Vector2(0.430075, 0.430075)
+texture = SubResource("CanvasTexture_jrt7v")
+
+[node name="CoordRadar" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = SubResource("CanvasTexture_vxnem")
+
+[node name="lights" type="Node2D" parent="."]
+position = Vector2(-114.99999, 0)
+rotation = 3.1415927
+scale = Vector2(0.07192756, 0.07192756)
+
+[node name="display" type="PointLight2D" parent="lights"]
+position = Vector2(-1598.8306, 222.44601)
+rotation = -3.1415927
+scale = Vector2(13.902876, 13.902876)
+color = Color(0.87308395, 0.7632678, 0.31316668, 1)
+texture = ExtResource("9_pyhp2")
+height = 68.0
+
+[node name="turnedon" type="PointLight2D" parent="lights"]
+position = Vector2(-2419.1, -570.0179)
+scale = Vector2(1.5499524, 1.5499524)
+color = Color(0, 0.6150225, 0.033228893, 1)
+energy = 12.2
+texture = ExtResource("9_pyhp2")
+texture_scale = 0.5
+
+[node name="gear light1" type="PointLight2D" parent="lights"]
+color = Color(0.9432179, 0.8300716, 0.77653193, 1)
+energy = 12.99
+texture = ExtResource("9_pyhp2")
+texture_scale = 0.5
+
+[node name="gear light2" type="PointLight2D" parent="lights"]
+position = Vector2(-3294.9817, 250.25177)
+scale = Vector2(3.5884137, 3.5884137)
+color = Color(0, 0.60377777, 0.6103506, 1)
+energy = 4.35
+texture = ExtResource("9_pyhp2")
+texture_scale = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_173d1")
+}
+autoplay = "CoordDisplayLoopAnimation"

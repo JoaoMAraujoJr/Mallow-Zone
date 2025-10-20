@@ -1,10 +1,10 @@
-extends CanvasLayer
+extends Control
 
 @onready var ammo : int = GameManager.ammo
-@onready var _ammolabel: Label = $Ammo
-@onready var _killslabel: Label = $Kills
-@onready var _coords: Label = $Coordinates
-@onready var _button: TextureButton = $Button
+@onready var _ammolabel: Label = $InterfaceCanvaLayer/Ammo
+@onready var _killslabel: Label = $InterfaceCanvaLayer/Kills
+@onready var _coords: Label = $InterfaceCanvaLayer/Coordinates
+@onready var _button: TextureButton = $InterfaceCanvaLayer/Button
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
