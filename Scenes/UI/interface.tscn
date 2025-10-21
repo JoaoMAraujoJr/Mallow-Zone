@@ -142,23 +142,24 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="CoordRadarRect" type="TextureRect" parent="InterfaceCanvaLayer"]
-offset_left = 245.00002
-offset_top = 7.0
-offset_right = 501.0
-offset_bottom = 135.0
+offset_left = 256.0
+offset_top = 11.0
+offset_right = 512.0
+offset_bottom = 139.0
 scale = Vector2(0.9260484, 0.9260484)
 texture = SubResource("ViewportTexture_na5jw")
 
-[node name="xy" type="Label" parent="InterfaceCanvaLayer"]
+[node name="xy" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect"]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -74.0
-offset_top = 30.0
-offset_right = 142.85474
-offset_bottom = 605.0
+offset_left = -63.20858
+offset_top = 24.836714
+offset_right = 153.64615
+offset_bottom = 599.83673
 grow_horizontal = 2
-scale = Vector2(0.06302245, 0.06302245)
+scale = Vector2(0.078064285, 0.078064285)
 text = "x:
 Y:"
 label_settings = SubResource("LabelSettings_x2tka")
@@ -166,18 +167,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Coordinates" type="Label" parent="InterfaceCanvaLayer"]
+[node name="Coordinates" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.448
 anchor_top = 0.08400001
 anchor_right = 0.448
 anchor_bottom = 0.08400001
-offset_left = -16.064026
-offset_top = -6.288002
-offset_right = 1475.4683
-offset_bottom = 568.712
+offset_left = -30.459145
+offset_top = 14.084713
+offset_right = 1461.0731
+offset_bottom = 589.0847
 grow_horizontal = 2
-scale = Vector2(0.06302245, 0.06302245)
+scale = Vector2(0.078064285, 0.078064285)
 text = "x
 y"
 label_settings = SubResource("LabelSettings_x2tka")
