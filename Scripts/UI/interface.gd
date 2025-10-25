@@ -33,6 +33,7 @@ func _on_button_pressed() -> void:
 	GameManager.player_x = 0.0
 	GameManager.player_y = 0.0
 	GameManager.currentbiome="grasslands"
+	GameManager.can_shoot = true
 	BossManager._isOnBoss = false
 	BossManager.currentBossName = ""
 	get_tree().change_scene_to_file("res://Scenes/Level.tscn")

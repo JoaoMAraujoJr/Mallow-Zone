@@ -1,4 +1,7 @@
 extends Node
+
+signal skin_changed(new_skin: String)
+
 var ammoMax : int = 0
 var ammo : int = ammoMax
 var kills : int = 0
@@ -6,6 +9,7 @@ var player_x: float = 0
 var player_y: float = 0
 var enemySpeed: float = 50.0
 var player_health : int = 100
+var can_shoot: bool = true
 
 #current
 var currentbiome : String = "grasslands"
@@ -31,8 +35,6 @@ func UpdateBiome():
 			currentbiome = "grasslands"
 		if (player_x > 10000.0 or player_x < -10000.0 or player_y > 10000.0 or player_y < -10000.0):
 			currentbiome = "chess"
-
-
 
 
 func saveDataOnSlot(slot:int):

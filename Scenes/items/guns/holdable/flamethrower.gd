@@ -40,30 +40,32 @@ func _getGunPoint() -> Marker2D:
 
 
 func shootLogic() -> void:
-
-	if Input.is_action_just_pressed("Mouse_left")and GameManager.ammo > 0:
-		_igniteAudioStream.pitch_scale = randf_range(0.8,1.3)
-		_igniteAudioStream.play()
-		_FlameAudioStream.play()
-		canFlameSoundLoop = true
-	if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
-		_flameParticles.emitting = true
-		var bulletPart = bulletParticle.instantiate()
-		bulletPart.global_position = _gunpoint.global_position
-		get_tree().current_scene.add_child(bulletPart)
-		if canShoot:
-			canShoot = false
-			var newbullet = bulletScene.instantiate()
-			newbullet.position = _gunpoint.global_position
-			var bulletdirection :Vector2= (get_global_mouse_position() - newbullet.global_position).normalized()
-			newbullet.global_rotation =bulletdirection.angle()
-			GameManager.ammo -= 1
-			get_tree().current_scene.add_child(newbullet)
-			$Timer.start()
-	if Input.is_action_just_released("Mouse_left") or GameManager.ammo <= 0:
-		canFlameSoundLoop = false
-		_FlameAudioStream.stop()
-		_flameParticles.emitting = false
+	if GameManager.can_shoot:
+		if Input.is_action_just_pressed("Mouse_left")and GameManager.ammo > 0:
+			_igniteAudioStream.pitch_scale = randf_range(0.8,1.3)
+			_igniteAudioStream.play()
+			_FlameAudioStream.play()
+			canFlameSoundLoop = true
+		if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
+			_flameParticles.emitting = true
+			var bulletPart = bulletParticle.instantiate()
+			bulletPart.global_position = _gunpoint.global_position
+			get_tree().current_scene.add_child(bulletPart)
+			if canShoot:
+				canShoot = false
+				var newbullet = bulletScene.instantiate()
+				newbullet.position = _gunpoint.global_position
+				var bulletdirection :Vector2= (get_global_mouse_position() - newbullet.global_position).normalized()
+				newbullet.global_rotation =bulletdirection.angle()
+				GameManager.ammo -= 1
+				get_tree().current_scene.add_child(newbullet)
+				$Timer.start()
+		if Input.is_action_just_released("Mouse_left") or GameManager.ammo <= 0:
+			canFlameSoundLoop = false
+			_FlameAudioStream.stop()
+			_flameParticles.emitting = false
+	else:
+		return
 
 func _flipGun(is_backwards: bool):
 	if is_backwards:

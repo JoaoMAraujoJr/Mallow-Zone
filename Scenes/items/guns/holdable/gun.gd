@@ -45,46 +45,49 @@ func _getGunPoint() -> Marker2D:
 	return _gunpoint
 
 func shootLogic() -> void:
-	match TriggerMode:
-		GunTrigger.PRESS:
-			if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0:
-				_ShootSound.pitch_scale = randf_range(0.8,1.2)
-				_ShootSound.play()
-				var bulletPart = bulletParticle.instantiate()
-				bulletPart.global_position = _gunpoint.global_position
-				get_tree().current_scene.add_child(bulletPart)
-				var newbullet = bulletScene.instantiate()
-				newbullet.position = _gunpoint.global_position
-				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-				newbullet.set_direction(bulletdirection)
-				GameManager.ammo -= 1
-				get_tree().current_scene.add_child(newbullet)
-		GunTrigger.HOLD:
-			if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
-				_ShootSound.pitch_scale = randf_range(0.8,1.2)
-				_ShootSound.play()
-				var bulletPart = bulletParticle.instantiate()
-				bulletPart.global_position = _gunpoint.global_position
-				get_tree().current_scene.add_child(bulletPart)
-				var newbullet = bulletScene.instantiate()
-				newbullet.position = _gunpoint.global_position
-				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-				newbullet.set_direction(bulletdirection)
-				GameManager.ammo -= 1
-				get_tree().current_scene.add_child(newbullet)
-		GunTrigger.RELEASE:
-			if Input.is_action_just_released("Mouse_left") and GameManager.ammo > 0:
-				_ShootSound.pitch_scale = randf_range(0.8,1.2)
-				_ShootSound.play()
-				var bulletPart = bulletParticle.instantiate()
-				bulletPart.global_position = _gunpoint.global_position
-				get_tree().current_scene.add_child(bulletPart)
-				var newbullet = bulletScene.instantiate()
-				newbullet.position = _gunpoint.global_position
-				var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-				newbullet.set_direction(bulletdirection)
-				GameManager.ammo -= 1
-				get_tree().current_scene.add_child(newbullet)
+	if GameManager.can_shoot:
+		match TriggerMode:
+			GunTrigger.PRESS:
+				if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0:
+					_ShootSound.pitch_scale = randf_range(0.8,1.2)
+					_ShootSound.play()
+					var bulletPart = bulletParticle.instantiate()
+					bulletPart.global_position = _gunpoint.global_position
+					get_tree().current_scene.add_child(bulletPart)
+					var newbullet = bulletScene.instantiate()
+					newbullet.position = _gunpoint.global_position
+					var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
+					newbullet.set_direction(bulletdirection)
+					GameManager.ammo -= 1
+					get_tree().current_scene.add_child(newbullet)
+			GunTrigger.HOLD:
+				if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
+					_ShootSound.pitch_scale = randf_range(0.8,1.2)
+					_ShootSound.play()
+					var bulletPart = bulletParticle.instantiate()
+					bulletPart.global_position = _gunpoint.global_position
+					get_tree().current_scene.add_child(bulletPart)
+					var newbullet = bulletScene.instantiate()
+					newbullet.position = _gunpoint.global_position
+					var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
+					newbullet.set_direction(bulletdirection)
+					GameManager.ammo -= 1
+					get_tree().current_scene.add_child(newbullet)
+			GunTrigger.RELEASE:
+				if Input.is_action_just_released("Mouse_left") and GameManager.ammo > 0:
+					_ShootSound.pitch_scale = randf_range(0.8,1.2)
+					_ShootSound.play()
+					var bulletPart = bulletParticle.instantiate()
+					bulletPart.global_position = _gunpoint.global_position
+					get_tree().current_scene.add_child(bulletPart)
+					var newbullet = bulletScene.instantiate()
+					newbullet.position = _gunpoint.global_position
+					var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
+					newbullet.set_direction(bulletdirection)
+					GameManager.ammo -= 1
+					get_tree().current_scene.add_child(newbullet)
+	else:
+		return
 
 func _flipGun(is_backwards: bool):
 	if is_backwards:

@@ -20,6 +20,7 @@ class_name PlayerSkinManager
 func _ready() -> void:
 	currentAction = "Idle"
 	_loadSkin(thisSkin)
+	GameManager.connect("skin_changed",Callable(self,"on_Skin_Changed"))
 
 
 
@@ -72,8 +73,6 @@ func _loadSkin(skin:String):
 	else:
 		thisSkin = "Jim"
 		_loadSkin("Jim")
-		
-
 
 func Blink ():
 	if isBackwards:
@@ -84,7 +83,6 @@ func Blink ():
 func OpenEyes():
 	eyesClosed= false
 	
-	
 func playFootsteps():
 	footstepsAudioStream.pitch_scale = randf_range(0.8, 1.2)
 	footstepsAudioStream.play()
@@ -93,3 +91,7 @@ func _on_blink_timer_timeout() -> void:
 	eyeAnimPlayer.play("Blink")
 	$BlinkTimer.start()
 	pass # Replace with function body.
+
+
+func on_Skin_Changed(new_skin: String) -> void:
+	_loadSkin(new_skin)

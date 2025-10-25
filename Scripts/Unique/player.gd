@@ -77,18 +77,16 @@ func _physics_process(delta: float) -> void:
 			_gun._flipGun(_flipGun)
 			_gun.z_index = -1 if _isbackwards else 0
 		
-			
-			#calcula o recoil velocity e som do tiro
-		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and GameManager.currentEquipedWeaponType != "none" and _gun != null:
-			
-			var recoil_direction = ( global_position - mouse_pos ).normalized()
-			recoil_velocity = recoil_direction * recoil_strength
-			print("this is being recoiled")
+		if GameManager.can_shoot:
+			if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and GameManager.currentEquipedWeaponType != "none" and _gun != null:
+				var recoil_direction = ( global_position - mouse_pos ).normalized() #player recoiled by shoot
+				recoil_velocity = recoil_direction * recoil_strength
+				print("just shooted")
 
-		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
-			_outofAmmoAudioStream.play()
-		elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
-			_dropGun()
+			elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
+				_outofAmmoAudioStream.play()
+			elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
+				_dropGun()
 		#movement and mouse treatment:
 		if Input.is_action_just_pressed("UnlockMouse"):
 			if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
@@ -128,6 +126,7 @@ func  addToHealth(i:int) -> void:
 	elif (health + i < 0) or (health + i == 0):
 		health = 0
 		_canmove = false
+		GameManager.can_shoot=false
 	else : health += i
 	
 	GameManager.player_health = health
