@@ -15,7 +15,7 @@ var _gun : Node2D
 @onready var _gunPivot : Marker2D = $GunPivot
 @onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $Sounds/NeedsAmmoAudioStream
 @onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
-
+@onready var _effectHandler: EffectHandler = $EffectHandler
 @onready var playerSkin : PlayerSkinManager = $PlayerSkinNode
 
 #bools go here i guess:
@@ -25,13 +25,19 @@ var _gun : Node2D
 
 @export var recoil_strength: float = 100.0  # tweak this value for push force
 @export var recoil_decay: float = 80.0       # how fast recoil decay
-@export var speed: float = 200.0
+
+var OriginalSpeed: float = 200.0
+var CurrentSpeed: float = 200.0
+var MaxSpeed :float = 400.0 
+
 @export_range(0, 100, 1) var health: int = 100
 
 var pushingforce: Vector2 = Vector2.ZERO
 var pullforce: Vector2 = Vector2.ZERO
 var recoil_velocity: Vector2 = Vector2.ZERO
-var max_speed :float = 400.0 
+
+
+
 @export var max_camzoom :float = 0.4
 @export var min_camzoom :float = 1.0
 @export var zoom_speed : float = 0.1 
@@ -46,59 +52,49 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	adjustCameraZoom(delta)
+	
+	GameManager.player_x= global_position.x
+	GameManager.player_y= - global_position.y
+	
+	_lifebar.value = health
+	
 	if _canmove:
-		if !_iswalking and !_isbackwards:
-			playerSkin._setAction("Idle")
-			playerSkin._setBackwards(false)
-		elif !_iswalking and _isbackwards:
-			playerSkin._setAction("Idle")
-			playerSkin._setBackwards(true)
-		elif _iswalking and !_isbackwards:
-			playerSkin._setAction("Walking")
-			playerSkin._setBackwards(false)
-		elif _iswalking and _isbackwards:
-			playerSkin._setAction("Walking")
-			playerSkin._setBackwards(true)
-			
-		
-		GameManager.player_x= global_position.x
-		GameManager.player_y= - global_position.y
-		
-		_lifebar.value = health
-		var input_vector = Vector2.ZERO
-			# Pega a posição do mouse na world
-		var mouse_pos = get_global_mouse_position()
-			
-		var mouse_dir = (get_global_mouse_position() - global_position).normalized()
-		_isbackwards = mouse_dir.y < 0
-		
-		var _flipGun = mouse_dir.x <0
-		if _gun:
-			_gun._flipGun(_flipGun)
-			_gun.z_index = -1 if _isbackwards else 0
-		
-		if GameManager.can_shoot:
-			if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and GameManager.currentEquipedWeaponType != "none" and _gun != null:
-				var recoil_direction = ( global_position - mouse_pos ).normalized() #player recoiled by shoot
-				recoil_velocity = recoil_direction * recoil_strength
-				print("just shooted")
+		direction_and_action_handler()
+		update_player_motion(delta)
+		mouse_actions_handler()
 
-			elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
-				_outofAmmoAudioStream.play()
-			elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
-				_dropGun()
-		#movement and mouse treatment:
-		if Input.is_action_just_pressed("UnlockMouse"):
-			if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			else:
-				Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+
+#PlayerBehavior Methods
+
+func direction_and_action_handler(): #handles direction and current actions
+	if !_iswalking and !_isbackwards:
+		playerSkin._setAction("Idle")
+		playerSkin._setBackwards(false)
+	elif !_iswalking and _isbackwards:
+		playerSkin._setAction("Idle")
+		playerSkin._setBackwards(true)
+	elif _iswalking and !_isbackwards:
+		playerSkin._setAction("Walking")
+		playerSkin._setBackwards(false)
+	elif _iswalking and _isbackwards:
+		playerSkin._setAction("Walking")
+		playerSkin._setBackwards(true)
 		
+
+		
+	var mouse_dir = (get_global_mouse_position() - global_position).normalized()
+	_isbackwards = mouse_dir.y < 0
+	
+	var _flipGun = mouse_dir.x <0
+	if _gun:
+		_gun._flipGun(_flipGun)
+		_gun.z_index = -1 if _isbackwards else 0
+
+func update_player_motion(delta:float): #handles player current velocity and movement
+		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("Walk_right") - Input.get_action_strength("Walk_left")
 		input_vector.y = Input.get_action_strength("Walk_down") - Input.get_action_strength("Walk_up")
 		
-		if Input.is_action_pressed("Mouse_right"):
-			input_vector = ( get_global_mouse_position() - global_position).normalized()
 		# Normalize so diagonal movement isn’t faster
 		if input_vector != Vector2.ZERO:
 			_iswalking = true
@@ -107,20 +103,47 @@ func _physics_process(delta: float) -> void:
 			_iswalking = false
 
 		if isbeingpulled:
-			velocity = (input_vector * speed + recoil_velocity + pushingforce + pullforce)
+			velocity = ((input_vector * CurrentSpeed) + recoil_velocity + pushingforce + pullforce)
 		else:
-			velocity = (input_vector * speed + recoil_velocity + pushingforce)
+			velocity = ((input_vector * CurrentSpeed) + recoil_velocity + pushingforce)
 		
-		if velocity.length() > max_speed:
-			velocity = velocity.normalized() * max_speed
+		if velocity.length() > MaxSpeed:
+			velocity = velocity.normalized() * MaxSpeed
 		
 		recoil_velocity = recoil_velocity.move_toward(Vector2.ZERO, recoil_decay*delta)
 		pushingforce = pushingforce.move_toward(Vector2.ZERO, pushingforce.length() * 3 *delta)
 		
-		
 		move_and_slide()
 
-func  addToHealth(i:int) -> void:
+func mouse_actions_handler():
+	if GameManager.can_shoot:
+		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and GameManager.currentEquipedWeaponType != "none" and _gun != null:
+			var mouse_pos = get_global_mouse_position()
+			var recoil_direction = ( global_position - mouse_pos ).normalized() #player recoiled by shoot
+			recoil_velocity = recoil_direction * recoil_strength
+			print("just shooted")
+
+		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
+			_outofAmmoAudioStream.play()
+		elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
+			_dropGun()
+	#movement and mouse treatment:
+	if Input.is_action_just_pressed("UnlockMouse"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+
+
+#AddTo Methods
+func addEffectToSelf(effect : Effect):
+	_effectHandler.addEffect(effect)
+
+func addToSpeed(Added :float):
+	var percentage = 1 + Added
+	CurrentSpeed *= percentage 
+
+func addToHealth(i:int) -> void:
 	if health + i >= 100:
 		health =100
 	elif (health + i < 0) or (health + i == 0):
@@ -130,7 +153,7 @@ func  addToHealth(i:int) -> void:
 	else : health += i
 	
 	GameManager.player_health = health
-	
+
 func addToPullVelocity(pullingVector : Vector2): #metodo de puxar o jogador
 	pullforce += pullingVector
 	isbeingpulled = true # precisa ser desativado ao sair da area do objeto puxador, use resetPulling()
@@ -138,16 +161,16 @@ func addToPullVelocity(pullingVector : Vector2): #metodo de puxar o jogador
 func addtoPushVelocity(pushingVector : Vector2): #metodo de empurrar o jogador
 	pushingforce += pushingVector
 
+#Reset Methods
 func resetPulling():
 	pullforce = Vector2.ZERO
 	isbeingpulled = false
 
-func _on_regen_timer_timeout() -> void:
-	if health < 100 :
-		health += 1
-	else:
-		health=100
+func resetSpeed():
+	if CurrentSpeed != OriginalSpeed:
+		CurrentSpeed = OriginalSpeed
 
+#CameraMethods
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_UP and event.pressed:
@@ -160,6 +183,7 @@ func adjustCameraZoom(delta):
 	cur_camzoom = lerp(cur_camzoom, target_zoom, 10 * delta)  # 10 é a velocidade do lerp, ajuste como quiser
 	camera.zoom = Vector2.ONE * cur_camzoom
 
+#updateGunMethods
 func _equipGun():
 	_playReloadSound()
 	
@@ -176,7 +200,7 @@ func _equipGun():
 	_gun = currentGun["weapon_scene"].instantiate()
 	_gun.position = _gunPivot.position
 	add_child(_gun)
-	
+
 func _dropGun():
 	var droppedgunKey: String = GameManager.currentEquipedWeaponType
 	GameManager.currentEquipedWeaponType = "none"
@@ -186,7 +210,15 @@ func _dropGun():
 	newdroppedgun._setWeaponKey(droppedgunKey)
 	newdroppedgun._reloadTexture()
 	get_tree().current_scene.add_child(newdroppedgun)
-	
+
+#SoundMethods
 func _playReloadSound():
 	_reloadGunAudioStream.pitch_scale = randf_range(0.5, 0.8)
 	_reloadGunAudioStream.play()
+
+#TimerMethods
+func _on_regen_timer_timeout() -> void:
+	if health < 100 :
+		health += 1
+	else:
+		health=100

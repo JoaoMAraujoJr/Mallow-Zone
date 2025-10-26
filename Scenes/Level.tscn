@@ -68,7 +68,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.65012825, 0.6501283, 0.65012825, 1)
+color = Color(0.8247342, 0.9340918, 0.9340918, 1)
 
 [node name="RifleDropped" parent="." instance=ExtResource("6_tj5wv")]
 position = Vector2(-114, -46)
