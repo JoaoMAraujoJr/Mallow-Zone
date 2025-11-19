@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://cbry4l6aqwq6a"]
+
+[ext_resource type="Script" uid="uid://tw70m4qup3jg" path="res://Scenes/items/guns/holdable/chainsaw.gd" id="1_37sxq"]
+[ext_resource type="Texture2D" uid="uid://c3v6b738c3b26" path="res://Assets/Textures/items/guns/chainsaw_spr_sheet.png" id="2_i1o4l"]
+[ext_resource type="Texture2D" uid="uid://b8qei0yud7p7u" path="res://Assets/Textures/player_skins/red_jim/hand_spr.png" id="3_4m85u"]
+[ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="4_i1o4l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2g7wb"]
+atlas = ExtResource("2_i1o4l")
+region = Rect2(0, 0, 72, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71aa1"]
+atlas = ExtResource("2_i1o4l")
+region = Rect2(0, 0, 72, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajhu2"]
+atlas = ExtResource("2_i1o4l")
+region = Rect2(72, 0, 72, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8qaq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2g7wb")
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.71,
+"texture": SubResource("AtlasTexture_71aa1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajhu2")
+}],
+"loop": true,
+"name": &"on",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37sxq"]
+radius = 11.214327
+height = 44.830173
+
+[node name="Gun" type="Node2D"]
+scale = Vector2(1.3991469, 1.3991469)
+script = ExtResource("1_37sxq")
+_Type = "chainsaw"
+TriggerMode = 1
+
+[node name="gun" type="AnimatedSprite2D" parent="."]
+position = Vector2(-15, 3)
+rotation = -0.1849919
+scale = Vector2(0.96948373, 0.8079031)
+sprite_frames = SubResource("SpriteFrames_8qaq3")
+animation = &"off"
+frame_progress = 1.0
+offset = Vector2(31.666668, -2.3999999)
+
+[node name="damageArea" type="Area2D" parent="gun" groups=["Bullet"]]
+position = Vector2(15.777348, -0.2348485)
+rotation = -1.5110097
+scale = Vector2(1.0391262, 1.2313575)
+skew = -0.06619656
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gun/damageArea"]
+position = Vector2(-1.7833825, 22.415081)
+shape = SubResource("CapsuleShape2D_37sxq")
+
+[node name="LeftHand" type="Node2D" parent="gun"]
+y_sort_enabled = true
+position = Vector2(20.27157, -15.595988)
+rotation = 4.3807764
+scale = Vector2(0.99, 0.985)
+
+[node name="hand_L" type="Sprite2D" parent="gun/LeftHand"]
+position = Vector2(-4.200001, 5.9604645e-08)
+scale = Vector2(-0.46549737, 0.46549737)
+texture = ExtResource("3_4m85u")
+
+[node name="RightHand" type="Node2D" parent="gun"]
+position = Vector2(0.12449196, -7.527593)
+rotation = 0.7298123
+scale = Vector2(1.29, 1.255)
+
+[node name="hand_R" type="Sprite2D" parent="gun/RightHand"]
+position = Vector2(2.2418718, 0)
+rotation = 0.27684313
+scale = Vector2(0.3315387, 0.3315387)
+texture = ExtResource("3_4m85u")
+
+[node name="AmmoWasteCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i1o4l")
+pitch_scale = 0.34
+bus = &"SFXReverb"
+
+[connection signal="area_entered" from="gun/damageArea" to="." method="_on_damage_area_area_entered"]
+[connection signal="timeout" from="AmmoWasteCooldown" to="." method="_on_ammo_waste_cooldown_timeout"]

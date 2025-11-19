@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://siudy2wrjg83"]
 
-[ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/Carboss.gd" id="1_78rw5"]
+[ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/carBoss/Carboss.gd" id="1_78rw5"]
 [ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/objects/car/car.png" id="1_htj82"]
 [ext_resource type="PackedScene" uid="uid://dmpjceleu1vfr" path="res://Scenes/particles/explosion_particle.tscn" id="2_6n6a6"]
 [ext_resource type="Shader" uid="uid://sb648qjmfvdb" path="res://Scripts/shaders/Damaged.gdshader" id="2_hm7pw"]

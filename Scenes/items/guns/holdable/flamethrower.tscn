@@ -78,10 +78,6 @@ y_sort_enabled = true
 position = Vector2(56, -4)
 emitting = false
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
 [node name="IgniteAudioStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_schkd")
 pitch_scale = 0.5
@@ -97,5 +93,9 @@ attenuation = 3.605001
 max_polyphony = 4
 bus = &"SFXReverb"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="finished" from="FlameAudioStream" to="." method="_on_flame_audio_stream_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

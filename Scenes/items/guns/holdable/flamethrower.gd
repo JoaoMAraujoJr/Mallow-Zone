@@ -91,4 +91,4 @@ func loadPlayerSkin():
 	var thisSkin = GameManager.currentPlayerSkin
 	if thisSkin in SkinData.PlayerSkins:
 		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
-		hand_R.texture = SkinData.PlayerSkinsthisSkin[thisSkin]["hand"]
+		hand_R.texture = SkinData.PlayerSkins[thisSkin]["hand"]

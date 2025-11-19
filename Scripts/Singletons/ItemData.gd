@@ -6,9 +6,9 @@ var weapons := {
 		"weapon_scene": load("res://Scenes/items/guns/holdable/rifle.tscn"),
 		"bullet_scene": load("res://Scenes/items/guns/bullets/rifleBullet.tscn"),
 		"texture": load("res://Assets/Textures/items/guns/rifle.png"),
-		"max_ammo": 12,
-		"waste": 1,
-		"ammo_value": 5
+		"max_ammo": 12, # valor maximo de munição
+		"waste": 1, # o quanto que gasta de munição
+		"ammo_value": 5 #o quanto é recuperado de munição ao pegar ammo
 	} ,
 	"flamethrower": {
 		"weapon_scene": load("res://Scenes/items/guns/holdable/flamethrower.tscn"),
@@ -17,6 +17,13 @@ var weapons := {
 		"max_ammo": 20,
 		"waste": 1,
 		"ammo_value": 10
+	},
+	"chainsaw": {
+		"weapon_scene": load("res://Scenes/items/guns/holdable/chainsaw.tscn"),
+		"texture": load("res://Assets/Textures/items/guns/chainsaw_spr.png"),
+		"max_ammo": 10,
+		"waste": 1,
+		"ammo_value": 5
 	}
 }
 

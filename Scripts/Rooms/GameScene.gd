@@ -26,7 +26,6 @@ extends Node2D
 @onready var CheckerDown: Area2D = $Checkers/StageCheckerDown
 
 # ===== BIOME =====
-@onready var biome: String = "chess"
 @onready var ThisBiome : Biome
 
 # ===== BIOMES =====
@@ -55,40 +54,29 @@ func _ready() -> void:
 	TriggerUp.connect("area_entered", Callable(self, "_on_trigger_up_entered"))
 	TriggerDown.connect("area_entered", Callable(self, "_on_trigger_down_entered"))
 	
-	if GameManager.currentbiome==null:
-		biome="chess"
+	if BiomeManager.currentBiome==null:
+		BiomeManager.currentBiome="Chess"
 	else:
-		biome = GameManager.currentbiome
+		var plataform :Biome = BiomeManager.BiomeList[BiomeManager.currentBiome]["BiomeScene"].instantiate().init(isthisroot)
+		_setbiome(plataform)
 		
-	match biome:
-		"chess":
-			var plataform :Biome= ChessBiome.instantiate().init(isthisroot)
-			_setbiome(plataform)
-		"grasslands":
-			var plataform:Biome = GrassBiome.instantiate().init(isthisroot)
-			_setbiome(plataform)
-		"asphalt":
-			var plataform = AsphaltBiome.instantiate().init(isthisroot)
-			_setbiome(plataform)
-		
-# ===== TRIGGERS =====
 func _on_trigger_left_entered(body):
-	if !isLeftTriggered and body.is_in_group("PlayerArea"):
+	if !isLeftTriggered and body.is_in_group("ChunkLoader"):
 		isLeftTriggered = true
 		TriggerLeft.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageLeftPosition.position, TriggerLeft)
 func _on_trigger_right_entered(body):
-	if !isRightTriggered and body.is_in_group("PlayerArea"):
+	if !isRightTriggered and body.is_in_group("ChunkLoader"):
 		isRightTriggered = true
 		TriggerRight.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageRightPosition.position, TriggerRight)
 func _on_trigger_up_entered(body):
-	if !isUpTriggered and body.is_in_group("PlayerArea"):
+	if !isUpTriggered and body.is_in_group("ChunkLoader"):
 		isUpTriggered = true
 		TriggerUp.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageUpPosition.position, TriggerUp)
 func _on_trigger_down_entered(body):
-	if !isDownTriggered and body.is_in_group("PlayerArea"):
+	if !isDownTriggered and body.is_in_group("ChunkLoader"):
 		isDownTriggered = true
 		TriggerDown.set_deferred("monitoring",false)
 		call_deferred("_spawn_stage_at_deferred", StageDownPosition.position, TriggerDown)

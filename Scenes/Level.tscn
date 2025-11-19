@@ -70,6 +70,10 @@ autostart = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.8247342, 0.9340918, 0.9340918, 1)
 
+[node name="chainsawdropped" parent="." instance=ExtResource("6_tj5wv")]
+position = Vector2(-5, -97)
+weaponKey = "chainsaw"
+
 [node name="RifleDropped" parent="." instance=ExtResource("6_tj5wv")]
 position = Vector2(-114, -46)
 

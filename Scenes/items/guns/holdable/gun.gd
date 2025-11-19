@@ -21,7 +21,7 @@ enum GunTrigger{
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	loadPlayerSkin()
 	if _Type != null :
 		if _Type in ItemData.weapons:
 			var this_weapon = ItemData.weapons[_Type]
@@ -31,7 +31,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var gunDir = (get_global_mouse_position() - global_position).normalized()
 	rotation = gunDir.angle()
 	shootLogic()
@@ -99,4 +99,4 @@ func loadPlayerSkin():
 	var thisSkin = GameManager.currentPlayerSkin
 	if thisSkin in SkinData.PlayerSkins:
 		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
-		hand_R.texture = SkinData.PlayerSkinsthisSkin[thisSkin]["hand"]
+		hand_R.texture = SkinData.PlayerSkins[thisSkin]["hand"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cb5khyq6wnglo"]
+[gd_scene load_steps=12 format=3 uid="uid://cb5khyq6wnglo"]
 
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/Unique/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="2_d05bs"]
@@ -10,7 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 250.49918
+radius = 356.3235
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d05bs"]
+size = Vector2(1536.8463, 1531.8463)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 20.0
@@ -38,10 +41,17 @@ position = Vector2(0, 7)
 scale = Vector2(0.14770508, 0.14770508)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
-visible = false
 position = Vector2(0, 6.770248)
 shape = SubResource("CircleShape2D_cvnsp")
 debug_color = Color(0.7466245, 0.45141858, 0.28133497, 0.41960785)
+
+[node name="ChunkLoader" type="Area2D" parent="." groups=["ChunkLoader"]]
+scale = Vector2(0.14770508, 0.14770508)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChunkLoader"]
+position = Vector2(6.770248, 0)
+shape = SubResource("RectangleShape2D_d05bs")
+debug_color = Color(0, 0.5951596, 0.7232592, 0.41960785)
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
 visible = false

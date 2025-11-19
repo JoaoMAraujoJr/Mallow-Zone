@@ -9,7 +9,6 @@ extends CharacterBody2D
 @onready var camera : Camera2D = $Camera2D
 
 @onready var _PlayerArea : Area2D = $PlayerArea2D
-@onready var _PlayerCollision : CollisionShape2D = $PlayerCollisionShape
 @onready var _lifebar : TextureProgressBar= $LifeBar
 var _gun : Node2D 
 @onready var _gunPivot : Marker2D = $GunPivot
@@ -94,6 +93,9 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("Walk_right") - Input.get_action_strength("Walk_left")
 		input_vector.y = Input.get_action_strength("Walk_down") - Input.get_action_strength("Walk_up")
+		
+		if input_vector == Vector2.ZERO and Input.is_action_pressed("Mouse_right"):
+			input_vector = get_global_mouse_position() - global_position
 		
 		# Normalize so diagonal movement isn’t faster
 		if input_vector != Vector2.ZERO:
@@ -222,3 +224,13 @@ func _on_regen_timer_timeout() -> void:
 		health += 1
 	else:
 		health=100
+
+#GetMethods
+func getRandomPlayerAreaCoordinates() -> Vector2:
+	var shape : CircleShape2D = $PlayerArea2D/CollisionShape2D.shape
+	var randomRadius = shape.radius * sqrt(randf())
+	var randomAngle = randf() * TAU
+	var coordinates = Vector2(randomRadius * cos(randomAngle) , randomRadius * sin(randomAngle))
+	var global_coordinates = _PlayerArea.to_global(coordinates)
+	return global_coordinates
+	
