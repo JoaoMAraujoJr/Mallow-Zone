@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvvycfod60vhs"
-path="res://.godot/imported/car_both_opened.png-9a1680f138a2abd02e2ffbd2d7f716f3.ctex"
+uid="uid://dg6ckt8uxs3pv"
+path="res://.godot/imported/carbrains.png-ebc6145aa385afdee5313144eadfb2e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/objects/car/car_both_opened.png"
-dest_files=["res://.godot/imported/car_both_opened.png-9a1680f138a2abd02e2ffbd2d7f716f3.ctex"]
+source_file="res://Assets/Textures/entities/Enemies/car/carbrains.png"
+dest_files=["res://.godot/imported/carbrains.png-ebc6145aa385afdee5313144eadfb2e3.ctex"]
 
 [params]
 

@@ -1,17 +1,20 @@
-[gd_scene load_steps=25 format=3 uid="uid://siudy2wrjg83"]
+[gd_scene load_steps=29 format=3 uid="uid://siudy2wrjg83"]
 
 [ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/carBoss/Carboss.gd" id="1_78rw5"]
-[ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/objects/car/car.png" id="1_htj82"]
 [ext_resource type="PackedScene" uid="uid://dmpjceleu1vfr" path="res://Scenes/particles/explosion_particle.tscn" id="2_6n6a6"]
 [ext_resource type="Shader" uid="uid://sb648qjmfvdb" path="res://Scripts/shaders/Damaged.gdshader" id="2_hm7pw"]
 [ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emitter.tscn" id="3_2ougs"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="3_d4hdx"]
+[ext_resource type="Texture2D" uid="uid://dfqf0ixj06oph" path="res://Assets/Textures/entities/Enemies/car/car_back_opened.png" id="4_4b447"]
 [ext_resource type="Texture2D" uid="uid://bg5d7fcnukepe" path="res://Assets/Textures/light_textures/directLightpoint_blurred.png" id="4_dyahk"]
 [ext_resource type="PackedScene" uid="uid://cacpu75j0o7gv" path="res://Scenes/particles/car_smoke_particle_emitter.tscn" id="4_ikkge"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="4_psh8h"]
-[ext_resource type="Texture2D" uid="uid://br24f7x3ljov3" path="res://Assets/objects/car/brainmask.png" id="7_83ax7"]
-[ext_resource type="Texture2D" uid="uid://dg6ckt8uxs3pv" path="res://Assets/objects/car/carbrains.png" id="8_hm7pw"]
+[ext_resource type="Texture2D" uid="uid://cwkg7457emxw4" path="res://Assets/Textures/entities/Enemies/car/car_front_opened.png" id="5_ak7pg"]
+[ext_resource type="Texture2D" uid="uid://bvvycfod60vhs" path="res://Assets/Textures/entities/Enemies/car/car_both_opened.png" id="6_xjw6g"]
+[ext_resource type="Texture2D" uid="uid://cbxxx7bcaqa8" path="res://Assets/Textures/entities/Enemies/car/car.png" id="7_cvsh7"]
+[ext_resource type="Texture2D" uid="uid://br24f7x3ljov3" path="res://Assets/Textures/entities/Enemies/car/brainmask.png" id="8_xss3y"]
 [ext_resource type="AudioStream" uid="uid://b77m4g4xkjbg1" path="res://Assets/Sounds/car motor.wav" id="10_4ksav"]
+[ext_resource type="Texture2D" uid="uid://dg6ckt8uxs3pv" path="res://Assets/Textures/entities/Enemies/car/carbrains.png" id="10_th27k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hm7pw"]
 size = Vector2(231.42859, 220.00002)
@@ -23,142 +26,44 @@ radius = 1107.5531
 radius = 111.42857
 height = 480.5716
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ksav"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4b447"]
 shader = ExtResource("2_hm7pw")
 shader_parameter/flash_white = false
 
-[sub_resource type="Animation" id="Animation_2ougs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carSprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.35, 0.34999993)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Lights/PointLight2D:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Lights/PointLight2D2:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Lights:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.35, 0.34999993)]
-}
-
-[sub_resource type="Animation" id="Animation_78rw5"]
-resource_name = "driving"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("carSprite:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.79, 1.53, 1.74, 2.26, 2.39, 2.57, 3.1, 3.71, 4.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.35, 0.34999993), Vector2(0.36500055, 0.3650005), Vector2(0.3398737, 0.33987364), Vector2(0.33352724, 0.33352718), Vector2(0.36846983, 0.36846977), Vector2(0.36368874, 0.36368868), Vector2(0.3836334, 0.38363335), Vector2(0.35017, 0.35016993), Vector2(0.35, 0.34999993), Vector2(0.36500055, 0.3650005)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Lights/PointLight2D:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2.2, 2.3799999, 2.47, 2.6, 2.8333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9999997, 0.10126803, 0.08898608, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Lights/PointLight2D2:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(2.18, 2.36, 2.5666666, 2.6799998, 3.04),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.71225244, 0.049173497, 0, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Lights:scale")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1.5383817, 2.0403118, 2.454404, 2.9500601, 3.433168, 3.9476464),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4)]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(2.1, 2.4333334, 2.7666667, 3.7666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"values": [{
-"args": [],
-"method": &"_boost"
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydtf1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4b447")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 5.0
 }, {
-"args": [],
-"method": &"_boost"
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ak7pg")
+}],
+"loop": true,
+"name": &"exposed",
+"speed": 5.0
 }, {
-"args": [],
-"method": &"_boost"
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xjw6g")
+}],
+"loop": true,
+"name": &"exposed_and_attacking",
+"speed": 5.0
 }, {
-"args": [],
-"method": &"_boost"
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_cvsh7")
+}],
+"loop": true,
+"name": &"protected",
+"speed": 5.0
 }]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dyahk"]
-_data = {
-&"RESET": SubResource("Animation_2ougs"),
-&"driving": SubResource("Animation_78rw5")
-}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hm7pw"]
 shader = ExtResource("2_hm7pw")
@@ -189,6 +94,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.45992854, 0.81364703)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageDetector:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageDetector:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_d4hdx"]
@@ -247,12 +176,145 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.34531972, 0.6108957), Vector2(0.345, 0.706), Vector2(0.34531972, 0.6108957), Vector2(0.37, 0.646), Vector2(0.345, 0.701), Vector2(0.37, 0.646), Vector2(0.34531972, 0.6108957)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageDetector:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.67, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageDetector:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.67, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m2gaa"]
 _data = {
 &"RESET": SubResource("Animation_6n6a6"),
 &"brainMode": SubResource("Animation_d4hdx"),
 &"brainSpawning": SubResource("Animation_4ksav")
+}
+
+[sub_resource type="Animation" id="Animation_2ougs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights/PointLight2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lights/PointLight2D2:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lights:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993)]
+}
+
+[sub_resource type="Animation" id="Animation_78rw5"]
+resource_name = "driving"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights/PointLight2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.2, 2.3799999, 2.47, 2.6, 2.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9999997, 0.10126803, 0.08898608, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lights/PointLight2D2:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.18, 2.36, 2.5666666, 2.6799998, 3.04),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.71225244, 0.049173497, 0, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lights:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5383817, 2.0403118, 2.454404, 2.9500601, 3.433168, 3.9476464),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.1, 2.4333334, 2.7666667, 3.7666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_boost"
+}, {
+"args": [],
+"method": &"_boost"
+}, {
+"args": [],
+"method": &"_boost"
+}, {
+"args": [],
+"method": &"_boost"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dyahk"]
+_data = {
+&"RESET": SubResource("Animation_2ougs"),
+&"driving": SubResource("Animation_78rw5")
 }
 
 [node name="CarBoss" type="CharacterBody2D" groups=["Car"]]
@@ -304,12 +366,31 @@ position = Vector2(-1, -37)
 scale = Vector2(0.35, 0.34999993)
 shape = SubResource("CapsuleShape2D_2ougs")
 
-[node name="carSprite" type="Sprite2D" parent="."]
-process_priority = 1
-material = SubResource("ShaderMaterial_4ksav")
-position = Vector2(0, -39.100014)
-scale = Vector2(0.35, 0.34999993)
-texture = ExtResource("1_htj82")
+[node name="CarAnimatedSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_4b447")
+position = Vector2(0, -39)
+scale = Vector2(0.34554717, 0.34554717)
+sprite_frames = SubResource("SpriteFrames_ydtf1")
+animation = &"attacking"
+frame_progress = 0.6666035
+
+[node name="BrainMask" type="Sprite2D" parent="."]
+clip_children = 1
+z_index = 1
+position = Vector2(0.4999962, 7.000002)
+scale = Vector2(1.0119048, 0.5)
+texture = ExtResource("8_xss3y")
+
+[node name="Sprite2D" type="Sprite2D" parent="BrainMask"]
+material = SubResource("ShaderMaterial_hm7pw")
+position = Vector2(4.7683716e-07, 121.1402)
+scale = Vector2(0.45992854, 0.81364703)
+texture = ExtResource("10_th27k")
+
+[node name="BrainAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m2gaa")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -360,13 +441,13 @@ wait_time = 2.0
 wait_time = 5.0
 
 [node name="TimerTillCloseFront" type="Timer" parent="Timers"]
-wait_time = 10.0
+wait_time = 5.0
 
 [node name="TimerTillOpenBack" type="Timer" parent="Timers"]
-wait_time = 14.0
+wait_time = 5.0
 
 [node name="TimerTillCloseBack" type="Timer" parent="Timers"]
-wait_time = 4.0
+wait_time = 5.0
 
 [node name="TimerToColorModulate" type="Timer" parent="Timers"]
 wait_time = 0.5
@@ -405,24 +486,6 @@ position = Vector2(80, 625.7144)
 color = Color(0.9843137, 0.9764706, 0.44705883, 0.10980392)
 texture = ExtResource("4_dyahk")
 
-[node name="BrainMask" type="Sprite2D" parent="."]
-clip_children = 1
-z_index = 1
-position = Vector2(0.4999962, 7.000002)
-scale = Vector2(1.0119048, 0.5)
-texture = ExtResource("7_83ax7")
-
-[node name="Sprite2D" type="Sprite2D" parent="BrainMask"]
-material = SubResource("ShaderMaterial_hm7pw")
-position = Vector2(4.7683716e-07, 121.1402)
-scale = Vector2(0.45992854, 0.81364703)
-texture = ExtResource("8_hm7pw")
-
-[node name="BrainAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_m2gaa")
-}
-
 [node name="MotorSoundStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_4ksav")
 pitch_scale = 0.83
@@ -431,8 +494,8 @@ max_distance = 846.0
 attenuation = 1.2745608
 bus = &"SFXReverb"
 
-[connection signal="body_entered" from="backwardsDetector" to="." method="_on_backwards_detector_body_entered"]
-[connection signal="body_exited" from="backwardsDetector" to="." method="_on_backwards_detector_body_exited"]
+[connection signal="body_entered" from="backwardsDetector" to="." method="backwardsAreaDetector_body_entered"]
+[connection signal="body_exited" from="backwardsDetector" to="." method="backwardsAreaDetector_body_exited"]
 [connection signal="area_entered" from="DamageDetector" to="." method="_on_damage_detector_area_entered"]
 [connection signal="body_entered" from="DamageDetector" to="." method="_on_damage_detector_body_entered"]
 [connection signal="timeout" from="Timers/CooldownTopickRotation" to="." method="_on_cooldown_topick_rotation_timeout"]

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal change_on_boss_status(BossName:String  ,currentHP:int ,IsOnBoss:bool, IsBossDefeated: bool)
 
-@onready var _carSprite :Sprite2D= $carSprite
+@onready var _carAnimatedSprite:AnimatedSprite2D = $CarAnimatedSprite
 @onready var _motorAudio:AudioStreamPlayer2D = $MotorSoundStream
 @onready var _brainSprite : Sprite2D = $BrainMask/Sprite2D
 @onready var maxHp : int = BossManager.BossList["Ominous Car"]["maxHP"]
@@ -12,15 +12,8 @@ signal change_on_boss_status(BossName:String  ,currentHP:int ,IsOnBoss:bool, IsB
 
 @export var ExplosioParticle : PackedScene
 
-const CarSpriteTextures = {
-	"BOTH_CLOSED": preload("res://Assets/objects/car/car.png"),
-	"FRONT_OPENED": preload("res://Assets/objects/car/car_front_opened.png"),
-	"BACK_OPENED": preload("res://Assets/objects/car/car_back_opened.png"),
-	"BOTH_OPENED": preload("res://Assets/objects/car/car_both_opened.png"),
-}
-
-var _isFrontOpened: bool = false
-var _isBackOpened: bool = false
+var frontOpen: bool = false
+var backOpen: bool = false
 
 @onready var _playerdetectArea := $PlayerDetectorArea
 @onready var _hitdetectArea := $PlayerHitArea
@@ -38,7 +31,6 @@ var _isBackOpened: bool = false
 var Playerdir : Vector2 = Vector2.ZERO
 @export var OriginalSpeed : float = 210.0
 @export var CurrentSpeed : float = OriginalSpeed
-@onready var PushStrenght : float= CurrentSpeed*4
 @export var Drifting : float = 0.9
 @onready var _cooldownmodifier := 1.0
 
@@ -52,9 +44,9 @@ var _playerInBackward := false
 
 
 func _ready() -> void:
-	_carSprite.material.set_shader_parameter("flash_white", false)
+	_carAnimatedSprite.material.set_shader_parameter("flash_white", false)
 	_brainSprite.material.set_shader_parameter("flash_white", false)
-	_carSprite.z_index = 0
+	_carAnimatedSprite.z_index = 0
 	$Timers/TimerTillOpenFront.start()
 	$Timers/TimerTillOpenBack.start()
 	BiomeManager.currentBiome = BossManager.BossList["Ominous Car"]["BossBiome"]
@@ -65,7 +57,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_updateDirection()  # nova função
-	_updateStrenght()
 	_GoinDirection(delta)
 	
 	if _canhit:
@@ -149,7 +140,7 @@ func _getHitsApplied() -> void:
 	for body in bodies:
 		if body != self:
 			if body.has_method("addtoPushVelocity"):
-				var push_vector: Vector2 = (body.global_position - global_position).normalized() * PushStrenght
+				var push_vector: Vector2 = (body.global_position - global_position).normalized() * CurrentSpeed*3
 				body.addtoPushVelocity(push_vector)
 				_canhit = false
 				if body.has_method("addToHealth"):
@@ -158,11 +149,9 @@ func _getHitsApplied() -> void:
 			elif body.has_method("setHealth"):
 				body.setHealth( -int(CurrentSpeed/10 * 2))
 
-func _updateStrenght():
-	PushStrenght= CurrentSpeed*3
 
 func _updateBossHealth(addto: int):
-	_carSprite.material.set_shader_parameter("flash_white", true)
+	_carAnimatedSprite.material.set_shader_parameter("flash_white", true)
 	_brainSprite.material.set_shader_parameter("flash_white", true)
 	$Timers/TimerToColorModulate.start()
 	if (currentHp + addto) <= 0:
@@ -188,46 +177,49 @@ func resetSpeed():
 
 
 #===ACTIONS===
-func openCloseFront():
-	if !_isFrontOpened:
-		_isFrontOpened = true
-		if _isBackOpened:
-			_carSprite.texture=CarSpriteTextures.BOTH_OPENED
-		else:
-			_carSprite.texture=CarSpriteTextures.FRONT_OPENED
-		$DamageDetector.monitoring = true
-		$DamageDetector.monitorable = true
-		_animplayer_brain.play("brainSpawning")
-		await _animplayer_brain.animation_finished
-		_animplayer_brain.play("brainMode")
 
-	elif _isFrontOpened:
-		_animplayer_brain.play_backwards("brainSpawning")
-		await _animplayer_brain.animation_finished
-		$DamageDetector.monitoring = false
-		$DamageDetector.monitorable = false
-		if _isBackOpened:
-			_carSprite.texture=CarSpriteTextures.BACK_OPENED
-		else:
-			_carSprite.texture=CarSpriteTextures.BOTH_CLOSED
-		_isFrontOpened = false
+func openEcloseDoors(door:String ):
+	match door:
+		"front":
+			if !frontOpen:
+				frontOpen = true
+				if backOpen:
+					_carAnimatedSprite.play("exposed_and_attacking")
+				else:
+					_carAnimatedSprite.play("exposed")
+				$DamageDetector.monitoring = true
+				$DamageDetector.monitorable = true
+				_animplayer_brain.play("brainSpawning")
+				await _animplayer_brain.animation_finished
+				_animplayer_brain.play("brainMode")
 
-func openCloseBack():
-	if !_isBackOpened:
-		_isBackOpened = true
-		if _isFrontOpened:
-			_carSprite.texture=CarSpriteTextures.BOTH_OPENED
-		else:
-			_carSprite.texture=CarSpriteTextures.BACK_OPENED
+			elif frontOpen:
+				_animplayer_brain.play_backwards("brainSpawning")
+				await _animplayer_brain.animation_finished
+				$DamageDetector.monitoring = false
+				$DamageDetector.monitorable = false
+				if backOpen:
+					_carAnimatedSprite.play("attacking")
+				else:
+					_carAnimatedSprite.play("protected")
+				frontOpen = false
+			
+		"back":
+			if !backOpen:
+				backOpen = true
+				if frontOpen:
+					_carAnimatedSprite.play("exposed_and_attacking")
+				else:
+					_carAnimatedSprite.play("attacking")
 
-	elif _isBackOpened:
-		_isBackOpened = false
-		
-		if _isFrontOpened:
-			_carSprite.texture=CarSpriteTextures.FRONT_OPENED
-		elif !_isFrontOpened:
+			elif backOpen:
+				backOpen = false
+				
+				if frontOpen:
+					_carAnimatedSprite.play("exposed")
+				elif !frontOpen:
+					_carAnimatedSprite.play("protected")
 
-			_carSprite.texture=CarSpriteTextures.BOTH_CLOSED
 
 #===SIGNALS FROM TIMERS===
 func _on_cooldown_topick_rotation_timeout() -> void:
@@ -249,16 +241,16 @@ func _on_damage_cool_down_timeout() -> void:
 	pass # Replace with function body.
 
 func _on_timer_till_close_front_timeout() -> void: #USED TO CLOSE CAR HOOD
-	openCloseFront()
+	openEcloseDoors("front")
 	$Timers/TimerTillOpenFront.start()
 
 func _on_timer_till_open_front_timeout() -> void: #USED TO OPEN CAR HOOD
-	openCloseFront()
+	openEcloseDoors("front")
 	$Timers/TimerTillCloseFront.start()
 	pass # Replace with function body.
 
 func _on_timer_to_color_modulate_timeout() -> void:
-	_carSprite.material.set_shader_parameter("flash_white", false)
+	_carAnimatedSprite.material.set_shader_parameter("flash_white", false)
 	_brainSprite.material.set_shader_parameter("flash_white", false)
 
 #===OTHER SIGNALS===
@@ -277,11 +269,11 @@ func _on_motor_sound_stream_finished() -> void:
 
 func _on_timer_till_open_back_timeout() -> void:
 	pass # Replace with function body.
-	openCloseBack()
+	openEcloseDoors("back")
 	$Timers/TimerTillCloseBack.start()
 
 
 func _on_timer_till_close_back_timeout() -> void:
-	openCloseBack()
+	openEcloseDoors("back")
 	$Timers/TimerTillOpenBack.start()
 	pass # Replace with function body.

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br24f7x3ljov3"
-path="res://.godot/imported/brainmask.png-ed25be16517cd2eabf10407e4b8bbc9a.ctex"
+uid="uid://dfqf0ixj06oph"
+path="res://.godot/imported/car_back_opened.png-0559348601f5b856d44bd8b8af7366f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/objects/car/brainmask.png"
-dest_files=["res://.godot/imported/brainmask.png-ed25be16517cd2eabf10407e4b8bbc9a.ctex"]
+source_file="res://Assets/Textures/entities/Enemies/car/car_back_opened.png"
+dest_files=["res://.godot/imported/car_back_opened.png-0559348601f5b856d44bd8b8af7366f7.ctex"]
 
 [params]
 

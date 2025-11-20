@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5nwi5mkrtut0"
-path="res://.godot/imported/car_damaged.png-bdef0080c884c7be747cc8557001ab4c.ctex"
+uid="uid://bvvycfod60vhs"
+path="res://.godot/imported/car_both_opened.png-26dd8c31129ccd3c0be12b30dce28249.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/objects/car/car_damaged.png"
-dest_files=["res://.godot/imported/car_damaged.png-bdef0080c884c7be747cc8557001ab4c.ctex"]
+source_file="res://Assets/Textures/entities/Enemies/car/car_both_opened.png"
+dest_files=["res://.godot/imported/car_both_opened.png-26dd8c31129ccd3c0be12b30dce28249.ctex"]
 
 [params]
 

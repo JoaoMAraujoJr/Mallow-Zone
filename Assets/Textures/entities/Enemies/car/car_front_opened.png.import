@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwkg7457emxw4"
-path="res://.godot/imported/car_front_opened.png-6dc2677e94f641dfaeaa44a44b04bca5.ctex"
+path="res://.godot/imported/car_front_opened.png-4e4896966662bb283bd4c016f100b285.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/objects/car/car_front_opened.png"
-dest_files=["res://.godot/imported/car_front_opened.png-6dc2677e94f641dfaeaa44a44b04bca5.ctex"]
+source_file="res://Assets/Textures/entities/Enemies/car/car_front_opened.png"
+dest_files=["res://.godot/imported/car_front_opened.png-4e4896966662bb283bd4c016f100b285.ctex"]
 
 [params]
 

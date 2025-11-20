@@ -86,7 +86,7 @@ func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 	if trigger.is_queued_for_deletion():
 		return
 	trigger.queue_free()
-	print("Tentando spawn em: ", markerposition, " trigger: ", trigger.name)
+	#print("Tentando spawn em: ", markerposition, " trigger: ", trigger.name)
 
 	# Choose the checker
 	var checker: Area2D
@@ -101,7 +101,7 @@ func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 	if checker:
 		for body in checker.get_overlapping_areas():
 			if body.is_in_group("Stage"):
-				print("Stage já existe adjacente à ", trigger.name)
+				#print("Stage já existe adjacente à ", trigger.name)
 				trigger.queue_free()
 				return
 
@@ -110,7 +110,7 @@ func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 	new_stage.position = markerposition
 	add_child(new_stage)
 	trigger.queue_free()
-	print("Stage spawnada em: ", new_stage.global_position)
+	#print("Stage spawnada em: ", new_stage.global_position)
 	
 
 func _setbiome(plataform : Biome):

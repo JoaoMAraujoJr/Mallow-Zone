@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 356.3235
+radius = 250.86487
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d05bs"]
 size = Vector2(1536.8463, 1531.8463)
