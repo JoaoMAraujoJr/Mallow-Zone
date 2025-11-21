@@ -15,7 +15,7 @@ extends StaticBody2D
 
 var fruitCounter:= 0
 var maxfruits := 2
-var TurnedOn := false
+var TurnedOn : bool = false
 var isTrimmed := false
 var isBeingTrimmed := false
 # Called when the node enters the scene tree for the first time.

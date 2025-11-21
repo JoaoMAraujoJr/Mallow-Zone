@@ -176,9 +176,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_tt31a"]
 radius = 1243.2426
 
-[node name="FollowerSaw" type="CharacterBody2D"]
+[node name="FollowerSaw" type="RigidBody2D"]
 z_index = 1
 y_sort_enabled = true
+mass = 20.0
+gravity_scale = 0.0
 script = ExtResource("1_nq37f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

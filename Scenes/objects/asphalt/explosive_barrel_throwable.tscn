@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu5yy7uvyjf25"]
+
+[ext_resource type="Texture2D" uid="uid://biny1v6so3j14" path="res://Assets/Textures/entities/objects/Asphalt/oil_barrel.png" id="1_sxub6"]
+[ext_resource type="Script" uid="uid://p02ruj6kw3ap" path="res://Scenes/objects/asphalt/explosive_barrel_throwable.gd" id="1_wurtp"]
+
+[sub_resource type="Animation" id="Animation_muc0g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("barrelsprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.43689907, 0.43689907)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("barrelsprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.13889375]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("barrelsprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wurtp"]
+resource_name = "throw_at"
+length = 3.3585
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("barrelsprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6, 3.3333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(2, 2), Vector2(0.7, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("barrelsprite:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.58, 1.1666666, 1.76, 2.34, 2.9266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.10471975511965978, 0.0786884, 0.0, -0.10471975511965978, 0.0786884]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("barrelsprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.44),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.6666667), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.3333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"explode"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5txsd"]
+_data = {
+&"RESET": SubResource("Animation_muc0g"),
+&"throw_at": SubResource("Animation_wurtp")
+}
+
+[node name="explosiveBarrelThrowable" type="Node2D"]
+z_index = 2
+script = ExtResource("1_wurtp")
+
+[node name="barrelsprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+rotation = -0.13889375
+scale = Vector2(0.43689907, 0.43689907)
+texture = ExtResource("1_sxub6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5txsd")
+}
+autoplay = "throw_at"
+speed_scale = 2.0

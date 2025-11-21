@@ -10,13 +10,13 @@
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 250.86487
+radius = 141.36693
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d05bs"]
 size = Vector2(1536.8463, 1531.8463)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
-radius = 20.0
+radius = 11.0
 height = 40.0
 
 [node name="Player" type="CharacterBody2D" groups=["PlayerArea"]]
@@ -54,7 +54,6 @@ shape = SubResource("RectangleShape2D_d05bs")
 debug_color = Color(0, 0.5951596, 0.7232592, 0.41960785)
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_6t5aa")
 
 [node name="Camera2D" type="Camera2D" parent="."]

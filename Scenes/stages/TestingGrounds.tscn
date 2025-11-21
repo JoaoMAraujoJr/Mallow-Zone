@@ -10,11 +10,10 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_hccwu")]
-position = Vector2(0, -5)
+position = Vector2(-95, 109)
 
 [node name="CarBoss" parent="." instance=ExtResource("2_lu3d8")]
 position = Vector2(319, -90)
-Drifting = 2.0
 
 [node name="Interface" parent="." instance=ExtResource("1_w2jle")]
 
@@ -74,3 +73,14 @@ position = Vector2(4, 4)
 
 [node name="weaponDropped" parent="." instance=ExtResource("7_3kiau")]
 position = Vector2(1, -5)
+
+[node name="weaponDropped" parent="weaponDropped" instance=ExtResource("7_3kiau")]
+position = Vector2(-140, 47)
+
+[node name="weaponDropped" parent="weaponDropped/weaponDropped" instance=ExtResource("7_3kiau")]
+position = Vector2(0, -83)
+weaponKey = "flamethrower"
+
+[node name="weaponDropped2" parent="." instance=ExtResource("7_3kiau")]
+position = Vector2(-70, 66)
+weaponKey = "chainsaw"

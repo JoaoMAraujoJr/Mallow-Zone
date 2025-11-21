@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var _damage_timer: Timer = $DamageTimer 
 @onready var _colorchangetimer : Timer = $SelfModulateTimer
 @onready var _lightcolor : PointLight2D = $PointLight2D
-@onready var _sprite2d : Sprite2D = $Sprite2D
+@onready var _animatedSprite : AnimatedSprite2D = $EnemyAnimatedSprite
 @onready var _deathAudioStream : AudioStreamPlayer2D = $DeathAudioStream
 @onready var _damageAudioStream : AudioStreamPlayer2D = $DamageAudioStream
 @onready var _effectHandler : EffectHandler = $EffectHandler
@@ -33,6 +33,7 @@ var OriginalSpeed: float = Global.enemySpeed
 var CurrentSpeed: float = Global.enemySpeed
 
 func _ready() -> void:
+	_animatedSprite.play("normal")
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -102,8 +103,7 @@ func setHealth(addedAmount : int)-> void:
 
 		#remove visuasl
 		_lightcolor.queue_free()
-		_sprite2d.queue_free()
-		$LightOccluder2D.queue_free()
+		_animatedSprite.queue_free()
 		$CollisionShape2D.queue_free()
 		# increase kill count
 		Global.kills += 1 
@@ -126,14 +126,14 @@ func setHealth(addedAmount : int)-> void:
 	if _lightcolor != null:
 		_colorchangetimer.start()
 		_lightcolor.color = Color(1.0, 1.0, 1.0, 0.392)
-	if _sprite2d != null:
-		_sprite2d.texture = load("res://Assets/player/monster_damaged.png")# pinta de branco
+	if _animatedSprite != null:
+		_animatedSprite.play("damaged")
 
 func _on_self_modulate_timer_timeout() -> void:
 	if _lightcolor == null:
 		return
 	_lightcolor.color = Color(1.0, 0.0, 0.0, 0.686)
-	_sprite2d.texture=  load("res://Assets/player/monster.png")
+	_animatedSprite.play("normal")
 	pass # Replace with function body.
 
 func _killSelf ():

@@ -1,0 +1,224 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmkmnaxonina2"]
+
+[ext_resource type="Texture2D" uid="uid://djupqgxqkhgl2" path="res://Assets/Textures/entities/objects/Asphalt/oil.png" id="1_5uc6v"]
+[ext_resource type="Script" uid="uid://dg4lxkj3cm05d" path="res://Scenes/objects/asphalt/spilled_oil.gd" id="1_m6wcs"]
+[ext_resource type="PackedScene" uid="uid://bicx6emeshc36" path="res://Scenes/particles/flame_particle.tscn" id="1_n3n33"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n3n33"]
+radius = 90.02222
+
+[sub_resource type="Animation" id="Animation_m6wcs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("oilSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("oilSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlameParticle:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlameParticle2:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FlameParticle3:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_n3n33"]
+resource_name = "oils_lifeTime"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("oilSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333, 1.6, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1247929, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("oilSprite:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.50940984, 1.0333333, 1.5348089, 2.0587323, 2.6124406, 3.136364, 3.5687807, 4.0927043),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.06981317, 0.06981317, -0.06981317, 0.06981317, -0.06981317, 0.06981317, -0.06981317, 0.06981317]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlameParticle:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.34521538),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlameParticle2:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.413517),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FlameParticle3:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.5891154),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("..")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3.6666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"killOil"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmpw7"]
+_data = {
+&"RESET": SubResource("Animation_m6wcs"),
+&"oils_lifeTime": SubResource("Animation_n3n33")
+}
+
+[node name="spilled_Oil" type="Node2D"]
+script = ExtResource("1_m6wcs")
+
+[node name="oilScalable" type="Node2D" parent="."]
+
+[node name="damageArea" type="Area2D" parent="oilScalable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="oilScalable/damageArea"]
+shape = SubResource("CircleShape2D_n3n33")
+
+[node name="FlameParticle" parent="oilScalable" instance=ExtResource("1_n3n33")]
+position = Vector2(48, -47)
+scale = Vector2(0.20320031, 0.20320031)
+emitting = true
+amount = 9
+visibility_rect = Rect2(-100, -100, 100, 100)
+
+[node name="FlameParticle2" parent="oilScalable" instance=ExtResource("1_n3n33")]
+position = Vector2(-38, 48)
+scale = Vector2(0.20320031, 0.20320031)
+emitting = true
+amount = 9
+visibility_rect = Rect2(-100, -100, 100, 100)
+
+[node name="FlameParticle3" parent="oilScalable" instance=ExtResource("1_n3n33")]
+position = Vector2(-21, -29)
+scale = Vector2(0.20320031, 0.20320031)
+emitting = true
+amount = 9
+visibility_rect = Rect2(-100, -100, 100, 100)
+
+[node name="oilSprite" type="Sprite2D" parent="oilScalable"]
+z_index = -1
+scale = Vector2(1.5625477, 1.5625477)
+texture = ExtResource("1_5uc6v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="oilScalable"]
+libraries = {
+&"": SubResource("AnimationLibrary_bmpw7")
+}
+autoplay = "oils_lifeTime"
+speed_scale = 0.536
+
+[connection signal="area_entered" from="oilScalable/damageArea" to="." method="_on_damage_area_area_entered"]

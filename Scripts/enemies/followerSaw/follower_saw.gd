@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 @onready var _startTimer: Timer = $StartTimer
 @onready var _animplay: AnimationPlayer = $AnimationPlayer
@@ -46,9 +46,8 @@ func _physics_process(delta: float) -> void:
 			SPEED = 0.0  # garante que zere totalmente	
 	if canChase:
 
-		velocity = Dir * SPEED
+		linear_velocity = Dir * SPEED
 		
-		move_and_slide()
 
 		var hit_bodies = _damageHitbox.get_overlapping_bodies()
 		for body in hit_bodies:
@@ -61,9 +60,11 @@ func _physics_process(delta: float) -> void:
 						can_damage = false
 						_damage_timer.start()
 
-			elif body.has_method("setHealth"):
+			elif body.has_method("setHealth") and !body.is_in_group("Boss"):
 				hitCounter +=1
-				body.setHealth(-30)
+				body.setHealth(damage)
+				can_damage = false
+				_damage_timer.start()
 
 
 func _update_texture() -> void:

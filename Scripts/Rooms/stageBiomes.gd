@@ -74,7 +74,7 @@ func _spawn_entities_at_Stage():
 		
 	#Spawn de BH
 	if rng.randf() <= 0.1 :
-		if (GameManager.currentbiome == "chess") :
+		if (BiomeManager.currentBiome == "chess") :
 			var BH = BHScene.instantiate()
 			BH.global_position =  _get_random_point_in_area()
 			get_tree().current_scene.add_child(BH)

@@ -6,7 +6,7 @@ extends Node2D
 func _ready() -> void:
 	_reloadTexture()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var bodies = _interactionArea.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("PlayerArea"):
@@ -14,14 +14,18 @@ func _process(delta: float) -> void:
 				var thisgun = weaponKey
 				var oldcurrent = GameManager.currentEquipedWeaponType
 				var oldMaxammo = GameManager.ammoMax
-				_setWeaponKey(oldcurrent)
+				_setWeaponKey(oldcurrent) # troca arma do drop pela arma current caso exista
 				GameManager.currentEquipedWeaponType = thisgun
+				
+				
 				GameManager.ammoMax = ItemData.weapons[thisgun]["max_ammo"]
 				if oldcurrent != thisgun and GameManager.ammoMax != oldMaxammo:
 					GameManager.ammo = ItemData.weapons[thisgun]["max_ammo"]
+					
 				if body.has_method("_equipGun"):
 					body._equipGun()
 					_reloadTexture()
+				break
 
 
 func _setWeaponKey(key : String) :

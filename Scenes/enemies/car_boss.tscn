@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://siudy2wrjg83"]
+[gd_scene load_steps=31 format=3 uid="uid://siudy2wrjg83"]
 
 [ext_resource type="Script" uid="uid://bree6runl6cny" path="res://Scripts/enemies/carBoss/Carboss.gd" id="1_78rw5"]
 [ext_resource type="PackedScene" uid="uid://dmpjceleu1vfr" path="res://Scenes/particles/explosion_particle.tscn" id="2_6n6a6"]
+[ext_resource type="PackedScene" uid="uid://cu5yy7uvyjf25" path="res://Scenes/objects/asphalt/explosive_barrel_throwable.tscn" id="2_ak7pg"]
 [ext_resource type="Shader" uid="uid://sb648qjmfvdb" path="res://Scripts/shaders/Damaged.gdshader" id="2_hm7pw"]
 [ext_resource type="PackedScene" uid="uid://bmliicxgfmc8h" path="res://Scenes/particles/tire_track_particle_emitter.tscn" id="3_2ougs"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="3_d4hdx"]
@@ -183,10 +184,10 @@ tracks/2/path = NodePath("DamageDetector:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.67, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [false, false, true, true]
+"values": []
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -195,10 +196,10 @@ tracks/3/path = NodePath("DamageDetector:monitorable")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.67, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [false, false, true, true]
+"values": []
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m2gaa"]
@@ -311,18 +312,85 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_ak7pg"]
+resource_name = "throwing"
+length = 2.981
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights/PointLight2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.36666667, 0.5466665, 0.63666666, 0.8666668, 0.9999999, 1.3000001, 1.4799999, 1.5700002, 1.8000001, 1.9333333, 2.2287855, 2.4087853, 2.4987855, 2.6287856, 2.8621187),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9999997, 0.10126803, 0.08898608, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.8409422, 0.22803345, 0.1372393, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9999997, 0.10126803, 0.08898608, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9999997, 0.10126803, 0.08898608, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.20392157), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lights/PointLight2D2:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03333342, 0.21333325, 0.41999996, 0.5333332, 0.8933333, 1.236775, 1.4167749, 1.6234416, 1.7367748, 2.096775, 2.3666668, 2.5466666, 2.7533336, 2.8666668, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.71225244, 0.049173497, 0, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.71225244, 0.049173497, 0, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.71225244, 0.049173497, 0, 0.8627451), Color(0.9843137, 0.9764706, 0.44705883, 0.10980392), Color(0.9843137, 0.9764706, 0.44705883, 0.8627451)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lights:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.19999999, 0.9333334, 1.3474257, 1.8430817, 2.3261895, 2.840668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4), Vector2(0.35, 0.34999993), Vector2(0.4, 0.4)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.46666667, 0.9, 1.5000001, 2.3214269, 2.4333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_dropThrowable"
+}, {
+"args": [],
+"method": &"_boost"
+}, {
+"args": [],
+"method": &"_dropThrowable"
+}, {
+"args": [],
+"method": &"_dropThrowable"
+}, {
+"args": [],
+"method": &"_boost"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dyahk"]
 _data = {
 &"RESET": SubResource("Animation_2ougs"),
-&"driving": SubResource("Animation_78rw5")
+&"driving": SubResource("Animation_78rw5"),
+&"throwing": SubResource("Animation_ak7pg")
 }
 
-[node name="CarBoss" type="CharacterBody2D" groups=["Car"]]
+[node name="CarBoss" type="CharacterBody2D" groups=["Boss", "Car"]]
 z_index = 1
 y_sort_enabled = true
 disable_mode = 2
-safe_margin = 2.0
 script = ExtResource("1_78rw5")
+ThrowableScene = ExtResource("2_ak7pg")
 ExplosioParticle = ExtResource("2_6n6a6")
 OriginalSpeed = 320.0
 
@@ -392,17 +460,17 @@ libraries = {
 &"": SubResource("AnimationLibrary_m2gaa")
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CarAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_dyahk")
 }
 autoplay = "driving"
 
 [node name="Backward" type="Marker2D" parent="."]
-position = Vector2(0, -167)
+position = Vector2(0, -127)
 
 [node name="Forward" type="Marker2D" parent="."]
-position = Vector2(0, 93)
+position = Vector2(0, 39)
 
 [node name="Particles" type="Node2D" parent="."]
 z_index = -1
@@ -437,17 +505,13 @@ autostart = true
 [node name="DamageCoolDown" type="Timer" parent="Timers"]
 wait_time = 2.0
 
-[node name="TimerTillOpenFront" type="Timer" parent="Timers"]
+[node name="OpenCloseFront_T" type="Timer" parent="Timers"]
 wait_time = 5.0
+autostart = true
 
-[node name="TimerTillCloseFront" type="Timer" parent="Timers"]
-wait_time = 5.0
-
-[node name="TimerTillOpenBack" type="Timer" parent="Timers"]
-wait_time = 5.0
-
-[node name="TimerTillCloseBack" type="Timer" parent="Timers"]
-wait_time = 5.0
+[node name="OpenCloseBack_T" type="Timer" parent="Timers"]
+wait_time = 3.0
+autostart = true
 
 [node name="TimerToColorModulate" type="Timer" parent="Timers"]
 wait_time = 0.5
@@ -494,17 +558,11 @@ max_distance = 846.0
 attenuation = 1.2745608
 bus = &"SFXReverb"
 
-[connection signal="body_entered" from="backwardsDetector" to="." method="backwardsAreaDetector_body_entered"]
-[connection signal="body_exited" from="backwardsDetector" to="." method="backwardsAreaDetector_body_exited"]
-[connection signal="area_entered" from="DamageDetector" to="." method="_on_damage_detector_area_entered"]
-[connection signal="body_entered" from="DamageDetector" to="." method="_on_damage_detector_body_entered"]
 [connection signal="timeout" from="Timers/CooldownTopickRotation" to="." method="_on_cooldown_topick_rotation_timeout"]
 [connection signal="timeout" from="Timers/CooldownTopickDirection" to="." method="_on_cooldown_topick_direction_timeout"]
 [connection signal="timeout" from="Timers/ToAddDrift" to="." method="_on_to_add_drift_timeout"]
 [connection signal="timeout" from="Timers/DamageCoolDown" to="." method="_on_damage_cool_down_timeout"]
-[connection signal="timeout" from="Timers/TimerTillOpenFront" to="." method="_on_timer_till_open_front_timeout"]
-[connection signal="timeout" from="Timers/TimerTillCloseFront" to="." method="_on_timer_till_close_front_timeout"]
-[connection signal="timeout" from="Timers/TimerTillOpenBack" to="." method="_on_timer_till_open_back_timeout"]
-[connection signal="timeout" from="Timers/TimerTillCloseBack" to="." method="_on_timer_till_close_back_timeout"]
+[connection signal="timeout" from="Timers/OpenCloseFront_T" to="." method="_on_timer_till_open_front_timeout"]
+[connection signal="timeout" from="Timers/OpenCloseBack_T" to="." method="_on_timer_till_open_back_timeout"]
 [connection signal="timeout" from="Timers/TimerToColorModulate" to="." method="_on_timer_to_color_modulate_timeout"]
 [connection signal="finished" from="MotorSoundStream" to="." method="_on_motor_sound_stream_finished"]

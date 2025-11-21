@@ -9,7 +9,7 @@ signal change_on_boss_status(BossName:String  ,currentHP:int ,IsOnBoss:bool, IsB
 @onready var currentHp:= maxHp
 @onready var _effectHandler := $EffectHandler
 
-
+@export var ThrowableScene : PackedScene
 @export var ExplosioParticle : PackedScene
 
 var frontOpen: bool = false
@@ -19,6 +19,8 @@ var backOpen: bool = false
 @onready var _hitdetectArea := $PlayerHitArea
 @onready var _forwardmarker := $Forward
 @onready var _backwardmarker :=$Backward
+
+@onready var _animplayer_car := $CarAnimationPlayer
 @onready var _animplayer_brain:=$BrainAnimationPlayer
 
 @onready var _cooldownTopickDir := $Timers/CooldownTopickDirection
@@ -26,7 +28,6 @@ var backOpen: bool = false
 @onready var _backwardsDetector := $backwardsDetector
 @onready var _canChangeDirection := true
 
-@onready var _dirtogo := "forward"
 
 var Playerdir : Vector2 = Vector2.ZERO
 @export var OriginalSpeed : float = 210.0
@@ -40,15 +41,24 @@ var Playerdir : Vector2 = Vector2.ZERO
 var _canhit : bool = true
 var _isOnBoost = false
 @onready var _canpickPlayerLocation : bool= true
-var _playerInBackward := false
+
+enum DirectionStateMachine{
+	FORWARD,BACKWARD
+}
+
+
+enum ActionStateMachine{
+	ATTACKING,EXPOSED,ATTACKINGANDEXPOSED,PROTECTED
+}
+
+var currentDirection : DirectionStateMachine = DirectionStateMachine.FORWARD
+var currentAction
 
 
 func _ready() -> void:
 	_carAnimatedSprite.material.set_shader_parameter("flash_white", false)
 	_brainSprite.material.set_shader_parameter("flash_white", false)
 	_carAnimatedSprite.z_index = 0
-	$Timers/TimerTillOpenFront.start()
-	$Timers/TimerTillOpenBack.start()
 	BiomeManager.currentBiome = BossManager.BossList["Ominous Car"]["BossBiome"]
 	self.change_on_boss_status.connect(BossManager.change_on_boss_status_received)
 	emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
@@ -71,12 +81,12 @@ func _process(delta: float) -> void:
 #===MOVEMENT===
 func _GoinDirection(delta:float) ->void:
 	var dirVector :Vector2
-	if _dirtogo == "forward":
+	if currentDirection == DirectionStateMachine.FORWARD:
 		dirVector = (_forwardmarker.global_position - global_position).normalized()
 		var _newvelocity = dirVector * CurrentSpeed
 		velocity = lerp(velocity, _newvelocity , delta*2)
 		rotationOffset = deg_to_rad(-90)
-	elif _dirtogo == "backward":
+	elif currentDirection == DirectionStateMachine.BACKWARD:
 		dirVector = (_backwardmarker.global_position - global_position).normalized()
 		var _newvelocity  = dirVector * CurrentSpeed * 0.8
 		velocity = lerp(velocity, _newvelocity , delta*2)
@@ -92,22 +102,15 @@ func _updateDirection() -> void:
 			player_detected = true
 			break
 	
-	for body in _backwardsDetector.get_overlapping_bodies():
-		if body.is_in_group("PlayerArea"):
-			player_detected = true
-			break
-	
 	# Se player entrou na área
-	if player_detected and not _playerInBackward:
-		_playerInBackward = true
-		_dirtogo = "backward"
+	if player_detected and currentDirection == DirectionStateMachine.FORWARD:
+		currentDirection = DirectionStateMachine.BACKWARD
 		_canChangeDirection = false
 		_cooldownTopickDir.start()
 	
 	# Se player saiu da área
-	elif not player_detected and _playerInBackward:
-		_playerInBackward = false
-		_dirtogo = "forward"
+	elif not player_detected and currentDirection == DirectionStateMachine.BACKWARD:
+		currentDirection = DirectionStateMachine.FORWARD
 		_canChangeDirection = false
 		_cooldownTopickDir.start()
 
@@ -126,14 +129,7 @@ func _updateCarRotation(delta: float) -> void:
 				_cooldownTopickRotation.start()
 			break
 
-func _boost():
-	if _isOnBoost == false :
-		_isOnBoost = true
-		CurrentSpeed = CurrentSpeed*2
-	elif _isOnBoost == true:
-		_isOnBoost= false
-		CurrentSpeed = OriginalSpeed
-		
+
 #===DAMAGE===
 func _getHitsApplied() -> void:
 	var bodies = _hitdetectArea.get_overlapping_bodies()
@@ -144,24 +140,24 @@ func _getHitsApplied() -> void:
 				body.addtoPushVelocity(push_vector)
 				_canhit = false
 				if body.has_method("addToHealth"):
-					body.addToHealth(-int(CurrentSpeed/10))
+					body.addToHealth(-int(CurrentSpeed/15))
 				$Timers/DamageCoolDown.start()
 			elif body.has_method("setHealth"):
-				body.setHealth( -int(CurrentSpeed/10 * 2))
+				body.setHealth( -int(CurrentSpeed/10 ))
 
 
-func _updateBossHealth(addto: int):
+func setHealth(addedAmount : int)-> void:
 	_carAnimatedSprite.material.set_shader_parameter("flash_white", true)
 	_brainSprite.material.set_shader_parameter("flash_white", true)
 	$Timers/TimerToColorModulate.start()
-	if (currentHp + addto) <= 0:
+	if (currentHp + addedAmount) <= 0:
 		emit_signal("change_on_boss_status","Ominous Car",0,false,true)
 		var explosion = ExplosioParticle.instantiate()
 		explosion.global_position = global_position
 		get_tree().current_scene.add_child(explosion)
 		queue_free()
 	else:
-		currentHp += addto
+		currentHp += addedAmount
 		emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
 
 #===EFFECTS===
@@ -178,15 +174,18 @@ func resetSpeed():
 
 #===ACTIONS===
 
+
 func openEcloseDoors(door:String ):
 	match door:
 		"front":
 			if !frontOpen:
 				frontOpen = true
 				if backOpen:
-					_carAnimatedSprite.play("exposed_and_attacking")
+					currentAction = ActionStateMachine.ATTACKINGANDEXPOSED
+					updateActionState()
 				else:
-					_carAnimatedSprite.play("exposed")
+					currentAction = ActionStateMachine.EXPOSED
+					updateActionState()
 				$DamageDetector.monitoring = true
 				$DamageDetector.monitorable = true
 				_animplayer_brain.play("brainSpawning")
@@ -194,32 +193,80 @@ func openEcloseDoors(door:String ):
 				_animplayer_brain.play("brainMode")
 
 			elif frontOpen:
+
 				_animplayer_brain.play_backwards("brainSpawning")
 				await _animplayer_brain.animation_finished
-				$DamageDetector.monitoring = false
-				$DamageDetector.monitorable = false
 				if backOpen:
-					_carAnimatedSprite.play("attacking")
+					currentAction = ActionStateMachine.ATTACKING
+					updateActionState()
 				else:
-					_carAnimatedSprite.play("protected")
+					currentAction = ActionStateMachine.PROTECTED
+					updateActionState()
 				frontOpen = false
 			
 		"back":
 			if !backOpen:
 				backOpen = true
 				if frontOpen:
-					_carAnimatedSprite.play("exposed_and_attacking")
+					currentAction = ActionStateMachine.ATTACKINGANDEXPOSED
+					updateActionState()
 				else:
-					_carAnimatedSprite.play("attacking")
+					currentAction= ActionStateMachine.ATTACKING
+					updateActionState()
 
 			elif backOpen:
 				backOpen = false
-				
 				if frontOpen:
-					_carAnimatedSprite.play("exposed")
-				elif !frontOpen:
-					_carAnimatedSprite.play("protected")
+					currentAction=ActionStateMachine.EXPOSED
+					updateActionState()
 
+				elif !frontOpen:
+					currentAction=ActionStateMachine.PROTECTED
+					updateActionState()
+
+
+func updateActionState():
+	match currentAction:
+		ActionStateMachine.ATTACKING:
+			_carAnimatedSprite.play("attacking")
+			if _animplayer_car.current_animation != "throwing":
+				_animplayer_car.play("throwing")
+			$DamageDetector.monitoring = false
+			$DamageDetector.monitorable = false
+		ActionStateMachine.EXPOSED:
+			_animplayer_car.play("driving")
+			_carAnimatedSprite.play("exposed")
+			$DamageDetector.monitoring = true
+			$DamageDetector.monitorable = true
+		ActionStateMachine.PROTECTED:
+			_animplayer_car.play("driving")
+			_carAnimatedSprite.play("protected")
+			$DamageDetector.monitoring = false
+			$DamageDetector.monitorable = false
+		ActionStateMachine.ATTACKINGANDEXPOSED:
+			_carAnimatedSprite.play("exposed_and_attacking")
+			if _animplayer_car.current_animation != "throwing":
+				_animplayer_car.play("throwing")
+			$DamageDetector.monitoring = true
+			$DamageDetector.monitorable = true
+
+func _boost():
+	if _isOnBoost == false :
+		_isOnBoost = true
+		CurrentSpeed = CurrentSpeed*2
+	elif _isOnBoost == true:
+		_isOnBoost= false
+		CurrentSpeed = OriginalSpeed
+
+
+func _dropThrowable():
+	if ThrowableScene == null:
+		return
+
+	var newThrowable :Node2D= ThrowableScene.instantiate()
+	newThrowable.global_position = _backwardmarker.global_position
+	
+	get_tree().current_scene.add_child(newThrowable)
 
 #===SIGNALS FROM TIMERS===
 func _on_cooldown_topick_rotation_timeout() -> void:
@@ -231,49 +278,26 @@ func _on_cooldown_topick_direction_timeout() -> void:
 	pass # Replace with function body.
 
 func _on_to_add_drift_timeout() -> void:
-	if Drifting < 1.5:
+	if Drifting < 2.5:
 		Drifting += 0.1
-	pass # Replace with function body.
 
 func _on_damage_cool_down_timeout() -> void:
 	_canhit = true
 	_cooldownmodifier = 1.0
-	pass # Replace with function body.
-
-func _on_timer_till_close_front_timeout() -> void: #USED TO CLOSE CAR HOOD
-	openEcloseDoors("front")
-	$Timers/TimerTillOpenFront.start()
 
 func _on_timer_till_open_front_timeout() -> void: #USED TO OPEN CAR HOOD
 	openEcloseDoors("front")
-	$Timers/TimerTillCloseFront.start()
-	pass # Replace with function body.
+	$Timers/OpenCloseFront_T.wait_time = randf_range(5.0 , 10.0)
+
+func _on_timer_till_open_back_timeout() -> void:
+	openEcloseDoors("back")
+	$Timers/OpenCloseBack_T.wait_time = randf_range(3.0 , 5.0)
 
 func _on_timer_to_color_modulate_timeout() -> void:
 	_carAnimatedSprite.material.set_shader_parameter("flash_white", false)
 	_brainSprite.material.set_shader_parameter("flash_white", false)
 
-#===OTHER SIGNALS===
-func _on_damage_detector_area_entered(area: Area2D) -> void: #APPLY DAMAGE
-	if area.is_in_group("Bullet"):
-		_updateBossHealth(area.get_parent().damage)
-
-	pass # Replace with function body.
-
-
 func _on_motor_sound_stream_finished() -> void:
 	_motorAudio.pitch_scale = randf_range(0.4,2.0)
 	_motorAudio.play()
-	pass # Replace with function body.
-
-
-func _on_timer_till_open_back_timeout() -> void:
-	pass # Replace with function body.
-	openEcloseDoors("back")
-	$Timers/TimerTillCloseBack.start()
-
-
-func _on_timer_till_close_back_timeout() -> void:
-	openEcloseDoors("back")
-	$Timers/TimerTillOpenBack.start()
 	pass # Replace with function body.

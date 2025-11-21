@@ -112,6 +112,7 @@ _data = {
 }
 
 [node name="FlameParticle" type="GPUParticles2D"]
+z_index = 1
 amount = 200
 texture = ExtResource("1_gfg05")
 lifetime = 2.0

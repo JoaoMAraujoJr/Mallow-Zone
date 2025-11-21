@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cin23rxcvrher"
-path="res://.godot/imported/signtop_spr.png-2611f839c31b81b47e7f99f9f6f67878.ctex"
+uid="uid://biny1v6so3j14"
+path="res://.godot/imported/oil_barrel.png-c3a3d7252d73b40ec56104a00593e04d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/entities/ScenesSprites/Asphalt/signtop_spr.png"
-dest_files=["res://.godot/imported/signtop_spr.png-2611f839c31b81b47e7f99f9f6f67878.ctex"]
+source_file="res://Assets/Textures/entities/objects/Asphalt/oil_barrel.png"
+dest_files=["res://.godot/imported/oil_barrel.png-c3a3d7252d73b40ec56104a00593e04d.ctex"]
 
 [params]
 

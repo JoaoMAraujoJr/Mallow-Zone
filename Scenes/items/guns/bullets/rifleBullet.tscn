@@ -2,27 +2,21 @@
 
 [ext_resource type="Script" uid="uid://dwms633t47x1t" path="res://Scenes/items/guns/bullets/riflebullet.gd" id="1_wnwga"]
 [ext_resource type="Texture2D" uid="uid://bwy1yk26573bi" path="res://Assets/player/bullet.png" id="2_uostt"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/LightTextures/proto_light_2.png" id="3_bhd26"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oduel"]
-radius = 2.0
-height = 12.0
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="3_bhd26"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
-radius = 8.062258
+radius = 10.049875
 
-[node name="bullet" type="CharacterBody2D" groups=["Bullet"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnwga"]
+size = Vector2(6, 4)
+
+[node name="bullet" type="RigidBody2D" groups=["Bullet"]]
+mass = 0.5
+gravity_scale = 0.0
 script = ExtResource("1_wnwga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_uostt")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-light_mask = 3
-visibility_layer = 2
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_oduel")
-disabled = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -32,7 +26,12 @@ disabled = true
 shape = SubResource("CircleShape2D_oduel")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 texture = ExtResource("3_bhd26")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_wnwga")
+disabled = true
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="damageArea" to="." method="_on_damage_area_area_entered"]

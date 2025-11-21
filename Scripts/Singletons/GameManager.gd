@@ -12,7 +12,6 @@ var player_health : int = 100
 var can_shoot: bool = true
 
 #current
-var currentbiome : String = "grasslands"
 var currentEquipedWeaponType : String = "none"
 var currentPlayerSkin: String = ""
 

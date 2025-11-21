@@ -32,7 +32,7 @@ func _on_button_pressed() -> void:
 	GameManager.ammo= GameManager.ammoMax
 	GameManager.player_x = 0.0
 	GameManager.player_y = 0.0
-	GameManager.currentbiome="grasslands"
+	BiomeManager.currentBiome="grasslands"
 	GameManager.can_shoot = true
 	BossManager._isOnBoss = false
 	BossManager.currentBossName = ""
