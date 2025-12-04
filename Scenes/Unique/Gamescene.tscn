@@ -23,6 +23,7 @@ AsphaltBiome = ExtResource("4_jmaar")
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_urbuv")
 debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
@@ -30,6 +31,7 @@ debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
 [node name="EnemySpawnArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_urbuv")
 debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
@@ -54,6 +56,7 @@ position = Vector2(410, 0)
 script = ExtResource("4_cxw4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Right"]
+visible = false
 position = Vector2(177, 1.25)
 shape = SubResource("RectangleShape2D_cxw4p")
 debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
@@ -63,6 +66,7 @@ rotation = -1.5707964
 script = ExtResource("4_cxw4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Up"]
+visible = false
 position = Vector2(177, 1.25)
 shape = SubResource("RectangleShape2D_cxw4p")
 debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
@@ -72,6 +76,7 @@ rotation = 3.1415925
 script = ExtResource("4_cxw4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Left"]
+visible = false
 position = Vector2(177, 1.25)
 shape = SubResource("RectangleShape2D_cxw4p")
 debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
@@ -81,6 +86,7 @@ rotation = 1.5707964
 script = ExtResource("4_cxw4p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Triggers/Trigger_Down"]
+visible = false
 position = Vector2(177, 1.25)
 shape = SubResource("RectangleShape2D_cxw4p")
 debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
@@ -90,6 +96,7 @@ debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
 [node name="StageCheckerLeft" type="Area2D" parent="Checkers" groups=["Checker"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerLeft"]
+visible = false
 position = Vector2(-410, 0)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_jmaar")
@@ -98,6 +105,7 @@ shape = SubResource("RectangleShape2D_jmaar")
 rotation = 1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerUp"]
+visible = false
 position = Vector2(-410, 0)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_jmaar")
@@ -106,6 +114,7 @@ shape = SubResource("RectangleShape2D_jmaar")
 rotation = 3.1415927
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerRight"]
+visible = false
 position = Vector2(-410, 0)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_jmaar")
@@ -114,11 +123,13 @@ shape = SubResource("RectangleShape2D_jmaar")
 rotation = 4.712389
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerDown"]
+visible = false
 position = Vector2(-410, 0)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_jmaar")
 
 [node name="AmmoSpawnMarker" type="Marker2D" parent="."]
+visible = false
 
 [connection signal="body_entered" from="Triggers/Trigger_Right" to="." method="_on_trigger_right_entered"]
 [connection signal="body_entered" from="Triggers/Trigger_Up" to="." method="_on_trigger_up_entered"]

@@ -407,9 +407,11 @@ polygon = PackedVector2Array(-37, -1348, -688, -1399, -852, -1179, -1083, -1274,
 position = Vector2(0, -39.100014)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerHitArea"]
+visible = false
 polygon = PackedVector2Array(-34, 102, -50, 91, -41, 7, -31, 19, -28, 71, 30, 72, 32, 22, 43, 8, 52, 89, 31, 103)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="PlayerHitArea"]
+visible = false
 polygon = PackedVector2Array(-31, 16, -46, -41, -43, -81, -34, -95, 33, -94, 41, -84, 44, -37, 34, 16, 19, -65, -20, -65)
 
 [node name="DamageDetector" type="Area2D" parent="." groups=["Damageble"]]
@@ -419,6 +421,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDetector"]
+visible = false
 position = Vector2(1.4285702, 144.28577)
 shape = SubResource("RectangleShape2D_hm7pw")
 debug_color = Color(0.9372549, 0.21960784, 0.3254902, 0.7882353)
@@ -428,8 +431,10 @@ position = Vector2(0, -39.100014)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectorArea"]
 shape = SubResource("CircleShape2D_78rw5")
+debug_color = Color(0.62352943, 0.49803922, 0.52156866, 0.07450981)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, -37)
 scale = Vector2(0.35, 0.34999993)
 shape = SubResource("CapsuleShape2D_2ougs")
@@ -439,8 +444,7 @@ material = SubResource("ShaderMaterial_4b447")
 position = Vector2(0, -39)
 scale = Vector2(0.34554717, 0.34554717)
 sprite_frames = SubResource("SpriteFrames_ydtf1")
-animation = &"attacking"
-frame_progress = 0.6666035
+animation = &"protected"
 
 [node name="BrainMask" type="Sprite2D" parent="."]
 clip_children = 1
