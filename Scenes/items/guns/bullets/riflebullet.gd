@@ -2,14 +2,13 @@ extends RigidBody2D
 
 @onready var speed: float = 500.0
 @onready var direction: Vector2 
-@onready var _area: Area2D = $damageArea
 @onready var damage := -2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	linear_velocity = direction * speed
 
 func set_direction(dir: Vector2) -> void:

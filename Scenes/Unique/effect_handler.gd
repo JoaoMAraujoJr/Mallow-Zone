@@ -5,6 +5,12 @@ class_name EffectHandler
 @onready var CurrentEffectsLifetimes: Array[Timer]
 @onready var _timer: Timer = $Timer
 
+#func _ready():
+#	add_child(_timer)
+#	_timer.wait_time = 1.0
+#	_timer.autostart = true
+#	_timer.timeout.connect(_on_timer_timeout)
+
 func addEffect(effect:Effect):
 	for i in range(CurrentEffectsList.size()):
 		if CurrentEffectsList[i].name == effect.name:

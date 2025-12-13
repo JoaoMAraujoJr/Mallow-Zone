@@ -222,3 +222,4 @@ autoplay = "oils_lifeTime"
 speed_scale = 0.536
 
 [connection signal="area_entered" from="oilScalable/damageArea" to="." method="_on_damage_area_area_entered"]
+[connection signal="body_entered" from="oilScalable/damageArea" to="." method="_on_damage_area_body_entered"]

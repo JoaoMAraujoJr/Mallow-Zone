@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="1_hccwu"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_w2jle"]
-[ext_resource type="PackedScene" uid="uid://siudy2wrjg83" path="res://Scenes/enemies/car_boss.tscn" id="2_lu3d8"]
-[ext_resource type="PackedScene" uid="uid://bcdu0hfcb5b2i" path="res://Scenes/objects/asphalt/traffic_cone.tscn" id="5_c0g3b"]
+[ext_resource type="PackedScene" uid="uid://bhl7mtmnhud1k" path="res://Scenes/enemies/Bosses/rohk_the_boulder.tscn" id="5_c0g3b"]
+[ext_resource type="PackedScene" uid="uid://siudy2wrjg83" path="res://Scenes/enemies/car_boss.tscn" id="6_3kiau"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="6_ugj8f"]
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="7_3kiau"]
 
@@ -12,61 +12,7 @@
 [node name="Player" parent="." instance=ExtResource("1_hccwu")]
 position = Vector2(-95, 109)
 
-[node name="CarBoss" parent="." instance=ExtResource("2_lu3d8")]
-position = Vector2(319, -90)
-
 [node name="Interface" parent="." instance=ExtResource("1_w2jle")]
-
-[node name="Node" type="Node" parent="."]
-
-[node name="Traffic Cone" parent="Node" instance=ExtResource("5_c0g3b")]
-position = Vector2(-307, -225)
-
-[node name="Traffic Cone2" parent="Node" instance=ExtResource("5_c0g3b")]
-position = Vector2(-307, -190)
-
-[node name="Traffic Cone3" parent="Node" instance=ExtResource("5_c0g3b")]
-position = Vector2(-307, -151)
-
-[node name="Traffic Cone4" parent="Node" instance=ExtResource("5_c0g3b")]
-position = Vector2(-307, -115)
-
-[node name="Traffic Cone5" parent="Node" instance=ExtResource("5_c0g3b")]
-position = Vector2(-307, -80)
-
-[node name="Node2" type="Node" parent="."]
-
-[node name="Traffic Cone" parent="Node2" instance=ExtResource("5_c0g3b")]
-position = Vector2(90, -218)
-
-[node name="Traffic Cone2" parent="Node2" instance=ExtResource("5_c0g3b")]
-position = Vector2(90, -183)
-
-[node name="Traffic Cone3" parent="Node2" instance=ExtResource("5_c0g3b")]
-position = Vector2(90, -144)
-
-[node name="Traffic Cone4" parent="Node2" instance=ExtResource("5_c0g3b")]
-position = Vector2(90, -108)
-
-[node name="Traffic Cone5" parent="Node2" instance=ExtResource("5_c0g3b")]
-position = Vector2(90, -73)
-
-[node name="Node3" type="Node" parent="."]
-
-[node name="Traffic Cone" parent="Node3" instance=ExtResource("5_c0g3b")]
-position = Vector2(531, -218)
-
-[node name="Traffic Cone2" parent="Node3" instance=ExtResource("5_c0g3b")]
-position = Vector2(531, -183)
-
-[node name="Traffic Cone3" parent="Node3" instance=ExtResource("5_c0g3b")]
-position = Vector2(531, -144)
-
-[node name="Traffic Cone4" parent="Node3" instance=ExtResource("5_c0g3b")]
-position = Vector2(531, -108)
-
-[node name="Traffic Cone5" parent="Node3" instance=ExtResource("5_c0g3b")]
-position = Vector2(531, -73)
 
 [node name="Scene" parent="." instance=ExtResource("6_ugj8f")]
 position = Vector2(4, 4)
@@ -84,3 +30,9 @@ weaponKey = "flamethrower"
 [node name="weaponDropped2" parent="." instance=ExtResource("7_3kiau")]
 position = Vector2(-70, 66)
 weaponKey = "chainsaw"
+
+[node name="Rohk The Boulder" parent="." instance=ExtResource("5_c0g3b")]
+position = Vector2(-108, -112)
+
+[node name="CarBoss" parent="." instance=ExtResource("6_3kiau")]
+position = Vector2(-68, 477)

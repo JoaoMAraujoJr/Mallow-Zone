@@ -1,0 +1,241 @@
+[gd_scene load_steps=13 format=3 uid="uid://dya4pn5fc83y8"]
+
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="1_1nm5o"]
+[ext_resource type="Script" uid="uid://drb6e5j81566p" path="res://Scripts/Unique/Classes/Pickable.gd" id="1_47yf2"]
+[ext_resource type="Texture2D" uid="uid://chd3l01ioqd0j" path="res://Assets/Textures/UI/Buttons/key.png" id="2_4je43"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="4_hkno7"]
+
+[sub_resource type="Animation" id="Animation_y5f0o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DroppedItem:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DroppedItem:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.9374999, 0.9477566)]
+}
+
+[sub_resource type="Animation" id="Animation_bjfpq"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DroppedItem:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DroppedItem:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.56666666, 1.1800001, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.13962634, 0.0, 0.16057029118347813, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shadow:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96666664, 1.94),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.9374999, 0.9477566), Vector2(1.452, 0.723), Vector2(1.9374999, 0.9477566)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnjce"]
+_data = {
+&"RESET": SubResource("Animation_y5f0o"),
+&"new_animation": SubResource("Animation_bjfpq")
+}
+
+[sub_resource type="Animation" id="Animation_hkno7"]
+resource_name = "topress"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("key:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.58, 0.96666664, 1.35, 2, 2.63, 3.01, 3.42, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 37), Vector2(0, 37), Vector2(0, 44), Vector2(0, 37), Vector2(0, 37), Vector2(0, 37), Vector2(0, 44), Vector2(0, 37), Vector2(0, 37)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("key:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.56666666, 0.96666664, 1.3666666, 2.6000001, 3, 3.4, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 0.56), Vector2(1, 1), Vector2(1, 1), Vector2(1, 0.56), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("key:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_weh0v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("key:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 37)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("key:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("key:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_stodb"]
+_data = {
+&"RESET": SubResource("Animation_weh0v"),
+&"topress": SubResource("Animation_hkno7")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_47yf2"]
+radius = 56.0357
+
+[sub_resource type="LabelSettings" id="LabelSettings_weh0v"]
+font = ExtResource("4_hkno7")
+font_size = 26
+
+[node name="PickableItem" type="Node2D"]
+script = ExtResource("1_47yf2")
+
+[node name="DroppedItem" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1.7690611, 1.7690611)
+
+[node name="shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2.3841858e-07, 16)
+scale = Vector2(1.9374999, 0.9477566)
+texture = ExtResource("1_1nm5o")
+
+[node name="DroppedItemAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xnjce")
+}
+autoplay = "new_animation"
+
+[node name="KeyAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_stodb")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_47yf2")
+
+[node name="key" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 37)
+
+[node name="keysprite" type="Sprite2D" parent="key"]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(0, 0.9999924)
+scale = Vector2(1.5812603, 1.5812603)
+texture = ExtResource("2_4je43")
+
+[node name="Label" type="Label" parent="key"]
+z_index = 5
+offset_left = -19.0
+offset_top = -1.0
+offset_right = 21.0
+offset_bottom = 41.0
+scale = Vector2(0.53870636, 0.53870636)
+pivot_offset = Vector2(19, 1)
+text = "E"
+label_settings = SubResource("LabelSettings_weh0v")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_uponBodyEnteredArea"]
+[connection signal="body_exited" from="Area2D" to="." method="_uponBodyExitedArea"]

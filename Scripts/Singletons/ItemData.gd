@@ -21,11 +21,13 @@ var weapons := {
 	"chainsaw": {
 		"weapon_scene": load("res://Scenes/items/guns/holdable/chainsaw.tscn"),
 		"texture": load("res://Assets/Textures/items/guns/chainsaw_spr.png"),
-		"max_ammo": 10,
+		"max_ammo": 99,
 		"waste": 1,
-		"ammo_value": 5
+		"ammo_value": 99
 	}
 }
-
+var consumables :={
+	
+}
 func get_weapon_names() -> Array:
 	return weapons.keys()

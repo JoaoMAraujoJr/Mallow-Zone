@@ -21,6 +21,8 @@ height = 40.0
 
 [node name="Player" type="CharacterBody2D" groups=["PlayerArea"]]
 script = ExtResource("1_cvnsp")
+max_health = 100
+health = 100
 
 [node name="EffectHandler" parent="." instance=ExtResource("2_d05bs")]
 z_index = 2
@@ -56,10 +58,6 @@ debug_color = Color(0, 0.5951596, 0.7232592, 0.41960785)
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_6t5aa")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(3.1200018, 3.1200018)
-position_smoothing_enabled = true
-
 [node name="LifeBar" type="TextureProgressBar" parent="."]
 offset_left = -23.0
 offset_top = 25.000002
@@ -77,6 +75,10 @@ texture_progress = ExtResource("7_8erm5")
 [node name="RegenTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(3.1200018, 3.1200018)
+position_smoothing_enabled = true
 
 [node name="Sounds" type="Node2D" parent="."]
 

@@ -135,12 +135,11 @@ func _getHitsApplied() -> void:
 	var bodies = _hitdetectArea.get_overlapping_bodies()
 	for body in bodies:
 		if body != self:
-			if body.has_method("addtoPushVelocity"):
+			if body is CharacterEntity:
 				var push_vector: Vector2 = (body.global_position - global_position).normalized() * CurrentSpeed*3
-				body.addtoPushVelocity(push_vector)
+				body.updateExternalForces("push",push_vector)
 				_canhit = false
-				if body.has_method("addToHealth"):
-					body.addToHealth(-int(CurrentSpeed/15))
+				body.addToHealth(-int(CurrentSpeed/15))
 				$Timers/DamageCoolDown.start()
 			elif body.has_method("setHealth"):
 				body.setHealth( -int(CurrentSpeed/10 ))

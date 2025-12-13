@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_xylue"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_8rbpu"]
 [ext_resource type="PackedScene" uid="uid://cdof1lf74pr0c" path="res://Scenes/backgrounds/background.tscn" id="2_tj5wv"]
-[ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="6_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://cu5yy7uvyjf25" path="res://Scenes/objects/asphalt/explosive_barrel_throwable.tscn" id="7_ienac"]
+[ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="8_5rrr5"]
 
 [sub_resource type="Gradient" id="Gradient_xylue"]
 offsets = PackedFloat32Array(0, 0.4041096, 0.7226027, 1)
@@ -71,24 +71,25 @@ autostart = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.8247342, 0.9340918, 0.9340918, 1)
 
-[node name="chainsawdropped" parent="." instance=ExtResource("6_tj5wv")]
-position = Vector2(-5, -97)
-weaponKey = "chainsaw"
-
-[node name="RifleDropped" parent="." instance=ExtResource("6_tj5wv")]
-position = Vector2(-114, -46)
-
-[node name="flameweapon" parent="." instance=ExtResource("6_tj5wv")]
-position = Vector2(101, -46)
-weaponKey = "flamethrower"
-
-[node name="explosiveBarrelThrowable" parent="." instance=ExtResource("7_ienac")]
-position = Vector2(-156, -10)
-
 [node name="explosiveBarrelThrowable2" parent="." instance=ExtResource("7_ienac")]
-position = Vector2(90, -103)
+position = Vector2(250, -158)
 
 [node name="explosiveBarrelThrowable3" parent="." instance=ExtResource("7_ienac")]
-position = Vector2(75, 83)
+position = Vector2(282, -62)
+
+[node name="PickableItem2" parent="." instance=ExtResource("8_5rrr5")]
+position = Vector2(-2, -66)
+get_by_approach = true
+PickableName = "flamethrower"
+
+[node name="PickableItem3" parent="." instance=ExtResource("8_5rrr5")]
+position = Vector2(129, -93)
+get_by_approach = true
+PickableName = "chainsaw"
+
+[node name="PickableItem" parent="." instance=ExtResource("8_5rrr5")]
+position = Vector2(-94, 37)
+get_by_approach = true
+PickableName = "rifle"
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

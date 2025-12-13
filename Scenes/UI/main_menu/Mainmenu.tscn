@@ -580,11 +580,18 @@ text = "play"
 
 [node name="CRT" type="ColorRect" parent="MenuUI"]
 material = SubResource("ShaderMaterial_q3nry")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -383.0
+offset_top = -215.99998
+offset_right = 2763.5889
+offset_bottom = 1572.6737
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.24375601, 0.24375601)
 mouse_filter = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="MenuUI"]
@@ -675,7 +682,7 @@ max_polyphony = 4
 bus = &"SFXReverb"
 
 [node name="Arrows" type="Node2D" parent="."]
-position = Vector2(507.00003, 316)
+position = Vector2(555, 331)
 scale = Vector2(1.9726124, 1.9726124)
 
 [node name="SkinArrowButton_R" parent="Arrows" instance=ExtResource("14_m7skv")]

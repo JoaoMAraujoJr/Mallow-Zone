@@ -182,6 +182,7 @@ y_sort_enabled = true
 mass = 20.0
 gravity_scale = 0.0
 script = ExtResource("1_nq37f")
+damage = -30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_36nog")

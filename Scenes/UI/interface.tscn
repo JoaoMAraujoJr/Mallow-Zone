@@ -32,7 +32,7 @@ shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wpqjx"]
 font = ExtResource("2_75fju")
-font_size = 32
+font_size = 22
 outline_size = 6
 outline_color = Color(1.269618, 1.269618, 1.269618, 0.3137255)
 shadow_size = 10
@@ -106,16 +106,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Ammo" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
-anchor_left = 0.82000005
-anchor_top = 0.106000006
-anchor_right = 0.82000005
-anchor_bottom = 0.106000006
-offset_left = -98.880005
-offset_top = -31.896002
-offset_right = 163.36737
-offset_bottom = 45.425068
+anchor_left = 0.845
+anchor_top = 0.11800001
+anchor_right = 0.845
+anchor_bottom = 0.11800001
+offset_left = -142.96002
+offset_top = -39.976
+offset_right = 119.287415
+offset_bottom = 37.34506
 grow_horizontal = 0
-scale = Vector2(0.6910793, 0.6910793)
 text = "Ammo: 0/25"
 label_settings = SubResource("LabelSettings_wpqjx")
 horizontal_alignment = 1
@@ -125,16 +124,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Kills" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
-anchor_left = 0.156
-anchor_top = 0.105000004
-anchor_right = 0.156
-anchor_bottom = 0.105000004
-offset_left = -90.90399
-offset_top = -33.68
-offset_right = 125.95073
-offset_bottom = 43.641075
+anchor_left = 0.18800001
+anchor_top = 0.11800001
+anchor_right = 0.18800001
+anchor_bottom = 0.11800001
+offset_left = -105.32001
+offset_top = -20.480003
+offset_right = 91.63692
+offset_bottom = 29.52
 grow_horizontal = 0
-scale = Vector2(0.6967743, 0.6967743)
 text = "0 kills"
 label_settings = SubResource("LabelSettings_wpqjx")
 horizontal_alignment = 1
@@ -142,11 +140,16 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="CoordRadarRect" type="TextureRect" parent="InterfaceCanvaLayer"]
-offset_left = 256.0
-offset_top = 11.0
-offset_right = 512.0
-offset_bottom = 139.0
-scale = Vector2(0.9260484, 0.9260484)
+anchors_preset = -1
+anchor_left = 0.49400002
+anchor_right = 0.49400002
+offset_left = -128.39203
+offset_top = -10.000001
+offset_right = 127.60797
+offset_bottom = 118.0
+grow_horizontal = 2
+scale = Vector2(0.56063807, 0.56063807)
+pivot_offset = Vector2(128.50299, 59.39214)
 texture = SubResource("ViewportTexture_na5jw")
 
 [node name="xy" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect"]
@@ -188,6 +191,7 @@ autowrap_mode = 3
 uppercase = true
 
 [node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
+offset_bottom = -360.0
 mouse_filter = 2
 
 [node name="Button" type="TextureButton" parent="InterfaceCanvaLayer"]
@@ -196,10 +200,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -13.0
-offset_right = 129.79999
-offset_bottom = 78.0
+offset_left = -31.0
+offset_top = -16.999985
+offset_right = 132.79999
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3734264, 0.3734264)

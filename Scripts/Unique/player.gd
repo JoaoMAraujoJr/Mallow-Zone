@@ -1,6 +1,6 @@
 # Attach this script to a CharacterBody2D node
-extends CharacterBody2D
-
+extends CharacterEntity
+class_name Player
 
 @onready var _iswalking : bool = false
 @onready var _isbackwards: bool= false
@@ -14,28 +14,17 @@ var _gun : Node2D
 @onready var _gunPivot : Marker2D = $GunPivot
 @onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $Sounds/NeedsAmmoAudioStream
 @onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
-@onready var _effectHandler: EffectHandler = $EffectHandler
 @onready var playerSkin : PlayerSkinManager = $PlayerSkinNode
 
 #bools go here i guess:
 @onready var can_shoot : bool = true
-@onready var isbeingpulled: bool = false
+
 
 
 @export var recoil_strength: float = 100.0  # tweak this value for push force
 @export var recoil_decay: float = 80.0       # how fast recoil decay
 
-var OriginalSpeed: float = 200.0
-var CurrentSpeed: float = 200.0
-var MaxSpeed :float = 400.0 
-
-@export_range(0, 100, 1) var health: int = 100
-
-var pushingforce: Vector2 = Vector2.ZERO
-var pullforce: Vector2 = Vector2.ZERO
 var recoil_velocity: Vector2 = Vector2.ZERO
-
-
 
 @export var max_camzoom :float = 0.4
 @export var min_camzoom :float = 1.0
@@ -43,7 +32,11 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 @onready var target_zoom : float = 0.6 
 @onready var cur_camzoom :float = target_zoom
 
+
 func _ready():
+	super._ready()
+	isAffectable = true
+	
 	call_deferred("_equipGun")
 	GameManager.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
@@ -61,7 +54,6 @@ func _physics_process(delta: float) -> void:
 		direction_and_action_handler()
 		update_player_motion(delta)
 		mouse_actions_handler()
-
 
 #PlayerBehavior Methods
 
@@ -104,16 +96,15 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		else:
 			_iswalking = false
 
-		if isbeingpulled:
-			velocity = ((input_vector * CurrentSpeed) + recoil_velocity + pushingforce + pullforce)
-		else:
-			velocity = ((input_vector * CurrentSpeed) + recoil_velocity + pushingforce)
-		
-		if velocity.length() > MaxSpeed:
-			velocity = velocity.normalized() * MaxSpeed
+
+		velocity = ((input_vector * speed) + recoil_velocity + pushingforce + pullingforce)
+
+		if velocity.length() > max_speed:
+			velocity = velocity.normalized() * max_speed
 		
 		recoil_velocity = recoil_velocity.move_toward(Vector2.ZERO, recoil_decay*delta)
-		pushingforce = pushingforce.move_toward(Vector2.ZERO, pushingforce.length() * 3 *delta)
+		
+		updateExternalForces("push", pushingforce.move_toward(Vector2.ZERO, pushingforce.length() * 3 *delta))
 		
 		move_and_slide()
 
@@ -138,39 +129,16 @@ func mouse_actions_handler():
 
 
 #AddTo Methods
-func addEffectToSelf(effect : Effect):
-	_effectHandler.addEffect(effect)
 
-func addToSpeed(Added :float):
-	var percentage = 1 + Added
-	CurrentSpeed *= percentage 
 
-func addToHealth(i:int) -> void:
-	if health + i >= 100:
-		health =100
-	elif (health + i < 0) or (health + i == 0):
-		health = 0
-		_canmove = false
-		GameManager.can_shoot=false
-	else : health += i
-	
+func uponDamage():
 	GameManager.player_health = health
 
-func addToPullVelocity(pullingVector : Vector2): #metodo de puxar o jogador
-	pullforce += pullingVector
-	isbeingpulled = true # precisa ser desativado ao sair da area do objeto puxador, use resetPulling()
+func Die():
+	_canmove = false
+	GameManager.can_shoot=false
+	
 
-func addtoPushVelocity(pushingVector : Vector2): #metodo de empurrar o jogador
-	pushingforce += pushingVector
-
-#Reset Methods
-func resetPulling():
-	pullforce = Vector2.ZERO
-	isbeingpulled = false
-
-func resetSpeed():
-	if CurrentSpeed != OriginalSpeed:
-		CurrentSpeed = OriginalSpeed
 
 #CameraMethods
 func _input(event):
@@ -184,6 +152,7 @@ func _input(event):
 func adjustCameraZoom(delta):
 	cur_camzoom = lerp(cur_camzoom, target_zoom, 10 * delta)  # 10 é a velocidade do lerp, ajuste como quiser
 	camera.zoom = Vector2.ONE * cur_camzoom
+
 
 #updateGunMethods
 func _equipGun():
@@ -203,15 +172,36 @@ func _equipGun():
 	_gun.position = _gunPivot.position
 	add_child(_gun)
 
+func _switchGun(newWeapon:String):
+	if !(newWeapon in ItemData.weapons.keys()):
+		return
+		
+	var oldWeapon = GameManager.currentEquipedWeaponType
+	
+	GameManager.currentEquipedWeaponType = newWeapon
+
+	GameManager.ammoMax = ItemData.weapons[newWeapon]["max_ammo"]
+	var newCurrentAmmo:int 
+	
+	if oldWeapon != "none" and oldWeapon != null:
+		newCurrentAmmo = floor(( GameManager.ammo * ItemData.weapons[newWeapon]["max_ammo"])/ItemData.weapons[oldWeapon]["max_ammo"])
+	else: 
+		newCurrentAmmo = ItemData.weapons[newWeapon]["max_ammo"]
+		
+	GameManager.ammo = newCurrentAmmo
+	_equipGun()
+	return oldWeapon
+
 func _dropGun():
 	var droppedgunKey: String = GameManager.currentEquipedWeaponType
 	GameManager.currentEquipedWeaponType = "none"
 	_equipGun()
-	var newdroppedgun = preload("res://Scenes/items/guns/pickable/droppedGun.tscn").instantiate()
+	var newdroppedgun :Pickable= preload("res://Scenes/items/pickable_item.tscn").instantiate()
 	newdroppedgun.global_position = global_position
-	newdroppedgun._setWeaponKey(droppedgunKey)
-	newdroppedgun._reloadTexture()
+	newdroppedgun.PickableName = droppedgunKey
+	newdroppedgun.setItemType("WEAPON")
 	get_tree().current_scene.add_child(newdroppedgun)
+	newdroppedgun.reloadTexture()
 
 #SoundMethods
 func _playReloadSound():
@@ -220,10 +210,8 @@ func _playReloadSound():
 
 #TimerMethods
 func _on_regen_timer_timeout() -> void:
-	if health < 100 :
-		health += 1
-	else:
-		health=100
+	health += 3
+
 
 #GetMethods
 func getRandomPlayerAreaCoordinates() -> Vector2:
