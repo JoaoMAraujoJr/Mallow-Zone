@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 signal skin_changed(new_skin: String)
 

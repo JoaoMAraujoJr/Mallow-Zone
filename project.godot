@@ -18,7 +18,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 config/name="Mellow Zone"
 run/main_scene="uid://dq7b8pjm2yyqv"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bnoyyubederp7"
 
 [audio]
 

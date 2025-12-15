@@ -580,18 +580,12 @@ text = "play"
 
 [node name="CRT" type="ColorRect" parent="MenuUI"]
 material = SubResource("ShaderMaterial_q3nry")
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -383.0
-offset_top = -215.99998
-offset_right = 2763.5889
-offset_bottom = 1572.6737
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.24375601, 0.24375601)
+scale = Vector2(1.0172144, 1.0172144)
 mouse_filter = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="MenuUI"]
@@ -681,14 +675,22 @@ volume_db = -6.0
 max_polyphony = 4
 bus = &"SFXReverb"
 
-[node name="Arrows" type="Node2D" parent="."]
-position = Vector2(555, 331)
+[node name="Arrows" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 543.0
+offset_top = 331.0
+offset_right = 543.0
+offset_bottom = 331.0
 scale = Vector2(1.9726124, 1.9726124)
 
 [node name="SkinArrowButton_R" parent="Arrows" instance=ExtResource("14_m7skv")]
-position = Vector2(44.61087, 0)
+layout_mode = 0
+offset_left = 44.61087
+offset_right = 44.61087
 
 [node name="SkinArrowButton_L" parent="Arrows" instance=ExtResource("14_m7skv")]
+layout_mode = 0
 type = 1
 
 [connection signal="finished" from="MenuUI/MenuMusic" to="MenuUI" method="_on_menu_music_finished"]

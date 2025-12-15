@@ -106,7 +106,7 @@ func setHealth(addedAmount : int)-> void:
 		_animatedSprite.queue_free()
 		$CollisionShape2D.queue_free()
 		# increase kill count
-		Global.kills += 1 
+		GameManager.kills += 1 
 
 		# play death sound
 		_deathAudioStream.pitch_scale = randf_range(0.9, 1.9)

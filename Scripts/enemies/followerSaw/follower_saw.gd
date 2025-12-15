@@ -7,7 +7,7 @@ extends RigidBody2D
 @onready var _damage_timer: Timer = $DamageTimer 
 @onready var _deleteItSelf: Timer = $DeleteitSelfTimer
 @onready var _audioStream : AudioStreamPlayer2D = $AudioStreamPlayer2D
-@onready var _sawSprite : Sprite2D = $Saw
+@onready var _sawSprite : Sprite2D = $Sprite2D
 
 @export var damage = -20
 

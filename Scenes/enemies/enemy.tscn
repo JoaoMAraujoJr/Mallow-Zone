@@ -82,6 +82,8 @@ animations = [{
 y_sort_enabled = true
 disable_mode = 2
 script = ExtResource("1_hghv2")
+max_health = 3
+health = 3
 
 [node name="EffectHandler" parent="." instance=ExtResource("2_5d1s0")]
 z_index = 1

@@ -191,7 +191,8 @@ autowrap_mode = 3
 uppercase = true
 
 [node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
-offset_bottom = -360.0
+offset_top = 355.0
+offset_bottom = -5.0
 mouse_filter = 2
 
 [node name="Button" type="TextureButton" parent="InterfaceCanvaLayer"]

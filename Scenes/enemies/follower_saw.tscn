@@ -25,7 +25,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Saw:rotation")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +49,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Saw:scale")
+tracks/2/path = NodePath("Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -78,7 +78,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Saw:rotation")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -102,7 +102,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Saw:scale")
+tracks/2/path = NodePath("Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -118,7 +118,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Saw:rotation")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -193,11 +193,11 @@ shape = SubResource("CircleShape2D_36nog")
 shape = SubResource("CircleShape2D_ghqmr")
 debug_color = Color(0.6976559, 0.47439355, 0.38469806, 0.41960785)
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="."]
 scale = Vector2(0.6208293, 0.6208293)
 texture = ExtResource("3_ghqmr")
 
-[node name="Saw" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.9123621, 1.9123621)
 texture = SubResource("CanvasTexture_ghqmr")
 

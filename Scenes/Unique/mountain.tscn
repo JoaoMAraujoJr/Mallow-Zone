@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dw7en77yhx7it"]
+
+[ext_resource type="Texture2D" uid="uid://dn2d5bkyctki" path="res://Assets/Textures/floors/terrain/mountain.png" id="1_cx0gk"]
+[ext_resource type="Script" uid="uid://chnaluor5aw1o" path="res://Scripts/Unique/terrain/mountain.gd" id="1_fttky"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="2_fttky"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cx0gk"]
+radius = 443.46512
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fttky"]
+radius = 155.32225
+
+[node name="mountain" type="StaticBody2D"]
+script = ExtResource("1_fttky")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.48108947, 0.48108947)
+texture = ExtResource("1_cx0gk")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.48108947, 0.48108947)
+texture = ExtResource("2_fttky")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.48108947, 0.48108947)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cx0gk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(1.0129993, 1.0129993)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.0129993, 1.0129993)
+shape = SubResource("CircleShape2D_fttky")
+disabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

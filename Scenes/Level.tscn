@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://216kvumeoqpb"]
+[gd_scene load_steps=13 format=3 uid="uid://216kvumeoqpb"]
 
 [ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/Unique/level.gd" id="1_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="1_vsvp5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cdof1lf74pr0c" path="res://Scenes/backgrounds/background.tscn" id="2_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://cu5yy7uvyjf25" path="res://Scenes/objects/asphalt/explosive_barrel_throwable.tscn" id="7_ienac"]
 [ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="8_5rrr5"]
+[ext_resource type="PackedScene" uid="uid://dw7en77yhx7it" path="res://Scenes/Unique/mountain.tscn" id="8_or7tv"]
 
 [sub_resource type="Gradient" id="Gradient_xylue"]
 offsets = PackedFloat32Array(0, 0.4041096, 0.7226027, 1)
@@ -79,17 +80,23 @@ position = Vector2(282, -62)
 
 [node name="PickableItem2" parent="." instance=ExtResource("8_5rrr5")]
 position = Vector2(-2, -66)
-get_by_approach = true
 PickableName = "flamethrower"
 
 [node name="PickableItem3" parent="." instance=ExtResource("8_5rrr5")]
 position = Vector2(129, -93)
-get_by_approach = true
 PickableName = "chainsaw"
 
 [node name="PickableItem" parent="." instance=ExtResource("8_5rrr5")]
 position = Vector2(-94, 37)
-get_by_approach = true
 PickableName = "rifle"
+
+[node name="mountain" parent="." instance=ExtResource("8_or7tv")]
+position = Vector2(-335, -135)
+
+[node name="mountain2" parent="." instance=ExtResource("8_or7tv")]
+position = Vector2(6, -300)
+
+[node name="mountain3" parent="." instance=ExtResource("8_or7tv")]
+position = Vector2(368, -182)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
