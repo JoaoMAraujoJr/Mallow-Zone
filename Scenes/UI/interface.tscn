@@ -91,7 +91,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="InterfaceCanvaLayer" type="CanvasLayer" parent="."]
 
@@ -102,7 +101,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="Ammo" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
@@ -120,7 +118,6 @@ label_settings = SubResource("LabelSettings_wpqjx")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="Kills" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
@@ -191,8 +188,6 @@ autowrap_mode = 3
 uppercase = true
 
 [node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
-offset_top = 355.0
-offset_bottom = -5.0
 mouse_filter = 2
 
 [node name="Button" type="TextureButton" parent="InterfaceCanvaLayer"]

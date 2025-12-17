@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://8nfq8meb3toa"]
+
+[ext_resource type="Script" uid="uid://bwh1kydd7bhjk" path="res://Scripts/UI/cursor.gd" id="1_62ffu"]
+[ext_resource type="Texture2D" uid="uid://34hcw31spnb6" path="res://Assets/Textures/UI/cursor/open_cursor2.png" id="2_7a3k2"]
+[ext_resource type="Texture2D" uid="uid://crp0hjn4u4w2j" path="res://Assets/Textures/UI/cursor/open_cursor1.png" id="3_bxphg"]
+[ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="4_1iscq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jashu"]
+atlas = ExtResource("2_7a3k2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk6y5"]
+atlas = ExtResource("3_bxphg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t3q65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jashu")
+}],
+"loop": true,
+"name": &"click",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk6y5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_kure6"]
+_data = [Vector2(0.10645161, 0.78023404), 0.0, 0.0, 0, 0, Vector2(0.26774195, 0.019505858), 0.0, 0.0, 0, 0, Vector2(0.5129032, 0.6449935), 0.0, 0.0, 0, 0, Vector2(0.7935484, 0.5013004), 0.0, 0.0, 0, 0, Vector2(0.91612905, 0.9239272), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_0jbah"]
+curve = SubResource("Curve_kure6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tl36c"]
+shader = ExtResource("4_1iscq")
+shader_parameter/curve = SubResource("CurveTexture_0jbah")
+shader_parameter/rotation_speed = -1.0
+shader_parameter/distortion_strength = 0.6
+shader_parameter/iridescence_scale = 3.0
+shader_parameter/iridescence_intensity = 0.5
+shader_parameter/light_dir = Vector2(0.5, -0.5)
+shader_parameter/scroll = Vector2(0, 0)
+shader_parameter/angle_deg = 0.0
+
+[node name="cursor" type="Node2D"]
+script = ExtResource("1_62ffu")
+
+[node name="cursorOutline" type="AnimatedSprite2D" parent="."]
+clip_children = 1
+scale = Vector2(0.774387, 0.774387)
+sprite_frames = SubResource("SpriteFrames_t3q65")
+animation = &"click"
+
+[node name="ColorRect" type="ColorRect" parent="cursorOutline"]
+material = SubResource("ShaderMaterial_tl36c")
+offset_left = -28.409567
+offset_top = -32.2836
+offset_right = 42.61435
+offset_bottom = 37.448975
+mouse_filter = 2
+
+[node name="cursor" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.703125, 0.703125)
+sprite_frames = SubResource("SpriteFrames_t3q65")
+animation = &"click"

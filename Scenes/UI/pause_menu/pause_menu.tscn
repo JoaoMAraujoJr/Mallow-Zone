@@ -1,0 +1,476 @@
+[gd_scene load_steps=20 format=3 uid="uid://kviofjbantkf"]
+
+[ext_resource type="Script" uid="uid://ba1xa8mi2qtj3" path="res://Scripts/UI/pause_menu.gd" id="1_6y0ft"]
+[ext_resource type="Texture2D" uid="uid://ikj04knqcjh2" path="res://Assets/Textures/UI/PauseMenu/ScreemCrack.png" id="1_g2bbq"]
+[ext_resource type="Shader" uid="uid://byliyvhuyk4ai" path="res://Scripts/shaders/blur.gdshader" id="1_mwi5l"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="1_xf76s"]
+[ext_resource type="Texture2D" uid="uid://d3g4d3o6uigpu" path="res://Assets/Textures/UI/PauseMenu/ScreemCrack_inside_mask.png" id="2_mwi5l"]
+[ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="3_6y0ft"]
+[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="4_cngij"]
+[ext_resource type="PackedScene" uid="uid://8nfq8meb3toa" path="res://Scenes/UI/cursor.tscn" id="8_cngij"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6y0ft"]
+shader = ExtResource("1_mwi5l")
+shader_parameter/blur_strength = 2.0
+
+[sub_resource type="Curve" id="Curve_vmtwu"]
+_data = [Vector2(0.038709678, 0.17165148), 0.0, 0.0, 0, 0, Vector2(0.16451612, 0.6703511), 0.0, 0.0, 0, 0, Vector2(0.5322581, 0.5942783), 0.0, 0.0, 0, 0, Vector2(0.7451613, 0.81404424), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_crbjc"]
+curve = SubResource("Curve_vmtwu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtob6"]
+shader = ExtResource("3_6y0ft")
+shader_parameter/curve = SubResource("CurveTexture_crbjc")
+shader_parameter/rotation_speed = -1.0
+shader_parameter/distortion_strength = 0.6
+shader_parameter/iridescence_scale = 1.5290000726275
+shader_parameter/iridescence_intensity = 0.230000010925
+shader_parameter/light_dir = Vector2(1.05, -0.5)
+shader_parameter/scroll = Vector2(0, 0)
+shader_parameter/angle_deg = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s0jth"]
+shader = ExtResource("4_cngij")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 2.0
+shader_parameter/vignette_intensity = 0.63600003021
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_cngij"]
+device = -1
+pressed = true
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_vmtwu"]
+events = [SubResource("InputEventKey_cngij")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2bbq"]
+font = ExtResource("1_xf76s")
+font_size = 37
+outline_size = 1
+
+[sub_resource type="Animation" id="Animation_mwi5l"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/screenCrack:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/SideMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/SideMenu/ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/SideMenu/Options:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/SideMenu/Options/resume:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer/SideMenu/Options/options:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/SideMenu/Options/quit:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CanvasLayer/SideMenu/Label:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.02, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".:canUnpause")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.03333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_6y0ft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/screenCrack:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/SideMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/SideMenu/ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/SideMenu/Options:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/SideMenu/Options/resume:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer/SideMenu/Options/options:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/SideMenu/Options/quit:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CanvasLayer/SideMenu/Label:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".:canUnpause")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cngij"]
+_data = {
+&"RESET": SubResource("Animation_6y0ft"),
+&"Show": SubResource("Animation_mwi5l")
+}
+
+[node name="PauseMenu" type="Control" groups=["PauseMenu"]]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6y0ft")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_6y0ft")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="screenCrack" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_bottom = 143.0
+grow_horizontal = 0
+pivot_offset = Vector2(170, 0)
+
+[node name="crack" type="Sprite2D" parent="CanvasLayer/screenCrack"]
+position = Vector2(170, -1)
+texture = ExtResource("1_g2bbq")
+offset = Vector2(-129, 128)
+
+[node name="rainbow" type="Sprite2D" parent="CanvasLayer/screenCrack"]
+clip_children = 1
+position = Vector2(170, -1)
+texture = ExtResource("2_mwi5l")
+offset = Vector2(-129, 128)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/screenCrack/rainbow"]
+material = SubResource("ShaderMaterial_rtob6")
+anchors_preset = -1
+anchor_left = 1.008
+anchor_right = 1.008
+offset_left = -417.048
+offset_right = -257.048
+offset_bottom = 164.0
+metadata/_edit_use_anchors_ = true
+
+[node name="vhs" type="Sprite2D" parent="CanvasLayer/screenCrack"]
+clip_children = 1
+position = Vector2(170, -1)
+texture = ExtResource("2_mwi5l")
+offset = Vector2(-129, 128)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/screenCrack/vhs"]
+material = SubResource("ShaderMaterial_s0jth")
+anchors_preset = -1
+anchor_left = 1.008
+anchor_right = 1.008
+offset_left = -417.048
+offset_right = -257.048
+offset_bottom = 164.0
+
+[node name="SideMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -216.0
+offset_right = 202.0
+offset_bottom = 215.0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SideMenu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -785.03094
+offset_top = -826.1395
+offset_right = 174.16089
+offset_bottom = 976.1669
+grow_vertical = 2
+rotation = -0.059006196
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Options" type="VBoxContainer" parent="CanvasLayer/SideMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.064
+anchor_top = 0.61200005
+anchor_right = 0.064
+anchor_bottom = 0.61200005
+offset_left = 0.07200146
+offset_top = -66.77203
+offset_right = 196.072
+offset_bottom = 91.22797
+grow_vertical = 2
+scale = Vector2(0.8456239, 0.8456239)
+
+[node name="resume" type="Button" parent="CanvasLayer/SideMenu/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xf76s")
+theme_override_font_sizes/font_size = 26
+shortcut = SubResource("Shortcut_vmtwu")
+text = "Resume"
+flat = true
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="options" type="Button" parent="CanvasLayer/SideMenu/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xf76s")
+theme_override_font_sizes/font_size = 26
+text = "Options"
+flat = true
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="quit" type="Button" parent="CanvasLayer/SideMenu/Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xf76s")
+theme_override_font_sizes/font_size = 26
+text = "Quit Game"
+flat = true
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/SideMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.054
+anchor_top = 0.19000001
+anchor_right = 0.054
+anchor_bottom = 0.19000001
+offset_left = 0.09200001
+offset_top = 0.10999298
+offset_right = 188.092
+offset_bottom = 64.10999
+grow_vertical = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_g2bbq")
+
+[node name="cursor" parent="CanvasLayer/SideMenu" instance=ExtResource("8_cngij")]
+position = Vector2(284, 162)
+
+[node name="AppearAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cngij")
+}
+
+[node name="PauseCooldown" type="Timer" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/SideMenu/Options/resume" to="." method="_on_resume_pressed"]
+[connection signal="timeout" from="PauseCooldown" to="." method="_on_pause_cooldown_timeout"]

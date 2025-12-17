@@ -6,10 +6,6 @@ extends Node2D
 
 
 
-func _on_damage_area_area_entered(area: Area2D) -> void:
-	if area.get_parent() is CharacterDamageable or area.get_parent() is RigidDamageable:
-		area.get_parent().addEffectToSelf(burning)
-		print("player detected")
 func killOil():
 	queue_free()
 
