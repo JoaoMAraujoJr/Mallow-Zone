@@ -11,4 +11,4 @@ func _ready():
 				return
 			var instance = random_scene.instantiate()
 			instance .global_position = global_position
-			get_tree().current_scene.add_child(instance)
+			get_tree().current_scene.add_child.call_deferred(instance)

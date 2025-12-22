@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d13qxpghckkcj"
-path="res://.godot/imported/bush_bluberry.png-c956d2893beafa446850ace21e3588ab.ctex"
+uid="uid://bdjoyyv2ie8a4"
+path="res://.godot/imported/floortexture_2.png-b334e89e238e7c26a84ec40e2ad0bed9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/entities/objects/Forest/bush_bluberry.png"
-dest_files=["res://.godot/imported/bush_bluberry.png-c956d2893beafa446850ace21e3588ab.ctex"]
+source_file="res://Assets/Textures/floors/salty_water/floortexture_2.png"
+dest_files=["res://.godot/imported/floortexture_2.png-b334e89e238e7c26a84ec40e2ad0bed9.ctex"]
 
 [params]
 

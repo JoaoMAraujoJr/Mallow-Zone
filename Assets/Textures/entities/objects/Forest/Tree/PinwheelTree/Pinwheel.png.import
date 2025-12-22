@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h7noi1dii1cv"
-path="res://.godot/imported/candyTree_1.png-a9a0cc4fdf6942d96843e1cc591005ad.ctex"
+uid="uid://chhl2w2n5bjxk"
+path="res://.godot/imported/Pinwheel.png-649220bea6f31f6ba8a306d0fe26bc59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/entities/objects/Forest/candyTree_1.png"
-dest_files=["res://.godot/imported/candyTree_1.png-a9a0cc4fdf6942d96843e1cc591005ad.ctex"]
+source_file="res://Assets/Textures/entities/objects/Forest/Tree/PinwheelTree/Pinwheel.png"
+dest_files=["res://.godot/imported/Pinwheel.png-649220bea6f31f6ba8a306d0fe26bc59.ctex"]
 
 [params]
 

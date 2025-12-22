@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgckeryun22ry"
-path="res://.godot/imported/bush_empty.png-8075a49b250afa3de4f86dd76bac62a3.ctex"
+uid="uid://dvycpfmpy23pc"
+path="res://.godot/imported/candyTree_2.png-f4c0aef253933b69815ebb05798f2f74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/entities/objects/Forest/bush_empty.png"
-dest_files=["res://.godot/imported/bush_empty.png-8075a49b250afa3de4f86dd76bac62a3.ctex"]
+source_file="res://Assets/Textures/entities/objects/Forest/Tree/CandyTree/candyTree_2.png"
+dest_files=["res://.godot/imported/candyTree_2.png-f4c0aef253933b69815ebb05798f2f74.ctex"]
 
 [params]
 
