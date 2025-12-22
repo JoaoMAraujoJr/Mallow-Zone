@@ -20,7 +20,7 @@ texture = ExtResource("2_uostt")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="damageArea" type="Area2D" parent="." groups=["Bullet"]]
+[node name="damageArea" type="Area2D" parent="." groups=["Bullet", "canInteract"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damageArea"]
 shape = SubResource("CircleShape2D_oduel")

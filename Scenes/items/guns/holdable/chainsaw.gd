@@ -82,8 +82,6 @@ func _on_damage_area_area_entered(area: Area2D) -> void:
 		var enemy = area.get_parent()
 		if enemy.has_method("setHealth"):
 			enemy.setHealth(-damage)
-	elif area.is_in_group("Interactable"):
-		area.get_parent().TurnedOn = true
 	pass # Replace with function body.
 
 

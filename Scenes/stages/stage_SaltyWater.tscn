@@ -105,6 +105,7 @@ offset_top = -511.0029
 offset_right = -257.4956
 offset_bottom = -255.0029
 scale = Vector2(4.0157127, 4.0157127)
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="top/SubViewportContainer"]
 transparent_bg = true

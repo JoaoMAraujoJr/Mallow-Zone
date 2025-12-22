@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbf4muc7d60h"]
+[gd_scene load_steps=17 format=3 uid="uid://cbf4muc7d60h"]
 
-[ext_resource type="Script" uid="uid://b1q8sm0ok75hi" path="res://Scripts/objects/tree.gd" id="1_0yjm6"]
+[ext_resource type="Script" uid="uid://dxl83axbgoc4c" path="res://Scripts/Unique/Classes/Tree.gd" id="1_ryksv"]
 [ext_resource type="Texture2D" uid="uid://b0417p1208j21" path="res://Assets/objects/tree.png" id="1_uvtpv"]
+[ext_resource type="PackedScene" uid="uid://kdb60air4lgi" path="res://Scenes/objects/Fruit.tscn" id="2_fh86l"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_n5ney"]
+[ext_resource type="Texture2D" uid="uid://bdclujmi00jys" path="res://Assets/objects/tree_root.png" id="3_dl5hb"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="3_j8h35"]
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uopmo"]
+[ext_resource type="PackedScene" uid="uid://c7xbhtxd03xn4" path="res://Scenes/particles/tree_explossion_particles.tscn" id="4_dkidj"]
 [ext_resource type="AudioStream" uid="uid://btsnqmg6ydpwl" path="res://Assets/Sounds/Wood Crash.wav" id="6_ryksv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryksv"]
@@ -88,11 +91,17 @@ _data = {
 radius = 4.0085382
 height = 27.487118
 
-[node name="tree" type="StaticBody2D" groups=["Interactable"]]
+[node name="tree" type="Node2D" groups=["Interactable"]]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(3.492545, 3.492545)
-script = ExtResource("1_0yjm6")
+script = ExtResource("1_ryksv")
+fruitScene = ExtResource("2_fh86l")
+rootTexture = ExtResource("3_dl5hb")
+TreeParticles = ExtResource("4_dkidj")
+usageType = 1
+interactionType = 2
+maxAmmountOfInteractions = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
@@ -106,8 +115,12 @@ script = ExtResource("3_j8h35")
 position = Vector2(-14.1698265, -53.79228)
 scale = Vector2(0.9999999, 0.9999999)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.28632417, 6.0128074)
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(0.28632414, 6.012807)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(2.9802322e-08, 9.536743e-07)
 shape = SubResource("CapsuleShape2D_uvtpv")
 
 [node name="log" type="LightOccluder2D" parent="."]
@@ -122,9 +135,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_gbq6h")
 }
 
-[node name="shootDetector" type="Area2D" parent="." groups=["Interactable"]]
+[node name="TreeArea2D" type="Area2D" parent="." groups=["Interactable"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shootDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea2D"]
 position = Vector2(0.28632414, 0)
 shape = SubResource("CapsuleShape2D_uopmo")
 
@@ -145,5 +158,3 @@ scale = Vector2(0.9999999, 0.9999999)
 stream = ExtResource("6_ryksv")
 volume_db = -2.0
 bus = &"SFXReverb"
-
-[connection signal="area_entered" from="shootDetector" to="." method="_on_shoot_detector_area_entered"]

@@ -26,7 +26,5 @@ func _on_damage_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Damageble") and area.get_parent().has_method("setHealth") :
 		area.get_parent().setHealth(damage)
 		queue_free()
-	if area.get_parent().is_in_group("Interactable"):
-		area.get_parent().TurnedOn = true
-		queue_free()
+
 	pass # Replace with function body.

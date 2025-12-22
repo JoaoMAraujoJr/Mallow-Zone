@@ -60,6 +60,7 @@ Interactable=""
 Damageble=""
 ChunkLoader=""
 Boss="A group for all bosses in the game"
+canInteract="group for nodes that can interact with the Interactable Class"
 
 [input]
 
