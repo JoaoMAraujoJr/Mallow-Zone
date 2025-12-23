@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://216kvumeoqpb"]
+[gd_scene load_steps=12 format=3 uid="uid://216kvumeoqpb"]
 
 [ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/Unique/level.gd" id="1_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="1_vsvp5"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_xylue"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_8rbpu"]
 [ext_resource type="PackedScene" uid="uid://cdof1lf74pr0c" path="res://Scenes/backgrounds/background.tscn" id="2_tj5wv"]
+[ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="7_ienac"]
 [ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="8_5rrr5"]
 
 [sub_resource type="Gradient" id="Gradient_xylue"]
@@ -47,6 +48,7 @@ environment = SubResource("Environment_xylue")
 isthisroot = true
 
 [node name="Player" parent="." instance=ExtResource("2_8rbpu")]
+visible = false
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, 17)
@@ -71,15 +73,19 @@ autostart = true
 color = Color(0.8247342, 0.9340918, 0.9340918, 1)
 
 [node name="PickableItem2" parent="." instance=ExtResource("8_5rrr5")]
+visible = false
 position = Vector2(-2, -66)
 PickableName = "flamethrower"
 
 [node name="PickableItem3" parent="." instance=ExtResource("8_5rrr5")]
-position = Vector2(129, -93)
+position = Vector2(-202, -93)
 PickableName = "chainsaw"
 
 [node name="PickableItem" parent="." instance=ExtResource("8_5rrr5")]
-position = Vector2(-94, 37)
+position = Vector2(-197, 37)
 PickableName = "rifle"
+
+[node name="LevelWarper" parent="." instance=ExtResource("7_ienac")]
+position = Vector2(-72, -65)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
