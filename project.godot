@@ -18,6 +18,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 config/name="Mellow Zone"
 run/main_scene="uid://dq7b8pjm2yyqv"
 config/features=PackedStringArray("4.5", "Forward Plus")
+run/max_fps=30
 config/icon="uid://bnoyyubederp7"
 
 [audio]
@@ -36,10 +37,10 @@ DayTimeManager="*res://Scripts/Singletons/DayTimeManager.gd"
 
 [display]
 
-window/size/viewport_width=768
-window/size/viewport_height=432
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=854
+window/size/window_height_override=480
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
@@ -135,3 +136,8 @@ Pause={
 
 textures/canvas_textures/default_texture_filter=3
 2d/snap/snap_2d_transforms_to_pixel=true
+2d/stretch/aspect="expand"
+2d/stretch/mode="viewport"
+2d/size/window_height_override=480
+2d/size/window_width_override=854
+2d/max_fps=30

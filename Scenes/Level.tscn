@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://216kvumeoqpb"]
+[gd_scene load_steps=13 format=3 uid="uid://216kvumeoqpb"]
 
 [ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/Unique/level.gd" id="1_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="1_vsvp5"]
@@ -8,12 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="7_ienac"]
 [ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="8_5rrr5"]
 
-[sub_resource type="Gradient" id="Gradient_xylue"]
-offsets = PackedFloat32Array(0, 0.4041096, 0.7226027, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.033529483, 0.13237768, 0.038184483, 1, 0.41960785, 0.5019608, 0.1882353, 1, 1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_ienac"]
+offsets = PackedFloat32Array(0, 0.2939189, 1)
+colors = PackedColorArray(0, 0, 0.0627451, 1, 0.25550973, 0.21084356, 0.18943366, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tj5wv"]
-gradient = SubResource("Gradient_xylue")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5rrr5"]
+gradient = SubResource("Gradient_ienac")
 
 [sub_resource type="Environment" id="Environment_xylue"]
 background_mode = 3
@@ -28,7 +28,10 @@ glow_bloom = 0.29
 glow_blend_mode = 1
 adjustment_enabled = true
 adjustment_contrast = 1.1
-adjustment_color_correction = SubResource("GradientTexture1D_tj5wv")
+adjustment_color_correction = SubResource("GradientTexture2D_5rrr5")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ienac"]
+blend_mode = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tj5wv"]
 blend_mode = 3
@@ -48,10 +51,22 @@ environment = SubResource("Environment_xylue")
 isthisroot = true
 
 [node name="Player" parent="." instance=ExtResource("2_8rbpu")]
-visible = false
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, 17)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("CanvasItemMaterial_ienac")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0012396049
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

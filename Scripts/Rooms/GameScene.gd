@@ -107,8 +107,8 @@ func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 
 	# Instantiate new stage
 	var new_stage : Stage = StageScene.instantiate()
-	new_stage.position = markerposition
-	add_child(new_stage)
+	new_stage.global_position = markerposition
+	add_child.call_deferred(new_stage)
 	trigger.queue_free()
 	#print("Stage spawnada em: ", new_stage.global_position)
 	

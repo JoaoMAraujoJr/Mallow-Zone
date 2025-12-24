@@ -31,7 +31,7 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 @export var zoom_speed : float = 0.1 
 @onready var target_zoom : float = 0.6 
 @onready var cur_camzoom :float = target_zoom
-
+@onready var viewBobbing : float = 2
 
 func _ready():
 	super._ready()
@@ -85,6 +85,8 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		var input_vector = Vector2.ZERO
 		input_vector.x = Input.get_action_strength("Walk_right") - Input.get_action_strength("Walk_left")
 		input_vector.y = Input.get_action_strength("Walk_down") - Input.get_action_strength("Walk_up")
+		
+		camera.rotation_degrees = input_vector.x * viewBobbing
 		
 		if input_vector == Vector2.ZERO and Input.is_action_pressed("Mouse_right"):
 			input_vector = get_global_mouse_position() - global_position

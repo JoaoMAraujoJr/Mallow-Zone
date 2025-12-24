@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	ammo = GameManager.ammo
 	_ammolabel.text = "Ammo: " + str(ammo) + "/ " + str(GameManager.ammoMax)
 	_killslabel.text= str(GameManager.kills) + " Kills"
-	_coords.text = " %.2f \n %.2f" % [GameManager.player_x, GameManager.player_y]
+	_coords.text = "X: %.2f \n Y: %.2f" % [GameManager.player_x, GameManager.player_y]
 	
 
 	

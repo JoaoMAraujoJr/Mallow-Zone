@@ -57,7 +57,7 @@ script = ExtResource("1_62ffu")
 clip_children = 1
 scale = Vector2(0.774387, 0.774387)
 sprite_frames = SubResource("SpriteFrames_t3q65")
-animation = &"click"
+autoplay = "default"
 
 [node name="ColorRect" type="ColorRect" parent="cursorOutline"]
 material = SubResource("ShaderMaterial_tl36c")
@@ -70,4 +70,4 @@ mouse_filter = 2
 [node name="cursor" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.703125, 0.703125)
 sprite_frames = SubResource("SpriteFrames_t3q65")
-animation = &"click"
+autoplay = "default"
