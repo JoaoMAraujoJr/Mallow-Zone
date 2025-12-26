@@ -103,9 +103,6 @@ position = Vector2(-410, 0)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_jmaar")
 
-[node name="AmmoSpawnMarker" type="Marker2D" parent="."]
-visible = false
-
 [connection signal="body_entered" from="Triggers/Trigger_Right" to="." method="_on_trigger_right_entered"]
 [connection signal="body_entered" from="Triggers/Trigger_Up" to="." method="_on_trigger_up_entered"]
 [connection signal="body_entered" from="Triggers/Trigger_Left" to="." method="_on_trigger_left_entered"]

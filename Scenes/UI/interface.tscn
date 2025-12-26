@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=22 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/UI/mousefollow.tscn" id="5_r04jc"]
 [ext_resource type="Texture2D" uid="uid://xbsw0258yluo" path="res://Assets/button/reset_button_pressed.png" id="5_uwsgx"]
 [ext_resource type="Texture2D" uid="uid://bbjp1fswxcn8u" path="res://Assets/button/reset_button_hover.png" id="6_r04jc"]
+[ext_resource type="Texture2D" uid="uid://24mvdq1hhxy" path="res://Assets/Textures/UI/cursor/cursor_mask_.png" id="7_kp8ok"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_apajn"]
@@ -156,22 +157,63 @@ anchor_left = 0.448
 anchor_top = 0.08400001
 anchor_right = 0.448
 anchor_bottom = 0.08400001
-offset_left = -50.62256
+offset_left = -26.986923
 offset_top = 14.084713
-offset_right = 1699.2021
+offset_right = 1461.6381
 offset_bottom = 589.0847
 grow_horizontal = 2
 scale = Vector2(0.078064285, 0.078064285)
-text = "x:1111111111111111
-y:1111111111111"
+text = "111111111111111111111
+1111111111111111111"
 label_settings = SubResource("LabelSettings_x2tka")
 vertical_alignment = 1
 autowrap_mode = 2
+justification_flags = 129
 clip_text = true
 uppercase = true
+max_lines_visible = 2
+
+[node name="xy" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.08400001
+anchor_right = 0.448
+anchor_bottom = 0.08400001
+offset_left = -52.59218
+offset_top = 14.084713
+offset_right = 275.41028
+offset_bottom = 589.0847
+grow_horizontal = 2
+scale = Vector2(0.078064285, 0.078064285)
+text = "x:
+Y:"
+label_settings = SubResource("LabelSettings_x2tka")
+vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 129
+clip_text = true
+uppercase = true
+max_lines_visible = 2
 
 [node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
 mouse_filter = 2
+
+[node name="Mouse mask" type="TextureRect" parent="InterfaceCanvaLayer"]
+top_level = true
+clip_children = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("7_kp8ok")
+
+[node name="Mousefollow" parent="InterfaceCanvaLayer/Mouse mask" instance=ExtResource("5_r04jc")]
+position = Vector2(723, 283)
+scale = Vector2(2.0352337, 1.9654197)
 
 [node name="Button" type="TextureButton" parent="InterfaceCanvaLayer"]
 anchors_preset = 8
@@ -191,11 +233,6 @@ texture_normal = ExtResource("4_yg6la")
 texture_pressed = ExtResource("5_uwsgx")
 texture_hover = ExtResource("6_r04jc")
 stretch_mode = 0
-
-[node name="Mousefollow" parent="InterfaceCanvaLayer" instance=ExtResource("5_r04jc")]
-z_index = 4
-position = Vector2(190, 110.000015)
-scale = Vector2(0.6910793, 0.6910793)
 
 [node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer"]
 material = SubResource("ShaderMaterial_aq0n2")

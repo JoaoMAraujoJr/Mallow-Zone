@@ -1,11 +1,6 @@
 class_name Stage
 extends Node2D
 
-# ===== NODES =====
-@onready var StageArea: Area2D 
-@onready var EnemySpawnArea: Area2D
-@onready var AmmoSpawner: Marker2D = $AmmoSpawnMarker
-
 
 # Spawn pivots for new stages
 @onready var StageLeftPosition: Marker2D = $Positions/StageLeftPosition
@@ -115,8 +110,6 @@ func _setbiome(plataform : Biome):
 		plataform. global_position = global_position
 
 		get_tree().current_scene.add_child.call_deferred(plataform)
-		StageArea = plataform.get_stage_area()
-		EnemySpawnArea = plataform.get_enemy_area()
 		ThisBiome = plataform
 		
 
