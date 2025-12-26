@@ -1,18 +1,64 @@
-[gd_scene load_steps=14 format=3 uid="uid://fsdix0jl7nvw"]
+[gd_scene load_steps=25 format=3 uid="uid://fsdix0jl7nvw"]
 
 [ext_resource type="Script" uid="uid://lyljldb0hycj" path="res://Scripts/Rooms/stageBiomes.gd" id="1_42ut7"]
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_22vud"]
-[ext_resource type="Script" uid="uid://bm5hm1oxipirt" path="res://Scripts/Rooms/object_spawner.gd" id="2_bmnd4"]
+[ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="2_hkvsp"]
+[ext_resource type="PackedScene" uid="uid://bo1gabovpt4cb" path="res://Scenes/enemies/enemy.tscn" id="3_65yrf"]
 [ext_resource type="PackedScene" uid="uid://cbf4muc7d60h" path="res://Scenes/objects/tree.tscn" id="3_ytrwr"]
 [ext_resource type="Texture2D" uid="uid://cvx7qhxej7ak3" path="res://Assets/Textures/floors/grass/Grassfloortexture.png" id="4_t23bk"]
 [ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="4_xsqpy"]
+[ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="4_ycj2y"]
 [ext_resource type="PackedScene" uid="uid://dw7en77yhx7it" path="res://Scenes/Unique/mountain.tscn" id="5_0e4g5"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1fha2"]
+[ext_resource type="PackedScene" uid="uid://bodu84frg2ffg" path="res://Scenes/objects/medikit.tscn" id="5_7j6q1"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="6_xsqpy"]
 [ext_resource type="Texture2D" uid="uid://pwxt8t11o8en" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom2.png" id="9_xsqpy"]
 
+[sub_resource type="Resource" id="Resource_ycj2y"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("3_65yrf")
+SpawnRate = 0.4
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_dglu8"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("4_ycj2y")
+SpawnRate = 0.7
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_bh7eg"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("5_7j6q1")
+SpawnRate = 0.2
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_7j6q1"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("3_ytrwr")
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_4vyh2"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("3_ytrwr")
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_ade7e"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("4_xsqpy")
+isRandomPosition = false
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_tnirv"]
+script = ExtResource("2_hkvsp")
+SpawnableScene = ExtResource("5_0e4g5")
+isRandomPosition = false
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
 size = Vector2(411, 412)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycj2y"]
+size = Vector2(325, 315)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_idggg"]
 shader = ExtResource("2_22vud")
@@ -30,10 +76,9 @@ shader_parameter/edge_width = 0.05
 
 [node name="StageGrass" type="Node2D"]
 script = ExtResource("1_42ut7")
-
-[node name="objectSpawner" type="Node2D" parent="."]
-script = ExtResource("2_bmnd4")
-SpawnableObjectList = Array[PackedScene]([ExtResource("3_ytrwr"), ExtResource("3_ytrwr"), null, null, ExtResource("4_xsqpy"), null, null, ExtResource("5_0e4g5")])
+enemiesList = Array[ExtResource("2_hkvsp")]([SubResource("Resource_ycj2y")])
+itemDropsList = Array[ExtResource("2_hkvsp")]([SubResource("Resource_dglu8"), SubResource("Resource_bh7eg")])
+ObjectsList = Array[ExtResource("2_hkvsp")]([null, null, SubResource("Resource_7j6q1"), SubResource("Resource_4vyh2"), SubResource("Resource_ade7e"), SubResource("Resource_tnirv")])
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 z_index = -2
@@ -50,6 +95,14 @@ z_index = -2
 z_index = -2
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_a6xb7")
+debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
+
+[node name="ObjectSpawnArea" type="Area2D" parent="."]
+z_index = -2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectSpawnArea"]
+z_index = -2
+shape = SubResource("RectangleShape2D_ycj2y")
 debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
 
 [node name="top" type="Sprite2D" parent="."]

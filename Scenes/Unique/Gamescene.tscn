@@ -1,13 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://j6ha40as0s3t"]
+[gd_scene load_steps=5 format=3 uid="uid://j6ha40as0s3t"]
 
 [ext_resource type="Script" uid="uid://bbtne4sdjjpti" path="res://Scripts/Rooms/GameScene.gd" id="1_n03b8"]
-[ext_resource type="PackedScene" uid="uid://ccdp414dq4f1w" path="res://Scenes/stages/stage_chess.tscn" id="2_urbuv"]
-[ext_resource type="PackedScene" uid="uid://fsdix0jl7nvw" path="res://Scenes/stages/stage_grass.tscn" id="3_cxw4p"]
 [ext_resource type="Script" uid="uid://cmrm53qn3csqo" path="res://Scripts/Rooms/trigger.gd" id="4_cxw4p"]
-[ext_resource type="PackedScene" uid="uid://cku80l75hewae" path="res://Scenes/stages/stage_asphalt.tscn" id="4_jmaar"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_urbuv"]
-size = Vector2(402, 403)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxw4p"]
 size = Vector2(50, 401.5)
@@ -16,25 +10,6 @@ size = Vector2(50, 401.5)
 
 [node name="Scene" type="Node2D"]
 script = ExtResource("1_n03b8")
-ChessBiome = ExtResource("2_urbuv")
-GrassBiome = ExtResource("3_cxw4p")
-AsphaltBiome = ExtResource("4_jmaar")
-
-[node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
-visible = false
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_urbuv")
-debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
-
-[node name="EnemySpawnArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
-visible = false
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_urbuv")
-debug_color = Color(0, 0.7560839, 1.1998147, 0.16078432)
 
 [node name="Positions" type="Node2D" parent="."]
 

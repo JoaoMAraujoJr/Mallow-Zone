@@ -70,18 +70,10 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	UpdateBiome()
 	if Input.is_action_just_pressed("SaveGameDebug"):
 		saveDataOnSlot(1)
 	pass
 
-
-func UpdateBiome():
-	if !BossManager._isOnBoss:
-		if (player_x < 0.0 or player_x > -0.0 or player_y < 0.0 or player_y > -0.0):
-			BiomeManager.currentBiome = "Grasslands"
-		if (player_x > 10000.0 or player_x < -10000.0 or player_y > 10000.0 or player_y < -10000.0):
-			BiomeManager.currentBiome = "Chess"
 
 
 func saveDataOnSlot(slot:int):

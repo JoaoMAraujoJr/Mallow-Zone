@@ -2,8 +2,8 @@ class_name Stage
 extends Node2D
 
 # ===== NODES =====
-@onready var StageArea: Area2D = $StageArea
-@onready var EnemySpawnArea: Area2D = $EnemySpawnArea
+@onready var StageArea: Area2D 
+@onready var EnemySpawnArea: Area2D
 @onready var AmmoSpawner: Marker2D = $AmmoSpawnMarker
 
 
@@ -29,9 +29,7 @@ extends Node2D
 @onready var ThisBiome : Biome
 
 # ===== BIOMES =====
-@export var ChessBiome: PackedScene
-@export var GrassBiome: PackedScene
-@export var AsphaltBiome:PackedScene
+
 var StageScene: PackedScene = preload("res://Scenes/Unique/Gamescene.tscn")
 
 # ===== FLAGS =====
