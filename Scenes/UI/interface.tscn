@@ -1,17 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=18 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
 [ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
-[ext_resource type="Texture2D" uid="uid://cb44i5ksnihh7" path="res://Assets/button/reset_button.png" id="4_yg6la"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/UI/mousefollow.tscn" id="5_r04jc"]
-[ext_resource type="Texture2D" uid="uid://xbsw0258yluo" path="res://Assets/button/reset_button_pressed.png" id="5_uwsgx"]
-[ext_resource type="Texture2D" uid="uid://bbjp1fswxcn8u" path="res://Assets/button/reset_button_hover.png" id="6_r04jc"]
 [ext_resource type="Texture2D" uid="uid://24mvdq1hhxy" path="res://Assets/Textures/UI/cursor/cursor_mask_.png" id="7_kp8ok"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_apajn"]
+[ext_resource type="PackedScene" uid="uid://dpqahfejiw8a7" path="res://Scenes/UI/buttons/reset_button.tscn" id="11_apajn"]
 [ext_resource type="PackedScene" uid="uid://dwyntrhkd73bo" path="res://Scenes/UI/CoorRadar.tscn" id="12_na5jw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7l867"]
@@ -52,14 +50,6 @@ shadow_size = 46
 shadow_color = Color(1.469, 1.469, 1.469, 0.329)
 shadow_offset = Vector2(0, 0)
 
-[sub_resource type="InputEventKey" id="InputEventKey_hbxki"]
-device = -1
-keycode = 75
-unicode = 107
-
-[sub_resource type="Shortcut" id="Shortcut_aq0n2"]
-events = [SubResource("InputEventKey_hbxki")]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aq0n2"]
 shader = ExtResource("9_hbxki")
 shader_parameter/resolution = Vector2(768, 432)
@@ -92,6 +82,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="reset button" parent="." instance=ExtResource("11_apajn")]
 
 [node name="InterfaceCanvaLayer" type="CanvasLayer" parent="."]
 
@@ -102,6 +95,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Ammo" type="Label" parent="InterfaceCanvaLayer"]
 anchors_preset = -1
@@ -197,6 +191,7 @@ uppercase = true
 max_lines_visible = 2
 
 [node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
+visible = false
 mouse_filter = 2
 
 [node name="Mouse mask" type="TextureRect" parent="InterfaceCanvaLayer"]
@@ -209,30 +204,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 texture = ExtResource("7_kp8ok")
 
 [node name="Mousefollow" parent="InterfaceCanvaLayer/Mouse mask" instance=ExtResource("5_r04jc")]
 position = Vector2(723, 283)
 scale = Vector2(2.0352337, 1.9654197)
-
-[node name="Button" type="TextureButton" parent="InterfaceCanvaLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -16.999985
-offset_right = 132.79999
-offset_bottom = 74.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.3734264, 0.3734264)
-shortcut = SubResource("Shortcut_aq0n2")
-texture_normal = ExtResource("4_yg6la")
-texture_pressed = ExtResource("5_uwsgx")
-texture_hover = ExtResource("6_r04jc")
-stretch_mode = 0
 
 [node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer"]
 material = SubResource("ShaderMaterial_aq0n2")
@@ -251,5 +228,3 @@ size_2d_override = Vector2i(265, 111)
 render_target_update_mode = 4
 
 [node name="CoorRadar" parent="CoordRadarSubViewport" instance=ExtResource("12_na5jw")]
-
-[connection signal="pressed" from="InterfaceCanvaLayer/Button" to="." method="_on_button_pressed"]

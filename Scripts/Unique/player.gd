@@ -122,12 +122,6 @@ func mouse_actions_handler():
 			_outofAmmoAudioStream.play()
 		elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
 			_dropGun()
-	#movement and mouse treatment:
-	if Input.is_action_just_pressed("UnlockMouse"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 
 #AddTo Methods

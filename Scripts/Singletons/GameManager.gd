@@ -65,15 +65,16 @@ func _input(event):
 		pause()
 	if event.is_action_pressed("SaveGameDebug"):
 		saveDataOnSlot(currentSaveSlot)
-
-
+	if event.is_action_pressed("UnlockMouse"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("SaveGameDebug"):
-		saveDataOnSlot(1)
-	pass
-
+		saveDataOnSlot(currentSaveSlot)
 
 
 func saveDataOnSlot(slot:int):
@@ -94,6 +95,4 @@ func saveDataOnSlot(slot:int):
 		file.store_string(JSON.stringify(saveData))
 		file.close()
 		print("game was saved on slot " + str(slot))
-	
-	
 	

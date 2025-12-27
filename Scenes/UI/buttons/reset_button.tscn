@@ -1,0 +1,178 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpqahfejiw8a7"]
+
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="1_fu41q"]
+[ext_resource type="Script" uid="uid://tw32mgxoijh2" path="res://Scenes/UI/buttons/reset_button.gd" id="1_r10o2"]
+[ext_resource type="Texture2D" uid="uid://byu2hr3do7waf" path="res://Assets/Textures/UI/progressbars/loading_under.png" id="2_v4ckx"]
+[ext_resource type="Texture2D" uid="uid://dtks8t52ds3xv" path="res://Assets/Textures/UI/progressbars/loading_progress.png" id="3_r10o2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r10o2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6xjy8"]
+font = ExtResource("1_fu41q")
+font_size = 28
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_jv2gt"]
+resource_name = "hold"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../text:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.145, 1.145)]
+}
+
+[sub_resource type="Animation" id="Animation_yodwp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../text:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.145, 1.145)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dr2uf"]
+_data = {
+&"RESET": SubResource("Animation_yodwp"),
+&"hold": SubResource("Animation_jv2gt")
+}
+
+[sub_resource type="Animation" id="Animation_r10o2"]
+resource_name = "popping"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("text:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.97, 1.9666667, 2.9466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.034906585, 0.034906585, -0.034906585, 0.034906585]
+}
+
+[sub_resource type="Animation" id="Animation_tux4g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("text:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x5eps"]
+_data = {
+&"RESET": SubResource("Animation_tux4g"),
+&"popping": SubResource("Animation_r10o2")
+}
+
+[node name="reset button" type="CanvasLayer"]
+script = ExtResource("1_r10o2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="text" type="Control" parent="."]
+z_index = 4
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -44.0
+offset_right = 69.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="text"]
+material = SubResource("CanvasItemMaterial_r10o2")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -266.0
+offset_top = -44.0
+offset_right = 152.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6150189, 0.6150189)
+text = "Hold \"K\" to restart "
+label_settings = SubResource("LabelSettings_6xjy8")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="text"]
+material = SubResource("CanvasItemMaterial_r10o2")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -44.0
+offset_right = 55.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3.3177755, 3.0749311)
+max_value = 21.0
+stretch_margin_left = 3
+stretch_margin_top = 2
+stretch_margin_right = 3
+stretch_margin_bottom = 2
+texture_under = ExtResource("2_v4ckx")
+texture_progress = ExtResource("3_r10o2")
+texture_progress_offset = Vector2(0.555, 0)
+
+[node name="HoldAnimPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../IddleAnimPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_dr2uf")
+}
+speed_scale = 0.9
+
+[node name="IddleAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x5eps")
+}
+autoplay = "popping"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
