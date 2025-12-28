@@ -156,5 +156,5 @@ position = Vector2(0, -26.91447)
 position = Vector2(0, -26.914467)
 scale = Vector2(0.9999999, 0.9999999)
 stream = ExtResource("6_ryksv")
-volume_db = -2.0
+volume_db = -5.0
 bus = &"SFXReverb"

@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdof1lf74pr0c"]
+[gd_scene load_steps=9 format=3 uid="uid://cdof1lf74pr0c"]
 
-[ext_resource type="Texture2D" uid="uid://b51gydmbpyodp" path="res://Assets/Textures/backgrounds/dark.png" id="1_7eyp6"]
 [ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="2_j7nw7"]
 [ext_resource type="Texture2D" uid="uid://c1ukeyun86qns" path="res://Assets/Textures/backgrounds/starsBACKGROUND.png" id="3_mkb3k"]
 
@@ -58,30 +57,24 @@ shader_parameter/distortion_strength = 0.678000032205
 [node name="Background" type="Node2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Parallax2D")
+root_node = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_3l4eu")
 }
 autoplay = "Pulsating"
 
-[node name="Parallax2D2" type="Parallax2D" parent="."]
-z_index = -19
-scroll_scale = Vector2(0.9, 0.9)
-repeat_size = Vector2(432, 432)
-repeat_times = 7
-
-[node name="sky" type="Sprite2D" parent="Parallax2D2"]
-self_modulate = Color(1, 1, 1, 0)
-texture = ExtResource("1_7eyp6")
-
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+visible = false
 z_index = -20
-scroll_scale = Vector2(0.9, 0.9)
-repeat_size = Vector2(128, 86)
-repeat_times = 19
+scale = Vector2(3.0944655, 3.0944655)
+repeat_size = Vector2(256, 256)
+repeat_times = 13
 
-[node name="shader" type="Sprite2D" parent="Parallax2D"]
+[node name="shader" type="Sprite2D" parent="Parallax2D3"]
+visible = false
 modulate = Color(1, 1, 1, 0.3647059)
 self_modulate = Color(0, 0, 0, 0)
 material = SubResource("ShaderMaterial_7gujx")
+position = Vector2(68.479225, -8.898685e-06)
+scale = Vector2(2.320993, 3.454226)
 texture = ExtResource("3_mkb3k")

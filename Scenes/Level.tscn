@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://216kvumeoqpb"]
+[gd_scene load_steps=12 format=3 uid="uid://216kvumeoqpb"]
 
 [ext_resource type="Script" uid="uid://oc4lwf7450gd" path="res://Scripts/Unique/level.gd" id="1_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://j6ha40as0s3t" path="res://Scenes/Unique/Gamescene.tscn" id="1_vsvp5"]
 [ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_xylue"]
 [ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_8rbpu"]
-[ext_resource type="PackedScene" uid="uid://cdof1lf74pr0c" path="res://Scenes/backgrounds/background.tscn" id="2_tj5wv"]
 [ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="7_ienac"]
 [ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="8_5rrr5"]
 
@@ -40,8 +39,6 @@ blend_mode = 3
 y_sort_enabled = true
 script = ExtResource("1_tj5wv")
 
-[node name="Background" parent="." instance=ExtResource("2_tj5wv")]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xylue")
 
@@ -54,7 +51,6 @@ isthisroot = true
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, 17)
-health = 20
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 

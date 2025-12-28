@@ -1,14 +1,27 @@
 extends Node2D
+@export var heal_amount:int = 25
 @onready var CaseAnimPlayer : AnimationPlayer = $SubViewportContainer/SubViewport/Node3D/AnimationPlayer
+@onready var CaseAudStream : AudioStreamPlayer2D = $CaseAudioStream
+@onready var BandageAudStream : AudioStreamPlayer2D = $BandageAudioStream
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerArea"):
-		body.addToHealth(25)
+		$PlayerDetector.queue_free()
+		$SubViewportContainer.queue_free()
+		$LightOccluder2D.queue_free()
+		$PlayerCollision.queue_free()
+		body.addToHealth(heal_amount)
+		BandageAudStream.pitch_scale = randf_range(0.4,1.2)
+		BandageAudStream.play()
+		await BandageAudStream.finished
 		queue_free()
 
 
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	if body is Player:
+		CaseAudStream.pitch_scale = randf_range(0.4,1.2)
+		CaseAudStream.play()
 		CaseAnimPlayer.play("OpenCase")
 		await CaseAnimPlayer.animation_finished
 		CaseAnimPlayer.play("CaseOpened")
@@ -19,5 +32,7 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 	if body is Player:
 		CaseAnimPlayer.play_backwards("OpenCase")
 		await CaseAnimPlayer.animation_finished
+		CaseAudStream.pitch_scale = randf_range(0.4,1.2)
+		CaseAudStream.play()
 		CaseAnimPlayer.play("CaseClosed")
 	pass # Replace with function body.

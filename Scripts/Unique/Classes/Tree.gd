@@ -58,6 +58,7 @@ func spawnTreeParticles():
 		var TreePart = TreeParticles.instantiate()
 		_rootLightOcludder.queue_free()
 		TreePart.global_position = _ParticleSpawnerMarker.global_position
+		TreePart.z_index = 2
 		get_tree().current_scene.add_child(TreePart)
 
 
