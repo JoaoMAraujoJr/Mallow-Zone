@@ -1,9 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgep6su5k2jxi"]
+[gd_scene load_steps=15 format=3 uid="uid://dgep6su5k2jxi"]
 
+[ext_resource type="Script" uid="uid://dsqngua1p7gfp" path="res://Scripts/Unique/level_warper.gd" id="1_2yth8"]
 [ext_resource type="Texture2D" uid="uid://ddo8j0ki4phej" path="res://Assets/Textures/entities/StageWarper/bubble/bubble_icon_mask.png" id="1_5elti"]
 [ext_resource type="Texture2D" uid="uid://b7kq1kd3ai4vt" path="res://Assets/Textures/entities/StageWarper/bubble/bubble.png" id="1_u3r14"]
 [ext_resource type="Texture2D" uid="uid://dlgubbkv0pbk8" path="res://Assets/Textures/entities/StageWarper/levelart/Yard.png" id="2_2yth8"]
+[ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_t4uhn"]
 [ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="3_t4uhn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_brfrw"]
+font = ExtResource("2_t4uhn")
+font_size = 17
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Curve" id="Curve_brfrw"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
@@ -57,20 +65,40 @@ _data = {
 &"iddle": SubResource("Animation_kwx0q")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2yth8"]
+radius = 20.024984
+
 [node name="LevelWarper" type="Node2D"]
 z_index = 2
+scale = Vector2(1.311, 1.311)
+script = ExtResource("1_2yth8")
+interactionType = 1
 
 [node name="Warp" type="Node2D" parent="."]
 position = Vector2(0, -3.002634)
 
+[node name="WarpName" type="Label" parent="Warp"]
+offset_left = -96.0
+offset_top = -77.99737
+offset_right = 97.0
+offset_bottom = -44.997368
+text = "Biome name"
+label_settings = SubResource("LabelSettings_brfrw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 131
+paragraph_separator = "\\2"
+
 [node name="LevelMask" type="Sprite2D" parent="Warp"]
 clip_children = 1
 position = Vector2(0, 0.0026340485)
-scale = Vector2(0.39800894, 0.39800894)
+scale = Vector2(0.43677187, 0.43677187)
 texture = ExtResource("1_5elti")
 
 [node name="LevelSpriteDisplay" type="Sprite2D" parent="Warp/LevelMask"]
-scale = Vector2(1.9009277, 1.9009277)
+modulate = Color(1.224127, 1.224127, 1.224127, 1)
+scale = Vector2(1.4801689, 1.4801689)
 texture = ExtResource("2_2yth8")
 
 [node name="Bubble" type="Sprite2D" parent="Warp"]
@@ -85,3 +113,10 @@ libraries = {
 }
 autoplay = "iddle"
 speed_scale = 0.561
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2yth8")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

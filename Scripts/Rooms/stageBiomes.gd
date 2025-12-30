@@ -72,7 +72,10 @@ func _spawn_entities_at_Stage():
 		for enemy in enemiesList:
 			if rand_chance <= enemy.SpawnRate:
 				var newEnemy = enemy.SpawnableScene.instantiate()
-				newEnemy.global_position = _get_random_point_in_area(SpawnAreas.ENEMY)
+				if enemy.isRandomPosition:
+					newEnemy.global_position = _get_random_point_in_area(SpawnAreas.ENEMY)
+				else:
+					newEnemy.global_position = global_position
 				get_tree().current_scene.add_child(newEnemy)
 				print("Inimigo spawnado em: ", newEnemy.global_position)
 	
@@ -82,7 +85,10 @@ func _spawn_entities_at_Stage():
 		for item in itemDropsList:
 			if rand_chance <= item.SpawnRate:
 				var newitem = item.SpawnableScene.instantiate()
-				newitem.global_position = _get_random_point_in_area(SpawnAreas.STAGE)
+				if item.isRandomPosition:
+					newitem.global_position = _get_random_point_in_area(SpawnAreas.STAGE)
+				else:
+					newitem.global_position = global_position
 				get_tree().current_scene.add_child(newitem)
 				print("Item dropado em: ", newitem.global_position)
 

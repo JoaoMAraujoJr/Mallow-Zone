@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="4_ycj2y"]
 [ext_resource type="PackedScene" uid="uid://dw7en77yhx7it" path="res://Scenes/Unique/mountain.tscn" id="5_0e4g5"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1fha2"]
-[ext_resource type="PackedScene" uid="uid://bodu84frg2ffg" path="res://Scenes/objects/medikit.tscn" id="5_7j6q1"]
+[ext_resource type="PackedScene" uid="uid://bodu84frg2ffg" path="res://Scenes/objects/medkit.tscn" id="5_7j6q1"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="6_xsqpy"]
 [ext_resource type="Texture2D" uid="uid://pwxt8t11o8en" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom2.png" id="9_xsqpy"]
 

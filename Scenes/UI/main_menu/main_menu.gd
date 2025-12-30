@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	GameManager.canPause=true
-	get_tree().change_scene_to_file("res://Scenes/Level.tscn")
+	LoadManager.LoadScene("res://Scenes/Level.tscn")
 	pass # Replace with function body.
 
 

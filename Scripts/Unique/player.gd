@@ -31,7 +31,7 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 @export var zoom_speed : float = 0.1 
 @onready var target_zoom : float = 0.6 
 @onready var cur_camzoom :float = target_zoom
-@onready var viewBobbing : float = 2
+@onready var viewBobbing : float = 3
 
 func _ready():
 	super._ready()
@@ -107,7 +107,7 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		recoil_velocity = recoil_velocity.move_toward(Vector2.ZERO, recoil_decay*delta)
 		
 		updateExternalForces("push", pushingforce.move_toward(Vector2.ZERO, pushingforce.length() * 3 *delta))
-		
+		updateExternalForces("pull", pullingforce.move_toward(Vector2.ZERO, pullingforce.length() * 3 *delta))
 		move_and_slide()
 
 func mouse_actions_handler():

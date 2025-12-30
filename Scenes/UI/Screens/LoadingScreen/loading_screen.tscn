@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsw0hufosca1b"]
+
+[ext_resource type="Script" uid="uid://bv137oto275ar" path="res://Scenes/UI/Screens/LoadingScreen/loading_screen.gd" id="1_2f4ir"]
+[ext_resource type="Texture2D" uid="uid://byu2hr3do7waf" path="res://Assets/Textures/UI/progressbars/loading_under.png" id="1_387km"]
+[ext_resource type="Texture2D" uid="uid://dtks8t52ds3xv" path="res://Assets/Textures/UI/progressbars/loading_progress.png" id="2_2f4ir"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r3a8a"]
+
+[node name="LoadingScreen" type="CanvasLayer"]
+script = ExtResource("1_2f4ir")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+material = SubResource("CanvasItemMaterial_r3a8a")
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -344.0
+offset_top = -59.0
+offset_right = -280.0
+offset_bottom = -51.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(4.982684, 4.617977)
+max_value = 21.0
+value = 21.0
+stretch_margin_left = 3
+stretch_margin_top = 2
+stretch_margin_right = 3
+stretch_margin_bottom = 2
+texture_under = ExtResource("1_387km")
+texture_progress = ExtResource("2_2f4ir")
+texture_progress_offset = Vector2(0.555, 0)

@@ -51,6 +51,7 @@ isthisroot = true
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, 17)
+speed = 900.0
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -89,6 +90,10 @@ visible = false
 position = Vector2(-2, -66)
 PickableName = "flamethrower"
 
+[node name="PickableItem4" parent="." instance=ExtResource("8_5rrr5")]
+position = Vector2(-404, -186)
+PickableName = "flamethrower"
+
 [node name="PickableItem3" parent="." instance=ExtResource("8_5rrr5")]
 position = Vector2(-202, -93)
 PickableName = "chainsaw"
@@ -98,6 +103,8 @@ position = Vector2(-197, 37)
 PickableName = "rifle"
 
 [node name="LevelWarper" parent="." instance=ExtResource("7_ienac")]
-position = Vector2(-72, -65)
+z_index = 3
+position = Vector2(-61, -167)
+warpBiome = "Chess"
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

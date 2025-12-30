@@ -34,6 +34,7 @@ SkinData="*res://Scripts/Singletons/SkinData.gd"
 GameManager="*res://Scripts/Singletons/GameManager.gd"
 BiomeManager="*res://Scripts/Singletons/BiomeManager.gd"
 DayTimeManager="*res://Scripts/Singletons/DayTimeManager.gd"
+LoadManager="*res://Scripts/Singletons/LoadManager.gd"
 
 [display]
 

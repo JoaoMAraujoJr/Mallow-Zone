@@ -159,3 +159,18 @@ func resetSpeed():
 func _on_location_reset_timer_timeout() -> void:
 	update_player_location()
 	pass # Replace with function body.
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	var timerToDie : Timer = Timer.new()
+	add_child(timerToDie)
+	timerToDie.wait_time = 20.0
+	timerToDie.start()
+	
+	timerToDie.timeout.connect(
+		func():
+			setHealth(-1000)
+			print("enemy deleted for being inactive")
+	)
+
+	pass # Replace with function body.

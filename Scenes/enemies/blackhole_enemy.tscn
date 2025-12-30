@@ -6,15 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="3_qm35p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_287tu"]
-radius = 24.020824
+radius = 42.107006
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
-radius = 435.66156
+radius = 672.07513
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5fk2r"]
-radius = 55.00909
+radius = 58.00862
 
-[node name="BlackHole Enemy" type="CharacterBody2D"]
+[node name="BlackHole Enemy" type="StaticBody2D"]
 script = ExtResource("1_5fk2r")
 
 [node name="Blackhole" parent="." instance=ExtResource("2_qm35p")]

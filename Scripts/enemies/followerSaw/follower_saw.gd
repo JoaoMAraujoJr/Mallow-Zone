@@ -25,6 +25,7 @@ const BLOODED_TEXTURE = preload("res://Assets/objects/saw/saw_blooded.png")
 const BLOODED_LVL2_TEXTURE = preload("res://Assets/objects/saw/saw_blooded_level2.png")
 
 func _ready() -> void:
+
 	# Faz uma cópia da textura do Sprite para não afetar o modelo base
 	_sawSprite.texture = _sawSprite.texture.duplicate()
 	_startTimer.start()
@@ -49,22 +50,6 @@ func _physics_process(delta: float) -> void:
 		linear_velocity = Dir * SPEED
 		
 
-		var hit_bodies = _damageHitbox.get_overlapping_bodies()
-		for body in hit_bodies:
-			if body.is_in_group("PlayerArea"):
-				if can_damage:
-					if body.has_method("addToHealth"):
-						body.addToHealth(damage)
-						hitCounter +=1
-						# inicia cooldown
-						can_damage = false
-						_damage_timer.start()
-
-			elif body.has_method("setHealth") and !body.is_in_group("Boss"):
-				hitCounter +=1
-				body.setHealth(damage)
-				can_damage = false
-				_damage_timer.start()
 
 
 func _update_texture() -> void:
@@ -77,6 +62,7 @@ func _update_texture() -> void:
 			_sawSprite.texture.diffuse_texture = NORMAL_TEXTURE
 
 func _on_startimer_timeout() -> void:
+	_damageHitbox.monitoring = true
 	canChase = true
 	can_damage = true
 	_animplay.play("rotating")
@@ -116,3 +102,22 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 			if _deleteItSelf.is_inside_tree():
 				_deleteItSelf.start()
 				
+
+
+func _on_damagehitbox_body_entered(body: Node2D) -> void:
+	if !can_damage:
+		return
+	
+	if body is Player:
+		body.addToHealth(damage)
+		can_damage = false
+		_damage_timer.start()
+	elif body.has_method("setHealth") and !body.is_in_group("Boss"):
+		body.setHealth(damage)
+	else:
+		return
+	
+	hitCounter +=1
+
+	
+	return

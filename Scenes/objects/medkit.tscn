@@ -482,7 +482,7 @@ bus = &"SFX"
 
 [node name="BandageAudioStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_pftdi")
-volume_db = 10.0
+volume_db = 15.0
 pitch_scale = 1.32
 attenuation = 1.4640859
 bus = &"SFX"

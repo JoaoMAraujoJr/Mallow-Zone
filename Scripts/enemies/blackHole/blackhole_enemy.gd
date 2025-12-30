@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends StaticBody2D
 
 @onready var _vision: Area2D = $EnemyVision
 @onready var _hitbox: Area2D = $EnemyHitbox
@@ -22,7 +22,8 @@ var pushingforce: Vector2 = Vector2.ZERO
 var followMode: bool = false
 var SPEED: float = 0
 
-
+func _ready() -> void:
+	scale *= randf_range(1.0,2.0)
 func _physics_process(delta: float) -> void:
 	
 	scale = scale.move_toward(target_scale, shrink_speed * delta)
@@ -35,18 +36,16 @@ func _physics_process(delta: float) -> void:
 	if followMode:
 		var bodies = _vision.get_overlapping_bodies()
 		for body in bodies:
-			if body.has_method("addToPullVelocity"):
-				var direction = (body.global_position - global_position).normalized()
-
-				# movimento do buraco negro
-
-				velocity = direction * SPEED + knockbackvelocity
+			if body is CharacterEntity:
 
 				# força de sucção no player
 				var offset: Vector2 = global_position - body.global_position
 				var distance = max(offset.length(), 1.0) # evita divisão por zero
-				var force = clamp(100.0 / distance, 2, 400) # limite mínimo e máximo
-				body.addToPullVelocity(offset.normalized() * force)
+				var force = clamp(1000.0 / distance, 2, 20) # limite mínimo e máximo
+				
+				var pullingVector : Vector2 = offset.normalized() * force 
+				pullingVector += body.pullingforce
+				body.updateExternalForces("pull",pullingVector)
 				break
 				
 		var enemy_areas= _hitbox.get_overlapping_areas()
@@ -70,11 +69,9 @@ func _physics_process(delta: float) -> void:
 						break
 					
 	else:
-		velocity = Vector2.ZERO
-	knockbackvelocity = knockbackvelocity.move_toward(Vector2.ZERO, SPEED*delta)
+		pass
 	
-	
-	move_and_slide()
+
 
 func _on_enemy_vision_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerArea"):
@@ -82,9 +79,8 @@ func _on_enemy_vision_body_entered(body: Node2D) -> void:
 
 
 func _on_enemy_vision_body_exited(body: Node2D) -> void:
-	if body.is_in_group("PlayerArea"):
-		if body.has_method("resetPulling"):
-			body.resetPulling()
+	if body is Player:
+		body.updateExternalForces("pull",Vector2.ZERO)
 		followMode = false
 
 func _on_damage_timer_timeout() -> void:

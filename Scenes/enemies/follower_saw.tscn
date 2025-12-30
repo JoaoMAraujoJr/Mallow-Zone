@@ -9,10 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="7_tt31a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36nog"]
-radius = 92.34717
+radius = 84.0238
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ghqmr"]
-radius = 113.004425
+radius = 110.16351
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ghqmr"]
 diffuse_texture = ExtResource("4_ghqmr")
@@ -225,7 +225,7 @@ height = 355.0
 shape = SubResource("CircleShape2D_tt31a")
 
 [node name="DamageTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.5
 
 [node name="DeleteitSelfTimer" type="Timer" parent="."]
 wait_time = 6.0
@@ -245,6 +245,7 @@ autostart = true
 stream = ExtResource("7_tt31a")
 bus = &"SFXReverb"
 
+[connection signal="body_entered" from="damagehitbox" to="." method="_on_damagehitbox_body_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

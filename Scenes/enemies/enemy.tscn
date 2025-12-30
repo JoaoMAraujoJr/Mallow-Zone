@@ -82,8 +82,6 @@ animations = [{
 y_sort_enabled = true
 disable_mode = 2
 script = ExtResource("1_hghv2")
-max_health = 3
-health = 3
 
 [node name="EffectHandler" parent="." instance=ExtResource("2_5d1s0")]
 z_index = 1
@@ -144,9 +142,12 @@ one_shot = true
 wait_time = 0.5
 autostart = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="body_entered" from="EnemyVision" to="." method="_on_enemy_vision_body_entered"]
 [connection signal="body_exited" from="EnemyVision" to="." method="_on_enemy_vision_body_exited"]
 [connection signal="finished" from="DeathAudioStream" to="." method="_on_death_audio_stream_finished"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="SelfModulateTimer" to="." method="_on_self_modulate_timer_timeout"]
 [connection signal="timeout" from="LocationResetTimer" to="." method="_on_location_reset_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
