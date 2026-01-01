@@ -36,3 +36,21 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 		CaseAudStream.play()
 		CaseAnimPlayer.play("CaseClosed")
 	pass # Replace with function body.
+
+
+#signals:
+
+func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
+	$TimerToDeleteSelf.start()
+	pass # Replace with function body.ss
+
+
+func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
+	$TimerToDeleteSelf.stop()
+	pass # Replace with function body.
+
+
+func _on_timer_to_delete_self_timeout() -> void:
+	print("3D propDeleted")
+	queue_free()
+	pass # Replace with function body.

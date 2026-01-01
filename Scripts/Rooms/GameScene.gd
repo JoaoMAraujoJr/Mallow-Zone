@@ -1,7 +1,7 @@
 class_name Stage
 extends Node2D
 
-
+var chunk_key : Vector2i
 # Spawn pivots for new stages
 @onready var StageLeftPosition: Marker2D = $Positions/StageLeftPosition
 @onready var StageRightPosition: Marker2D = $Positions/StageRightPosition
@@ -14,17 +14,8 @@ extends Node2D
 @onready var TriggerUp: Area2D = $Triggers/Trigger_Up
 @onready var TriggerDown: Area2D = $Triggers/Trigger_Down
 
-# Checkers for existing stages
-@onready var CheckerLeft: Area2D = $Checkers/StageCheckerLeft
-@onready var CheckerRight: Area2D = $Checkers/StageCheckerRight
-@onready var CheckerUp: Area2D = $Checkers/StageCheckerUp
-@onready var CheckerDown: Area2D = $Checkers/StageCheckerDown
-
 # ===== BIOME =====
 @onready var ThisBiome : Biome
-
-# ===== BIOMES =====
-
 var StageScene: PackedScene = preload("res://Scenes/Unique/Gamescene.tscn")
 
 # ===== FLAGS =====
@@ -76,39 +67,24 @@ func _on_trigger_down_entered(body):
 
 # ===== SPAWN STAGE =====
 func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
+	var key := Vector2i(to_global(markerposition))
+	if GameManager.currentSpawnedChunks.has(key):
+		return
+	GameManager.currentSpawnedChunks[key]=true
 	if trigger.is_queued_for_deletion():
 		return
-	trigger.queue_free()
-	#print("Tentando spawn em: ", markerposition, " trigger: ", trigger.name)
-
-	# Choose the checker
-	var checker: Area2D
-	match trigger:
-		TriggerLeft: checker = CheckerLeft
-		TriggerRight: checker = CheckerRight
-		TriggerUp: checker = CheckerUp
-		TriggerDown: checker = CheckerDown
-		_: checker = null
-
-	# Check for existing adjacent stages
-	if checker:
-		for body in checker.get_overlapping_areas():
-			if body.is_in_group("Stage"):
-				#print("Stage já existe adjacente à ", trigger.name)
-				trigger.queue_free()
-				return
 
 	# Instantiate new stage
 	var new_stage : Stage = StageScene.instantiate()
 	new_stage.global_position = markerposition
+	new_stage.chunk_key = key
 	add_child.call_deferred(new_stage)
 	trigger.queue_free()
 	#print("Stage spawnada em: ", new_stage.global_position)
 	
 
 func _setbiome(plataform : Biome):
-		plataform. global_position = global_position
-
+		plataform.global_position = global_position
 		get_tree().current_scene.add_child.call_deferred(plataform)
 		ThisBiome = plataform
 		

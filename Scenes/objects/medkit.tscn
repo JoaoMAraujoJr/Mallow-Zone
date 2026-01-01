@@ -487,7 +487,16 @@ pitch_scale = 1.32
 attenuation = 1.4640859
 bus = &"SFX"
 
+[node name="TimerToDeleteSelf" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-32, -23, 62, 48)
+
 [connection signal="area_entered" from="PlayerDetector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
 [connection signal="body_entered" from="PlayerCollision" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="TimerToDeleteSelf" to="." method="_on_timer_to_delete_self_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

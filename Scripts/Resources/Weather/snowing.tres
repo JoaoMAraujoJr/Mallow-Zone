@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weather" load_steps=3 format=3 uid="uid://c7e4pxjbd4syb"]
+
+[ext_resource type="PackedScene" uid="uid://djm6r1ypeko4n" path="res://Scenes/particles/weather_particles/snow_particles.tscn" id="1_88suq"]
+[ext_resource type="Script" uid="uid://c2x0pbf6lpil1" path="res://Scripts/Resources/Weather.gd" id="2_0i3o4"]
+
+[resource]
+script = ExtResource("2_0i3o4")
+name = "snowing"
+colorOverlay = Color(0, 0.8980392, 0.9019608, 0.06666667)
+weatherParticles = Array[PackedScene]([ExtResource("1_88suq")])
+metadata/_custom_type_script = "uid://c2x0pbf6lpil1"

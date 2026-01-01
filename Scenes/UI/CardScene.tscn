@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="1_rkhd2"]
 [ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="1_wsgrk"]
 [ext_resource type="Texture2D" uid="uid://b3vwrx3svoeei" path="res://Assets/objects/cards/cardmask.png" id="2_wy13b"]
-[ext_resource type="Texture2D" uid="uid://da0hw1h2ep5pd" path="res://Assets/objects/cards/lightmask.png" id="5_l7gxn"]
+[ext_resource type="Texture2D" uid="uid://da0hw1h2ep5pd" path="res://Assets/Textures/sprite_masks/light_mask/lightmask.png" id="5_l7gxn"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="7_rkhd2"]
 
 [sub_resource type="Curve" id="Curve_wy13b"]

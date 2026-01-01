@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://j6ha40as0s3t"]
+[gd_scene load_steps=4 format=3 uid="uid://j6ha40as0s3t"]
 
 [ext_resource type="Script" uid="uid://bbtne4sdjjpti" path="res://Scripts/Rooms/GameScene.gd" id="1_n03b8"]
 [ext_resource type="Script" uid="uid://cmrm53qn3csqo" path="res://Scripts/Rooms/trigger.gd" id="4_cxw4p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxw4p"]
 size = Vector2(50, 401.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmaar"]
 
 [node name="Scene" type="Node2D"]
 script = ExtResource("1_n03b8")
@@ -65,43 +63,6 @@ visible = false
 position = Vector2(177, 1.25)
 shape = SubResource("RectangleShape2D_cxw4p")
 debug_color = Color(0.9590382, 0.50914407, 0.4602995, 0.6862745)
-
-[node name="Checkers" type="Node2D" parent="."]
-
-[node name="StageCheckerLeft" type="Area2D" parent="Checkers" groups=["Checker"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerLeft"]
-visible = false
-position = Vector2(-410, 0)
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_jmaar")
-
-[node name="StageCheckerUp" type="Area2D" parent="Checkers" groups=["Checker"]]
-rotation = 1.5707964
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerUp"]
-visible = false
-position = Vector2(-410, 0)
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_jmaar")
-
-[node name="StageCheckerRight" type="Area2D" parent="Checkers" groups=["Checker"]]
-rotation = 3.1415927
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerRight"]
-visible = false
-position = Vector2(-410, 0)
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_jmaar")
-
-[node name="StageCheckerDown" type="Area2D" parent="Checkers" groups=["Checker"]]
-rotation = 4.712389
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkers/StageCheckerDown"]
-visible = false
-position = Vector2(-410, 0)
-scale = Vector2(5, 5)
-shape = SubResource("RectangleShape2D_jmaar")
 
 [connection signal="body_entered" from="Triggers/Trigger_Right" to="." method="_on_trigger_right_entered"]
 [connection signal="body_entered" from="Triggers/Trigger_Up" to="." method="_on_trigger_up_entered"]

@@ -5,6 +5,7 @@ var current_to_be_load_scene :String
 
 func LoadScene(nextScene:String):
 	current_to_be_load_scene = nextScene
+	GameManager.currentSpawnedChunks = {}
 	call_deferred("_deferred_load_scene")
 
 func _deferred_load_scene():

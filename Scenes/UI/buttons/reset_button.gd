@@ -8,7 +8,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if GameManager.player_health <= 0:
 		visible = true
 	if Input.is_action_pressed("RestartButton") and GameManager.player_health <= 0:
@@ -17,8 +17,8 @@ func _process(delta: float) -> void:
 			GameManager.kills= 0
 			GameManager.enemySpeed= 50.0
 			GameManager.ammo= GameManager.ammoMax
-			GameManager.player_x = 0.0
-			GameManager.player_y = 0.0
+			GameManager.currentEquipedWeaponType = ""
+			GameManager.currentSpawnedChunks = {}
 			BiomeManager.currentBiome="Grasslands"
 			GameManager.can_shoot = true
 			BossManager._isOnBoss = false

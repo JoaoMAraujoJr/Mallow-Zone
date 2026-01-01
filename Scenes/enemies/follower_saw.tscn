@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cdvi88e42jjsb"]
+[gd_scene load_steps=18 format=3 uid="uid://cdvi88e42jjsb"]
 
 [ext_resource type="Script" uid="uid://ysjkink7woy0" path="res://Scripts/enemies/followerSaw/follower_saw.gd" id="1_nq37f"]
-[ext_resource type="Texture2D" uid="uid://dkpem8yj4qctq" path="res://Assets/objects/saw/saw_light2.png" id="2_36nog"]
+[ext_resource type="Texture2D" uid="uid://dkpem8yj4qctq" path="res://Assets/Textures/entities/Enemies/saw/saw_light2.png" id="2_36nog"]
 [ext_resource type="Texture2D" uid="uid://chbghrjef56v5" path="res://Assets/objects/blackhole2.png" id="3_ghqmr"]
-[ext_resource type="Texture2D" uid="uid://5vrg23fkrcj8" path="res://Assets/objects/saw/saw_normal_3.png" id="3_syqxs"]
-[ext_resource type="Texture2D" uid="uid://dvege2thj5ttp" path="res://Assets/objects/saw/saw_specular_2.png" id="4_36nog"]
-[ext_resource type="Texture2D" uid="uid://47ce1rfkf1f1" path="res://Assets/objects/saw/saw.png" id="4_ghqmr"]
+[ext_resource type="Texture2D" uid="uid://dwadxaxkrw2ym" path="res://Assets/Textures/entities/Enemies/saw/saw_blooded.png" id="3_o50ad"]
+[ext_resource type="Texture2D" uid="uid://5vrg23fkrcj8" path="res://Assets/Textures/entities/Enemies/saw/saw_normal_3.png" id="3_syqxs"]
+[ext_resource type="Texture2D" uid="uid://cdwl6a2ukqaav" path="res://Assets/Textures/entities/Enemies/saw/saw_blooded_level2.png" id="4_2lqbj"]
+[ext_resource type="Texture2D" uid="uid://dvege2thj5ttp" path="res://Assets/Textures/entities/Enemies/saw/saw_specular_2.png" id="4_36nog"]
+[ext_resource type="Texture2D" uid="uid://47ce1rfkf1f1" path="res://Assets/Textures/entities/Enemies/saw/saw.png" id="4_ghqmr"]
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="7_tt31a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36nog"]
@@ -183,6 +185,9 @@ mass = 20.0
 gravity_scale = 0.0
 script = ExtResource("1_nq37f")
 damage = -30
+NORMAL_TEXTURE = ExtResource("4_ghqmr")
+BLOODED_TEXTURE = ExtResource("3_o50ad")
+BLOODED_TEXTURE_2 = ExtResource("4_2lqbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_36nog")

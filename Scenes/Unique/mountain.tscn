@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dn2d5bkyctki" path="res://Assets/Textures/floors/terrain/mountain.png" id="1_cx0gk"]
 [ext_resource type="Script" uid="uid://chnaluor5aw1o" path="res://Scripts/Unique/terrain/mountain.gd" id="1_fttky"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="2_fttky"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="2_fttky"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cx0gk"]
 radius = 443.46512

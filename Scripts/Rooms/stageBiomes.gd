@@ -18,18 +18,29 @@ enum SpawnAreas{
 @export_range(0.0,1.0,0.01) var enemySpawnRate : float = 0.5
 @export_range(0.0,1.0,0.01) var dropSpawnRate : float = 0.5
 
+@export var biomeWeather:Weather
+
 @export var enemiesList : Array[SpawnEntry]
 @export var itemDropsList : Array[SpawnEntry]
 @export var ObjectsList : Array[SpawnEntry]
+
+var createdObjects: Array[Node2D]
 # ===== RNG =====
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func init(isrootboolean :bool) -> Biome:
 	self._isroot = isrootboolean
+
+			
 	return self
 
 
 func _ready() -> void:
+	if  _isroot :
+		await get_tree().process_frame
+		if GameManager.weatherManager:
+			if GameManager.weatherManager.currentWeather != biomeWeather:
+				GameManager.weatherManager.updateWeather(biomeWeather)
 	if !_isroot or _isroot == null:
 		_spawn_entities_at_Stage()
 	if _topTextureVariants != null and _topTextureVariants.size() > 0:
@@ -89,6 +100,7 @@ func _spawn_entities_at_Stage():
 					newitem.global_position = _get_random_point_in_area(SpawnAreas.STAGE)
 				else:
 					newitem.global_position = global_position
+				createdObjects.append(newitem)
 				get_tree().current_scene.add_child(newitem)
 				print("Item dropado em: ", newitem.global_position)
 
@@ -105,6 +117,7 @@ func _spawn_entities_at_Stage():
 					newObject.global_position = _get_random_point_in_area(SpawnAreas.OBJECT)
 				else:
 					newObject.global_position = global_position
+				createdObjects.append(newObject)
 				get_tree().current_scene.add_child.call_deferred(newObject)
 
 
@@ -125,3 +138,24 @@ func EntityspawnerAtMilestone(milestoneCoords : float ):
 		else:return
 	else :
 		print ("não ta dando")
+
+
+func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
+	$top.show()
+	$bottom.show()
+	set_process(true)
+	set_physics_process(true)
+	pass # Replace with function body.
+
+
+func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
+	$top.hide()
+	$bottom.hide()
+	set_process(false)
+	set_physics_process(false)
+	pass # Replace with function body.
+
+
+func deleteAllObjects():
+	for object in ObjectsList:
+		object.queue_free()

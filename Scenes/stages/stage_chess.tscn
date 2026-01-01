@@ -44,20 +44,20 @@ SpawnableScene = ExtResource("6_7kbir")
 SpawnRate = 0.4
 metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fobx4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4nr8"]
 size = Vector2(411, 412)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntpuk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fobx4"]
 size = Vector2(325, 315)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pfv32"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntpuk"]
 shader = ExtResource("2_m518n")
 shader_parameter/noise_tex = ExtResource("5_40mwk")
 shader_parameter/threshold = 1.0
 shader_parameter/edge_color = Color(0.29803923, 0.5019608, 0.101960786, 1)
 shader_parameter/edge_width = 0.05
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_45hi6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pfv32"]
 shader = ExtResource("2_m518n")
 shader_parameter/noise_tex = ExtResource("5_40mwk")
 shader_parameter/threshold = 1.0
@@ -71,32 +71,38 @@ itemDropsList = Array[ExtResource("2_yjv11")]([SubResource("Resource_7kbir"), Su
 
 [node name="StageArea" type="Area2D" parent="." groups=["Stage"]]
 z_index = -2
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageArea"]
 z_index = -2
 position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_fobx4")
+shape = SubResource("RectangleShape2D_m4nr8")
 
 [node name="EnemySpawnArea" type="Area2D" parent="."]
 z_index = -2
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySpawnArea"]
 z_index = -2
 position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_fobx4")
+shape = SubResource("RectangleShape2D_m4nr8")
 debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
 
 [node name="ObjectSpawnArea" type="Area2D" parent="."]
 z_index = -2
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectSpawnArea"]
 z_index = -2
-shape = SubResource("RectangleShape2D_ntpuk")
+shape = SubResource("RectangleShape2D_fobx4")
 debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-206, -204, 413, 615)
 
 [node name="top" type="Sprite2D" parent="."]
 z_index = -3
-material = SubResource("ShaderMaterial_pfv32")
+material = SubResource("ShaderMaterial_ntpuk")
 scale = Vector2(0.4011719, 0.4011719)
 texture = ExtResource("4_r4p5m")
 script = ExtResource("5_r4p5m")
@@ -104,7 +110,7 @@ script = ExtResource("5_r4p5m")
 [node name="bottom" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.41960785)
 z_index = -6
-material = SubResource("ShaderMaterial_45hi6")
+material = SubResource("ShaderMaterial_pfv32")
 position = Vector2(-0.39999998, 307.2)
 scale = Vector2(0.4011719, 0.19960937)
 texture = ExtResource("10_ijqqf")

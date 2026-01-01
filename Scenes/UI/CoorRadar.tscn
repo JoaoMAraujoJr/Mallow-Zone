@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=3 uid="uid://dwyntrhkd73bo"]
 
-[ext_resource type="Texture2D" uid="uid://bv1hf16orojiv" path="res://Assets/Textures/UI/gear_1.png" id="1_cd8rp"]
-[ext_resource type="Texture2D" uid="uid://co7on84cr45bd" path="res://Assets/Textures/UI/gear_1_normal.png" id="2_pyhp2"]
-[ext_resource type="Texture2D" uid="uid://lke6753f7ddp" path="res://Assets/Textures/UI/gear_3.png" id="3_7rehp"]
-[ext_resource type="Texture2D" uid="uid://cgjmjx3jkuccm" path="res://Assets/Textures/UI/gear_3_normal.png" id="4_173d1"]
-[ext_resource type="Texture2D" uid="uid://w21mh2ed5hg4" path="res://Assets/Textures/UI/gear_2.png" id="5_84ci2"]
-[ext_resource type="Texture2D" uid="uid://dujsalq18sof2" path="res://Assets/Textures/UI/gear_2_normal.png" id="6_iq4qt"]
-[ext_resource type="Texture2D" uid="uid://bl4nc0ploxo84" path="res://Assets/Textures/UI/CoordsLocator.png" id="7_k4ivy"]
-[ext_resource type="Texture2D" uid="uid://bl0ifv4dng78u" path="res://Assets/Textures/UI/CoordsLocator_normal.png" id="8_3vtp7"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="9_pyhp2"]
+[ext_resource type="Texture2D" uid="uid://bv1hf16orojiv" path="res://Assets/Textures/UI/CoordRadar/gear_1.png" id="1_cd8rp"]
+[ext_resource type="Texture2D" uid="uid://co7on84cr45bd" path="res://Assets/Textures/UI/CoordRadar/gear_1_normal.png" id="2_pyhp2"]
+[ext_resource type="Texture2D" uid="uid://lke6753f7ddp" path="res://Assets/Textures/UI/CoordRadar/gear_3.png" id="3_7rehp"]
+[ext_resource type="Texture2D" uid="uid://cgjmjx3jkuccm" path="res://Assets/Textures/UI/CoordRadar/gear_3_normal.png" id="4_173d1"]
+[ext_resource type="Texture2D" uid="uid://w21mh2ed5hg4" path="res://Assets/Textures/UI/CoordRadar/gear_2.png" id="5_84ci2"]
+[ext_resource type="Texture2D" uid="uid://dujsalq18sof2" path="res://Assets/Textures/UI/CoordRadar/gear_2_normal.png" id="6_iq4qt"]
+[ext_resource type="Texture2D" uid="uid://bl4nc0ploxo84" path="res://Assets/Textures/UI/CoordRadar/CoordsLocator.png" id="7_k4ivy"]
+[ext_resource type="Texture2D" uid="uid://bl0ifv4dng78u" path="res://Assets/Textures/UI/CoordRadar/CoordsLocator_normal.png" id="8_3vtp7"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="9_pyhp2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_87x3g"]
 diffuse_texture = ExtResource("1_cd8rp")

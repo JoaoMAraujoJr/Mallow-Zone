@@ -13,16 +13,20 @@ extends RigidBody2D
 
 var canChase: bool = false
 var Dir: Vector2 = Vector2.ZERO
-@onready var hitCounter := 0
+@onready var hitCounter := 0 :
+	set(new_value):
+		hitCounter = clamp(new_value,0,2)
+		
+	
 @onready var can_damage : bool = false
 @onready var _itstoped : bool = false
 
 @export var SPEED: float = 500.0
 
 # Texturas independentes (carregadas uma vez)
-const NORMAL_TEXTURE = preload("res://Assets/objects/saw/saw.png")
-const BLOODED_TEXTURE = preload("res://Assets/objects/saw/saw_blooded.png")
-const BLOODED_LVL2_TEXTURE = preload("res://Assets/objects/saw/saw_blooded_level2.png")
+@export var NORMAL_TEXTURE : Texture2D
+@export var BLOODED_TEXTURE : Texture2D
+@export var BLOODED_TEXTURE_2 : Texture2D
 
 func _ready() -> void:
 
@@ -35,10 +39,6 @@ func _physics_process(delta: float) -> void:
 	
 	_update_texture()
 	
-	if hitCounter == 1 :
-		_sawSprite.texture.diffuse_texture = preload("res://Assets/objects/saw/saw_blooded.png")
-	elif hitCounter >= 2:
-		_sawSprite.texture.diffuse_texture = preload("res://Assets/objects/saw/saw_blooded_level2.png")
 	
 	if _itstoped:
 		canChase = false
@@ -56,9 +56,9 @@ func _update_texture() -> void:
 	match hitCounter:
 		1:
 			_sawSprite.texture.diffuse_texture = BLOODED_TEXTURE
-		2, _ when hitCounter > 2:
-			_sawSprite.texture.diffuse_texture = BLOODED_LVL2_TEXTURE
-		_:
+		2:
+			_sawSprite.texture.diffuse_texture = BLOODED_TEXTURE_2
+		0:
 			_sawSprite.texture.diffuse_texture = NORMAL_TEXTURE
 
 func _on_startimer_timeout() -> void:

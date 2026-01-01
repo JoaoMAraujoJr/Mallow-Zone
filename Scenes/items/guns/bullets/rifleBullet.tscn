@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwms633t47x1t" path="res://Scenes/items/guns/bullets/riflebullet.gd" id="1_wnwga"]
 [ext_resource type="Texture2D" uid="uid://bwy1yk26573bi" path="res://Assets/player/bullet.png" id="2_uostt"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="3_bhd26"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="3_bhd26"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oduel"]
 radius = 10.049875

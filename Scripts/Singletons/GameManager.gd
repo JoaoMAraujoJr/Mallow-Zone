@@ -1,5 +1,5 @@
 extends Node
-
+@warning_ignore("unused_signal")
 signal skin_changed(new_skin: String)
 
 var currentSaveSlot = 1
@@ -7,11 +7,12 @@ var currentSaveSlot = 1
 var ammoMax : int = 0
 var ammo : int = ammoMax
 var kills : int = 0
-var player_x: float = 0
-var player_y: float = 0
 var enemySpeed: float = 50.0
 var player_health : int = 100
 var can_shoot: bool = true
+
+var thisPlayer : Player
+var weatherManager : WeatherManager
 
 #Pause Menu:
 var pauseMenuScene :PackedScene = load("res://Scenes/UI/pause_menu/pause_menu.tscn")
@@ -22,6 +23,7 @@ var isPaused:bool = false
 
 
 #current
+var currentSpawnedChunks :={}
 var currentEquipedWeaponType : String = "none"
 var currentPlayerSkin: String = ""
 
@@ -79,13 +81,11 @@ func _process(_delta: float) -> void:
 
 func saveDataOnSlot(slot:int):
 	var saveData = {
-		"player_health":player_health,
-		"player_ammo": ammo,
-		"player_max_ammo": ammoMax,
+		"player" : thisPlayer,
+		"current_ammo": ammo,
 		"player_skin": currentPlayerSkin,
 		"player_equiped_weapon_type":  currentEquipedWeaponType,
-		"x_coord": player_x,
-		"y_coord": player_y
+
 	}
 	var dir = "user://saves/"
 	DirAccess.make_dir_recursive_absolute(dir)

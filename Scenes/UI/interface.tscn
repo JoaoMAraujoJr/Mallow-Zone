@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=19 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
+[ext_resource type="PackedScene" uid="uid://debg6fibu7vns" path="res://Scenes/Unique/weather_manager.tscn" id="2_na5jw"]
 [ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/UI/mousefollow.tscn" id="5_r04jc"]
@@ -71,6 +72,8 @@ shader_parameter/pixel_strength = -4.0
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_j00uw")
+
+[node name="Weather_Manager" parent="." instance=ExtResource("2_na5jw")]
 
 [node name="FishEyeEffectLayer" type="CanvasLayer" parent="."]
 

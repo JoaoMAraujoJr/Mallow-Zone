@@ -1,0 +1,87 @@
+[gd_scene load_steps=14 format=3 uid="uid://dsdfci3it6gcr"]
+
+[ext_resource type="Texture2D" uid="uid://6i726c34sov8" path="res://Assets/Textures/entities/Particles/weather/leaf_1.png" id="1_47nqi"]
+[ext_resource type="Texture2D" uid="uid://kgatgaf6pisd" path="res://Assets/Textures/entities/Particles/weather/leaf_2.png" id="2_xpr53"]
+
+[sub_resource type="Curve" id="Curve_47nqi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86577183, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xpr53"]
+curve = SubResource("Curve_47nqi")
+
+[sub_resource type="Curve" id="Curve_q1imo"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -10.313812), 535.11926, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_icfyk"]
+curve = SubResource("Curve_q1imo")
+
+[sub_resource type="Curve" id="Curve_icfyk"]
+_limits = [-40.0, 40.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 2.7285159, 0, 1, Vector2(0.5, 1.3642578), 0.0, 0.0, 0, 0, Vector2(0.77516776, 8.785812), 0.0, 0.0, 0, 0, Vector2(1, -9.658943), 67.26524, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_w4hxu"]
+curve = SubResource("Curve_icfyk")
+
+[sub_resource type="Curve" id="Curve_w4hxu"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3590604, 0.79399705), 1.3590331, 1.3590331, 0, 0, Vector2(0.7114094, 1.2551157), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_3c08l"]
+curve = SubResource("Curve_w4hxu")
+
+[sub_resource type="Curve" id="Curve_2wmw6"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.8717599), 0.0, 0.0, 0, 0, Vector2(1, 1.084584), 3.446824, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2g1pt"]
+curve = SubResource("Curve_2wmw6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xpr53"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(640, 1, 0)
+emission_shape = 2
+emission_sphere_radius = 1.0
+angle_min = -9.9999895
+angle_max = 10.0000105
+angle_curve = SubResource("CurveTexture_icfyk")
+gravity = Vector3(0, 48, 0)
+radial_accel_min = -40.0
+radial_accel_max = 72.74
+radial_accel_curve = SubResource("CurveTexture_w4hxu")
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_3c08l")
+scale_over_velocity_curve = SubResource("CurveTexture_2g1pt")
+alpha_curve = SubResource("CurveTexture_xpr53")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.039999977
+
+[node name="FallingLeafParticles1" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 10
+texture = ExtResource("1_47nqi")
+lifetime = 6.0
+randomness = 0.5
+use_fixed_seed = true
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_xpr53")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 5
+texture = ExtResource("2_xpr53")
+lifetime = 6.0
+randomness = 0.5
+use_fixed_seed = true
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_xpr53")

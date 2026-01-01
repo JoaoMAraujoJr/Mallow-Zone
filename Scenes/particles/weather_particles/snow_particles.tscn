@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://djm6r1ypeko4n"]
+
+[sub_resource type="Curve" id="Curve_5a6cr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8020134, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i2dvi"]
+curve = SubResource("Curve_5a6cr")
+
+[sub_resource type="Curve" id="Curve_qu5l5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.71623456), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6aemy"]
+curve = SubResource("Curve_qu5l5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5a6cr"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(640, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 36, 0)
+radial_accel_min = -10.000002
+radial_accel_max = 9.999997
+scale_min = 2.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_6aemy")
+alpha_curve = SubResource("CurveTexture_i2dvi")
+
+[node name="SnowParticles" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="SnowGPUParticles" type="GPUParticles2D" parent="."]
+amount = 200
+lifetime = 7.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_5a6cr")

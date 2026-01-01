@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dya4pn5fc83y8"]
 
-[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="1_1nm5o"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="1_1nm5o"]
 [ext_resource type="Script" uid="uid://drb6e5j81566p" path="res://Scripts/Unique/Classes/Pickable.gd" id="1_47yf2"]
 [ext_resource type="Texture2D" uid="uid://chd3l01ioqd0j" path="res://Assets/Textures/UI/Buttons/key.png" id="2_4je43"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="4_hkno7"]

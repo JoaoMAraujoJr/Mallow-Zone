@@ -9,6 +9,16 @@ var BiomeList := {
 		"BiomeScene": load("res://Scenes/stages/stage_grass.tscn"),
 		"WarpArt": load("res://Assets/Textures/entities/StageWarper/levelart/Yard.png")
 	},
+	"Winterforest":{
+		"name": "Winter Outskirts",
+		"BiomeScene": load("res://Scenes/stages/stage_grass.tscn"),
+		"WarpArt":load("res://Assets/Textures/entities/StageWarper/levelart/Yard.png")
+	},
+	"Autumnforest":{
+		"name": "Orange valley",
+		"BiomeScene": load("res://Scenes/stages/stage_grass.tscn"),
+		"WarpArt":load("res://Assets/Textures/entities/StageWarper/levelart/Yard.png")
+	},
 	"Chess":{
 		"name": "The Chess Zone",
 		"BiomeScene": load("res://Scenes/stages/stage_chess.tscn"),

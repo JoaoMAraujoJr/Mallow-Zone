@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dr7y78whn4dis"]
 
 [ext_resource type="Script" uid="uid://q58c2ys1vn3i" path="res://Scripts/UI/boss_bar.gd" id="1_6csbe"]
-[ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/player/barunder.png" id="1_a47q3"]
-[ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/player/bar.png" id="2_6csbe"]
+[ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/Textures/UI/progressbars/lifebar_under.png" id="1_a47q3"]
+[ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/Textures/UI/progressbars/lifebar_progress.png" id="2_6csbe"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="3_xmrbd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ics7f"]

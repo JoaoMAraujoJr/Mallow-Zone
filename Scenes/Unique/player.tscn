@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/Unique/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="2_d05bs"]
 [ext_resource type="PackedScene" uid="uid://bjxxblvb7g17" path="res://Scenes/Unique/player_skin_node.tscn" id="3_d05bs"]
-[ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/player/barunder.png" id="6_3smsa"]
-[ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/player/bar.png" id="7_8erm5"]
-[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/player/shadow.png" id="8_8erm5"]
+[ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/Textures/UI/progressbars/lifebar_under.png" id="6_3smsa"]
+[ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/Textures/UI/progressbars/lifebar_progress.png" id="7_8erm5"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="8_8erm5"]
 [ext_resource type="AudioStream" uid="uid://yvfg5cl1j23" path="res://Assets/Sounds/Gun/OutofAmmo.wav" id="8_gymyn"]
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
 

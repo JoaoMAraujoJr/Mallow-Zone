@@ -1,16 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://rjh4xm252afo"]
+[gd_scene load_steps=8 format=3 uid="uid://rjh4xm252afo"]
 
 [ext_resource type="Script" uid="uid://b3uu1wj2ostvi" path="res://Scenes/items/guns/holdable/flamethrower.gd" id="1_8f050"]
 [ext_resource type="PackedScene" uid="uid://bicx6emeshc36" path="res://Scenes/particles/flame_particle.tscn" id="2_8f050"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="3_450hh"]
 [ext_resource type="Texture2D" uid="uid://rbc1aemrhq6e" path="res://Assets/Textures/items/guns/flamethrower.png" id="3_f8dng"]
 [ext_resource type="PackedScene" uid="uid://dgnqylesw223s" path="res://Scenes/items/guns/bullets/flamethrower_fire.tscn" id="4_f8dng"]
 [ext_resource type="Texture2D" uid="uid://b8qei0yud7p7u" path="res://Assets/Textures/player_skins/red_jim/hand_spr.png" id="5_gmide"]
 [ext_resource type="AudioStream" uid="uid://bsemfjt8owtya" path="res://Assets/Sounds/Gun/IgniteFlamethrower.ogg" id="6_schkd"]
 [ext_resource type="AudioStream" uid="uid://dbbwpwe8f40tn" path="res://Assets/Sounds/Gun/FlameSound.ogg" id="7_qmuyu"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_schkd"]
-polygon = PackedVector2Array(0, -16, -84, -86, 0, 6, 90, -87, 0, -16)
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_8f050")
@@ -23,31 +19,6 @@ position = Vector2(-10.5, -1.1920929e-07)
 scale = Vector2(1.5, 1.25)
 texture = ExtResource("3_f8dng")
 offset = Vector2(16, -0.7999996)
-
-[node name="flashlight" type="Node2D" parent="gun"]
-z_index = -1
-y_sort_enabled = true
-position = Vector2(1, -6.4000006)
-scale = Vector2(0.6666667, 0.8000001)
-
-[node name="light" type="PointLight2D" parent="gun/flashlight"]
-z_index = -1
-y_sort_enabled = true
-position = Vector2(34.60001, 2)
-scale = Vector2(1.48, 1)
-color = Color(1.4687854, 1.4687854, 0.73811597, 0.33333334)
-energy = 4.39
-shadow_enabled = true
-shadow_filter = 1
-shadow_item_cull_mask = 3
-texture = ExtResource("3_450hh")
-texture_scale = 0.5
-
-[node name="Ocluder" type="LightOccluder2D" parent="gun/flashlight"]
-position = Vector2(11, 4.7683716e-07)
-rotation = 1.5980113
-scale = Vector2(0.99999994, 0.99999994)
-occluder = SubResource("OccluderPolygon2D_schkd")
 
 [node name="gunpoint" type="Marker2D" parent="gun"]
 position = Vector2(36, -4)
@@ -73,7 +44,6 @@ scale = Vector2(0.3315387, 0.3315387)
 texture = ExtResource("5_gmide")
 
 [node name="FlameParticle" parent="." instance=ExtResource("4_f8dng")]
-z_index = 1
 y_sort_enabled = true
 position = Vector2(56, -4)
 emitting = false

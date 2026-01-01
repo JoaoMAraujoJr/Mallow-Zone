@@ -36,7 +36,7 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 func _ready():
 	super._ready()
 	isAffectable = true
-	
+	GameManager.thisPlayer = self
 	call_deferred("_equipGun")
 	GameManager.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
@@ -45,8 +45,6 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	adjustCameraZoom(delta)
 	
-	GameManager.player_x= global_position.x
-	GameManager.player_y= - global_position.y
 	
 	_lifebar.value = health
 	
@@ -158,11 +156,13 @@ func _equipGun():
 		_gun.queue_free()
 		_gun = null
 		
-	if(GameManager.currentEquipedWeaponType == null or GameManager.currentEquipedWeaponType == "none" ):
+	if(GameManager.currentEquipedWeaponType not in ItemData.weapons):
 		return
 		
 	var currentGunType = GameManager.currentEquipedWeaponType
+
 	var currentGun = ItemData.weapons[currentGunType]
+	
 	_gun = null
 	_gun = currentGun["weapon_scene"].instantiate()
 	_gun.position = _gunPivot.position
@@ -179,7 +179,7 @@ func _switchGun(newWeapon:String):
 	GameManager.ammoMax = ItemData.weapons[newWeapon]["max_ammo"]
 	var newCurrentAmmo:int 
 	
-	if oldWeapon != "none" and oldWeapon != null:
+	if oldWeapon in ItemData.weapons:
 		newCurrentAmmo = floor(( GameManager.ammo * ItemData.weapons[newWeapon]["max_ammo"])/ItemData.weapons[oldWeapon]["max_ammo"])
 	else: 
 		newCurrentAmmo = ItemData.weapons[newWeapon]["max_ammo"]

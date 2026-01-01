@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw06ynpshu646"]
+[gd_scene load_steps=7 format=3 uid="uid://dw06ynpshu646"]
 
 [ext_resource type="Script" uid="uid://cwmxqrxgyy2ag" path="res://Scripts/enemies/blackHole/blackhole_enemy.gd" id="1_5fk2r"]
-[ext_resource type="Texture2D" uid="uid://wkmj7ds68ym" path="res://Assets/player/monster.png" id="2_5fk2r"]
 [ext_resource type="PackedScene" uid="uid://bo4itjsycgk4x" path="res://Scenes/blackhole.tscn" id="2_qm35p"]
-[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/light_textures/proto_light_2.png" id="3_qm35p"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="3_qm35p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_287tu"]
 radius = 42.107006
@@ -19,10 +18,6 @@ script = ExtResource("1_5fk2r")
 
 [node name="Blackhole" parent="." instance=ExtResource("2_qm35p")]
 scale = Vector2(0.62451005, 0.62451005)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.1603798, 1.1603798)
-texture = ExtResource("2_5fk2r")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visibility_layer = 3

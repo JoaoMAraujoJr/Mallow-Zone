@@ -11,11 +11,12 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	ammo = GameManager.ammo
 	_ammolabel.text = "Ammo: " + str(ammo) + "/ " + str(GameManager.ammoMax)
 	_killslabel.text= str(GameManager.kills) + " Kills"
-	_coords.text = "%.2f \n%.2f" % [GameManager.player_x, GameManager.player_y]
+	if GameManager.thisPlayer:
+		_coords.text = "%.2f \n%.2f" % [GameManager.thisPlayer.global_position.x, GameManager.thisPlayer.global_position.y]
 	
 
 	

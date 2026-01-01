@@ -1,5 +1,5 @@
 extends Control
-
+@warning_ignore("unused_signal")
 signal skin_changed(new_skin: String)
 
 enum dir {

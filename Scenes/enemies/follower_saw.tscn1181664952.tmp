@@ -1,0 +1,254 @@
+[gd_scene load_steps=16 format=3 uid="uid://cdvi88e42jjsb"]
+
+[ext_resource type="Script" uid="uid://ysjkink7woy0" path="res://Scripts/enemies/followerSaw/follower_saw.gd" id="1_nq37f"]
+[ext_resource type="Texture2D" uid="uid://dkpem8yj4qctq" path="res://Assets/Textures/entities/Enemies/saw/saw_light2.png" id="2_36nog"]
+[ext_resource type="Texture2D" uid="uid://chbghrjef56v5" path="res://Assets/objects/blackhole2.png" id="3_ghqmr"]
+[ext_resource type="Texture2D" uid="uid://5vrg23fkrcj8" path="res://Assets/Textures/entities/Enemies/saw/saw_normal_3.png" id="3_syqxs"]
+[ext_resource type="Texture2D" uid="uid://dvege2thj5ttp" path="res://Assets/Textures/entities/Enemies/saw/saw_specular_2.png" id="4_36nog"]
+[ext_resource type="Texture2D" uid="uid://47ce1rfkf1f1" path="res://Assets/Textures/entities/Enemies/saw/saw.png" id="4_ghqmr"]
+[ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="7_tt31a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36nog"]
+radius = 84.0238
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghqmr"]
+radius = 110.16351
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ghqmr"]
+diffuse_texture = ExtResource("4_ghqmr")
+normal_texture = ExtResource("3_syqxs")
+specular_texture = ExtResource("4_36nog")
+specular_shininess = 0.5
+
+[sub_resource type="Animation" id="Animation_syqxs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.9123621, 1.9123621)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jk6la"]
+resource_name = "rotating"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.9123621, 1.9123621), Vector2(1.962, 1.962), Vector2(1.9123621, 1.9123621)]
+}
+
+[sub_resource type="Animation" id="Animation_ghqmr"]
+resource_name = "stopRotation"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8666667, 1.8, 2.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 3.7908552, 5.37735942539453, 6.263986685407648]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_StopSaw"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.85, 1.83, 2.82),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 3.7873645, 5.3040557, 5.8451076]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.7666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qre6k"]
+_data = {
+&"RESET": SubResource("Animation_syqxs"),
+&"rotating": SubResource("Animation_jk6la"),
+&"stopRotation": SubResource("Animation_ghqmr")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tt31a"]
+radius = 1243.2426
+
+[node name="FollowerSaw" type="RigidBody2D"]
+z_index = 1
+y_sort_enabled = true
+mass = 20.0
+gravity_scale = 0.0
+script = ExtResource("1_nq37f")
+damage = -30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_36nog")
+
+[node name="damagehitbox" type="Area2D" parent="." groups=["SawArea"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damagehitbox"]
+shape = SubResource("CircleShape2D_ghqmr")
+debug_color = Color(0.6976559, 0.47439355, 0.38469806, 0.41960785)
+
+[node name="Shadow" type="Sprite2D" parent="."]
+scale = Vector2(0.6208293, 0.6208293)
+texture = ExtResource("3_ghqmr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.9123621, 1.9123621)
+texture = SubResource("CanvasTexture_ghqmr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qre6k")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(1.9123621, 1.9123621)
+
+[node name="PointLight2D" type="PointLight2D" parent="Node2D"]
+position = Vector2(0, 2.091654)
+scale = Vector2(0.59751326, 0.59751326)
+energy = 3.99
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = ExtResource("2_36nog")
+texture_scale = 0.24
+height = 355.0
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("CircleShape2D_tt31a")
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="DeleteitSelfTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="TimeToStop" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_tt31a")
+bus = &"SFXReverb"
+
+[connection signal="body_entered" from="damagehitbox" to="." method="_on_damagehitbox_body_entered"]
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="timeout" from="DeleteitSelfTimer" to="." method="_on_deleteit_self_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_startimer_timeout"]
+[connection signal="timeout" from="TimeToStop" to="." method="_on_time_to_stop_timeout"]

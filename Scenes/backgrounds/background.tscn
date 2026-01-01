@@ -1,80 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdof1lf74pr0c"]
+[gd_scene load_steps=2 format=3 uid="uid://cdof1lf74pr0c"]
 
-[ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="2_j7nw7"]
-[ext_resource type="Texture2D" uid="uid://c1ukeyun86qns" path="res://Assets/Textures/backgrounds/starsBACKGROUND.png" id="3_mkb3k"]
+[ext_resource type="Texture2D" uid="uid://ccdsw5apsha0t" path="res://Assets/Textures/backgrounds/BiomesBackgrounds/day/sky_2.png" id="1_7eyp6"]
 
-[sub_resource type="Animation" id="Animation_j7nw7"]
-resource_name = "Pulsating"
-length = 10.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Parallax2D2/sky:self_modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3.8333333, 4.5666666, 5.3, 7.133333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.4), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
-}
+[node name="Background" type="CanvasLayer"]
+layer = -99
 
-[sub_resource type="Animation" id="Animation_mkb3k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Parallax2D2/sky:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3l4eu"]
-_data = {
-&"Pulsating": SubResource("Animation_j7nw7"),
-&"RESET": SubResource("Animation_mkb3k")
-}
-
-[sub_resource type="Curve" id="Curve_mkb3k"]
-_data = [Vector2(0.42477876, 0.011235952), 0.0, -0.20814145, 0, 0, Vector2(0.8274336, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_3l4eu"]
-curve = SubResource("Curve_mkb3k")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gujx"]
-shader = ExtResource("2_j7nw7")
-shader_parameter/curve = SubResource("CurveTexture_3l4eu")
-shader_parameter/rotation_speed = 0.75
-shader_parameter/distortion_strength = 0.678000032205
-
-[node name="Background" type="Node2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
-libraries = {
-&"": SubResource("AnimationLibrary_3l4eu")
-}
-autoplay = "Pulsating"
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -93.0
+offset_right = -564.3082
+offset_bottom = -322.53036
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.872199, 1.872199)
+texture = ExtResource("1_7eyp6")
+stretch_mode = 1
 
 [node name="Parallax2D3" type="Parallax2D" parent="."]
-visible = false
 z_index = -20
 scale = Vector2(3.0944655, 3.0944655)
-repeat_size = Vector2(256, 256)
-repeat_times = 13
-
-[node name="shader" type="Sprite2D" parent="Parallax2D3"]
-visible = false
-modulate = Color(1, 1, 1, 0.3647059)
-self_modulate = Color(0, 0, 0, 0)
-material = SubResource("ShaderMaterial_7gujx")
-position = Vector2(68.479225, -8.898685e-06)
-scale = Vector2(2.320993, 3.454226)
-texture = ExtResource("3_mkb3k")
+scroll_offset = Vector2(-1802, -3128)
