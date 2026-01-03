@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cbf4muc7d60h"]
+[gd_scene load_steps=19 format=3 uid="uid://cbf4muc7d60h"]
 
 [ext_resource type="Script" uid="uid://dxl83axbgoc4c" path="res://Scripts/Unique/Classes/Tree.gd" id="1_ryksv"]
 [ext_resource type="Texture2D" uid="uid://b0417p1208j21" path="res://Assets/objects/tree.png" id="1_uvtpv"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="3_j8h35"]
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uopmo"]
 [ext_resource type="PackedScene" uid="uid://c7xbhtxd03xn4" path="res://Scenes/particles/tree_explossion_particles.tscn" id="4_dkidj"]
+[ext_resource type="Texture2D" uid="uid://0fcblgf76t2e" path="res://Assets/Textures/UI/minimap_icons/structures/tree_1.png" id="5_dkidj"]
+[ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="6_j2xe8"]
 [ext_resource type="AudioStream" uid="uid://btsnqmg6ydpwl" path="res://Assets/Sounds/Wood Crash.wav" id="6_ryksv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryksv"]
@@ -102,6 +104,16 @@ TreeParticles = ExtResource("4_dkidj")
 usageType = 1
 interactionType = 2
 maxAmmountOfInteractions = 2
+
+[node name="MiniMapIcon" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+y_sort_enabled = true
+position = Vector2(0, -40.371708)
+scale = Vector2(1.2475007, 1.2475007)
+texture = ExtResource("5_dkidj")
+offset = Vector2(-1.4901161e-08, -3.9018097)
+script = ExtResource("6_j2xe8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2

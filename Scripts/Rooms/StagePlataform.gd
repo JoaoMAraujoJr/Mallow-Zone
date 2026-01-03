@@ -1,13 +1,13 @@
 extends Node2D
-class_name Biome
+class_name newStageBiome
 
 @onready var stage_area = $StageArea
 @onready var areashape = $EnemySpawnArea/CollisionShape2D
 @onready var enemy_spawn_area = $EnemySpawnArea
 var _isroot :bool = false
-@export var _topTextureVariants : Array[Texture2D]
-@onready var _top = $top
 
+@onready var topSprite = $top
+@onready var bottomSprite=$bottom
 #==== SPAWNABLES =====
 enum SpawnAreas{
 	STAGE,
@@ -18,20 +18,14 @@ enum SpawnAreas{
 @export_range(0.0,1.0,0.01) var enemySpawnRate : float = 0.5
 @export_range(0.0,1.0,0.01) var dropSpawnRate : float = 0.5
 
-@export var biomeWeather:Weather
+var thisBiome :Biome = BiomeManager.currentBiome
 
-@export var enemiesList : Array[SpawnEntry]
-@export var itemDropsList : Array[SpawnEntry]
-@export var ObjectsList : Array[SpawnEntry]
 
-var createdObjects: Array[Node2D]
 # ===== RNG =====
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
-func init(isrootboolean :bool) -> Biome:
+func init(isrootboolean :bool) -> newStageBiome:
 	self._isroot = isrootboolean
-
-			
 	return self
 
 
@@ -39,15 +33,18 @@ func _ready() -> void:
 	if  _isroot :
 		await get_tree().process_frame
 		if GameManager.weatherManager:
-			if GameManager.weatherManager.currentWeather != biomeWeather:
-				GameManager.weatherManager.updateWeather(biomeWeather)
-	if !_isroot or _isroot == null:
+			if GameManager.weatherManager.currentWeather != thisBiome.weather:
+				GameManager.weatherManager.updateWeather(thisBiome.weather)
+	if !_isroot:
 		_spawn_entities_at_Stage()
-	if _topTextureVariants != null and _topTextureVariants.size() > 0:
-		var randomTexture :Texture2D = _topTextureVariants[randi() % _topTextureVariants.size()]
+	if thisBiome.topTextureVariants != null and thisBiome.topTextureVariants.size() > 0:
+		var randomTexture :Texture2D = thisBiome.topTextureVariants[randi() % thisBiome.topTextureVariants.size()]
 		if randomTexture != null:
-			_top.texture = randomTexture
-	pass
+			topSprite.texture = randomTexture
+	if thisBiome.bottomTexturesVariants != null and thisBiome.bottomTexturesVariants.size() > 0:
+		var randomTexture :Texture2D = thisBiome.bottomTexturesVariants[randi() % thisBiome.bottomTexturesVariants.size()]
+		if randomTexture != null:
+			bottomSprite.texture = randomTexture
 
 func get_stage_area() -> Area2D:
 	return stage_area
@@ -77,10 +74,10 @@ func _get_random_point_in_area(area:SpawnAreas) -> Vector2:
 		return areashape.global_position
 
 func _spawn_entities_at_Stage():
-	if (enemiesList != null ) and (enemiesList.size() > 0):
+	if (thisBiome.enemiesList != null ) and (thisBiome.enemiesList.size() > 0):
 		rng.randomize() 
 		var rand_chance:float = randf()
-		for enemy in enemiesList:
+		for enemy in thisBiome.enemiesList:
 			if rand_chance <= enemy.SpawnRate:
 				var newEnemy = enemy.SpawnableScene.instantiate()
 				if enemy.isRandomPosition:
@@ -90,34 +87,32 @@ func _spawn_entities_at_Stage():
 				get_tree().current_scene.add_child(newEnemy)
 				print("Inimigo spawnado em: ", newEnemy.global_position)
 	
-	if (itemDropsList != null ) and (itemDropsList.size() > 0):
+	if (thisBiome.itemDropsList != null ) and (thisBiome.itemDropsList.size() > 0):
 		rng.randomize() 
 		var rand_chance:float = randf()
-		for item in itemDropsList:
+		for item in thisBiome.itemDropsList:
 			if rand_chance <= item.SpawnRate:
 				var newitem = item.SpawnableScene.instantiate()
 				if item.isRandomPosition:
 					newitem.global_position = _get_random_point_in_area(SpawnAreas.STAGE)
 				else:
 					newitem.global_position = global_position
-				createdObjects.append(newitem)
 				get_tree().current_scene.add_child(newitem)
 				print("Item dropado em: ", newitem.global_position)
 
-	if (ObjectsList != null ) and (ObjectsList.size() > 0):
+	if (thisBiome.objectsList != null ) and (thisBiome.objectsList.size() > 0):
 		rng.randomize() 
 		if !_isroot: 
-			var random_index = randi() % ObjectsList.size()
-			var randomObjectScene = ObjectsList[random_index]
+			var random_index = randi() % thisBiome.objectsList.size()
+			var randomObjectScene = thisBiome.objectsList[random_index]
 			if randomObjectScene == null or randomObjectScene.SpawnableScene == null:
 				pass
 			else:
 				var newObject = randomObjectScene.SpawnableScene.instantiate()
-				if ObjectsList[random_index].isRandomPosition:
+				if thisBiome.objectsList[random_index].isRandomPosition:
 					newObject.global_position = _get_random_point_in_area(SpawnAreas.OBJECT)
 				else:
 					newObject.global_position = global_position
-				createdObjects.append(newObject)
 				get_tree().current_scene.add_child.call_deferred(newObject)
 
 
@@ -154,8 +149,3 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 	set_process(false)
 	set_physics_process(false)
 	pass # Replace with function body.
-
-
-func deleteAllObjects():
-	for object in ObjectsList:
-		object.queue_free()

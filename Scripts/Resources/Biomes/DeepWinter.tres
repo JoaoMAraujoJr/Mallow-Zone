@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=4 format=3 uid="uid://dmatsd422cqmg"]
+
+[ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="1_cwix2"]
+[ext_resource type="Script" uid="uid://eq8xeuv5a2or" path="res://Scripts/Resources/Biome.gd" id="2_tl7jt"]
+[ext_resource type="Resource" uid="uid://c7e4pxjbd4syb" path="res://Scripts/Resources/Weather/snowing.tres" id="3_tl7jt"]
+
+[resource]
+script = ExtResource("2_tl7jt")
+name = "Deep Winter Cove"
+weather = ExtResource("3_tl7jt")
+metadata/_custom_type_script = "uid://eq8xeuv5a2or"

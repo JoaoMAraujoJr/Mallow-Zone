@@ -15,8 +15,8 @@ var chunk_key : Vector2i
 @onready var TriggerDown: Area2D = $Triggers/Trigger_Down
 
 # ===== BIOME =====
-@onready var ThisBiome : Biome
-var StageScene: PackedScene = preload("res://Scenes/Unique/Gamescene.tscn")
+@onready var ThisBiome : newStageBiome
+var StageScene: PackedScene = preload("res://Scenes/Unique/PlataformSpawner.tscn")
 
 # ===== FLAGS =====
 var isLeftTriggered := false
@@ -38,10 +38,15 @@ func _ready() -> void:
 	TriggerUp.connect("area_entered", Callable(self, "_on_trigger_up_entered"))
 	TriggerDown.connect("area_entered", Callable(self, "_on_trigger_down_entered"))
 	
+	if isthisroot:
+		var key := Vector2i(global_position)
+		GameManager.currentSpawnedChunks[key]=true
+		
 	if BiomeManager.currentBiome==null:
-		BiomeManager.currentBiome="Chess"
+		print("Biome Manager Current Biome is Null Reasigning is Being Made")
+		BiomeManager.currentBiome= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
 	else:
-		var plataform :Biome = BiomeManager.BiomeList[BiomeManager.currentBiome]["BiomeScene"].instantiate().init(isthisroot)
+		var plataform :newStageBiome = BiomeManager.PlataforScene.instantiate().init(isthisroot)
 		_setbiome(plataform)
 		
 func _on_trigger_left_entered(body):
@@ -83,12 +88,12 @@ func _spawn_stage_at_deferred(markerposition: Vector2, trigger: Area2D) -> void:
 	#print("Stage spawnada em: ", new_stage.global_position)
 	
 
-func _setbiome(plataform : Biome):
+func _setbiome(plataform : newStageBiome):
 		plataform.global_position = global_position
 		get_tree().current_scene.add_child.call_deferred(plataform)
 		ThisBiome = plataform
 		
 
-func  _getbiome() -> Biome:
+func  _getbiome() -> newStageBiome:
 	return ThisBiome
 	

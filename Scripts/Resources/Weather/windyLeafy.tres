@@ -1,11 +1,19 @@
-[gd_resource type="Resource" script_class="Weather" load_steps=3 format=3 uid="uid://xxjnd60p1vxg"]
+[gd_resource type="Resource" script_class="Weather" load_steps=5 format=3 uid="uid://xxjnd60p1vxg"]
 
 [ext_resource type="Script" uid="uid://c2x0pbf6lpil1" path="res://Scripts/Resources/Weather.gd" id="1_746p8"]
 [ext_resource type="PackedScene" uid="uid://dsdfci3it6gcr" path="res://Scenes/particles/weather_particles/falling_leaf_particles_1.tscn" id="2_w3dx7"]
+
+[sub_resource type="Gradient" id="Gradient_w3dx7"]
+offsets = PackedFloat32Array(0, 0.221519, 0.7468355, 1)
+colors = PackedColorArray(0, 0, 0.05490196, 1, 0.19215687, 0.28235295, 0.26666668, 1, 0.6509804, 0.77254903, 0.77254903, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e4ecp"]
+gradient = SubResource("Gradient_w3dx7")
 
 [resource]
 script = ExtResource("1_746p8")
 name = "Windy and Leafy"
 colorOverlay = Color(0.2901961, 0.6431373, 0.3529412, 0.08235294)
+worldEnviromentGradiant = SubResource("GradientTexture2D_e4ecp")
 weatherParticles = Array[PackedScene]([ExtResource("2_w3dx7")])
 metadata/_custom_type_script = "uid://c2x0pbf6lpil1"

@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var _vision: Area2D = $EnemyVision
 @onready var _hitbox: Area2D = $EnemyHitbox
 @onready var _damage_timer: Timer = $DamageTimer 
+@onready var minimapIcon :Sprite2D = $MiniMapIcon
 
 var target_scale: Vector2 = Vector2.ZERO
 var shrink_speed: float = 0.05  # unidades de scale por segundo
@@ -23,6 +24,9 @@ var followMode: bool = false
 var SPEED: float = 0
 
 func _ready() -> void:
+	var random_color = Color.from_hsv(randf(), 0.6, 1.5)
+	minimapIcon.modulate = random_color
+	
 	scale *= randf_range(1.0,2.0)
 func _physics_process(delta: float) -> void:
 	

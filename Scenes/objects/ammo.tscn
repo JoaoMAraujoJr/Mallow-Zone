@@ -1,41 +1,398 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctgqpxo0oqo8t"]
+[gd_scene load_steps=26 format=4 uid="uid://ctgqpxo0oqo8t"]
 
-[ext_resource type="Texture2D" uid="uid://bdx16w1p88exn" path="res://Assets/player/ammo.png" id="1_mq6ge"]
 [ext_resource type="Script" uid="uid://bac8p0wlsel7l" path="res://Scripts/objects/ammo.gd" id="1_pncbt"]
-[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_7r188"]
-[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uunpu"]
-[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_uunpu"]
+[ext_resource type="Texture2D" uid="uid://c8nne8f2qmn5l" path="res://Assets/3D/cases/ammo/AmmoCase_3D_0.png" id="2_de5fp"]
+[ext_resource type="AudioStream" uid="uid://wbjgqp6nisql" path="res://Assets/Sounds/soundEffects/case_1.wav" id="3_sn6wm"]
+[ext_resource type="Texture2D" uid="uid://dvjnuaol6ske" path="res://Assets/Textures/entities/shadows/shadow_rect.png" id="5_sn6wm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j57vc"]
-shader = ExtResource("2_7r188")
-shader_parameter/noise_tex = ExtResource("3_uunpu")
-shader_parameter/threshold = 1.0
-shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
-shader_parameter/edge_width = 0.05
+[sub_resource type="CircleShape2D" id="CircleShape2D_884kk"]
+radius = 195.50192
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pncbt"]
-radius = 40.012497
+[sub_resource type="CircleShape2D" id="CircleShape2D_pnvo3"]
+radius = 21.0
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pncbt"]
-polygon = PackedVector2Array(-27, 14, -22, 18, 21, 18, 27, 14, 27, -18, 23, -22, -24, -22, -28, -18)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sn6wm"]
+polygon = PackedVector2Array(-28, 22, -30, 9, 29, 9, 27, 22)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_duk50"]
+
+[sub_resource type="Environment" id="Environment_d67nq"]
+
+[sub_resource type="Environment" id="Environment_ieao1"]
+
+[sub_resource type="World3D" id="World3D_xllvv"]
+environment = SubResource("Environment_d67nq")
+fallback_environment = SubResource("Environment_ieao1")
+camera_attributes = SubResource("CameraAttributesPractical_duk50")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xv7pk"]
+resource_name = "material_0"
+transparency = 4
+blend_mode = 1
+cull_mode = 2
+albedo_texture = ExtResource("2_de5fp")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qe4pm"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0.0625, -0.3125, 1, 0.38125, 0.625),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEABAAFAAEAAQAFAAMABAAGAAUABQAGAAcABwAGAAQABQAHAAMABwAEAAAACAACAAMACQADAAcACAADAAkACgAHAAAACQAHAAoACwAAAAIACwACAAgACgAAAAsADAAIAAkADQAKAAsADgALAAgADQALAA4ADgAIAAwADwAKAA0ADwANAA4ADwAJAAoADwAOAAwADAAJAA8A"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("///M+wAAAAAy+wAA//8AAP//Odr//wAAAABs3v//AAAy+wAAAAAAAMwEAAD//wAAzAQAAAAAAAAAAP//AAAAAGX2Odoy8wAAmQls3jLzAACZCf//zAwAAGX2zPvMDAAAZfaONjLzAACZCY42zAwAAGX2jjbMDAAAmQmONjLzAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5cgf5"]
+resource_name = "blockbench_export_mesh"
+_surfaces = [{
+"aabb": AABB(-0.5, 0.0625, -0.3125, 1, 0.38125, 0.625),
+"attribute_data": PackedByteArray("/14AAAAA/1sAAAAA/17/WwAAAAD/Xv9bAAD/W/9eAADS2BC+xfi0+LHZlfjm97e9GPr/+TLX/7r/+f+6/9f/+f//v7X/ZL9b//+/W/9kv7X///8AgmX6Wv9k/wD//2Ra/2T/UP9e/xP/ZP8T/17/UP9e/zD/ZP9b/17/W/9k/zD/Xv8M/2T/Pv9e/z7/ZP8M/2T/Qv9e/wv/ZP8L/17/QrLXJfoY0Qu3GNcmuxjR//8K+uz5zdH//xrY2fn///////kpu/////8i+in6//8Ht//W/7r///+2//n/uv/QMrc="),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUA"),
+"material": SubResource("StandardMaterial3D_xv7pk"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("///M+wAAMsAy+wAA//8vwP//Odr//zDAMvsAAAAAN8DMBAAA///c/wAA//8AABf/AABs3v//VP/MBAAAAABe/pkJjjYy8zXVZfaONswMTdVl9o42MvNo1ZkJjjbMDBrVMvsAAAAA/7/MBAAA////vzL7AAD///+/zAQAAAAA/78y+wAA//8zgAAAbN7//wyA//852v//QIDMBAAA//8AgAAA//8AAP//MvsAAAAA/////8z7AAD//8wEAAAAAP//ZfY52jLzi+sAAGze//8AxZkJbN4y81jE//852v//6utl9sz7zAwkwv//Odr//6u/ZfY52jLzlMD//8z7AACQwpkJ///MDIvr///M+wAAAMVl9sz7zAxYxAAA//8AAOrrmQls3jLzJMIAAP//AACrv5kJ///MDJTAAABs3v//kMJl9o42MvP//5kJbN4y8///mQmONjLz//9l9jnaMvP//2X2jjbMDCX+ZfY52jLzVv9l9o42MvPY/2X2zPvMDHH9mQmONswMhrxl9sz7zAzpx2X2jjbMDI/LmQn//8wM8biZCY42MvMEwJkJ///MDADAmQmONswM/7+ZCWzeMvMKwAR7+AZXefoGinYmCIJ89gaYQZx8KUFufcT7CsLAQDV+Z9XQKljVsypI1ZEqd9XxKgAA/38AAP9/AAD/fwAA/3//f/9//3//f/9//3//f///93/3/0SAuf9lgJj/1H/U/wTKvRO+48FH5OQTStnJZRNe6a9KNMy6m2DIaZ2o6FBJBMq9E77jwUfk5BNK2cllE17pr0o0zLqbYMhpnajoUEmrxqtG3ETbxJtHm8d/yX9J+f0CwUT/XMAVQCqAOP1iwf////////////////////98esECxX0dAf9/AAAjeO4D")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qe4pm")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_83ebv"]
+_surfaces = [{
+"aabb": AABB(-0.48125, 0, -0.3125, 0.9625, 0.109375, 0.625),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEABQAAAAIABAAGAAIABQACAAcABgAHAAIABgAIAAcA"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("AAAAAP9/AAD/fwAAAAAAAP9/////fwAAAAAAAAAAAAD//wAAAAAAAAAAAAD//wAA//8AAP9/AAD/fwAA//8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2vh6t"]
+resource_name = "blockbench_export_mesh2"
+_surfaces = [{
+"aabb": AABB(-0.48125, 0, -0.3125, 0.9625, 0.109375, 0.625),
+"attribute_data": PackedByteArray("/2d/3X+a/71/mn/d/2f/vf9n//x/mn/df5r//P9nf93/zH/df5r//H+af93/zP/8/8z/vX+af91/mv+9/8x/3Q=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_xv7pk"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP9/97//fwAAAAC/zf9/////f/+/AAAAAAAACc4AAAAA//9Psv9/////f/+//38AAP//f7IAAAAA/3/3v///AAD/f0jA/38AAP//f7L/f////3//v///AAD//+qy//8AAAAAus3/f////3//v/9/AAAAAL/N//8AAP9/SMCP+emMMfr9iv///3/X96STMf0/ef///38M8fF4j/npjCDzinkM8fF4////f/LlwnAm/SJ7////fzH6/Yog84p5")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_83ebv")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4r8kg"]
+_surfaces = [{
+"aabb": AABB(-0.5375, 0.1296875, -0.328125, 1.075, 0.2296875, 0.66875),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAQADAAIAAwAEAAAABAAFAAAAAAAFAAEABgAEAAMAAQAGAAMABAAHAAUABgAHAAQACAABAAUACQAGAAEACQABAAgACgAGAAkACgAHAAYACwAFAAcACwAHAAoACAAFAAsADAAKAAkADQAIAAsADgALAAoADQALAA4ADgAKAAwADwAIAA0ADgAPAA0ADwAJAAgADgAMAA8ADAAJAA8A"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("//8q3QAAAAD3/AAA//8AAP///////wAAAAD/////AAAAACrdAAAAAPf8AAAAAAAABwMwDP//AAAHAzAMAAAAAKLuAACV8wAAXBEwDJXzAABcETAMMhEAAKLuAAAyEQAAXBH/XzIRAACi7v9f+vUAAKLu/18yEQAAXBH/X/r1AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u88bo"]
+resource_name = "blockbench_export_mesh3"
+_surfaces = [{
+"aabb": AABB(-0.5375, 0.1296875, -0.328125, 1.075, 0.2296875, 0.66875),
+"attribute_data": PackedByteArray("/1f/8/8R//v/Ef/z/1f/+/9W//v/A/7z/1b+8/8D//v/VwLx/wH/X/9X/1//Av/x/9D//////7b//////9D/tv9g/1//V//w/1f/X/9g//C/V/9b/WDo7v9XF++/YP9b/2T/0f9g/5D/ZP+U/2D/1P9k//T/YP/P/2T/0/9g//T/ZP+D/2D/W/9k/13/YP+G/2T/oP9g/2H/ZP9l/2D/pKfU/7nn/f+25/3/uRbV/7aF07DqUNGsu9fTsLtQ0azq//v//WXU////0//9//v//3v8lL6M/5P6e/yT+v//lL4="),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUA"),
+"material": SubResource("StandardMaterial3D_xv7pk"),
+"name": "material_0",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("//8q3QAA77/3/AAA///7v/////////+/9/wAAAAA7L8HAzAM///7vwAAKt0AAO6/AAD//////78HAzAMAADrvwAA/////5jW//8q3QAAhtb///////9v1gAAKt0AAK/Wou7/XzIRVNVcEf9f+vVU1aLu/1/69VTVXBH/XzIRVNX3/AAA//+swQAA/////0e+////////QMIHAzAM//+hvQAAKt0AAP//9/wAAAAA/////yrdAAD//wcDMAwAAP//ou4AAJXzzP73/AAAAACB/aLuAAAyERH99/wAAP//mf5cETAMlfO4wff8AAD//03Cou4AAJXzWcIHAzAM//+2wVwRMAwyEQHABwMwDP//AMBcETAMlfMAwAcDMAwAAAHAou4AADIRbtMHAzAMAAD71VwRMAwyES/W9/wAAAAAYdOi7v9f+vX//6LuAAAyEf//ou7/XzIR//+i7gAAlfP//1wR/1/69ef9ou4AAJXz5/2i7v9f+vXn/VwRMAyV8+f9XBH/XzIR/79cETAMlfP/v1wR/1/69f+/XBEwDDIR/7+i7v9fMhH/v1wRMAwyEf+/XBH/XzIR/7+i7gAAMhH/vzp9uQbyfrkGd3+6BqN8uQb0eND+9HgK/fR4Tv/0eHr8H6tsqzarYatSq1KrA6t7q6oqVNWqKlTVqipU1aoqVNX/f/9//3//f/9//3//f/9/rMGtQWdBZ8HVQdXBKsIrQq1+qECkPkj9aT7R/Hd+w0A6Kx9rby6EaaguZ2kvKyVrjAM5fsYCnH6yAqZ+lgM0fgYqMNSHK0LXpSt+1/4pINT/P/9//z//f/8//3//P/9/+768vvu+vL77vry++768vv9/AAD/fwAA/38AAP9/AAD/f/9//3//f/9//3//f/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_4r8kg")
+
+[sub_resource type="Animation" id="Animation_prb00"]
+resource_name = "CaseClosed"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("box2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1.6, 1, 0, 0, 0, 1.6333333, 1, 0, 0.0041666627, 0, 1.7333333, 1, 0, 0.054166675, 0, 1.7666667, 1, 0, 0.058333337, 0, 2, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("box2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.7, 1, 0, 0, 0, 1, 1.7333333, 1, 0, 0, -0.008727693, 0.999962, 1.8333334, 1, 0, 0, -0.043615896, 0.9990485, 1.8666667, 1, 0, 0, -0.008725835, 0.999962, 1.9, 1, 0, 0, 0.026174854, 0.9996574, 1.9333333, 1, 0, 0, 0.034900904, 0.9993908, 1.9666667, 1, 0, 0, 0.01745308, 0.9998477, 2, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("box2/lid")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.021814885, 0, 0, 0.999762, 1.7333333, 1, 0.021814885, 0, 0, 0.999762, 1.7666667, 1, 0.018324798, 0, 0, 0.9998321, 1.8, 1, 0.011343993, 0, 0, 0.99993575, 1.8333334, 1, 0.0043637753, 0, 0, 0.99999046, 1.9333333, 1, 0.018325385, 0, 0, 0.99983215, 1.9666667, 1, 0.021814886, 0, 0, 0.9997621, 2, 1, 0.021814886, 0, 0, 0.9997621)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("box2/light")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.09375, 0)
+tracks/4/type = "scale_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("box2/light")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_xlo1k"]
+resource_name = "OpenCase"
+length = 1.33333
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("box2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("box2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("box2/lid")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.021814885, 0, 0, 0.999762, 0.033333335, 1, 0.0014266649, 0, 0, 0.99999905, 0.06666667, 1, -0.022086265, 0, 0, 0.9997561, 0.1, 1, -0.048519127, 0, 0, 0.99882233, 0.13333334, 1, -0.07803368, 0, 0, 0.9969508, 0.2, 1, -0.14414482, 0, 0, 0.9895566, 0.23333333, 1, -0.18089217, 0, 0, 0.9835029, 0.26666668, 1, -0.21868242, 0, 0, 0.9757961, 0.3, 1, -0.25687954, 0, 0, 0.9664435, 0.33333334, 1, -0.29685023, 0, 0, 0.95492405, 0.36666667, 1, -0.33773372, 0, 0, 0.9412417, 0.4, 1, -0.37877834, 0, 0, 0.92548746, 0.43333334, 1, -0.41969258, 0, 0, 0.90766644, 0.53333336, 1, -0.5387789, 0, 0, 0.8424473, 0.6, 1, -0.61188185, 0, 0, 0.7909493, 0.6333333, 1, -0.6461278, 0, 0, 0.76322925, 0.7, 1, -0.7083912, 0, 0, 0.7058201, 0.73333335, 1, -0.735723, 0, 0, 0.6772825, 0.76666665, 1, -0.76129246, 0, 0, 0.6484087, 0.8, 1, -0.7849088, 0, 0, 0.6196114, 0.8666667, 1, -0.82436776, 0, 0, 0.5660545, 0.9, 1, -0.83997595, 0, 0, 0.5426236, 0.93333334, 1, -0.85403305, 0, 0, 0.52021885, 0.96666664, 1, -0.86673784, 0, 0, 0.49876398, 1, 1, -0.87672675, 0, 0, 0.48098877)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("box2/light")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.09375, 0, 0.033333335, 1, 0, 0.10421296, 0, 0.06666667, 1, 0, 0.11722801, 0, 0.1, 1, 0, 0.13246527, 0, 0.13333334, 1, 0, 0.14977285, 0, 0.2, 1, 0, 0.18858074, 0, 0.23333333, 1, 0, 0.20913051, 0, 0.3, 1, 0, 0.25086805, 0, 0.33333334, 1, 0, 0.2712963, 0, 0.36666667, 1, 0, 0.29050925, 0, 0.4, 1, 0, 0.30831596, 0, 0.43333334, 1, 0, 0.32358795, 0, 0.5, 1, 0, 0.35, 0, 0.56666666, 1, 0, 0.37097672, 0, 0.6, 1, 0, 0.37824234, 0, 0.6666667, 1, 0, 0.38632822, 0, 0.73333335, 1, 0, 0.3873828, 0, 0.8666667, 1, 0, 0.38732415, 0, 0.9, 1, 0, 0.3857421, 0, 0.93333334, 1, 0, 0.38369134, 0, 0.96666664, 1, 0, 0.38130853, 0, 1.0333333, 1, 0, 0.37455085, 0, 1.0666667, 1, 0, 0.3710841, 0, 1.1, 1, 0, 0.3677834, 0, 1.1333333, 1, 0, 0.3648635, 0, 1.1666666, 1, 0, 0.36250025, 0, 1.2333333, 1, 0, 0.35625008, 0, 1.2666667, 1, 0, 0.35374996, 0, 1.33333, 1, 0, 0.35, 0)
+tracks/4/type = "scale_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("box2/light")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.033333335, 1, 1, 1.1458611, 1, 0.06666667, 1, 1, 1.3285973, 1, 0.1, 1, 1, 1.5432917, 1, 0.13333334, 1, 1, 1.7874861, 1, 0.2, 1, 1, 2.334875, 1, 0.23333333, 1, 1, 2.6233196, 1, 0.3, 1, 1, 3.2075834, 1, 0.33333334, 1, 1, 3.491111, 1, 0.36666667, 1, 1, 3.7549722, 1, 0.4, 1, 1, 3.9967084, 1, 0.43333334, 1, 1, 4.199111, 1, 0.5, 1, 1, 4.54, 1, 1.33333, 1, 1, 4.54, 1)
+
+[sub_resource type="Animation" id="Animation_eenju"]
+resource_name = "CaseOpened"
+length = 1.375
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("box2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("box2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("box2/lid")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.87672675, 0, 0, 0.48098877)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("box2/light")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0.35, 0, 0.033333335, 1, 0, 0.3482812, 0, 0.06666667, 1, 0, 0.344453, 0, 0.1, 1, 0, 0.3389842, 0, 0.13333334, 1, 0, 0.33234346, 0, 0.2, 1, 0, 0.3176558, 0, 0.23333333, 1, 0, 0.3126558, 0, 0.33333334, 1, 0, 0.3000002, 0, 0.36666667, 1, 0, 0.30171898, 0, 0.4, 1, 0, 0.30554715, 0, 0.43333334, 1, 0, 0.31101587, 0, 0.46666667, 1, 0, 0.3176564, 0, 0.53333336, 1, 0, 0.3323436, 0, 0.56666666, 1, 0, 0.33828107, 0, 0.6, 1, 0, 0.34374976, 0, 0.6333333, 1, 0, 0.348281, 0, 0.6666667, 1, 0, 0.34999982, 0, 0.73333335, 1, 0, 0.3437504, 0, 0.76666665, 1, 0, 0.3387504, 0, 0.9, 1, 0, 0.31125018, 0, 0.93333334, 1, 0, 0.3062501, 0, 1, 1, 0, 0.3, 0, 1.0666667, 1, 0, 0.30504802, 0, 1.1, 1, 0, 0.3089712, 0, 1.1333333, 1, 0, 0.31454045, 0, 1.1666666, 1, 0, 0.3208505, 0, 1.2, 1, 0, 0.3274897, 0, 1.2333333, 1, 0, 0.33388203, 0, 1.2666667, 1, 0, 0.3396982, 0, 1.3, 1, 0, 0.34432098, 0, 1.375, 1, 0, 0.35, 0)
+tracks/4/type = "scale_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("box2/light")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 1, 4.54, 1, 0.033333335, 1, 1.0005391, 4.54, 1, 0.06666667, 1, 1.0018164, 4.54, 1, 0.1, 1, 1.0037616, 4.54, 1, 0.13333334, 1, 1.006375, 4.54, 1, 0.2, 1, 1.013078, 4.54, 1, 0.23333333, 1, 1.0170623, 4.54, 1, 0.26666668, 1, 1.0212576, 4.54, 1, 0.3, 1, 1.0255232, 4.54, 1, 0.36666667, 1, 1.0344763, 4.54, 1, 0.4, 1, 1.0388474, 4.54, 1, 0.43333334, 1, 1.0430427, 4.54, 1, 0.46666667, 1, 1.0469216, 4.54, 1, 0.53333336, 1, 1.0536247, 4.54, 1, 0.56666666, 1, 1.0559217, 4.54, 1, 0.6, 1, 1.057867, 4.54, 1, 0.6333333, 1, 1.0594609, 4.54, 1, 0.73333335, 1, 1.0581634, 4.54, 1, 0.76666665, 1, 1.056483, 4.54, 1, 0.8333333, 1, 1.0515981, 4.54, 1, 0.9, 1, 1.0446028, 4.54, 1, 0.93333334, 1, 1.040812, 4.54, 1, 1, 1, 1.0326443, 4.54, 1, 1.0333333, 1, 1.0284138, 4.54, 1, 1.0666667, 1, 1.0242274, 4.54, 1, 1.1, 1, 1.0201435, 4.54, 1, 1.1333333, 1, 1.0162208, 4.54, 1, 1.1666666, 1, 1.0125179, 4.54, 1, 1.2, 1, 1.0092254, 4.54, 1, 1.2333333, 1, 1.0063286, 4.54, 1, 1.2666667, 1, 1.0038861, 4.54, 1, 1.3, 1, 1.0020664, 4.54, 1, 1.375, 1, 1, 4.54, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xl6m8"]
+_data = {
+&"CaseClosed": SubResource("Animation_prb00"),
+&"CaseOpened": SubResource("Animation_eenju"),
+&"OpenCase": SubResource("Animation_xlo1k")
+}
+
+[sub_resource type="Animation" id="Animation_de5fp"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sn6wm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ouvp7"]
+_data = {
+&"RESET": SubResource("Animation_sn6wm"),
+&"appear": SubResource("Animation_de5fp")
+}
 
 [node name="ammo" type="Node2D"]
-y_sort_enabled = true
 script = ExtResource("1_pncbt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_j57vc")
-scale = Vector2(1.9885328, 1.9885328)
-texture = ExtResource("1_mq6ge")
-offset = Vector2(-0.09226676, -3.1095665)
-script = ExtResource("5_uunpu")
+[node name="PlayerDetector" type="Area2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+shape = SubResource("CircleShape2D_884kk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_pncbt")
+[node name="PlayerCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
+shape = SubResource("CircleShape2D_pnvo3")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_pncbt")
+position = Vector2(0, 4)
+occluder = SubResource("OccluderPolygon2D_sn6wm")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+offset_left = -258.0
+offset_top = -392.0
+offset_right = 254.0
+offset_bottom = 200.0
+scale = Vector2(0.22468024, 0.22468024)
+pivot_offset = Vector2(258.25784, 401.98682)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_xllvv")
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+size = Vector2i(512, 592)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(0.9, 0, 0, 0, 0.7417402, 0.50972676, 0, -0.50972676, 0.7417402, 0, 1.901, 2.234)
+fov = 28.9
+
+[node name="box2" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="box" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/box2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625, 0)
+mesh = SubResource("ArrayMesh_5cgf5")
+skeleton = NodePath("")
+
+[node name="plane" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/box2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296875, 0)
+mesh = SubResource("ArrayMesh_2vh6t")
+skeleton = NodePath("")
+
+[node name="lid" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D/box2"]
+transform = Transform3D(1, 0, 0, 0, 0.99904823, -0.043619383, 0, 0.043619383, 0.99904823, 0, 0.3765625, -0.3125)
+
+[node name="cuboid" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/box2/lid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1625, 0.3125)
+mesh = SubResource("ArrayMesh_u88bo")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Node3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_xl6m8")
+}
+autoplay = "CaseClosed"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.84657425, 0.5322706, 0, -0.5322706, 0.84657425, 0, 1.840774, 2.2991316)
+
+[node name="CaseAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sn6wm")
+volume_db = 10.0
+pitch_scale = 1.32
+attenuation = 1.4640859
+bus = &"SFX"
+
+[node name="TimerToDeleteSelf" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-32, -23, 62, 48)
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.6862745)
+position = Vector2(-2.3841858e-07, 16)
+scale = Vector2(0.93750006, 1.09375)
+texture = ExtResource("5_sn6wm")
+
+[node name="dissolvingAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ouvp7")
+}
+autoplay = "appear"
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="PlayerCollision" to="." method="_on_player_collision_body_entered"]
+[connection signal="timeout" from="TimerToDeleteSelf" to="." method="_on_timer_to_delete_self_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

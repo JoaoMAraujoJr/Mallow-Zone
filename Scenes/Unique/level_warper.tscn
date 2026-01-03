@@ -69,7 +69,7 @@ _data = {
 radius = 20.024984
 
 [node name="LevelWarper" type="Node2D"]
-z_index = 2
+y_sort_enabled = true
 scale = Vector2(1.311, 1.311)
 script = ExtResource("1_2yth8")
 interactionType = 1
@@ -89,6 +89,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 justification_flags = 131
 paragraph_separator = "\\2"
+metadata/_edit_use_anchors_ = true
 
 [node name="LevelMask" type="Sprite2D" parent="Warp"]
 clip_children = 1

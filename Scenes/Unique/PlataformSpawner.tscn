@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://j6ha40as0s3t"]
 
-[ext_resource type="Script" uid="uid://bbtne4sdjjpti" path="res://Scripts/Rooms/GameScene.gd" id="1_n03b8"]
+[ext_resource type="Script" uid="uid://bbtne4sdjjpti" path="res://Scripts/Rooms/PlataformSpawner.gd" id="1_n03b8"]
 [ext_resource type="Script" uid="uid://cmrm53qn3csqo" path="res://Scripts/Rooms/trigger.gd" id="4_cxw4p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxw4p"]

@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=15 format=3 uid="uid://dxgb3b06nceuu"]
+
+[ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="1_kfibf"]
+[ext_resource type="Texture2D" uid="uid://c36a6uqs65p" path="res://Assets/Textures/floors/chess/walltextureTransparent.png" id="1_tyuhy"]
+[ext_resource type="Script" uid="uid://eq8xeuv5a2or" path="res://Scripts/Resources/Biome.gd" id="2_7w3n0"]
+[ext_resource type="PackedScene" uid="uid://dw06ynpshu646" path="res://Scenes/enemies/blackhole_enemy.tscn" id="3_rd4gk"]
+[ext_resource type="PackedScene" uid="uid://bo1gabovpt4cb" path="res://Scenes/enemies/enemy.tscn" id="4_rpxl2"]
+[ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="5_pvjly"]
+[ext_resource type="PackedScene" uid="uid://bodu84frg2ffg" path="res://Scenes/objects/medkit.tscn" id="6_kwf7b"]
+[ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="7_fngwr"]
+[ext_resource type="Texture2D" uid="uid://dmnoi65rgtqp1" path="res://Assets/Textures/floors/chess/floortexture.png" id="9_13ifo"]
+
+[sub_resource type="Resource" id="Resource_4lcwa"]
+script = ExtResource("1_kfibf")
+SpawnableScene = ExtResource("3_rd4gk")
+SpawnRate = 0.45
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_x785q"]
+script = ExtResource("1_kfibf")
+SpawnableScene = ExtResource("4_rpxl2")
+SpawnRate = 0.3
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_w3vlq"]
+script = ExtResource("1_kfibf")
+SpawnableScene = ExtResource("5_pvjly")
+SpawnRate = 0.4
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_2ao3k"]
+script = ExtResource("1_kfibf")
+SpawnableScene = ExtResource("6_kwf7b")
+SpawnRate = 0.2
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_nx2u3"]
+script = ExtResource("1_kfibf")
+SpawnableScene = ExtResource("7_fngwr")
+isRandomPosition = false
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[resource]
+script = ExtResource("2_7w3n0")
+name = "Ominous ChessFields"
+warpArt = ExtResource("9_13ifo")
+topTextureVariants = Array[Texture2D]([ExtResource("9_13ifo")])
+bottomTexturesVariants = Array[Texture2D]([ExtResource("1_tyuhy")])
+enemiesList = Array[ExtResource("1_kfibf")]([SubResource("Resource_4lcwa"), SubResource("Resource_x785q")])
+itemDropsList = Array[ExtResource("1_kfibf")]([SubResource("Resource_w3vlq"), SubResource("Resource_2ao3k")])
+objectsList = Array[ExtResource("1_kfibf")]([SubResource("Resource_nx2u3"), null])
+metadata/_custom_type_script = "uid://eq8xeuv5a2or"

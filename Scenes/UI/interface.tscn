@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=20 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
 [ext_resource type="PackedScene" uid="uid://debg6fibu7vns" path="res://Scenes/Unique/weather_manager.tscn" id="2_na5jw"]
 [ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
+[ext_resource type="PackedScene" uid="uid://dirsmstjakf4h" path="res://Scenes/UI/mini_map.tscn" id="5_kp8ok"]
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/UI/mousefollow.tscn" id="5_r04jc"]
 [ext_resource type="Texture2D" uid="uid://24mvdq1hhxy" path="res://Assets/Textures/UI/cursor/cursor_mask_.png" id="7_kp8ok"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
@@ -91,7 +92,9 @@ mouse_filter = 2
 
 [node name="InterfaceCanvaLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="InterfaceCanvaLayer"]
+[node name="MiniMap" parent="InterfaceCanvaLayer" instance=ExtResource("5_kp8ok")]
+
+[node name="Vignette" type="ColorRect" parent="InterfaceCanvaLayer"]
 material = SubResource("ShaderMaterial_r04jc")
 anchors_preset = 15
 anchor_right = 1.0

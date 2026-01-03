@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdvi88e42jjsb"]
+[gd_scene load_steps=20 format=3 uid="uid://cdvi88e42jjsb"]
 
 [ext_resource type="Script" uid="uid://ysjkink7woy0" path="res://Scripts/enemies/followerSaw/follower_saw.gd" id="1_nq37f"]
 [ext_resource type="Texture2D" uid="uid://dkpem8yj4qctq" path="res://Assets/Textures/entities/Enemies/saw/saw_light2.png" id="2_36nog"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dvege2thj5ttp" path="res://Assets/Textures/entities/Enemies/saw/saw_specular_2.png" id="4_36nog"]
 [ext_resource type="Texture2D" uid="uid://47ce1rfkf1f1" path="res://Assets/Textures/entities/Enemies/saw/saw.png" id="4_ghqmr"]
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="7_tt31a"]
+[ext_resource type="Texture2D" uid="uid://bkvvslfkqikwp" path="res://Assets/Textures/UI/minimap_icons/enemies/saw.png" id="8_4c4ry"]
+[ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="9_xqwtm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36nog"]
 radius = 84.0238
@@ -72,6 +74,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MiniMapIcon:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_jk6la"]
 resource_name = "rotating"
@@ -112,6 +126,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1.9123621, 1.9123621), Vector2(1.962, 1.962), Vector2(1.9123621, 1.9123621)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MiniMapIcon:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.537856]
 }
 
 [sub_resource type="Animation" id="Animation_ghqmr"]
@@ -167,6 +193,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0, -80.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MiniMapIcon:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.86, 1.9, 2.73),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 3.7873645, 5.2883477, 6.1784654]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qre6k"]
 _data = {
@@ -188,6 +226,14 @@ damage = -30
 NORMAL_TEXTURE = ExtResource("4_ghqmr")
 BLOODED_TEXTURE = ExtResource("3_o50ad")
 BLOODED_TEXTURE_2 = ExtResource("4_2lqbj")
+
+[node name="MiniMapIcon" type="Sprite2D" parent="."]
+visible = false
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(6.5510774, 6.5510774)
+texture = ExtResource("8_4c4ry")
+script = ExtResource("9_xqwtm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_36nog")

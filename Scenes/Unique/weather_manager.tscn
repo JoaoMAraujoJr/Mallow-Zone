@@ -1,9 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://debg6fibu7vns"]
+[gd_scene load_steps=6 format=3 uid="uid://debg6fibu7vns"]
 
 [ext_resource type="Script" uid="uid://rv6cpar42krj" path="res://Scenes/Unique/weather_manager.gd" id="1_hl32d"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dg4oq"]
 blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_hl32d"]
+offsets = PackedFloat32Array(0, 0.2939189, 1)
+colors = PackedColorArray(0, 0, 0.0627451, 1, 0.25550973, 0.21084356, 0.18943366, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5rrr5"]
+gradient = SubResource("Gradient_hl32d")
+
+[sub_resource type="Environment" id="Environment_dg4oq"]
+background_mode = 3
+tonemap_exposure = 1.3
+glow_enabled = true
+glow_levels/1 = 0.95
+glow_levels/2 = 2.85
+glow_levels/3 = 3.48
+glow_levels/4 = 3.8
+glow_normalized = true
+glow_bloom = 0.29
+glow_blend_mode = 1
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_color_correction = SubResource("GradientTexture2D_5rrr5")
 
 [node name="Weather_Manager" type="CanvasLayer"]
 script = ExtResource("1_hl32d")
@@ -19,3 +41,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dg4oq")

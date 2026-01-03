@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb5khyq6wnglo"]
+[gd_scene load_steps=14 format=3 uid="uid://cb5khyq6wnglo"]
 
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/Unique/player.gd" id="1_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="2_d05bs"]
+[ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_6nq75"]
 [ext_resource type="PackedScene" uid="uid://bjxxblvb7g17" path="res://Scenes/Unique/player_skin_node.tscn" id="3_d05bs"]
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/Textures/UI/progressbars/lifebar_under.png" id="6_3smsa"]
 [ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/Textures/UI/progressbars/lifebar_progress.png" id="7_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="8_8erm5"]
 [ext_resource type="AudioStream" uid="uid://yvfg5cl1j23" path="res://Assets/Sounds/Gun/OutofAmmo.wav" id="8_gymyn"]
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
+[ext_resource type="Texture2D" uid="uid://by47w7rb0sgnm" path="res://Assets/Textures/UI/minimap_icons/player_1.png" id="9_yiw7m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
 radius = 141.36693
@@ -25,6 +27,14 @@ max_camzoom = 0.7
 min_camzoom = 1.3
 max_health = 100
 health = 100
+
+[node name="MiniMapIcon" type="Sprite2D" parent="."]
+visible = false
+light_mask = 2
+visibility_layer = 2
+scale = Vector2(4.563005, 4.563005)
+texture = ExtResource("9_yiw7m")
+script = ExtResource("3_6nq75")
 
 [node name="EffectHandler" parent="." instance=ExtResource("2_d05bs")]
 z_index = 2

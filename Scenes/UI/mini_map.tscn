@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://dirsmstjakf4h"]
+
+[ext_resource type="Script" uid="uid://djsanqh1y0siy" path="res://Scripts/Unique/mini_map.gd" id="1_67nhm"]
+
+[node name="MiniMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_67nhm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -326.0
+offset_top = -242.0
+offset_right = -19.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -326.0
+offset_top = -242.0
+offset_right = -19.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+stretch = true
+
+[node name="MinimapSubviewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4293918722
+size = Vector2i(307, 221)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/MinimapSubviewport"]
+light_mask = 2
+visibility_layer = 2
+zoom = Vector2(0.15, 0.15)

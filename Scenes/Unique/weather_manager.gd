@@ -3,6 +3,7 @@ class_name WeatherManager
 
 @export var currentWeather : Weather
 @onready var weatherOverlay : ColorRect = $WeatherOverlay
+@onready var worldEnviromentGradiant : WorldEnvironment = $WorldEnvironment
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,6 +20,7 @@ func updateWeather(new_weather : Weather):
 		
 	#atualiza parametros do clima
 	weatherOverlay.color = new_weather.colorOverlay
+	worldEnviromentGradiant.environment.adjustment_color_correction = new_weather.worldEnviromentGradiant
 	
 	for particle in new_weather.weatherParticles:
 		var new_particle :Control= particle.instantiate()

@@ -11,6 +11,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		$SubViewportContainer.queue_free()
 		$LightOccluder2D.queue_free()
 		$PlayerCollision.queue_free()
+		$shadow.queue_free()
 		body.addToHealth(heal_amount)
 		BandageAudStream.pitch_scale = randf_range(0.4,1.2)
 		BandageAudStream.play()

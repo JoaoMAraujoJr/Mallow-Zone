@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 			GameManager.ammo= GameManager.ammoMax
 			GameManager.currentEquipedWeaponType = ""
 			GameManager.currentSpawnedChunks = {}
-			BiomeManager.currentBiome="Grasslands"
+			BiomeManager.currentBiome= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
 			GameManager.can_shoot = true
 			BossManager._isOnBoss = false
 			BossManager.currentBossName = ""

@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=4 uid="uid://bodu84frg2ffg"]
+[gd_scene load_steps=31 format=4 uid="uid://bodu84frg2ffg"]
 
 [ext_resource type="Script" uid="uid://b4t1028gcnf1d" path="res://Scripts/objects/medkit.gd" id="1_ifbh6"]
 [ext_resource type="Texture2D" uid="uid://xfntow5gbq5g" path="res://Assets/3D/cases/medkit/Medikit_3D_0.png" id="2_t2gdt"]
 [ext_resource type="AudioStream" uid="uid://wbjgqp6nisql" path="res://Assets/Sounds/soundEffects/case_1.wav" id="3_abi2x"]
 [ext_resource type="AudioStream" uid="uid://bogqlgxfr7w3j" path="res://Assets/Sounds/soundEffects/medkit_1.wav" id="4_pftdi"]
+[ext_resource type="Texture2D" uid="uid://dvjnuaol6ske" path="res://Assets/Textures/entities/shadows/shadow_rect.png" id="5_l86m6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t2gdt"]
 radius = 195.50192
@@ -15,16 +16,16 @@ radius = 21.0
 cull_mode = 1
 polygon = PackedVector2Array(-33, 6, -30, 22, 29, 22, 32, 6)
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_duk50"]
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_mg0vf"]
 
-[sub_resource type="Environment" id="Environment_d67nq"]
+[sub_resource type="Environment" id="Environment_utwg0"]
 
-[sub_resource type="Environment" id="Environment_ieao1"]
+[sub_resource type="Environment" id="Environment_44bd1"]
 
 [sub_resource type="World3D" id="World3D_duk50"]
-environment = SubResource("Environment_d67nq")
-fallback_environment = SubResource("Environment_ieao1")
-camera_attributes = SubResource("CameraAttributesPractical_duk50")
+environment = SubResource("Environment_utwg0")
+fallback_environment = SubResource("Environment_44bd1")
+camera_attributes = SubResource("CameraAttributesPractical_mg0vf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chvl4"]
 resource_name = "material_0"
@@ -35,7 +36,7 @@ albedo_texture = ExtResource("2_t2gdt")
 texture_filter = 0
 texture_repeat = false
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_01kd2"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0k0wc"]
 _surfaces = [{
 "aabb": AABB(-0.5375, 0.1296875, -0.328125, 1.075, 0.2296875, 0.66875),
 "format": 34896613377,
@@ -65,9 +66,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray("//8q3QAA77/3/AAA///7v/////////+/9/wAAAAA7L8HAzAM///7vwAAKt0AAO6/AAD//////78HAzAMAADrvwAA/////5jW//8q3QAAhtb///////9v1gAAKt0AAK/Wou7/XzIRVNVcEf9f+vVU1aLu/1/69VTVXBH/XzIRVNX3/AAA//+swQAA/////0e+////////QMIHAzAM//+hvQAAKt0AAP//9/wAAAAA/////yrdAAD//wcDMAwAAP//ou4AAJXzzP73/AAAAACB/aLuAAAyERH99/wAAP//mf5cETAMlfO4wff8AAD//03Cou4AAJXzWcIHAzAM//+2wVwRMAwyEQHABwMwDP//AMBcETAMlfMAwAcDMAwAAAHAou4AADIRbtMHAzAMAAD71VwRMAwyES/W9/wAAAAAYdOi7v9f+vX//6LuAAAyEf//ou7/XzIR//+i7gAAlfP//1wR/1/69ef9ou4AAJXz5/2i7v9f+vXn/VwRMAyV8+f9XBH/XzIR/79cETAMlfP/v1wR/1/69f+/XBEwDDIR/7+i7v9fMhH/v1wRMAwyEf+/XBH/XzIR/7+i7gAAMhH/vzp9uQbyfrkGd3+6BqN8uQb0eND+9HgK/fR4Tv/0eHr8H6tsqzarYatSq1KrA6t7q6oqVNWqKlTVqipU1aoqVNX/f/9//3//f/9//3//f/9/3MHcQWBBYMHTQdPBYMJhQq1+qECkPkj9aT7R/Hd+w0A6Kx9rby6EaaguZ2kvKyVrjAM5fsYCnH6yAqZ+lgM0fgYqMNSHK0LXpSt+1/4pINT/P/9//z//f/8//3//P/9/+768vvu+vL77vry++768vv9/AAD/fwAA/38AAP9/AAD/f/9//3//f/9//3//f/9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_01kd2")
+shadow_mesh = SubResource("ArrayMesh_0k0wc")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_32wrn"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_h420e"]
 _surfaces = [{
 "aabb": AABB(-0.15625, 0.0625, -0.15625, 0.3125, 0.375, 0.3125),
 "format": 34896613377,
@@ -97,9 +98,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray("//8AAAS1rMT/fxAR/3+sxAS1AAD//6zEBLUAAP///5//////BLX/n///AAAEtf+fBLX//////58Etf/////Fw/9/mPn/f8XD/////wS1xcP//wAA+kpAwP9/EBH/f0DA//8AAAS1QMD//wAABLX/v//////6Sv+///8AAPpK/7//////BLX/v/////8EtXLC/3+Y+f9/csL/////+kpywgS1AAAAAJS7/38QEf9/lLv//wAA+kqUu///AAD6Sv/fBLX//wAA/98EtQAAAAD/3//////6Sv/f//////pKq8D/f5j5/3+rwAS1//8AAKvA+koAAAAAiLn/fxAR/3+IuQS1AAAAAIi5BLUAAAAA///6Sv//AAD///pKAAAAAP//BLX//wAA//8Etf//AABxv/9/mPn/f3G/+kr//wAAcb8AAAAA+kqUu/9/EBH/f5S7+koAAAAAlLv6SgAAAAD/3wAA///6Sv/fAAAAAPpK/9/6Sv//AAD/3/pK//8AAK2//3+Y+f9/rb8AAP//+kqtvwAAAAAEtUDA/38QEf9/QMAAAAAA+kpAwAAAAAD6Sv+/AAD//wS1/78AAAAABLX/vwAA///6Sv+/AAD///pKGMH/f5j5/38YwQAA//8EtRjB+koAAP//rMT/fxAR/3+sxAAAAAAEtazEAAAAAAS1/5/6Sv//////n/pKAAD///+fAAD//wS1/58AAP//BLXkwv9/mPn/f+TC+kr/////5MIEtQAA//92xv9/EBH/f3bG+koAAP//dsb6SgAA//8AgAS1/////wCABLUAAP//AID6Sv////8AgPpK/////wTE/3+Y+f9/BMQEtf////8ExFkMhIZZDISGWQyEhv9/AAD/fwAA/38AAP9/AAC77oVau+6FWrvuhVqPEceIjxHHiI8Rx4j/fwAA/38AAP9/AAD/fwAAG+/sWBvv7Fgb7+xYqA1yhqgNcoaoDXKG/38AAP9/AAD/fwAA/38AAF7uGlhe7hpYXu4aWAAA/38AAP9/AAD/f/9/////f////3////9///8C7dlYAu3ZWALt2VhyBlZycgZWcnIGVnL/f////3////9/////f///ZevmWWXr5lll6+ZZxwhwbscIcG7HCHBu/3////9/////f////3///wnrm1sJ65tbCeubW4UGpXOFBqVzhQalc/9/////f////3////9///+/6xpcv+saXL/rGlwAAP9/AAD/fwAA/3//f////3////9/////f///GO1LWxjtS1sY7Utb")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_32wrn")
+shadow_mesh = SubResource("ArrayMesh_h420e")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_xc8nc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_euijv"]
 _surfaces = [{
 "aabb": AABB(-0.14831126, -0.06875, -0.06320375, 0.2877794, 0.1375, 0.14649938),
 "format": 34896613377,
@@ -129,9 +130,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray("41tFJ6USyZYAABa953Hmlj9cudgAAHKXCQTHZP+XZpgQuv8PpScRpuT4/////wum//8AAObZ76UKuv/vDxNkpgq6/+8PE5GG41tFJ6USk4Y/XLnYAAD3hxC6/w+lJziIIpmTD5+UuCEHorMJSJbbNCFpo/F2aSzxiGzb7ElmovX0ugi+gLqovaPWddNIpvKs")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_xc8nc")
+shadow_mesh = SubResource("ArrayMesh_euijv")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_wx0f4"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_5egqx"]
 _surfaces = [{
 "aabb": AABB(-0.45, 0.20625, -0.28125, 0.9, 0.08749999, 0.5625),
 "format": 34896613377,
@@ -161,9 +162,9 @@ _surfaces = [{
 "vertex_data": PackedByteArray("/////wAA8fgb8wAAX+tS3P///////9LRG/MAAJ8UEPrjDAAAX+vfvgAA//8AAHrZAAD/////PMDjDAAAnxSp0BvzAACfFKvS4wwAAF/ry7Ab8wAAX+vLsOMMAACfFKvSG/MAAF/rK9kAAP/////swv///////9LR4wwAAF/rbcAAAP//AADZ2BvzAACfFD/5/////wAAlfvjDAAAnxSp0PWkmkeberlKroWvTwQ1Yt6VOxN5xDdWr/RHl4a0LlK2Yww6YJcrl5qXGmdUxB9jjAF4IUtaSB+EroWvTzE+Rnf9O5G4TTR83V2o+kq0LlK2")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_wx0f4")
+shadow_mesh = SubResource("ArrayMesh_5egqx")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fpqnn"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_u4p37"]
 _surfaces = [{
 "aabb": AABB(-0.5, 0.0625, -0.3125, 1, 0.38125, 0.625),
 "format": 34896613377,
@@ -193,7 +194,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("///M+wAAMsAy+wAA//8vwP//Odr//zDAMvsAAAAAN8DMBAAA///c/wAA//8AABf/AABs3v//VP/MBAAAAABe/pkJjjYy8zXVZfaONswMTdVl9o42MvNo1ZkJjjbMDBrVMvsAAAAA/7/MBAAA////vzL7AAD///+/zAQAAAAA/78y+wAA//8zgAAAbN7//wyA//852v//QIDMBAAA//8AgAAA//8AAP//MvsAAAAA/////8z7AAD//8wEAAAAAP//ZfY52jLzi+sAAGze//8AxZkJbN4y81jE//852v//6utl9sz7zAwkwv//Odr//6u/ZfY52jLzlMD//8z7AACQwpkJ///MDIvr///M+wAAAMVl9sz7zAxYxAAA//8AAOrrmQls3jLzJMIAAP//AACrv5kJ///MDJTAAABs3v//kMJl9o42MvP//5kJbN4y8///mQmONjLz//9l9jnaMvP//2X2jjbMDCX+ZfY52jLzVv9l9o42MvPY/2X2zPvMDHH9mQmONswMhrxl9sz7zAzpx2X2jjbMDI/LmQn//8wM8biZCY42MvMEwJkJ///MDADAmQmONswM/7+ZCWzeMvMKwAR7+AZXefoGinYmCIJ89gaYQZx8KUFufcT7CsLAQDV+Z9XQKljVsypI1ZEqd9XxKgAA/38AAP9/AAD/fwAA/3//f/9//3//f/9//3//f///93/3/0SAuf9lgJj/1H/U/wTKvRO+48FH5OQTStnJZRNe6a9KNMy6m2DIaZ2o6FBJBMq9E77jwUfk5BNK2cllE17pr0o0zLqbYMhpnajoUEmrxqtG3ETbxJtHm8d/yX9J+f0CwUT/XMAVQCqAOP1iwf////////////////////98esECxX0dAf9/AAAjeO4D")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_fpqnn")
+shadow_mesh = SubResource("ArrayMesh_u4p37")
 
 [sub_resource type="Animation" id="Animation_ikntc"]
 resource_name = "CaseClosed"
@@ -384,7 +385,44 @@ _data = {
 &"OpenCase": SubResource("Animation_gsloq")
 }
 
+[sub_resource type="Animation" id="Animation_l86m6"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mg0vf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utwg0"]
+_data = {
+&"RESET": SubResource("Animation_mg0vf"),
+&"appear": SubResource("Animation_l86m6")
+}
+
 [node name="medkit" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_ifbh6")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
@@ -490,8 +528,20 @@ bus = &"SFX"
 [node name="TimerToDeleteSelf" type="Timer" parent="."]
 wait_time = 10.0
 
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.62352943)
+position = Vector2(0, 17)
+scale = Vector2(1.03125, 1)
+texture = ExtResource("5_l86m6")
+
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-32, -23, 62, 48)
+
+[node name="dissolvingAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_utwg0")
+}
+autoplay = "appear"
 
 [connection signal="area_entered" from="PlayerDetector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
