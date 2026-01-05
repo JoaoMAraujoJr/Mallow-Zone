@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene load_steps=22 format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
 [ext_resource type="PackedScene" uid="uid://dirsmstjakf4h" path="res://Scenes/UI/mini_map.tscn" id="5_kp8ok"]
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/UI/mousefollow.tscn" id="5_r04jc"]
+[ext_resource type="PackedScene" uid="uid://cnjknnlkh662k" path="res://Scenes/Unique/time_manager.tscn" id="6_w0njm"]
 [ext_resource type="Texture2D" uid="uid://24mvdq1hhxy" path="res://Assets/Textures/UI/cursor/cursor_mask_.png" id="7_kp8ok"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
@@ -22,6 +23,12 @@ shader_parameter/strength = 2.0
 shader_parameter/radius = 1.32800006308
 shader_parameter/zoom = 0.3850000182875
 shader_parameter/aspect = 0.64900002756762
+
+[sub_resource type="LabelSettings" id="LabelSettings_w0njm"]
+font = ExtResource("5_hbxki")
+font_size = 26
+outline_size = 14
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
 shader = ExtResource("2_uwsgx")
@@ -88,11 +95,25 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="reset button" parent="." instance=ExtResource("11_apajn")]
-
 [node name="InterfaceCanvaLayer" type="CanvasLayer" parent="."]
 
 [node name="MiniMap" parent="InterfaceCanvaLayer" instance=ExtResource("5_kp8ok")]
+
+[node name="FPS" type="Label" parent="InterfaceCanvaLayer"]
+offset_left = 24.000004
+offset_top = 151.0
+offset_right = 137.0
+offset_bottom = 193.0
+scale = Vector2(0.71763086, 0.71763086)
+text = "0 FPS"
+label_settings = SubResource("LabelSettings_w0njm")
+
+[node name="Time Manager" parent="InterfaceCanvaLayer" instance=ExtResource("6_w0njm")]
+offset_left = 86.0
+offset_top = 299.0
+offset_right = 86.0
+offset_bottom = 299.0
+scale = Vector2(2.9571428, 2.9571428)
 
 [node name="Vignette" type="ColorRect" parent="InterfaceCanvaLayer"]
 material = SubResource("ShaderMaterial_r04jc")
@@ -197,7 +218,6 @@ uppercase = true
 max_lines_visible = 2
 
 [node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
-visible = false
 mouse_filter = 2
 
 [node name="Mouse mask" type="TextureRect" parent="InterfaceCanvaLayer"]
@@ -225,6 +245,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="reset button" parent="." instance=ExtResource("11_apajn")]
 
 [node name="CoordRadarSubViewport" type="SubViewport" parent="."]
 disable_3d = true

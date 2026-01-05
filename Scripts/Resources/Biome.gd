@@ -15,3 +15,5 @@ class_name Biome
 @export var enemiesList : Array[SpawnEntry]
 @export var itemDropsList : Array[SpawnEntry]
 @export var objectsList : Array[SpawnEntry]
+
+@export var locatablesList : Array[LocatableSpawnable]

@@ -4,7 +4,6 @@ extends RigidBody2D
 @onready var _animplay: AnimationPlayer = $AnimationPlayer
 @onready var _playerDetector: Area2D = $PlayerDetector
 @onready var _damageHitbox : Area2D = $damagehitbox
-@onready var _damage_timer: Timer = $DamageTimer 
 @onready var _deleteItSelf: Timer = $DeleteitSelfTimer
 @onready var _audioStream : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var _sawSprite : Sprite2D = $Sprite2D
@@ -29,7 +28,7 @@ var Dir: Vector2 = Vector2.ZERO
 @export var BLOODED_TEXTURE_2 : Texture2D
 
 func _ready() -> void:
-
+	_damageHitbox.monitoring=false
 	# Faz uma cópia da textura do Sprite para não afetar o modelo base
 	_sawSprite.texture = _sawSprite.texture.duplicate()
 	_startTimer.start()
@@ -42,7 +41,8 @@ func _physics_process(delta: float) -> void:
 	
 	if _itstoped:
 		canChase = false
-		SPEED = lerp(SPEED, 0.0, delta * 2.0)  # o "2.0" controla a rapidez com que para
+		can_damage = false
+		SPEED = lerp(SPEED, 0.0, delta * 6.0)  # o "2.0" controla a rapidez com que para
 		if SPEED < 1.0:
 			SPEED = 0.0  # garante que zere totalmente	
 	if canChase:
@@ -105,13 +105,11 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 
 
 func _on_damagehitbox_body_entered(body: Node2D) -> void:
-	if !can_damage:
+	if !can_damage or _itstoped:
 		return
 	
 	if body is Player:
 		body.addToHealth(damage)
-		can_damage = false
-		_damage_timer.start()
 	elif body.has_method("setHealth") and !body.is_in_group("Boss"):
 		body.setHealth(damage)
 	else:

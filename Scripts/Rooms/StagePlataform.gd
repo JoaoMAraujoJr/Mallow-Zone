@@ -74,6 +74,21 @@ func _get_random_point_in_area(area:SpawnAreas) -> Vector2:
 		return areashape.global_position
 
 func _spawn_entities_at_Stage():
+	if (thisBiome.locatablesList != null ) and (thisBiome.locatablesList.size() > 0):
+		for locatable in thisBiome.locatablesList:
+			if locatable:
+				var offset :int = 200
+				if (global_position.x < locatable.xCoordinate + offset) and (global_position.x > locatable.xCoordinate - offset) and (global_position.y < locatable.yCoordinate + offset) and (global_position.y > locatable.yCoordinate - offset):
+					print("locatable found")
+					var new_locatable := locatable.Scene.instantiate()
+					new_locatable.global_position = global_position
+					get_tree().current_scene.add_child(new_locatable)
+					return
+				offset = 1000
+				if (global_position.x < locatable.xCoordinate + offset) and (global_position.x > locatable.xCoordinate - offset) and (global_position.y < locatable.yCoordinate + offset) and (global_position.y > locatable.yCoordinate - offset):
+					print("locatable spawnable is close")
+					return
+	
 	if (thisBiome.enemiesList != null ) and (thisBiome.enemiesList.size() > 0):
 		rng.randomize() 
 		var rand_chance:float = randf()
@@ -115,24 +130,6 @@ func _spawn_entities_at_Stage():
 					newObject.global_position = global_position
 				get_tree().current_scene.add_child.call_deferred(newObject)
 
-
-#	if !BossManager._isOnBoss:
-#		EntityspawnerAtMilestone(BossManager.NextMilestone)
-
-func EntityspawnerAtMilestone(milestoneCoords : float ):
-	var Entity : PackedScene
-	for Boss in BossManager.BossList:
-		if !BossManager.BossList[Boss]["isDefeated"]:
-			Entity = BossManager.BossList[Boss]["BossScene"]
-			break
-	if Entity != null:
-		if (GameManager.player_x > milestoneCoords or GameManager.player_x < -milestoneCoords or GameManager.player_y > milestoneCoords or GameManager.player_y < -milestoneCoords ):
-			var newEntity = Entity.instantiate()
-			newEntity.global_position = global_position
-			get_tree().current_scene.add_child(newEntity)
-		else:return
-	else :
-		print ("não ta dando")
 
 
 func _on_visible_on_screen_enabler_2d_screen_entered() -> void:

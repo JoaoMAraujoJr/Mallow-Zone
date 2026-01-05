@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=20 format=3 uid="uid://d11kdady4lqr2"]
+[gd_resource type="Resource" script_class="Biome" load_steps=24 format=3 uid="uid://d11kdady4lqr2"]
 
 [ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="1_cqk60"]
 [ext_resource type="Texture2D" uid="uid://6q2esd6l67ao" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom.png" id="1_pf4ip"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="3_46dm1"]
 [ext_resource type="PackedScene" uid="uid://bodu84frg2ffg" path="res://Scenes/objects/medkit.tscn" id="4_pf4ip"]
 [ext_resource type="PackedScene" uid="uid://cbf4muc7d60h" path="res://Scenes/objects/tree.tscn" id="5_fgs7w"]
+[ext_resource type="Script" uid="uid://b8tl52g0ivgyc" path="res://Scripts/Resources/LocatableSpawnable.gd" id="6_3uxnf"]
 [ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="6_eb26d"]
 [ext_resource type="PackedScene" uid="uid://dw7en77yhx7it" path="res://Scenes/Unique/mountain.tscn" id="7_46dm1"]
+[ext_resource type="PackedScene" uid="uid://bhl7mtmnhud1k" path="res://Scenes/enemies/Bosses/rohk_the_boulder.tscn" id="7_wmwkd"]
 [ext_resource type="Texture2D" uid="uid://dlgubbkv0pbk8" path="res://Assets/Textures/entities/StageWarper/levelart/Yard.png" id="9_wmwkd"]
 [ext_resource type="Texture2D" uid="uid://cvx7qhxej7ak3" path="res://Assets/Textures/floors/grass/Grassfloortexture.png" id="10_fgs7w"]
 [ext_resource type="Resource" uid="uid://xxjnd60p1vxg" path="res://Scripts/Resources/Weather/windyLeafy.tres" id="10_qgh8n"]
@@ -30,6 +32,20 @@ script = ExtResource("1_cqk60")
 SpawnableScene = ExtResource("4_pf4ip")
 SpawnRate = 0.2
 metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_qgh8n"]
+script = ExtResource("6_3uxnf")
+Scene = ExtResource("7_wmwkd")
+xCoordinate = 2000.0
+yCoordinate = 0.0
+metadata/_custom_type_script = "uid://b8tl52g0ivgyc"
+
+[sub_resource type="Resource" id="Resource_eb26d"]
+script = ExtResource("6_3uxnf")
+Scene = ExtResource("7_wmwkd")
+xCoordinate = 1130.0
+yCoordinate = 1230.0
+metadata/_custom_type_script = "uid://b8tl52g0ivgyc"
 
 [sub_resource type="Resource" id="Resource_i7rku"]
 script = ExtResource("1_cqk60")
@@ -63,4 +79,5 @@ bottomTexturesVariants = Array[Texture2D]([ExtResource("1_pf4ip")])
 enemiesList = Array[ExtResource("1_cqk60")]([SubResource("Resource_fdx75")])
 itemDropsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_k5la2"), SubResource("Resource_7uiy4")])
 objectsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_i7rku"), SubResource("Resource_ww40o"), SubResource("Resource_0afbt"), null, SubResource("Resource_pf4ip"), null])
+locatablesList = Array[ExtResource("6_3uxnf")]([SubResource("Resource_qgh8n"), SubResource("Resource_eb26d")])
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"

@@ -105,6 +105,7 @@ func setHealth(addedAmount : int)-> void:
 		_lightcolor.queue_free()
 		_animatedSprite.queue_free()
 		$CollisionShape2D.queue_free()
+		$MiniMapIcon.queue_free()
 		# increase kill count
 		GameManager.kills += 1 
 
