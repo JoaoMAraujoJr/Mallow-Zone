@@ -44,6 +44,7 @@ metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 [resource]
 script = ExtResource("2_7w3n0")
 name = "Ominous ChessFields"
+biome_id = "chessfields"
 warpArt = ExtResource("9_13ifo")
 topTextureVariants = Array[Texture2D]([ExtResource("9_13ifo")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_tyuhy")])

@@ -10,6 +10,7 @@
 [resource]
 script = ExtResource("2_tl7jt")
 name = "Deep Winter Cove"
+biome_id = "deepwinter"
 weather = ExtResource("3_tl7jt")
 topTextureVariants = Array[Texture2D]([ExtResource("5_qefhv")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_8ul5f")])

@@ -19,7 +19,7 @@ enum SpawnAreas{
 @export_range(0.0,1.0,0.01) var dropSpawnRate : float = 0.5
 
 var thisBiome :Biome = BiomeManager.currentBiome
-
+@export var levelWarpScene:PackedScene
 
 # ===== RNG =====
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -89,6 +89,18 @@ func _spawn_entities_at_Stage():
 					print("locatable spawnable is close")
 					return
 	
+	if (thisBiome.nearbyBiomesList != null ) and (thisBiome.nearbyBiomesList.size() > 0):
+		for nearbyBiome in thisBiome.nearbyBiomesList:
+			if nearbyBiome:
+				var offset :int = 200
+				if (global_position.x < nearbyBiome.xCoordinate + offset) and (global_position.x > nearbyBiome.xCoordinate - offset) and (global_position.y < nearbyBiome.yCoordinate + offset) and (global_position.y > nearbyBiome.yCoordinate - offset):
+					print("locatable found")
+					var new_warper :LevelWarper= levelWarpScene.instantiate()
+					new_warper.global_position = global_position
+					if nearbyBiome.BiomeId in BiomeManager.biomeList:
+						new_warper.warpBiome = BiomeManager.biomeList[nearbyBiome.BiomeId]
+					get_tree().current_scene.add_child(new_warper)
+
 	if (thisBiome.enemiesList != null ) and (thisBiome.enemiesList.size() > 0):
 		rng.randomize() 
 		var rand_chance:float = randf()

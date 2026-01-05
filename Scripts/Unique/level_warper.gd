@@ -1,5 +1,5 @@
 extends Interactable
-
+class_name LevelWarper
 
 @export var warpBiome :Biome
 

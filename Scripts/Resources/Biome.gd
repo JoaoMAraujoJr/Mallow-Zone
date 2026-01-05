@@ -2,6 +2,7 @@ extends Resource
 class_name Biome
 
 @export var name :String
+@export var biome_id:String
 @export var weather : Weather
 
 @export var hasDayNightCycle :bool = false
@@ -17,3 +18,4 @@ class_name Biome
 @export var objectsList : Array[SpawnEntry]
 
 @export var locatablesList : Array[LocatableSpawnable]
+@export var nearbyBiomesList :Array[BiomeSpawnEntry]
