@@ -5,7 +5,7 @@ extends Control
 @onready var _killslabel: Label = $InterfaceCanvaLayer/Kills
 @onready var _coords: Label = $InterfaceCanvaLayer/CoordRadarRect/Coordinates
 
-@onready var fpsDisplay :Label = $InterfaceCanvaLayer/FPS
+@onready var fpsDisplay :RichTextLabel = $InterfaceCanvaLayer/FPS
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	fpsDisplay.text = str(Engine.get_frames_per_second()) + " FPS"
+	fpsDisplay.text = "[shake rate=10 level=20][rainbow freq=1 sat=0.5 val=0.9]"+str(Engine.get_frames_per_second()) + " FPS [/rainbow][/shake]"
 	ammo = GameManager.ammo
 	_ammolabel.text = "Ammo: " + str(ammo) + "/ " + str(GameManager.ammoMax)
 	_killslabel.text= str(GameManager.kills) + " Kills"

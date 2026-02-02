@@ -16,8 +16,12 @@ var isAffectable : bool = true
 var _effectHandler : EffectHandler
 
 func _ready() -> void:
+	_effectHandler = find_child("EffectHandler")
+	
 	if isAffectable and _effectHandler == null:
 		_effectHandler = EffectHandler.new()
+		_effectHandler.name = "EffectHandler"
+		
 		add_child(_effectHandler)
 
 func addToHealth(i:int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpqahfejiw8a7"]
+[gd_scene format=3 uid="uid://dpqahfejiw8a7"]
 
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="1_fu41q"]
 [ext_resource type="Script" uid="uid://tw32mgxoijh2" path="res://Scenes/UI/buttons/reset_button.gd" id="1_r10o2"]
@@ -99,14 +99,14 @@ _data = {
 &"popping": SubResource("Animation_r10o2")
 }
 
-[node name="reset button" type="CanvasLayer"]
+[node name="reset button" type="CanvasLayer" unique_id=1338460572]
 script = ExtResource("1_r10o2")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1396053691]
 wait_time = 0.1
 autostart = true
 
-[node name="text" type="Control" parent="."]
+[node name="text" type="Control" parent="." unique_id=507664450]
 z_index = 4
 layout_mode = 3
 anchors_preset = 7
@@ -121,7 +121,7 @@ offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="text"]
+[node name="Label" type="Label" parent="text" unique_id=487814655]
 material = SubResource("CanvasItemMaterial_r10o2")
 layout_mode = 1
 anchors_preset = 7
@@ -138,7 +138,7 @@ scale = Vector2(0.6150189, 0.6150189)
 text = "Hold \"K\" to restart "
 label_settings = SubResource("LabelSettings_6xjy8")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="text"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="text" unique_id=488874957]
 material = SubResource("CanvasItemMaterial_r10o2")
 layout_mode = 1
 anchors_preset = 7
@@ -162,17 +162,13 @@ texture_under = ExtResource("2_v4ckx")
 texture_progress = ExtResource("3_r10o2")
 texture_progress_offset = Vector2(0.555, 0)
 
-[node name="HoldAnimPlayer" type="AnimationPlayer" parent="."]
+[node name="HoldAnimPlayer" type="AnimationPlayer" parent="." unique_id=1638303296]
 root_node = NodePath("../IddleAnimPlayer")
-libraries = {
-&"": SubResource("AnimationLibrary_dr2uf")
-}
+libraries/ = SubResource("AnimationLibrary_dr2uf")
 speed_scale = 0.9
 
-[node name="IddleAnimPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_x5eps")
-}
-autoplay = "popping"
+[node name="IddleAnimPlayer" type="AnimationPlayer" parent="." unique_id=520026672]
+libraries/ = SubResource("AnimationLibrary_x5eps")
+autoplay = &"popping"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

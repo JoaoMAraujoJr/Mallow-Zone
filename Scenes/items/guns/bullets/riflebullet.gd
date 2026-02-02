@@ -26,5 +26,8 @@ func _on_damage_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Damageble") and area.get_parent().has_method("setHealth") :
 		area.get_parent().setHealth(damage)
 		queue_free()
+	elif (area.get_parent() is RigidDamageable or area.get_parent() is CharacterDamageable) and area.get_parent() is not Player :
+		area.get_parent().addToHealth(damage)
+		queue_free()
 
 	pass # Replace with function body.

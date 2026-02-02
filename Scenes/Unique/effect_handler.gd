@@ -3,13 +3,15 @@ class_name EffectHandler
 
 @export var CurrentEffectsList :Array[Effect]
 @onready var CurrentEffectsLifetimes: Array[Timer]
-@onready var _timer: Timer = $Timer
+var _timer: Timer
 
-#func _ready():
-#	add_child(_timer)
-#	_timer.wait_time = 1.0
-#	_timer.autostart = true
-#	_timer.timeout.connect(_on_timer_timeout)
+func _ready():
+	_timer = Timer.new()
+	_timer.wait_time = 1.0
+	_timer.autostart = true
+	_timer.timeout.connect(_on_timer_timeout)
+	add_child(_timer)
+	_timer.start()
 
 func addEffect(effect:Effect):
 	for i in range(CurrentEffectsList.size()):

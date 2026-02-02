@@ -17,9 +17,13 @@ var BossList := {
 		"BossScene": preload("res://Scenes/enemies/car_boss.tscn"),
 		"maxHP": 50 * multiplier,
 		"isDefeated": false,
-		"BossBiome" : "Asphalt"
+	},
+	"Rohk":{
+	"name": "Rohk The Boulder",
+	"BossScene": preload("res://Scenes/enemies/car_boss.tscn"),
+	"maxHP": 50 * multiplier,
+	"isDefeated": false,
 	}
-	
 }
 
 
@@ -34,7 +38,8 @@ func change_on_boss_status_received(BossName:String ,currentBossHP:int,IsOnBoss:
 	if IsBossDefeated or !IsOnBoss:
 		if BossList.has(currentBossName):
 			currentBossHealth = currentBossHP
-			BossList[currentBossName]["isDefeated"] = true #<===== é essa aqui BURRO
+			if IsBossDefeated:
+				BossList[currentBossName]["isDefeated"] = true #<===== é essa aqui BURRO
 			Bossbar.updateBossBar(currentBossHealth,BossList[currentBossName]["maxHP"])
 			Bossbar.changeVisibility(false)
 			NextMilestone += 2000.0

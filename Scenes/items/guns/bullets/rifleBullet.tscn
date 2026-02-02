@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://0hmhkrf3c44n"]
+[gd_scene format=3 uid="uid://0hmhkrf3c44n"]
 
 [ext_resource type="Script" uid="uid://dwms633t47x1t" path="res://Scenes/items/guns/bullets/riflebullet.gd" id="1_wnwga"]
 [ext_resource type="Texture2D" uid="uid://bwy1yk26573bi" path="res://Assets/player/bullet.png" id="2_uostt"]
@@ -10,25 +10,25 @@ radius = 10.049875
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnwga"]
 size = Vector2(6, 4)
 
-[node name="bullet" type="RigidBody2D" groups=["Bullet"]]
+[node name="bullet" type="RigidBody2D" unique_id=1343896012 groups=["Bullet"]]
 mass = 0.5
 gravity_scale = 0.0
 script = ExtResource("1_wnwga")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1677611920]
 texture = ExtResource("2_uostt")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1475639722]
 
-[node name="damageArea" type="Area2D" parent="." groups=["Bullet", "canInteract"]]
+[node name="damageArea" type="Area2D" parent="." unique_id=1442206389 groups=["Bullet", "canInteract"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damageArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damageArea" unique_id=1769758112]
 shape = SubResource("CircleShape2D_oduel")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=890829216]
 texture = ExtResource("3_bhd26")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2123327730]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_wnwga")
 disabled = true

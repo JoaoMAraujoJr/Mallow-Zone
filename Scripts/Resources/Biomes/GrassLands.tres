@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=26 format=3 uid="uid://d11kdady4lqr2"]
+[gd_resource type="Resource" script_class="Biome" format=3 uid="uid://d11kdady4lqr2"]
 
 [ext_resource type="Texture2D" uid="uid://6okmu1we6x4" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom_256.png" id="1_3uxnf"]
 [ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="1_cqk60"]

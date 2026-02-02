@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbvngwwmb0afo"]
+[gd_scene format=3 uid="uid://bbvngwwmb0afo"]
 
 [ext_resource type="Script" uid="uid://c8pd8jkibn1lj" path="res://Scripts/UI/interface.gd" id="1_j00uw"]
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
@@ -23,12 +23,6 @@ shader_parameter/strength = 2.0
 shader_parameter/radius = 1.32800006308
 shader_parameter/zoom = 0.3850000182875
 shader_parameter/aspect = 0.64900002756762
-
-[sub_resource type="LabelSettings" id="LabelSettings_w0njm"]
-font = ExtResource("5_hbxki")
-font_size = 26
-outline_size = 14
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
 shader = ExtResource("2_uwsgx")
@@ -76,16 +70,16 @@ shader_parameter/roll_speed = 1.0
 shader_parameter/scan_line_strength = -10.393999923715
 shader_parameter/pixel_strength = -4.0
 
-[node name="Interface" type="Control"]
+[node name="Interface" type="Control" unique_id=1650993913]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_j00uw")
 
-[node name="Weather_Manager" parent="." instance=ExtResource("2_na5jw")]
+[node name="Weather_Manager" parent="." unique_id=1341393593 instance=ExtResource("2_na5jw")]
 
-[node name="FishEyeEffectLayer" type="CanvasLayer" parent="."]
+[node name="FishEyeEffectLayer" type="CanvasLayer" parent="." unique_id=1978402482]
 
-[node name="eyefish" type="ColorRect" parent="FishEyeEffectLayer"]
+[node name="eyefish" type="ColorRect" parent="FishEyeEffectLayer" unique_id=473675474]
 z_index = 1
 material = SubResource("ShaderMaterial_7l867")
 anchors_preset = 15
@@ -95,27 +89,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="InterfaceCanvaLayer" type="CanvasLayer" parent="."]
+[node name="InterfaceCanvaLayer" type="CanvasLayer" parent="." unique_id=1821217240]
 
-[node name="MiniMap" parent="InterfaceCanvaLayer" instance=ExtResource("5_kp8ok")]
+[node name="MiniMap" parent="InterfaceCanvaLayer" unique_id=1981650787 instance=ExtResource("5_kp8ok")]
 
-[node name="FPS" type="Label" parent="InterfaceCanvaLayer"]
-offset_left = 24.000004
-offset_top = 151.0
-offset_right = 137.0
-offset_bottom = 193.0
-scale = Vector2(0.71763086, 0.71763086)
+[node name="FPS" type="RichTextLabel" parent="InterfaceCanvaLayer" unique_id=700342857]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 86.0
+offset_top = -209.0
+offset_right = 621.09406
+offset_bottom = -47.356995
+grow_vertical = 2
+scale = Vector2(0.5277668, 0.5277668)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/normal_font = ExtResource("5_hbxki")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
+bbcode_enabled = true
 text = "0 FPS"
-label_settings = SubResource("LabelSettings_w0njm")
+fit_content = true
+scroll_active = false
 
-[node name="Time Manager" parent="InterfaceCanvaLayer" instance=ExtResource("6_w0njm")]
+[node name="Time Manager" parent="InterfaceCanvaLayer" unique_id=399650328 instance=ExtResource("6_w0njm")]
 offset_left = 86.0
 offset_top = 299.0
 offset_right = 86.0
 offset_bottom = 299.0
 scale = Vector2(2.9571428, 2.9571428)
 
-[node name="Vignette" type="ColorRect" parent="InterfaceCanvaLayer"]
+[node name="Vignette" type="ColorRect" parent="InterfaceCanvaLayer" unique_id=1229175021]
 material = SubResource("ShaderMaterial_r04jc")
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,7 +132,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Ammo" type="Label" parent="InterfaceCanvaLayer"]
+[node name="Ammo" type="Label" parent="InterfaceCanvaLayer" unique_id=2088555551]
 anchors_preset = -1
 anchor_left = 0.845
 anchor_top = 0.11800001
@@ -141,7 +149,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Kills" type="Label" parent="InterfaceCanvaLayer"]
+[node name="Kills" type="Label" parent="InterfaceCanvaLayer" unique_id=1635399923]
 anchors_preset = -1
 anchor_left = 0.18800001
 anchor_top = 0.11800001
@@ -158,7 +166,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="CoordRadarRect" type="TextureRect" parent="InterfaceCanvaLayer"]
+[node name="CoordRadarRect" type="TextureRect" parent="InterfaceCanvaLayer" unique_id=1439140662]
 anchors_preset = -1
 anchor_left = 0.49400002
 anchor_right = 0.49400002
@@ -171,7 +179,7 @@ scale = Vector2(1.0154165, 1.0154165)
 pivot_offset = Vector2(128.50299, 59.39214)
 texture = SubResource("ViewportTexture_na5jw")
 
-[node name="Coordinates" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect"]
+[node name="Coordinates" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect" unique_id=2087456942]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.448
@@ -194,7 +202,7 @@ clip_text = true
 uppercase = true
 max_lines_visible = 2
 
-[node name="xy" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect"]
+[node name="xy" type="Label" parent="InterfaceCanvaLayer/CoordRadarRect" unique_id=1464362663]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.448
@@ -217,10 +225,10 @@ clip_text = true
 uppercase = true
 max_lines_visible = 2
 
-[node name="BossBar" parent="InterfaceCanvaLayer" instance=ExtResource("10_apajn")]
+[node name="BossBar" parent="InterfaceCanvaLayer" unique_id=33436801 instance=ExtResource("10_apajn")]
 mouse_filter = 2
 
-[node name="Mouse mask" type="TextureRect" parent="InterfaceCanvaLayer"]
+[node name="Mouse mask" type="TextureRect" parent="InterfaceCanvaLayer" unique_id=624340322]
 top_level = true
 clip_children = 1
 anchors_preset = 15
@@ -233,11 +241,11 @@ size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("7_kp8ok")
 
-[node name="Mousefollow" parent="InterfaceCanvaLayer/Mouse mask" instance=ExtResource("5_r04jc")]
+[node name="Mousefollow" parent="InterfaceCanvaLayer/Mouse mask" unique_id=642612514 instance=ExtResource("5_r04jc")]
 position = Vector2(723, 283)
 scale = Vector2(2.0352337, 1.9654197)
 
-[node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer"]
+[node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer" unique_id=1120040036]
 material = SubResource("ShaderMaterial_aq0n2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -246,13 +254,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="reset button" parent="." instance=ExtResource("11_apajn")]
+[node name="reset button" parent="." unique_id=1918029492 instance=ExtResource("11_apajn")]
 
-[node name="CoordRadarSubViewport" type="SubViewport" parent="."]
+[node name="CoordRadarSubViewport" type="SubViewport" parent="." unique_id=1745337894]
 disable_3d = true
 transparent_bg = true
 size = Vector2i(256, 127)
 size_2d_override = Vector2i(265, 111)
 render_target_update_mode = 4
 
-[node name="CoorRadar" parent="CoordRadarSubViewport" instance=ExtResource("12_na5jw")]
+[node name="CoorRadar" parent="CoordRadarSubViewport" unique_id=1822673001 instance=ExtResource("12_na5jw")]

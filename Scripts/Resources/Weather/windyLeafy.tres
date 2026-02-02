@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Weather" load_steps=5 format=3 uid="uid://xxjnd60p1vxg"]
+[gd_resource type="Resource" script_class="Weather" format=3 uid="uid://xxjnd60p1vxg"]
 
 [ext_resource type="Script" uid="uid://c2x0pbf6lpil1" path="res://Scripts/Resources/Weather.gd" id="1_746p8"]
 [ext_resource type="PackedScene" uid="uid://dsdfci3it6gcr" path="res://Scenes/particles/weather_particles/falling_leaf_particles_1.tscn" id="2_w3dx7"]

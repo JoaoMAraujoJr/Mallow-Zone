@@ -110,7 +110,7 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 
 func mouse_actions_handler():
 	if GameManager.can_shoot:
-		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and GameManager.currentEquipedWeaponType != "none" and _gun != null:
+		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			var mouse_pos = get_global_mouse_position()
 			var recoil_direction = ( global_position - mouse_pos ).normalized() #player recoiled by shoot
 			recoil_velocity = recoil_direction * recoil_strength
@@ -118,7 +118,7 @@ func mouse_actions_handler():
 
 		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
 			_outofAmmoAudioStream.play()
-		elif Input.is_action_just_pressed("DropAction") and GameManager.currentEquipedWeaponType != "none" and _gun != null:
+		elif Input.is_action_just_pressed("DropAction") and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			_dropGun()
 
 

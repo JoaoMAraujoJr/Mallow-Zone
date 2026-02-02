@@ -1,11 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdof1lf74pr0c"]
+[gd_scene format=3 uid="uid://cdof1lf74pr0c"]
 
 [ext_resource type="Texture2D" uid="uid://ccdsw5apsha0t" path="res://Assets/Textures/backgrounds/BiomesBackgrounds/day/sky_2.png" id="1_7eyp6"]
 
-[node name="Background" type="CanvasLayer"]
-layer = -99
+[sub_resource type="GDScript" id="GDScript_7eyp6"]
+resource_name = "Background"
+script/source = "extends CanvasLayer
+"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="CanvasLayer" unique_id=215404212]
+layer = -99
+script = SubResource("GDScript_7eyp6")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=137581791]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,7 +26,7 @@ scale = Vector2(1.872199, 1.872199)
 texture = ExtResource("1_7eyp6")
 stretch_mode = 1
 
-[node name="Parallax2D3" type="Parallax2D" parent="."]
+[node name="Parallax2D3" type="Parallax2D" parent="." unique_id=1070221118]
 z_index = -20
 scale = Vector2(3.0944655, 3.0944655)
 scroll_offset = Vector2(-1802, -3128)

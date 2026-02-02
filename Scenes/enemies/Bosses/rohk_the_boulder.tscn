@@ -1,10 +1,39 @@
-[gd_scene load_steps=15 format=4 uid="uid://bhl7mtmnhud1k"]
+[gd_scene format=4 uid="uid://bhl7mtmnhud1k"]
 
 [ext_resource type="Texture2D" uid="uid://drl84kcujatcl" path="res://Assets/3D/Rhok the Boulder/model_0.png" id="1_acjef"]
 [ext_resource type="Texture2D" uid="uid://cvbv5bo6u7af4" path="res://Assets/Textures/UI/minimap_icons/boss/boulder_boss.png" id="2_mxrxc"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_llr1c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s3dos"]
+
+[sub_resource type="GDScript" id="GDScript_mxrxc"]
+resource_name = "RohkTheBoulder"
+script/source = "extends RigidBoss
+
+@onready var visual : SubViewportContainer = $SubViewportContainer
+@onready var playerDetector : Area2D = $\"PlayerDetector Area\"
+
+func _process(delta: float) -> void:
+	rotateTowardsPlayer()
+	pass
+
+
+func Die():
+	super()
+	queue_free()
+
+func rotateTowardsPlayer():
+	for body in playerDetector.get_overlapping_bodies():
+		if body is Player:
+			look_at(body.global_position)
+			break
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mxrxc"]
+radius = 1774.0553
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acjef"]
+radius = 88.29496
 
 [sub_resource type="World3D" id="World3D_wk8e1"]
 
@@ -126,16 +155,16 @@ _data = {
 &"Rolling foward": SubResource("Animation_my67n")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_acjef"]
-radius = 88.29496
-
-[node name="Rohk The Boulder" type="RigidBody2D"]
+[node name="Rohk The Boulder" type="RigidBody2D" unique_id=318558332 groups=["Enemy"]]
 light_mask = 3
 visibility_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_s3dos")
 gravity_scale = 0.0
+script = SubResource("GDScript_mxrxc")
+boss_name = "Rohk"
 
-[node name="MiniMapIcon" type="Sprite2D" parent="."]
+[node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=1509485939]
+visible = false
 visibility_layer = 2
 z_index = 1
 y_sort_enabled = true
@@ -143,47 +172,58 @@ scale = Vector2(6.5510774, 6.5510774)
 texture = ExtResource("2_mxrxc")
 script = ExtResource("3_llr1c")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="PlayerDetector Area" type="Area2D" parent="." unique_id=1297233192]
+
+[node name="Hitbox Collision" type="CollisionShape2D" parent="PlayerDetector Area" unique_id=1743768176]
+shape = SubResource("CircleShape2D_mxrxc")
+debug_color = Color(0.47843137, 0.85490197, 0.25882354, 0.047058824)
+
+[node name="Hitbox Area" type="Area2D" parent="." unique_id=1586494144]
+
+[node name="Hitbox Collision" type="CollisionShape2D" parent="Hitbox Area" unique_id=1690971786]
+shape = SubResource("CircleShape2D_mxrxc")
+debug_color = Color(0.63435644, 0.51454425, 0.33671847, 0.41960785)
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1458731370]
+shape = SubResource("CircleShape2D_acjef")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2025704012]
 offset_left = -258.0
 offset_top = -213.0
 offset_right = 254.0
 offset_bottom = 299.0
+rotation = -1.5707964
 scale = Vector2(0.51841855, 0.51841855)
 pivot_offset = Vector2(256.54944, 214.11266)
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=747314234]
 own_world_3d = true
 world_3d = SubResource("World3D_wk8e1")
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=968720156]
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=907858588]
 transform = Transform3D(1, 0, 0, 0, 0.82415587, 0.5663631, 0, -0.5663631, 0.82415587, 0, 1.901, 2.234)
 fov = 28.9
 
-[node name="Rohk the Boulder" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D"]
+[node name="Rohk the Boulder" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1831836397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="sphere" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Rohk the Boulder"]
+[node name="sphere" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Rohk the Boulder" unique_id=1127503194]
 gi_mode = 2
 mesh = SubResource("ArrayMesh_tjymx")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Rohk the Boulder/sphere"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Rohk the Boulder/sphere" unique_id=285066186]
 mesh = SubResource("ArrayMesh_mxrxc")
 surface_material_override/0 = SubResource("StandardMaterial3D_llr1c")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Node3D"]
-libraries = {
-&"": SubResource("AnimationLibrary_eouac")
-}
-autoplay = "Rolling foward"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1191750699]
+libraries/ = SubResource("AnimationLibrary_eouac")
+autoplay = &"Rolling foward"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1650844030]
 transform = Transform3D(1, 0, 0, 0, 0.84657425, 0.5322706, 0, -0.5322706, 0.84657425, 0, 1.840774, 2.2991316)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_acjef")

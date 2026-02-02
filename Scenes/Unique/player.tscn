@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cb5khyq6wnglo"]
+[gd_scene format=3 uid="uid://cb5khyq6wnglo"]
 
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/Unique/player.gd" id="1_cvnsp"]
-[ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="2_d05bs"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_6nq75"]
 [ext_resource type="PackedScene" uid="uid://bjxxblvb7g17" path="res://Scenes/Unique/player_skin_node.tscn" id="3_d05bs"]
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/Textures/UI/progressbars/lifebar_under.png" id="6_3smsa"]
@@ -21,14 +20,15 @@ size = Vector2(1536.8463, 1531.8463)
 radius = 11.0
 height = 40.0
 
-[node name="Player" type="CharacterBody2D" groups=["PlayerArea"]]
+[node name="Player" type="CharacterBody2D" unique_id=118340029 groups=["PlayerArea"]]
+visibility_layer = 3
 script = ExtResource("1_cvnsp")
 max_camzoom = 0.7
 min_camzoom = 1.3
 max_health = 100
 health = 100
 
-[node name="MiniMapIcon" type="Sprite2D" parent="."]
+[node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=436798569]
 visible = false
 light_mask = 2
 visibility_layer = 2
@@ -36,41 +36,38 @@ scale = Vector2(4.563005, 4.563005)
 texture = ExtResource("9_yiw7m")
 script = ExtResource("3_6nq75")
 
-[node name="EffectHandler" parent="." instance=ExtResource("2_d05bs")]
-z_index = 2
-
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=571946010]
 z_index = -2
 position = Vector2(0, 24)
 texture = ExtResource("8_8erm5")
 
-[node name="PlayerSkinNode" parent="." instance=ExtResource("3_d05bs")]
+[node name="PlayerSkinNode" parent="." unique_id=1590478521 instance=ExtResource("3_d05bs")]
 position = Vector2(0, 2)
 scale = Vector2(0.64923275, 0.64923275)
 
-[node name="GunPivot" type="Marker2D" parent="."]
+[node name="GunPivot" type="Marker2D" parent="." unique_id=1092457507]
 position = Vector2(0, 7)
 
-[node name="PlayerArea2D" type="Area2D" parent="." groups=["Damageble", "PlayerArea"]]
+[node name="PlayerArea2D" type="Area2D" parent="." unique_id=1064755649 groups=["Damageble", "PlayerArea"]]
 scale = Vector2(0.14770508, 0.14770508)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D" unique_id=1750442588]
 position = Vector2(0, 6.770248)
 shape = SubResource("CircleShape2D_cvnsp")
 debug_color = Color(0.7466245, 0.45141858, 0.28133497, 0.41960785)
 
-[node name="ChunkLoader" type="Area2D" parent="." groups=["ChunkLoader"]]
+[node name="ChunkLoader" type="Area2D" parent="." unique_id=1567156909 groups=["ChunkLoader"]]
 scale = Vector2(0.14770508, 0.14770508)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChunkLoader"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChunkLoader" unique_id=1128321281]
 position = Vector2(6.770248, 0)
 shape = SubResource("RectangleShape2D_d05bs")
 debug_color = Color(0, 0.5951596, 0.7232592, 0.41960785)
 
-[node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="." unique_id=333820573]
 shape = SubResource("CapsuleShape2D_6t5aa")
 
-[node name="LifeBar" type="TextureProgressBar" parent="."]
+[node name="LifeBar" type="TextureProgressBar" parent="." unique_id=326574726]
 offset_left = -23.0
 offset_top = 25.000002
 offset_right = 77.8757
@@ -84,30 +81,30 @@ stretch_margin_bottom = 2
 texture_under = ExtResource("6_3smsa")
 texture_progress = ExtResource("7_8erm5")
 
-[node name="RegenTimer" type="Timer" parent="."]
+[node name="RegenTimer" type="Timer" parent="." unique_id=632801662]
 wait_time = 2.0
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1459522712]
 scale = Vector2(3.1200018, 3.1200018)
 ignore_rotation = false
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 0.3
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" type="Node2D" parent="." unique_id=548383784]
 
-[node name="AudioListener2D" type="AudioListener2D" parent="Sounds"]
+[node name="AudioListener2D" type="AudioListener2D" parent="Sounds" unique_id=317724977]
 current = true
 
-[node name="NeedsAmmoAudioStream" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="NeedsAmmoAudioStream" type="AudioStreamPlayer2D" parent="Sounds" unique_id=614989106]
 stream = ExtResource("8_gymyn")
 volume_db = -15.167
 pitch_scale = 0.33
 attenuation = 3.605001
 bus = &"SFXReverb"
 
-[node name="ReloadAudioStream" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="ReloadAudioStream" type="AudioStreamPlayer2D" parent="Sounds" unique_id=741497538]
 stream = ExtResource("9_tx1dd")
 volume_db = -7.944
 pitch_scale = 0.81

@@ -59,7 +59,6 @@ func _ready() -> void:
 	_carAnimatedSprite.material.set_shader_parameter("flash_white", false)
 	_brainSprite.material.set_shader_parameter("flash_white", false)
 	_carAnimatedSprite.z_index = 0
-	BiomeManager.currentBiome = BossManager.BossList["Ominous Car"]["BossBiome"]
 	self.change_on_boss_status.connect(BossManager.change_on_boss_status_received)
 	emit_signal("change_on_boss_status","Ominous Car",currentHp,true,false)
 	

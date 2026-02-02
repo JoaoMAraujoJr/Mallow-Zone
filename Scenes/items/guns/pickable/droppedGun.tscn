@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3tikolqywyoa"]
+[gd_scene format=3 uid="uid://c3tikolqywyoa"]
 
 [ext_resource type="Script" uid="uid://dmdabebpqmyqt" path="res://Scenes/items/guns/pickable/weapon_dropped.gd" id="1_aoykg"]
-[ext_resource type="Texture2D" uid="uid://07gl01w750tf" path="res://Assets/Textures/entities/shadows/shadow.png" id="3_y5f0o"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="3_y5f0o"]
 
 [sub_resource type="Animation" id="Animation_y5f0o"]
 length = 0.001
@@ -92,28 +92,26 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjfpq"]
 radius = 25.495098
 
-[node name="weaponDropped" type="Node2D"]
+[node name="weaponDropped" type="Node2D" unique_id=344169487]
 script = ExtResource("1_aoykg")
 weaponKey = "rifle"
 
-[node name="gun" type="Sprite2D" parent="."]
+[node name="gun" type="Sprite2D" parent="." unique_id=962791736]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(1.7690611, 1.7690611)
 
-[node name="shadow" type="Sprite2D" parent="."]
+[node name="shadow" type="Sprite2D" parent="." unique_id=1977869522]
 z_index = -1
 position = Vector2(2.3841858e-07, 16)
 scale = Vector2(1.9374999, 0.9477566)
 texture = ExtResource("3_y5f0o")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xnjce")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=9840594]
+libraries/ = SubResource("AnimationLibrary_xnjce")
+autoplay = &"new_animation"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=407764138]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=25067314]
 shape = SubResource("CircleShape2D_bjfpq")
