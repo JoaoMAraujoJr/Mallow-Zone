@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="3_6wd1u"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1njt7"]
 [ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="5_s3jpe"]
-[ext_resource type="Texture2D" uid="uid://bme0q7kpu3375" path="res://Assets/Textures/floors/minimap/minimap_top_texture.png" id="7_khmls"]
 [ext_resource type="Texture2D" uid="uid://6okmu1we6x4" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom_256.png" id="7_kxp8e"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="8_1njt7"]
-[ext_resource type="Texture2D" uid="uid://e817p700gv5f" path="res://Assets/Textures/floors/minimap/minimap_bottom_texture.png" id="9_s3jpe"]
+[ext_resource type="Texture2D" uid="uid://bpw75fena71mc" path="res://Assets/Textures/UI/minimap_icons/floor_top_minimap.png" id="8_s3jpe"]
+[ext_resource type="Texture2D" uid="uid://dsbv42wtoixcx" path="res://Assets/Textures/UI/minimap_icons/floor_bottom_minimap.png" id="10_kxp8e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a6xb7"]
 size = Vector2(411, 412)
@@ -86,23 +86,25 @@ script = ExtResource("5_1njt7")
 
 [node name="top_minimap" type="Sprite2D" parent="." unique_id=43845966]
 visible = false
+light_mask = 0
 visibility_layer = 2
 z_index = -3
 texture_filter = 1
 material = SubResource("ShaderMaterial_idggg")
-scale = Vector2(0.4011719, 0.4011719)
-texture = ExtResource("7_khmls")
+scale = Vector2(6.4521112, 6.4521112)
+texture = ExtResource("8_s3jpe")
 script = ExtResource("8_1njt7")
 
 [node name="bottom_minimap" type="Sprite2D" parent="." unique_id=490847356]
 visible = false
 modulate = Color(1, 1, 1, 0.41960785)
+light_mask = 0
 visibility_layer = 2
 z_index = -6
 material = SubResource("ShaderMaterial_r4p5m")
 position = Vector2(-0.39999998, 307.2)
-scale = Vector2(0.4011719, 0.19960937)
-texture = ExtResource("9_s3jpe")
+scale = Vector2(6.4532747, 3.2109282)
+texture = ExtResource("10_kxp8e")
 script = ExtResource("8_1njt7")
 
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]

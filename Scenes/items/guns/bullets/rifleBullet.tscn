@@ -35,3 +35,4 @@ disabled = true
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="area_entered" from="damageArea" to="." method="_on_damage_area_area_entered"]
+[connection signal="body_entered" from="damageArea" to="." method="_on_damage_area_body_entered"]

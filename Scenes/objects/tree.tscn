@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="3_j8h35"]
 [ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uopmo"]
 [ext_resource type="PackedScene" uid="uid://c7xbhtxd03xn4" path="res://Scenes/particles/tree_explossion_particles.tscn" id="4_dkidj"]
-[ext_resource type="Texture2D" uid="uid://0fcblgf76t2e" path="res://Assets/Textures/UI/minimap_icons/structures/tree_1.png" id="5_dkidj"]
+[ext_resource type="Texture2D" uid="uid://bvh7w4dj1y30c" path="res://Assets/Textures/UI/minimap_icons/structures/tree_2.png" id="5_dkidj"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="6_j2xe8"]
 [ext_resource type="AudioStream" uid="uid://btsnqmg6ydpwl" path="res://Assets/Sounds/Wood Crash.wav" id="6_ryksv"]
 
@@ -107,7 +107,8 @@ interactionType = 2
 maxAmmountOfInteractions = 2
 
 [node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=28827612]
-light_mask = 2
+visible = false
+light_mask = 0
 visibility_layer = 2
 y_sort_enabled = true
 position = Vector2(0, -40.371708)

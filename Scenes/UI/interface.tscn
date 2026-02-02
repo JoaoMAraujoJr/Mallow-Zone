@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://debg6fibu7vns" path="res://Scenes/Unique/weather_manager.tscn" id="2_na5jw"]
 [ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
-[ext_resource type="PackedScene" uid="uid://dirsmstjakf4h" path="res://Scenes/UI/mini_map.tscn" id="5_kp8ok"]
 [ext_resource type="PackedScene" uid="uid://dykkt314can4l" path="res://Scenes/UI/mousefollow.tscn" id="5_r04jc"]
+[ext_resource type="PackedScene" uid="uid://c3xq3kyge52j8" path="res://Scenes/UI/Phone.tscn" id="6_cb0af"]
 [ext_resource type="PackedScene" uid="uid://cnjknnlkh662k" path="res://Scenes/Unique/time_manager.tscn" id="6_w0njm"]
 [ext_resource type="Texture2D" uid="uid://24mvdq1hhxy" path="res://Assets/Textures/UI/cursor/cursor_mask_.png" id="7_kp8ok"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
@@ -91,8 +91,6 @@ mouse_filter = 2
 
 [node name="InterfaceCanvaLayer" type="CanvasLayer" parent="." unique_id=1821217240]
 
-[node name="MiniMap" parent="InterfaceCanvaLayer" unique_id=1981650787 instance=ExtResource("5_kp8ok")]
-
 [node name="FPS" type="RichTextLabel" parent="InterfaceCanvaLayer" unique_id=700342857]
 anchors_preset = 4
 anchor_top = 0.5
@@ -122,6 +120,13 @@ offset_top = 299.0
 offset_right = 86.0
 offset_bottom = 299.0
 scale = Vector2(2.9571428, 2.9571428)
+
+[node name="Phone" parent="InterfaceCanvaLayer" unique_id=827125536 instance=ExtResource("6_cb0af")]
+offset_left = -38.0
+offset_top = -19.0
+offset_right = -38.0
+offset_bottom = -19.0
+scale = Vector2(1.2611108, 1.2611108)
 
 [node name="Vignette" type="ColorRect" parent="InterfaceCanvaLayer" unique_id=1229175021]
 material = SubResource("ShaderMaterial_r04jc")
@@ -246,6 +251,7 @@ position = Vector2(723, 283)
 scale = Vector2(2.0352337, 1.9654197)
 
 [node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer" unique_id=1120040036]
+visible = false
 material = SubResource("ShaderMaterial_aq0n2")
 anchors_preset = 15
 anchor_right = 1.0

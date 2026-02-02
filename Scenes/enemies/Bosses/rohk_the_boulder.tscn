@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_llr1c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s3dos"]
+friction = 0.79
+bounce = 0.3
+absorbent = true
 
 [sub_resource type="GDScript" id="GDScript_mxrxc"]
 resource_name = "RohkTheBoulder"
@@ -188,6 +191,8 @@ debug_color = Color(0.63435644, 0.51454425, 0.33671847, 0.41960785)
 shape = SubResource("CircleShape2D_acjef")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2025704012]
+z_index = 1
+y_sort_enabled = true
 offset_left = -258.0
 offset_top = -213.0
 offset_right = 254.0

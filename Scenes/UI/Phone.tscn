@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://c3xq3kyge52j8"]
+
+[ext_resource type="Script" uid="uid://djsanqh1y0siy" path="res://Scripts/Unique/mini_map.gd" id="1_4q088"]
+[ext_resource type="PackedScene" uid="uid://bxbsqa1hpvwno" path="res://Assets/Textures/UI/Phone/PhoneModel.gltf" id="1_p1xx1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4q088"]
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.2627451, 0.32156864, 0.23921569, 1)
+
+[sub_resource type="Gradient" id="Gradient_fdfwi"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.19938469, 0.459333, 0.21718162, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d00xm"]
+gradient = SubResource("Gradient_fdfwi")
+width = 300
+height = 300
+fill_from = Vector2(1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fdfwi"]
+viewport_path = NodePath("MiniMap/SubViewportContainer/MinimapSubviewport")
+
+[sub_resource type="Animation" id="Animation_4q088"]
+resource_name = "Idle"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2333333, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5181832, -0.39693928), Vector3(0, -0.598, -0.397), Vector3(0, -0.5181832, -0.39693928)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3666667, 4.1666665, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.08726646, 0), Vector3(0, 0.08726646, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fdfwi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.5181832, -0.39693928)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.08726646, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d00xm"]
+_data = {
+&"Idle": SubResource("Animation_4q088"),
+&"RESET": SubResource("Animation_fdfwi")
+}
+
+[node name="Control" type="Control" unique_id=827125536]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(-158, -151)
+
+[node name="MiniMap" type="Control" parent="." unique_id=1683831006]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4q088")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MiniMap" unique_id=712922212]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = -242.0
+offset_right = 90.0
+offset_bottom = -21.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.41165426, 0.41165426)
+stretch = true
+
+[node name="MinimapSubviewport" type="SubViewport" parent="MiniMap/SubViewportContainer" unique_id=854753593]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4293918722
+size = Vector2i(307, 221)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="MiniMap/SubViewportContainer/MinimapSubviewport" unique_id=477018451]
+light_mask = 0
+visibility_layer = 2
+zoom = Vector2(0.145, 0.145)
+
+[node name="PhoneContainer" type="SubViewportContainer" parent="." unique_id=957029681]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -294.0
+offset_top = -395.0
+offset_right = -38.0
+offset_bottom = 117.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.0843041, 1.0843041)
+
+[node name="SubViewport" type="SubViewport" parent="PhoneContainer" unique_id=751661051]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 512)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="PhoneContainer/SubViewport" unique_id=1005711229]
+
+[node name="Camera3D" type="Camera3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1948312764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03748989, 0.46570885)
+fov = 73.1
+
+[node name="Light" type="OmniLight3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1337048433]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81892794, 0.69313574)
+light_energy = 1.402
+omni_range = 1.45
+omni_attenuation = -1.964
+
+[node name="Phone" parent="PhoneContainer/SubViewport/Node3D" unique_id=711263046 instance=ExtResource("1_p1xx1")]
+transform = Transform3D(0.64752656, 0, -0.08715574, 0, 0.65, 0, 0.056651227, 0, 0.9961947, 0, -0.5181832, -0.39693928)
+
+[node name="BlackBackground" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/Phone" unique_id=2056316246]
+transform = Transform3D(0.22839811, 0, 0, 0, 0.22839811, 0, 0, 0, 1, 0, 1.0708525, 0.022020191)
+material_override = SubResource("StandardMaterial3D_4q088")
+transparency = 0.5
+cast_shadow = 0
+texture_filter = 2
+texture = SubResource("GradientTexture2D_d00xm")
+
+[node name="Sprite3D" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/Phone" unique_id=681291799]
+transform = Transform3D(0.22839811, 0, 0, 0, 0.22839811, 0, 0, 0, 1, 0, 1.0708525, 0.076640755)
+modulate = Color(0.7121294, 0.7121294, 0.71212935, 1)
+texture_filter = 2
+texture = SubResource("ViewportTexture_fdfwi")
+
+[node name="AnimationPlayer_Phone" type="AnimationPlayer" parent="." unique_id=314763030]
+root_node = NodePath("../PhoneContainer/SubViewport/Node3D/Phone/Sprite3D")
+libraries/ = SubResource("AnimationLibrary_d00xm")
+autoplay = &"Idle"
+
+[node name="AnimationPlayer_Screen" type="AnimationPlayer" parent="." unique_id=2112630534]
+root_node = NodePath("../PhoneContainer/SubViewport/Node3D/Phone/Sprite3D")

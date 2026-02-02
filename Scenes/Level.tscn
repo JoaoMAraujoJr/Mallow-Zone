@@ -28,6 +28,7 @@ isthisroot = true
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-8, 17)
+speed = 900.0
 
 [node name="EnemyTimer" type="Timer" parent="." unique_id=1139771370]
 wait_time = 5.0

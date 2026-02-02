@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cblkcpos51yeu" path="res://Scripts/enemies/smokeCreature/enemy.gd" id="1_hghv2"]
 [ext_resource type="PackedScene" uid="uid://b8lvqfwo4kiqt" path="res://Scenes/Unique/effect_handler.tscn" id="2_5d1s0"]
+[ext_resource type="Texture2D" uid="uid://baalqx0hgkcwc" path="res://Assets/Textures/UI/minimap_icons/enemies/enemy_2.png" id="2_ulvqc"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="3_afpow"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_psabu"]
 [ext_resource type="AudioStream" uid="uid://b2m4hy4ulb3pj" path="res://Assets/Sounds/EnemyDamage.ogg" id="4_slefu"]
 [ext_resource type="AudioStream" uid="uid://brpjub5yv36hm" path="res://Assets/Sounds/bloodSplatter.ogg" id="4_we58l"]
 [ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="6_hyw8s"]
 [ext_resource type="Texture2D" uid="uid://dfyto5l6bwyw0" path="res://Assets/Textures/entities/Enemies/smokeling/smokeling_spr_sheet.png" id="7_tm0ch"]
-[ext_resource type="Texture2D" uid="uid://drcm5hqcc75xk" path="res://Assets/Textures/UI/minimap_icons/enemies/enemy_1.png" id="8_ulvqc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
 radius = 487.45258
@@ -87,14 +87,6 @@ disable_mode = 2
 collision_mask = 3
 script = ExtResource("1_hghv2")
 
-[node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=1625166852]
-visibility_layer = 2
-z_index = 1
-y_sort_enabled = true
-scale = Vector2(3.425647, 3.425647)
-texture = ExtResource("8_ulvqc")
-script = ExtResource("3_psabu")
-
 [node name="EffectHandler" parent="." unique_id=731600442 instance=ExtResource("2_5d1s0")]
 z_index = 1
 
@@ -154,6 +146,15 @@ wait_time = 0.5
 autostart = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=349755948]
+
+[node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=1625166852]
+light_mask = 0
+visibility_layer = 2
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(3.425647, 3.425647)
+texture = ExtResource("2_ulvqc")
+script = ExtResource("3_psabu")
 
 [connection signal="body_entered" from="EnemyVision" to="." method="_on_enemy_vision_body_entered"]
 [connection signal="body_exited" from="EnemyVision" to="." method="_on_enemy_vision_body_exited"]

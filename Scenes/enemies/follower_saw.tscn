@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cdwl6a2ukqaav" path="res://Assets/Textures/entities/Enemies/saw/saw_blooded_level2.png" id="4_2lqbj"]
 [ext_resource type="Texture2D" uid="uid://dvege2thj5ttp" path="res://Assets/Textures/entities/Enemies/saw/saw_specular_2.png" id="4_36nog"]
 [ext_resource type="Texture2D" uid="uid://47ce1rfkf1f1" path="res://Assets/Textures/entities/Enemies/saw/saw.png" id="4_ghqmr"]
+[ext_resource type="Texture2D" uid="uid://ctbxanvyafr83" path="res://Assets/Textures/UI/minimap_icons/enemies/saw_2.png" id="5_4c4ry"]
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="7_tt31a"]
-[ext_resource type="Texture2D" uid="uid://bkvvslfkqikwp" path="res://Assets/Textures/UI/minimap_icons/enemies/saw.png" id="8_4c4ry"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="9_xqwtm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36nog"]
@@ -230,10 +230,10 @@ BLOODED_TEXTURE_2 = ExtResource("4_2lqbj")
 
 [node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=183696702]
 visible = false
-light_mask = 2
+light_mask = 0
 visibility_layer = 2
 scale = Vector2(6.5510774, 6.5510774)
-texture = ExtResource("8_4c4ry")
+texture = ExtResource("5_4c4ry")
 script = ExtResource("9_xqwtm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=130893273]
