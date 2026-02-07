@@ -2,88 +2,125 @@
 
 [ext_resource type="Script" uid="uid://djsanqh1y0siy" path="res://Scripts/Unique/mini_map.gd" id="1_4q088"]
 [ext_resource type="PackedScene" uid="uid://bxbsqa1hpvwno" path="res://Assets/Textures/UI/Phone/PhoneModel.gltf" id="1_p1xx1"]
+[ext_resource type="FontFile" uid="uid://diyw3rmemrisc" path="res://Assets/fonts/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="3_fdfwi"]
+
+[sub_resource type="GDScript" id="GDScript_fdfwi"]
+resource_name = "Phone"
+script/source = "extends Control # Ou o tipo de nó que o 'Phone' for
+
+
+
+func _on_button_1_input_event(camera, event, event_position, normal, shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_ao_clicar_no_botao_1()
+
+func _ao_clicar_no_botao_1():
+	print(\"Botão 1 pressionado!\")
+"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fdfwi"]
+height = 0.039001465
+radius = 0.071777344
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fdfwi"]
+size = Vector3(0.12135315, 0.026794434, 0.061645508)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4q088"]
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.2627451, 0.32156864, 0.23921569, 1)
+albedo_color = Color(0.17807314, 0.22013429, 0.15895295, 1)
 
 [sub_resource type="Gradient" id="Gradient_fdfwi"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.19938469, 0.459333, 0.21718162, 1)
+colors = PackedColorArray(0.16007765, 0.20285092, 0.1428257, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_d00xm"]
 gradient = SubResource("Gradient_fdfwi")
 width = 300
 height = 300
 fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d00xm"]
+shading_mode = 0
+albedo_color = Color(0.1764706, 0.21960784, 0.16078432, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fdfwi"]
 viewport_path = NodePath("MiniMap/SubViewportContainer/MinimapSubviewport")
 
-[sub_resource type="Animation" id="Animation_4q088"]
+[sub_resource type="Gradient" id="Gradient_4q088"]
+offsets = PackedFloat32Array(0, 0.27018633, 0.2705367, 0.28696606, 0.28806135)
+colors = PackedColorArray(0.2627451, 0.32156864, 0.23921569, 1, 0.26244184, 0.32086813, 0.2400937, 1, 0.78039217, 0.9411765, 0.84705883, 1, 0.78039217, 0.9411765, 0.84705883, 1, 0.24104936, 0.24104936, 0.24104936, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fdfwi"]
+gradient = SubResource("Gradient_4q088")
+width = 256
+height = 240
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_fdfwi"]
 resource_name = "Idle"
 length = 5.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
+tracks/0/path = NodePath("PhoneContainer/SubViewport/Node3D/PhonePivot:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.2333333, 5),
+"times": PackedFloat32Array(0, 2.0035374, 4.979552),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, -0.5181832, -0.39693928), Vector3(0, -0.598, -0.397), Vector3(0, -0.5181832, -0.39693928)]
+"values": [Vector3(0, 0, -0.428), Vector3(0, 0.052, -0.428), Vector3(0, 0, -0.428)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:rotation")
+tracks/1/path = NodePath("PhoneContainer/SubViewport/Node3D/PhonePivot:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.3666667, 4.1666665, 5),
+"times": PackedFloat32Array(0, 1.1666666, 3.4666667, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.08726646, 0), Vector3(0, 0.08726646, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0.08726646, 0), Vector3(0, -0.08726646, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_fdfwi"]
+[sub_resource type="Animation" id="Animation_d00xm"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
+tracks/0/path = NodePath("PhoneContainer/SubViewport/Node3D/PhonePivot:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.5181832, -0.39693928)]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:rotation")
+tracks/1/path = NodePath("PhoneContainer/SubViewport/Node3D/PhonePivot:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.08726646, 0)]
+"values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d00xm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mf6lq"]
 _data = {
-&"Idle": SubResource("Animation_4q088"),
-&"RESET": SubResource("Animation_fdfwi")
+&"Idle": SubResource("Animation_fdfwi"),
+&"RESET": SubResource("Animation_d00xm")
 }
 
-[node name="Control" type="Control" unique_id=827125536]
+[node name="Phone" type="Control" unique_id=827125536]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -93,6 +130,8 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(-158, -151)
+mouse_filter = 1
+script = SubResource("GDScript_fdfwi")
 
 [node name="MiniMap" type="Control" parent="." unique_id=1683831006]
 layout_mode = 1
@@ -139,10 +178,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -294.0
-offset_top = -395.0
-offset_right = -38.0
-offset_bottom = 117.0
+offset_left = -296.0
+offset_top = -562.0
+offset_right = -40.0
+offset_bottom = -50.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(1.0843041, 1.0843041)
@@ -150,6 +189,7 @@ scale = Vector2(1.0843041, 1.0843041)
 [node name="SubViewport" type="SubViewport" parent="PhoneContainer" unique_id=751661051]
 transparent_bg = true
 handle_input_locally = false
+physics_object_picking = true
 size = Vector2i(256, 512)
 render_target_update_mode = 4
 
@@ -160,32 +200,164 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03748989, 0.46570885)
 fov = 73.1
 
 [node name="Light" type="OmniLight3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1337048433]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81892794, 0.69313574)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5257893, 0.69313574)
 light_energy = 1.402
-omni_range = 1.45
+omni_range = 2.6445458
 omni_attenuation = -1.964
 
-[node name="Phone" parent="PhoneContainer/SubViewport/Node3D" unique_id=711263046 instance=ExtResource("1_p1xx1")]
-transform = Transform3D(0.64752656, 0, -0.08715574, 0, 0.65, 0, 0.056651227, 0, 0.9961947, 0, -0.5181832, -0.39693928)
+[node name="PhonePivot" type="Node3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1948493154]
 
-[node name="BlackBackground" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/Phone" unique_id=2056316246]
+[node name="Buttons" type="Node3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot" unique_id=322313759]
+
+[node name="middleButton" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1967832296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0019300599, -0.16335991, 0.09028137)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/middleButton" unique_id=1270426014]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="1" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1811204111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15643331, -0.27701822, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/1" unique_id=2025566646]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="2" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1613040600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005188316, -0.27701822, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/2" unique_id=1280849493]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="3" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=888685799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151624, -0.27701822, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/3" unique_id=1883567064]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="4" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=944015754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15643337, -0.34939313, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/4" unique_id=1595505783]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="5" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1677407982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0042604506, -0.34939313, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/5" unique_id=1324815572]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="6" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=534218564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151624, -0.34939313, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/6" unique_id=271805049]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="7" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1076269731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15550557, -0.42084017, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/7" unique_id=605880204]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="8" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1777988101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00426051, -0.42084017, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/8" unique_id=495981870]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="9" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1709728726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15162398, -0.42084017, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/9" unique_id=1821344295]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="0" type="Area3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons" unique_id=1751403176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00426051, -0.49599874, 0.10338193)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/0" unique_id=1411593755]
+transform = Transform3D(1.0000029, 0, 0, 0, -4.3711463e-08, -1.000001, 0, 1.0000017, -4.371143e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_fdfwi")
+debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
+
+[node name="Phone" parent="PhoneContainer/SubViewport/Node3D/PhonePivot" unique_id=711263046 instance=ExtResource("1_p1xx1")]
+transform = Transform3D(0.64923817, 0, 0, 0, 0.64923835, 0, 0, 0, 0.9988285, -0.00016084524, -0.56869864, 0.004841745)
+
+[node name="Background" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone" unique_id=2056316246]
 transform = Transform3D(0.22839811, 0, 0, 0, 0.22839811, 0, 0, 0, 1, 0, 1.0708525, 0.022020191)
 material_override = SubResource("StandardMaterial3D_4q088")
-transparency = 0.5
 cast_shadow = 0
 texture_filter = 2
 texture = SubResource("GradientTexture2D_d00xm")
 
-[node name="Sprite3D" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/Phone" unique_id=681291799]
-transform = Transform3D(0.22839811, 0, 0, 0, 0.22839811, 0, 0, 0, 1, 0, 1.0708525, 0.076640755)
+[node name="Background2" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/Background" unique_id=795133418]
+transform = Transform3D(-4.371136e-09, 0, 4.3783193, 0, 0.9999998, 0, -0.022839801, 0, -4.3711385e-08, -1.405984, 0, 0.039877057)
+material_override = SubResource("StandardMaterial3D_d00xm")
+cast_shadow = 0
+texture_filter = 2
+texture = SubResource("GradientTexture2D_d00xm")
+
+[node name="Background3" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/Background" unique_id=1876182311]
+transform = Transform3D(-9.983594e-10, 0, -4.3783193, 0, 0.99999964, 0, 0.022839801, 0, -1.9138241e-07, 1.3941225, 0, 0.039876997)
+material_override = SubResource("StandardMaterial3D_d00xm")
+cast_shadow = 0
+texture_filter = 2
+texture = SubResource("GradientTexture2D_d00xm")
+
+[node name="CurrentMenu" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone" unique_id=681291799]
+transform = Transform3D(0.2283981, 0, 0, 0, 0.2283981, 0, 0, 0, 0.9999999, 0, 1.0708525, 0.06483704)
 modulate = Color(0.7121294, 0.7121294, 0.71212935, 1)
 texture_filter = 2
 texture = SubResource("ViewportTexture_fdfwi")
 
-[node name="AnimationPlayer_Phone" type="AnimationPlayer" parent="." unique_id=314763030]
-root_node = NodePath("../PhoneContainer/SubViewport/Node3D/Phone/Sprite3D")
-libraries/ = SubResource("AnimationLibrary_d00xm")
-autoplay = &"Idle"
+[node name="UpperMenu" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone" unique_id=620874684]
+transform = Transform3D(0.25123784, 0, -1.1641531e-10, 0, 0.22839813, 0, -1.4551915e-11, 0, 0.9999996, 1.9525076e-05, 1.0995407, 0.086870775)
+modulate = Color(0.7121294, 0.7121294, 0.71212935, 1)
+texture_filter = 2
+texture = SubResource("GradientTexture2D_fdfwi")
+
+[node name="MenuName" type="Label3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/UpperMenu" unique_id=1834441127]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.85212666, 0.69592226, 8.800626e-05)
+double_sided = false
+texture_filter = 2
+render_priority = 1
+modulate = Color(0.78039217, 0.9411765, 0.84705883, 1)
+text = "GPS"
+font = ExtResource("3_fdfwi")
+font_size = 48
 
 [node name="AnimationPlayer_Screen" type="AnimationPlayer" parent="." unique_id=2112630534]
-root_node = NodePath("../PhoneContainer/SubViewport/Node3D/Phone/Sprite3D")
+root_node = NodePath("../PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/CurrentMenu")
+
+[node name="AnimationPlayer_Phone" type="AnimationPlayer" parent="." unique_id=579362315]
+libraries/ = SubResource("AnimationLibrary_mf6lq")
+autoplay = &"Idle"
+
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/middleButton" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/1" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/2" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/3" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/4" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/5" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/6" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/7" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/8" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/9" to="." method="_on_button_1_input_event"]
+[connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/0" to="." method="_on_button_1_input_event"]

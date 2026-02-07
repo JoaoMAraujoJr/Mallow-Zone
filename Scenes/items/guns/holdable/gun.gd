@@ -41,9 +41,6 @@ func _process(_delta: float) -> void:
 func _getSprite() -> Sprite2D:
 	return _sprite
 
-func _getGunPoint() -> Marker2D:
-	return _gunpoint
-
 func shootLogic() -> void:
 	if GameManager.can_shoot:
 		match TriggerMode:
@@ -54,10 +51,10 @@ func shootLogic() -> void:
 					var bulletPart = bulletParticle.instantiate()
 					bulletPart.global_position = _gunpoint.global_position
 					get_tree().current_scene.add_child(bulletPart)
-					var newbullet = bulletScene.instantiate()
+					var newbullet :Bullet= bulletScene.instantiate()
 					newbullet.position = _gunpoint.global_position
 					var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-					newbullet.set_direction(bulletdirection)
+					newbullet.set_dir(bulletdirection)
 					GameManager.ammo -= 1
 					get_tree().current_scene.add_child(newbullet)
 			GunTrigger.HOLD:
@@ -67,10 +64,10 @@ func shootLogic() -> void:
 					var bulletPart = bulletParticle.instantiate()
 					bulletPart.global_position = _gunpoint.global_position
 					get_tree().current_scene.add_child(bulletPart)
-					var newbullet = bulletScene.instantiate()
+					var newbullet :Bullet= bulletScene.instantiate()
 					newbullet.position = _gunpoint.global_position
 					var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-					newbullet.set_direction(bulletdirection)
+					newbullet.set_dir(bulletdirection)
 					GameManager.ammo -= 1
 					get_tree().current_scene.add_child(newbullet)
 			GunTrigger.RELEASE:
@@ -80,10 +77,10 @@ func shootLogic() -> void:
 					var bulletPart = bulletParticle.instantiate()
 					bulletPart.global_position = _gunpoint.global_position
 					get_tree().current_scene.add_child(bulletPart)
-					var newbullet = bulletScene.instantiate()
+					var newbullet :Bullet= bulletScene.instantiate()
 					newbullet.position = _gunpoint.global_position
 					var bulletdirection = (get_global_mouse_position() - newbullet.global_position).normalized()
-					newbullet.set_direction(bulletdirection)
+					newbullet.set_dir(bulletdirection)
 					GameManager.ammo -= 1
 					get_tree().current_scene.add_child(newbullet)
 	else:

@@ -1,10 +1,118 @@
-[gd_scene load_steps=9 format=3 uid="uid://dw06ynpshu646"]
+[gd_scene format=3 uid="uid://dw06ynpshu646"]
 
-[ext_resource type="Script" uid="uid://cwmxqrxgyy2ag" path="res://Scripts/enemies/blackHole/blackhole_enemy.gd" id="1_5fk2r"]
 [ext_resource type="PackedScene" uid="uid://bo4itjsycgk4x" path="res://Scenes/blackhole.tscn" id="2_qm35p"]
 [ext_resource type="Texture2D" uid="uid://crtefgb7vpwnt" path="res://Assets/Textures/UI/minimap_icons/enemies/blackhole.png" id="2_xqf62"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_pjuuu"]
 [ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="3_qm35p"]
+
+[sub_resource type="GDScript" id="GDScript_ktaqu"]
+resource_name = "BlackHoleEnemy"
+script/source = "extends StaticBody2D
+
+@onready var _vision: Area2D = $EnemyVision
+@onready var _hitbox: Area2D = $EnemyHitbox
+@onready var _damage_timer: Timer = $DamageTimer 
+@onready var minimapIcon :Sprite2D = $MiniMapIcon
+
+var target_scale: Vector2 = Vector2.ZERO
+var shrink_speed: float = 0.05  # unidades de scale por segundo
+var min_scale_threshold: float = 0.05  # quando a escala for menor que isso, deleta o node
+
+
+@onready var can_damage : bool = true
+@export var damage: int = -30
+
+var bloodscene = preload('res://Scenes/particles.tscn')
+
+
+@export var hp: int = 999
+
+var knockbackvelocity : Vector2 = Vector2.ZERO
+var pushingforce: Vector2 = Vector2.ZERO
+var followMode: bool = false
+var SPEED: float = 0
+
+func _ready() -> void:
+	var random_color = Color.from_hsv(randf(), 0.6, 1.5)
+	minimapIcon.modulate = random_color
+	
+	scale *= randf_range(1.0,2.0)
+func _physics_process(delta: float) -> void:
+	
+	scale = scale.move_toward(target_scale, shrink_speed * delta)
+
+	# checa se ficou pequeno demais
+	if scale.x <= min_scale_threshold and scale.y <= min_scale_threshold:
+		queue_free()
+
+		queue_free()
+	if followMode:
+		var bodies = _vision.get_overlapping_bodies()
+		for body in bodies:
+			if body is CharacterEntity:
+
+				# força de sucção no player
+				var offset: Vector2 = global_position - body.global_position
+				var distance = max(offset.length(), 1.0) # evita divisão por zero
+				var force = clamp(1000.0 / distance, 2, 20) # limite mínimo e máximo
+				
+				var pullingVector : Vector2 = offset.normalized() * force 
+				pullingVector += body.pullingforce
+				body.updateExternalForces(\"pull\",pullingVector)
+				break
+				
+		var enemy_areas= _hitbox.get_overlapping_areas()
+		for area in enemy_areas:		
+			if area.is_in_group(\"Enemy\"):
+				var enemy = area.get_parent()
+				if enemy.has_method(\"setHealth\"):
+					enemy.setHealth(-10)
+					
+		if can_damage:
+			var hit_bodies = _hitbox.get_overlapping_bodies()
+			for body in hit_bodies:
+				if body.is_in_group(\"PlayerArea\"):
+					var hitdirection =  ( global_position - body.global_position ).normalized()
+					if body.has_method(\"addToHealth\"):
+						body.addToHealth(damage)
+						knockbackvelocity += hitdirection * SPEED  *2
+						# inicia cooldown
+						can_damage = false
+						_damage_timer.start()
+						break
+					
+	else:
+		pass
+	
+
+
+func _on_enemy_vision_body_entered(body: Node2D) -> void:
+	if body.is_in_group(\"PlayerArea\"):
+		followMode = true
+
+
+func _on_enemy_vision_body_exited(body: Node2D) -> void:
+	if body is Player:
+		body.updateExternalForces(\"pull\",Vector2.ZERO)
+		followMode = false
+
+func _on_damage_timer_timeout() -> void:
+	can_damage = true
+
+
+func _on_delete_timer_timeout() -> void:
+	queue_free()
+	pass # Replace with function body.
+
+func upon_exiting_screen() -> void:
+	$DeleteTimer.start()
+	pass # Replace with function body.
+
+
+func upon_entering_screen() -> void:
+	$DeleteTimer.stop()
+	pass # Replace with function body.
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_287tu"]
 radius = 42.107006
@@ -15,11 +123,11 @@ radius = 672.07513
 [sub_resource type="CircleShape2D" id="CircleShape2D_5fk2r"]
 radius = 58.00862
 
-[node name="BlackHole Enemy" type="StaticBody2D"]
+[node name="BlackHole Enemy" type="StaticBody2D" unique_id=1675638550]
 visibility_layer = 3
-script = ExtResource("1_5fk2r")
+script = SubResource("GDScript_ktaqu")
 
-[node name="MiniMapIcon" type="Sprite2D" parent="."]
+[node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=1243232922]
 visible = false
 light_mask = 2
 visibility_layer = 2
@@ -28,25 +136,25 @@ scale = Vector2(2.737226, 2.737226)
 texture = ExtResource("2_xqf62")
 script = ExtResource("3_pjuuu")
 
-[node name="Blackhole" parent="." instance=ExtResource("2_qm35p")]
+[node name="Blackhole" parent="." unique_id=134600547 instance=ExtResource("2_qm35p")]
 scale = Vector2(0.62451005, 0.62451005)
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1796205817]
 visibility_layer = 3
 shape = SubResource("CircleShape2D_287tu")
 
-[node name="EnemyVision" type="Area2D" parent="."]
+[node name="EnemyVision" type="Area2D" parent="." unique_id=1372746003]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyVision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyVision" unique_id=1488515252]
 shape = SubResource("CircleShape2D_afpow")
 debug_color = Color(0.563406, 0.5186336, 0.57312727, 0.41960785)
 
-[node name="EnemyHitbox" type="Area2D" parent="."]
+[node name="EnemyHitbox" type="Area2D" parent="." unique_id=1443338479]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=603556776]
 shape = SubResource("CircleShape2D_5fk2r")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1128377044]
 light_mask = 7
 visibility_layer = 7
 z_index = -1
@@ -57,9 +165,16 @@ shadow_enabled = true
 texture = ExtResource("3_qm35p")
 texture_scale = 0.29
 
-[node name="DamageTimer" type="Timer" parent="."]
+[node name="DamageTimer" type="Timer" parent="." unique_id=1388462866]
 autostart = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2144638532]
+
+[node name="DeleteTimer" type="Timer" parent="." unique_id=1969926406]
 
 [connection signal="body_entered" from="EnemyVision" to="." method="_on_enemy_vision_body_entered"]
 [connection signal="body_exited" from="EnemyVision" to="." method="_on_enemy_vision_body_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="upon_entering_screen"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="upon_exiting_screen"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

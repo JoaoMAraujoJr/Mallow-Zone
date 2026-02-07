@@ -24,6 +24,13 @@ var weapons := {
 		"max_ammo": 99,
 		"waste": 1,
 		"ammo_value": 99
+	},
+	"shotgun": {
+		"weapon_scene": load("res://Scenes/items/guns/holdable/shotgun.tscn"),
+		"texture": load("res://Assets/Textures/items/guns/shotgun_spr.png"),
+		"max_ammo": 6,
+		"waste": 1,
+		"ammo_value": 6
 	}
 }
 var consumables :={

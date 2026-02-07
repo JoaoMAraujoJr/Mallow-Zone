@@ -20,7 +20,7 @@ config/name="Mellow Zone"
 run/main_scene="uid://dq7b8pjm2yyqv"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
-config/icon="uid://bnoyyubederp7"
+config/icon="uid://bafwx55qj65xn"
 
 [audio]
 

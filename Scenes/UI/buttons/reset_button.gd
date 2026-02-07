@@ -17,7 +17,7 @@ func _process(_delta: float) -> void:
 			GameManager.kills= 0
 			GameManager.enemySpeed= 50.0
 			GameManager.ammo= GameManager.ammoMax
-			GameManager.currentEquipedWeaponType = ""
+			GameManager.currentEquipedWeaponType = "none"
 			GameManager.thisPlayer = null
 			GameManager.currentSpawnedChunks = {}
 			BiomeManager.currentBiome= preload("res://Scripts/Resources/Biomes/GrassLands.tres")

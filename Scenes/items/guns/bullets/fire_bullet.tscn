@@ -1,7 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://rsise1n2xcgd"]
+[gd_scene format=3 uid="uid://rsise1n2xcgd"]
 
-[ext_resource type="Script" uid="uid://mb3bxlsyn8cr" path="res://Scenes/items/guns/bullets/fire_bullet.gd" id="1_3vema"]
 [ext_resource type="Texture2D" uid="uid://b7st847w5fu7c" path="res://Assets/particle/smoke.png" id="2_3ng5o"]
+[ext_resource type="Resource" uid="uid://dj1lpewutqd3n" path="res://Scripts/Resources/Effects/burning.tres" id="2_ii816"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ttwhq"]
+
+[sub_resource type="GDScript" id="GDScript_xukx5"]
+resource_name = "FireBullet"
+script/source = "extends Bullet
+
+
+func killSelf():
+	die()
+
+
+func _on_damage_area_body_entered(body: Node2D) -> void:
+	if  !body is Player:
+		if body.has_method(\"addEffectToSelf\"):
+			body.addEffectToSelf(effect)
+	pass # Replace with function body.
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ii816"]
 
@@ -152,25 +170,30 @@ _data = {
 &"new_animation": SubResource("Animation_ttwhq")
 }
 
-[node name="Fire_bullet" type="Node2D"]
-script = ExtResource("1_3vema")
+[node name="Fire_bullet" type="RigidBody2D" unique_id=1611066345]
+physics_material_override = SubResource("PhysicsMaterial_ttwhq")
+gravity_scale = 0.0
+script = SubResource("GDScript_xukx5")
+effect = ExtResource("2_ii816")
+metadata/_custom_type_script = "uid://c40ve5vd44bs5"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1357570220]
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_ii816")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1505569950]
 visible = false
 texture = ExtResource("2_3ng5o")
 
-[node name="damageArea" type="Area2D" parent="."]
+[node name="damageArea" type="Area2D" parent="." unique_id=350109054]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damageArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damageArea" unique_id=188469027]
 scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_ii816")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_k76fe")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1960037151]
+libraries/ = SubResource("AnimationLibrary_k76fe")
+autoplay = &"new_animation"
 
-[connection signal="area_entered" from="damageArea" to="." method="_on_damage_area_area_entered"]
 [connection signal="body_entered" from="damageArea" to="." method="_on_damage_area_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

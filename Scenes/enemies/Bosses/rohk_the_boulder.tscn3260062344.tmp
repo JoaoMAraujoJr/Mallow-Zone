@@ -19,9 +19,10 @@ func _ready() -> void:
 	Speed = 120.0
 	curSpeed = Speed
 
-func _physics_process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	rotateTowardsPlayer()
-	moveTowardsPlayer()
+	moveTowardsPlayer(delta)
+
 	pass
 
 
@@ -35,7 +36,7 @@ func rotateTowardsPlayer():
 			look_at(body.global_position)
 			break
 
-func moveTowardsPlayer():
+func moveTowardsPlayer(delta : float):
 	for body in playerDetector.get_overlapping_bodies():
 		if body is Player:
 			linear_velocity = (body.global_position - global_position).normalized() * curSpeed
@@ -47,9 +48,6 @@ func uponDamage():
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mxrxc"]
 radius = 1774.0553
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_llr1c"]
-radius = 109.01835
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_acjef"]
 radius = 88.29496
@@ -177,7 +175,7 @@ _data = {
 [node name="Rohk The Boulder" type="RigidBody2D" unique_id=318558332 groups=["Enemy"]]
 light_mask = 3
 visibility_layer = 3
-mass = 70.0
+mass = 1000.0
 physics_material_override = SubResource("PhysicsMaterial_mxrxc")
 gravity_scale = 0.0
 script = SubResource("GDScript_mxrxc")
@@ -201,8 +199,7 @@ debug_color = Color(0.47843137, 0.85490197, 0.25882354, 0.047058824)
 [node name="Hitbox Area" type="Area2D" parent="." unique_id=1586494144]
 
 [node name="Hitbox Collision" type="CollisionShape2D" parent="Hitbox Area" unique_id=1690971786]
-position = Vector2(-1, 0)
-shape = SubResource("CircleShape2D_llr1c")
+shape = SubResource("CircleShape2D_mxrxc")
 debug_color = Color(0.63435644, 0.51454425, 0.33671847, 0.41960785)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1458731370]
