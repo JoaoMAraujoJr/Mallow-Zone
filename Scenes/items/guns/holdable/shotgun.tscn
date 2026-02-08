@@ -328,6 +328,7 @@ bulletScene = ExtResource("1_mtb8l")
 bulletParticle = ExtResource("1_6hj43")
 hand_R = NodePath("gun/RightHand/hand_R")
 hand_L = NodePath("gun/LeftHand/hand_L")
+TriggerMode = 1
 
 [node name="gun" type="AnimatedSprite2D" parent="." unique_id=1074918036]
 y_sort_enabled = true
