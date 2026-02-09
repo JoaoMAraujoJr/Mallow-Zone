@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d07lojuhvkcgl"]
+
+[ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="1_iauro"]
+
+[resource]
+font = ExtResource("1_iauro")
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.36862746)
+shadow_offset = Vector2(1.3, 1)

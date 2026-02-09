@@ -65,7 +65,7 @@ z_index = 3
 position = Vector2(103, -167)
 warpBiome = ExtResource("9_133si")
 
-[node name="Zet" parent="otherNodes" unique_id=1045541873 instance=ExtResource("10_133si")]
-position = Vector2(228, 289)
+[node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("10_133si")]
+position = Vector2(-194, 178)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

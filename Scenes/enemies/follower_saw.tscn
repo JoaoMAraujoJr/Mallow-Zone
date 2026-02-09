@@ -12,15 +12,11 @@
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="7_tt31a"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="9_xqwtm"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4c4ry"]
-friction = 0.0
-bounce = 1.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_36nog"]
 radius = 84.0238
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ghqmr"]
-radius = 110.16351
+radius = 120.004166
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ghqmr"]
 diffuse_texture = ExtResource("4_ghqmr")
@@ -225,7 +221,6 @@ visibility_layer = 3
 z_index = 1
 y_sort_enabled = true
 mass = 80.0
-physics_material_override = SubResource("PhysicsMaterial_4c4ry")
 gravity_scale = 0.0
 script = ExtResource("1_nq37f")
 damage = -30

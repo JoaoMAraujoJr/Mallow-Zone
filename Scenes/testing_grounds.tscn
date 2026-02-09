@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cvdqy26p77c8p"]
+
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_w34uy"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="3_abtgi"]
+[ext_resource type="PackedScene" uid="uid://mok5m72dvxgh" path="res://Scenes/entities/npcs/zet.tscn" id="3_xwgi5"]
+
+[node name="Testing Grounds" type="Node2D" unique_id=1572845358]
+
+[node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_w34uy")]
+position = Vector2(-18, -173)
+
+[node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("3_xwgi5")]
+position = Vector2(396, -144)
+
+[node name="Interface" parent="." unique_id=1650993913 instance=ExtResource("3_abtgi")]
