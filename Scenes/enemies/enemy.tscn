@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_psabu"]
 [ext_resource type="AudioStream" uid="uid://b2m4hy4ulb3pj" path="res://Assets/Sounds/EnemyDamage.ogg" id="4_slefu"]
 [ext_resource type="AudioStream" uid="uid://brpjub5yv36hm" path="res://Assets/Sounds/bloodSplatter.ogg" id="4_we58l"]
-[ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="6_hyw8s"]
-[ext_resource type="Texture2D" uid="uid://dfyto5l6bwyw0" path="res://Assets/Textures/entities/Enemies/smokeling/smokeling_spr_sheet.png" id="7_tm0ch"]
+[ext_resource type="Texture2D" uid="uid://ckb6gbo3tp6ge" path="res://Assets/Textures/entities/Enemies/smokeling/smokeling-Sheet_waiting.png" id="7_psabu"]
+[ext_resource type="Texture2D" uid="uid://oyquxtj05phl" path="res://Assets/Textures/entities/Enemies/smokeling/smokeling_spr_sheet_2.png" id="7_ulvqc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afpow"]
 radius = 487.45258
@@ -19,64 +19,97 @@ radius = 28.635643
 [sub_resource type="CircleShape2D" id="CircleShape2D_287tu"]
 radius = 17.720045
 
-[sub_resource type="Curve" id="Curve_ulvqc"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.29545456, 0), -0.09269661, -0.09269661, 0, 0, Vector2(1, 0.04494381), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_psabu"]
-curve = SubResource("Curve_ulvqc")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c14y3"]
-shader = ExtResource("6_hyw8s")
-shader_parameter/curve = SubResource("CurveTexture_psabu")
-shader_parameter/rotation_speed = -1.0
-shader_parameter/distortion_strength = 0.5570000264575
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wdx6i"]
-atlas = ExtResource("7_tm0ch")
+[sub_resource type="AtlasTexture" id="AtlasTexture_psabu"]
+atlas = ExtResource("7_ulvqc")
 region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gb413"]
-atlas = ExtResource("7_tm0ch")
+[sub_resource type="AtlasTexture" id="AtlasTexture_c14y3"]
+atlas = ExtResource("7_ulvqc")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lr5bn"]
-atlas = ExtResource("7_tm0ch")
-region = Rect2(64, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb413"]
+atlas = ExtResource("7_ulvqc")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yoxru"]
-atlas = ExtResource("7_tm0ch")
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr5bn"]
+atlas = ExtResource("7_ulvqc")
 region = Rect2(128, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoxru"]
+atlas = ExtResource("7_ulvqc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdx6i"]
+atlas = ExtResource("7_psabu")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_74c38"]
-atlas = ExtResource("7_tm0ch")
+atlas = ExtResource("7_psabu")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88jtw"]
+atlas = ExtResource("7_psabu")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5lgf"]
+atlas = ExtResource("7_psabu")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp8vs"]
+atlas = ExtResource("7_psabu")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88jtw"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wdx6i")
+"duration": 0.9,
+"texture": SubResource("AtlasTexture_psabu")
 }],
 "loop": true,
 "name": &"damaged",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 2.0,
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_c14y3")
+}, {
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_gb413")
 }, {
-"duration": 1.0,
+"duration": 0.2,
 "texture": SubResource("AtlasTexture_lr5bn")
 }, {
-"duration": 2.0,
+"duration": 0.3,
 "texture": SubResource("AtlasTexture_yoxru")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74c38")
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_gb413")
 }],
 "loop": true,
 "name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdx6i")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_74c38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdx6i")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_88jtw")
+}, {
+"duration": 0.3,
+"texture": SubResource("AtlasTexture_d5lgf")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wp8vs")
+}],
+"loop": true,
+"name": &"waiting",
 "speed": 5.0
 }]
 
@@ -127,10 +160,10 @@ volume_db = -8.0
 bus = &"SFXReverb"
 
 [node name="EnemyAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=458562412]
-material = SubResource("ShaderMaterial_c14y3")
 scale = Vector2(1.1603798, 1.1603798)
 sprite_frames = SubResource("SpriteFrames_88jtw")
-animation = &"damaged"
+animation = &"waiting"
+frame_progress = 0.9263053
 offset = Vector2(3.4471474, 0)
 
 [node name="DamageTimer" type="Timer" parent="." unique_id=788227035]
@@ -147,6 +180,7 @@ autostart = true
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=349755948]
 
 [node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=1625166852]
+visible = false
 light_mask = 0
 visibility_layer = 2
 z_index = 1

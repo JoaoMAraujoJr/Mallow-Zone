@@ -26,6 +26,7 @@ isthisroot = true
 
 [node name="Player" parent="." unique_id=419890577 instance=ExtResource("2_8rbpu")]
 position = Vector2(-8, 17)
+max_health = 100
 
 [node name="EnemyTimer" type="Timer" parent="." unique_id=1139771370]
 wait_time = 5.0
