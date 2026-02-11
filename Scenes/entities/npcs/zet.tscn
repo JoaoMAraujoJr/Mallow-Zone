@@ -7,11 +7,16 @@
 [ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="3_sdt5q"]
 [ext_resource type="Texture2D" uid="uid://bm2ps4iuh8p55" path="res://Assets/Textures/entities/Npcs/zet/zet_mask_happy_spr.png" id="4_sdt5q"]
 [ext_resource type="Texture2D" uid="uid://bsysdpms4lxq5" path="res://Assets/Textures/sprite_masks/dialog_mask.png" id="5_ru6t8"]
+[ext_resource type="AudioStream" uid="uid://di24uglg7lmy8" path="res://Assets/Sounds/Ambience/ominous/BELLMisc_Chimes, Atmos, Dark Magic, Unsetting, Magical 01_344 Audio_Cymbals From Hell Vol 3.wav" id="8_fawou"]
+[ext_resource type="AudioStream" uid="uid://duxa2bldfdkus" path="res://Assets/Sounds/soundEffects/dialogue/zet_0.wav" id="9_4gotq"]
 
 [sub_resource type="GDScript" id="GDScript_sdt5q"]
 resource_name = "Zet"
 script/source = "extends Node2D
 
+
+@onready var anim_tree := $AnimationTree
+@onready var voice_player :AnimationPlayer= $DialogSFXPlayer
 
 @export var DialogTexts :Array[String]
 @export var thisDialogFont : FontFile
@@ -22,19 +27,22 @@ var timer_to_delete_dialog :Timer
 @onready var textcoolDown
 
 func _ready() -> void:
+	anim_tree.set(\"parameters/conditions/idle\",true)
 	timer_to_delete_dialog = Timer.new()
 	timer_to_delete_dialog.wait_time = 4.0
 	timer_to_delete_dialog.timeout.connect(deleteOldestText_timeout)
 	add_child(timer_to_delete_dialog)
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	deleteOldTexts()
 	pass
 
 func printDialog(text: String) -> void:
 	var newbubble := Label.new()
 	newbubble.text = text
+	newbubble.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	newbubble.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	newbubble.label_settings = dialogLabelSettings
 	newbubble.label_settings.font = thisDialogFont
 
@@ -45,34 +53,53 @@ func printDialog(text: String) -> void:
 		newbubble,
 		dialogContainer.get_child_count() - 1
 	)
-
-
-func _on_dialogue_entering_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		printDialog(DialogTexts[randi_range(0,DialogTexts.size()-1)])
-	pass # Replace with function body.
-
+	
 func deleteOldTexts():
 	if dialogContainer.get_child_count() > 0 :
 		if timer_to_delete_dialog.is_stopped():
 			timer_to_delete_dialog.start()
+	else:
+		timer_to_delete_dialog.stop()
+
+func _on_dialogue_entering_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		voice_player.play(\"voice_\"+ str(randi_range(1,4)))
+		printDialog(DialogTexts[randi_range(0,DialogTexts.size()-1)])
+	pass # Replace with function body.
+
+
 
 
 func deleteOldestText_timeout():
 	if dialogContainer.get_children(): 
-		print(dialogContainer.get_child(0).text + \"deleted\" )
+		print(dialogContainer.get_child(0).text + \" deleted\" )
 		dialogContainer.get_child(0).queue_free()
-"
 
-[sub_resource type="SkeletonModification2DJiggle" id="SkeletonModification2DJiggle_l1t1p"]
+
+func _on_zet_domain_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		
+		anim_tree.set(\"parameters/conditions/idle\",false)
+		anim_tree.set(\"parameters/conditions/bobling\",true)
+	else:
+		return
+
+
+func _on_zet_domain_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		anim_tree.set(\"parameters/conditions/idle\",true)
+		anim_tree.set(\"parameters/conditions/bobling\",false)
+	pass # Replace with function body.
+"
 
 [sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_byoxt"]
 enabled = true
-modification_count = 1
-modifications/0 = SubResource("SkeletonModification2DJiggle_l1t1p")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ru6t8"]
+radius = 743.01074
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nq41e"]
-radius = 152.0033
+radius = 271.18445
 
 [sub_resource type="Animation" id="Animation_l1t1p"]
 resource_name = "RESET"
@@ -851,6 +878,316 @@ _data = {
 &"idle_normal": SubResource("Animation_ru6t8")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fawou"]
+animation = &"bobling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4gotq"]
+animation = &"bowing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eayoc"]
+animation = &"idle_dancing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f8a5y"]
+animation = &"idle_normal"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rkomo"]
+advance_mode = 2
+
+[sub_resource type="Curve" id="Curve_fawou"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vb5o1"]
+xfade_time = 0.5
+xfade_curve = SubResource("Curve_fawou")
+advance_mode = 2
+advance_condition = &"bobling"
+
+[sub_resource type="Curve" id="Curve_4gotq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkuks"]
+xfade_time = 0.5
+xfade_curve = SubResource("Curve_4gotq")
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwlqs"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"bowing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0021j"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7jwaq"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"dancing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gok04"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kck3g"]
+allow_transition_to_self = true
+states/Start/position = Vector2(208, 94)
+states/bobling/node = SubResource("AnimationNodeAnimation_fawou")
+states/bobling/position = Vector2(458, 14)
+states/bowing/node = SubResource("AnimationNodeAnimation_4gotq")
+states/bowing/position = Vector2(596, 14)
+states/idle_dancing/node = SubResource("AnimationNodeAnimation_eayoc")
+states/idle_dancing/position = Vector2(823, -14)
+states/idle_normal/node = SubResource("AnimationNodeAnimation_f8a5y")
+states/idle_normal/position = Vector2(596, 201)
+transitions = ["Start", "idle_normal", SubResource("AnimationNodeStateMachineTransition_rkomo"), "idle_normal", "bobling", SubResource("AnimationNodeStateMachineTransition_vb5o1"), "bobling", "idle_normal", SubResource("AnimationNodeStateMachineTransition_fkuks"), "idle_normal", "bowing", SubResource("AnimationNodeStateMachineTransition_mwlqs"), "bowing", "idle_normal", SubResource("AnimationNodeStateMachineTransition_0021j"), "idle_normal", "idle_dancing", SubResource("AnimationNodeStateMachineTransition_7jwaq"), "idle_dancing", "idle_normal", SubResource("AnimationNodeStateMachineTransition_gok04")]
+graph_offset = Vector2(77.30928, -20.38913)
+
+[sub_resource type="Animation" id="Animation_fawou"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../VoiceStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VoiceStreamPlayer:pitch_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VoiceStreamPlayer:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_4gotq")]
+}
+
+[sub_resource type="Animation" id="Animation_4gotq"]
+resource_name = "voice_1"
+length = 2.0666666
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../VoiceStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VoiceStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.41196087, 1.2920779, 1.5626796, 1.772699),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VoiceStreamPlayer:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0117681455, 0.43180668, 1.2961167, 1.5747962, 1.7767378),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 1.2, 0.8, 0.9, 0.8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../VoiceStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_4gotq")]
+}
+
+[sub_resource type="Animation" id="Animation_eayoc"]
+resource_name = "voice_2"
+length = 1.1666666
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../VoiceStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VoiceStreamPlayer:pitch_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3675337, 0.47254336, 0.8562324),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.6, 0.7, 0.9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VoiceStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.46446568, 0.8602712),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../VoiceStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_4gotq")]
+}
+
+[sub_resource type="Animation" id="Animation_f8a5y"]
+resource_name = "voice_3"
+length = 1.3333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../VoiceStreamPlayer:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.8, 1.2, 0.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VoiceStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VoiceStreamPlayer:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_4gotq")]
+}
+
+[sub_resource type="Animation" id="Animation_rkomo"]
+resource_name = "voice_4"
+length = 1.8333334
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../VoiceStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../VoiceStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.34330073, 0.50889283, 1.0177857, 1.3368534, 1.4620572),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../VoiceStreamPlayer:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3877279, 0.5412035, 1.0258634, 1.3570476, 1.4822514),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.5, 1.3, 2.0, 1.0, 1.3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../VoiceStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_4gotq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vb5o1"]
+_data = {
+&"RESET": SubResource("Animation_fawou"),
+&"voice_1": SubResource("Animation_4gotq"),
+&"voice_2": SubResource("Animation_eayoc"),
+&"voice_3": SubResource("Animation_f8a5y"),
+&"voice_4": SubResource("Animation_rkomo")
+}
+
 [node name="Zet" type="Node2D" unique_id=1045541873 node_paths=PackedStringArray("dialogContainer")]
 script = SubResource("GDScript_sdt5q")
 DialogTexts = Array[String](["Hello...", "You are welcomed", "nice to see you", "Hi...", "...", "i see...", "you found your way to me...", "you seem different", "is that you?", "i can't see, but i can SEE you ..."])
@@ -904,7 +1241,7 @@ rest = Transform2D(1, 0, 0, 1, 0, -46)
 
 [node name="2" type="Bone2D" parent="SubViewportContainer/SubViewport/Visuals/bones/Skeleton2D/hip/1" unique_id=191503766]
 position = Vector2(0, -80)
-skew = -0.0004223585
+skew = -0.00055253506
 rest = Transform2D(1, 0, 0, 1, 0, -80)
 
 [node name="3" type="Bone2D" parent="SubViewportContainer/SubViewport/Visuals/bones/Skeleton2D/hip/1/2" unique_id=1506394001]
@@ -927,14 +1264,22 @@ y_sort_enabled = true
 position = Vector2(0, 24)
 texture = ExtResource("2_byoxt")
 
-[node name="Dialogue entering area" type="Area2D" parent="." unique_id=474380766]
+[node name="Zet_Domain_area" type="Area2D" parent="." unique_id=37483685]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dialogue entering area" unique_id=1170080597]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zet_Domain_area" unique_id=699544401]
+shape = SubResource("CircleShape2D_ru6t8")
+debug_color = Color(0.97078675, 0, 0.45557922, 0.41960785)
+
+[node name="Dialogue_entering_area" type="Area2D" parent="." unique_id=474380766]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dialogue_entering_area" unique_id=1170080597]
 shape = SubResource("CircleShape2D_nq41e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1369625040]
 clip_children = 1
+z_index = 2
 position = Vector2(0, -219)
+scale = Vector2(1.2320938, 1.2320938)
 texture = ExtResource("5_ru6t8")
 
 [node name="DialogContainer" type="VBoxContainer" parent="Sprite2D" unique_id=657637963]
@@ -943,15 +1288,45 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.2440001
 offset_left = -76.0
-offset_top = -21.0
+offset_top = -3.246502
 offset_right = -177.0
-offset_bottom = -50.616005
+offset_bottom = 5.1374893
+scale = Vector2(1.1721497, 1.1721497)
 pivot_offset = Vector2(76, 21)
-alignment = 1
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=802460371]
+stream = ExtResource("8_fawou")
+volume_db = -9.135
+pitch_scale = 0.92
+autoplay = true
+max_distance = 814.0
+bus = &"Music"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1921554229]
 root_node = NodePath("../SubViewportContainer/SubViewport/Visuals/bones")
 libraries/ = SubResource("AnimationLibrary_bfd54")
 autoplay = &"idle_normal"
 
-[connection signal="body_entered" from="Dialogue entering area" to="." method="_on_dialogue_entering_area_body_entered"]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1775163308]
+root_node = NodePath("../SubViewportContainer/SubViewport/Visuals/bones")
+tree_root = SubResource("AnimationNodeStateMachine_kck3g")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/bobling = false
+parameters/conditions/bowing = false
+parameters/conditions/dancing = false
+parameters/conditions/idle = false
+
+[node name="DialogSFXPlayer" type="AnimationPlayer" parent="." unique_id=2014770672]
+root_node = NodePath("../MusicStreamPlayer")
+libraries/ = SubResource("AnimationLibrary_vb5o1")
+
+[node name="VoiceStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=195147352]
+stream = ExtResource("9_4gotq")
+volume_db = 16.0
+max_distance = 3000.0
+max_polyphony = 2
+bus = &"SFX"
+
+[connection signal="body_entered" from="Zet_Domain_area" to="." method="_on_zet_domain_area_body_entered"]
+[connection signal="body_exited" from="Zet_Domain_area" to="." method="_on_zet_domain_area_body_exited"]
+[connection signal="body_entered" from="Dialogue_entering_area" to="." method="_on_dialogue_entering_area_body_entered"]

@@ -36,7 +36,7 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 func _ready():
 	super._ready()
 	isAffectable = true
-	GameManager.thisPlayer = self
+	GameManager.thisPlayer=self
 	call_deferred("_equipGun")
 	GameManager.player_health = health
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
@@ -68,8 +68,6 @@ func direction_and_action_handler(): #handles direction and current actions
 	elif _iswalking and _isbackwards:
 		playerSkin._setAction("Walking")
 		playerSkin._setBackwards(true)
-		
-
 		
 	var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 	_isbackwards = mouse_dir.y < 0
@@ -109,6 +107,8 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		move_and_slide()
 
 func mouse_actions_handler():
+	if !isAlive:
+		return
 	if GameManager.can_shoot:
 		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo > 0 and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			var mouse_pos = get_global_mouse_position()
@@ -129,9 +129,16 @@ func uponDamage():
 	GameManager.player_health = health
 
 func Die():
+	GameManager.currentEquipedWeaponType = "none"
+	if _gun:
+		_gun.queue_free()
+	isAlive = false
+	if _canmove and playerSkin.skullParticleEmitter:
+			playerSkin.skullCrashingAudioStream.play()
+			playerSkin.skullParticleEmitter.emitting = true
+	playerSkin._setAction("Die")
 	_canmove = false
 	GameManager.can_shoot=false
-	
 
 
 #CameraMethods
@@ -150,6 +157,9 @@ func adjustCameraZoom(delta):
 
 #updateGunMethods
 func _equipGun():
+	if !isAlive:
+		print("oxi tu ta morto cara")
+		return
 	_playReloadSound()
 	
 	if _gun and is_instance_valid(_gun):

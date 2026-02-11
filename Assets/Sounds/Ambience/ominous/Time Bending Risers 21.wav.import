@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c83kc1f348gy1"
+path="res://.godot/imported/Time Bending Risers 21.wav-d74ad24a0548b24d88269d1d45c9c47a.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Ambience/ominous/Time Bending Risers 21.wav"
+dest_files=["res://.godot/imported/Time Bending Risers 21.wav-d74ad24a0548b24d88269d1d45c9c47a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

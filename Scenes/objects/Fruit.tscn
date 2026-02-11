@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://kdb60air4lgi"]
+[gd_scene format=3 uid="uid://kdb60air4lgi"]
 
 [ext_resource type="Texture2D" uid="uid://bapqgfvn777lj" path="res://Assets/objects/apple.png" id="1_bt3ef"]
 [ext_resource type="Script" uid="uid://bj1ia0j41y0uw" path="res://Scripts/objects/fruit.gd" id="1_x50lt"]
@@ -14,29 +14,32 @@ radius = 17.464249
 [sub_resource type="CircleShape2D" id="CircleShape2D_bt3ef"]
 radius = 28.01785
 
-[node name="Fruit" type="RigidBody2D"]
-z_index = 1
+[node name="Fruit" type="RigidBody2D" unique_id=228598546]
+z_index = 2
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
+mass = 0.6
 physics_material_override = SubResource("PhysicsMaterial_bt3ef")
 script = ExtResource("1_x50lt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1658467882]
+y_sort_enabled = true
 scale = Vector2(1.5390823, 1.5390823)
 texture = ExtResource("1_bt3ef")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1183149047]
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_x50lt")
+disabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1125010943]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=687240283]
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_bt3ef")
 
-[node name="EatingSound" type="AudioStreamPlayer2D" parent="."]
+[node name="EatingSound" type="AudioStreamPlayer2D" parent="." unique_id=1580095190]
 stream = ExtResource("3_vhxl4")
 volume_db = 8.0
 pitch_scale = 1.4

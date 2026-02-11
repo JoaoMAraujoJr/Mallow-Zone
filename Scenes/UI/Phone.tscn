@@ -3,19 +3,56 @@
 [ext_resource type="Script" uid="uid://djsanqh1y0siy" path="res://Scripts/Unique/mini_map.gd" id="1_4q088"]
 [ext_resource type="PackedScene" uid="uid://bxbsqa1hpvwno" path="res://Assets/Textures/UI/Phone/PhoneModel.gltf" id="1_p1xx1"]
 [ext_resource type="FontFile" uid="uid://diyw3rmemrisc" path="res://Assets/fonts/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="3_fdfwi"]
+[ext_resource type="Script" uid="uid://p1f8bndwi0td" path="res://Scripts/time_manager.gd" id="4_d00xm"]
 
 [sub_resource type="GDScript" id="GDScript_fdfwi"]
 resource_name = "Phone"
 script/source = "extends Control # Ou o tipo de nó que o 'Phone' for
 
+enum PhonePositionState{
+	OUT_OF_SCREEN,
+	LOWERED,
+	LIFTED,
+	ON_CENTER
+}
 
+@onready var phonePosition := PhonePositionState.LOWERED
 
-func _on_button_1_input_event(_camera, event, event_position, _normal, shape_idx):
+func _on_button_1_input_event(_camera, event, _event_position, _normal, _shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_ao_clicar_no_botao_1()
 
 func _ao_clicar_no_botao_1():
-	print(\"Botão 1 pressionado!\")
+	if phonePosition == PhonePositionState.ON_CENTER:
+		$Position_on_Screen.play_backwards(\"to center\")
+		await $Position_on_Screen.animation_finished
+		phonePosition = PhonePositionState.LIFTED
+		$Position_on_Screen.play_backwards(\"lift\")
+		await $Position_on_Screen.animation_finished
+		phonePosition = PhonePositionState.LOWERED
+	else:
+		phonePosition = PhonePositionState.ON_CENTER
+		$Position_on_Screen.play(\"to center\")
+
+
+func on_mouse_entered() -> void:
+	if GameManager.game_cursor:
+		GameManager.game_cursor.cur_cursorType = GameManager.game_cursor.CursorTypeList.PHONE
+		GameManager.game_cursor.matchCursorType()
+	if phonePosition == PhonePositionState.LOWERED: 
+		$Position_on_Screen.play(\"lift\")
+		phonePosition = PhonePositionState.LIFTED
+
+
+func on_mouse_exited() -> void:
+	if GameManager.game_cursor:
+		GameManager.game_cursor.cur_cursorType = GameManager.game_cursor.CursorTypeList.CROSSHAIR
+		GameManager.game_cursor.matchCursorType()
+	if phonePosition == PhonePositionState.LIFTED: 
+		$Position_on_Screen.play_backwards(\"lift\")
+		await $Position_on_Screen.animation_finished
+		phonePosition = PhonePositionState.LOWERED
+		$Position_on_Screen.play(\"lowered\")
 "
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fdfwi"]
@@ -58,6 +95,222 @@ width = 256
 height = 240
 fill_to = Vector2(0, 1)
 
+[sub_resource type="Animation" id="Animation_mf6lq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PhoneContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-322, -393)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PhoneContainer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PhoneContainer:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 512)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PhoneContainer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1742903, 1.1742903)]
+}
+
+[sub_resource type="Animation" id="Animation_noj3s"]
+resource_name = "lift"
+length = 0.43333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PhoneContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(976, 431), Vector2(976, 359.99997)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PhoneContainer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PhoneContainer:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, 512), Vector2(256, 512)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PhoneContainer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2424757),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1742903, 1.1742903), Vector2(1.4589807, 1.4589807)]
+}
+
+[sub_resource type="Animation" id="Animation_ryt57"]
+resource_name = "lowered"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PhoneContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(976, 431), Vector2(976, 431)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PhoneContainer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PhoneContainer:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, 512), Vector2(256, 512)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PhoneContainer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.159, 1.159), Vector2(1.159, 1.159)]
+}
+
+[sub_resource type="Animation" id="Animation_w286e"]
+resource_name = "to center"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PhoneContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.50754565),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(976, 431), Vector2(499.00006, 142)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PhoneContainer:rotation")
+tracks/1/interp = 4
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.53333336, 0.6666667, 0.7347661, 0.8108054, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.06775698, 0.0, 0.029941825, 0.0, -0.00698131700797692, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../PhoneContainer:size")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, 512), Vector2(256, 512)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PhoneContainer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.4589807, 1.4589807)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ksd0o"]
+_data = {
+&"RESET": SubResource("Animation_mf6lq"),
+&"lift": SubResource("Animation_noj3s"),
+&"lowered": SubResource("Animation_ryt57"),
+&"to center": SubResource("Animation_w286e")
+}
+
 [sub_resource type="Animation" id="Animation_fdfwi"]
 resource_name = "Idle"
 length = 5.0
@@ -99,7 +352,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, -0.428)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -121,15 +374,14 @@ _data = {
 }
 
 [node name="Phone" type="Control" unique_id=827125536]
+process_priority = 1
 layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset = Vector2(-158, -151)
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 720)
 mouse_filter = 1
 script = SubResource("GDScript_fdfwi")
 
@@ -149,10 +401,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -217.0
-offset_top = -242.0
-offset_right = 90.0
-offset_bottom = -21.0
+offset_left = 896.0
+offset_top = -183.0
+offset_right = 1203.0
+offset_bottom = 38.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.41165426, 0.41165426)
@@ -178,26 +430,27 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -296.0
-offset_top = -562.0
-offset_right = -40.0
-offset_bottom = -50.0
+offset_left = -1602.0
+offset_top = -1113.0
+offset_right = -1346.0
+offset_bottom = -601.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(1.0843041, 1.0843041)
+scale = Vector2(1.1742903, 1.1742903)
+pivot_offset = Vector2(127.736694, 256.32504)
 
 [node name="SubViewport" type="SubViewport" parent="PhoneContainer" unique_id=751661051]
 transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(256, 512)
+size = Vector2i(256, 440)
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="PhoneContainer/SubViewport" unique_id=1005711229]
 
 [node name="Camera3D" type="Camera3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1948312764]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03748989, 0.46570885)
-fov = 73.1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0020075291, 0.46570885)
+fov = 70.546906
 
 [node name="Light" type="OmniLight3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1337048433]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5257893, 0.69313574)
@@ -206,6 +459,7 @@ omni_range = 2.6445458
 omni_attenuation = -1.964
 
 [node name="PhonePivot" type="Node3D" parent="PhoneContainer/SubViewport/Node3D" unique_id=1948493154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.428)
 
 [node name="Buttons" type="Node3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot" unique_id=322313759]
 
@@ -298,7 +552,7 @@ shape = SubResource("BoxShape3D_fdfwi")
 debug_color = Color(2.1382592, 2.1382592, 2.1382592, 1)
 
 [node name="Phone" parent="PhoneContainer/SubViewport/Node3D/PhonePivot" unique_id=711263046 instance=ExtResource("1_p1xx1")]
-transform = Transform3D(0.64923817, 0, 0, 0, 0.64923835, 0, 0, 0, 0.9988285, -0.00016084524, -0.56869864, 0.004841745)
+transform = Transform3D(0.67878914, 0, 3.7252903e-09, 0, 0.67881143, 0, 1.8626451e-09, 0, 0.99706924, -0.000160845, -0.56869864, 0.004841745)
 
 [node name="Background" type="Sprite3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone" unique_id=2056316246]
 transform = Transform3D(0.22839811, 0, 0, 0, 0.22839811, 0, 0, 0, 1, 0, 1.0708525, 0.022020191)
@@ -339,9 +593,27 @@ double_sided = false
 texture_filter = 2
 render_priority = 1
 modulate = Color(0.78039217, 0.9411765, 0.84705883, 1)
+outline_modulate = Color(0, 0, 0, 0)
 text = "GPS"
 font = ExtResource("3_fdfwi")
 font_size = 48
+
+[node name="CurrentTime" type="Label3D" parent="PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/UpperMenu" unique_id=1503933021]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, -8.326673e-17, 0, 0.99999976, 0.5368558, 0.6959224, 8.800626e-05)
+double_sided = false
+texture_filter = 2
+render_priority = 1
+modulate = Color(0.78039217, 0.9411765, 0.84705883, 1)
+outline_modulate = Color(0, 0, 0, 0)
+text = "00:00"
+font = ExtResource("3_fdfwi")
+font_size = 48
+script = ExtResource("4_d00xm")
+
+[node name="Position_on_Screen" type="AnimationPlayer" parent="." unique_id=1246015639]
+root_node = NodePath("../AnimationPlayer_Phone")
+libraries/ = SubResource("AnimationLibrary_ksd0o")
+autoplay = &"lowered"
 
 [node name="AnimationPlayer_Screen" type="AnimationPlayer" parent="." unique_id=2112630534]
 root_node = NodePath("../PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/CurrentMenu")
@@ -350,6 +622,8 @@ root_node = NodePath("../PhoneContainer/SubViewport/Node3D/PhonePivot/Phone/Curr
 libraries/ = SubResource("AnimationLibrary_mf6lq")
 autoplay = &"Idle"
 
+[connection signal="mouse_entered" from="PhoneContainer" to="." method="on_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneContainer" to="." method="on_mouse_exited"]
 [connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/middleButton" to="." method="_on_button_1_input_event"]
 [connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/1" to="." method="_on_button_1_input_event"]
 [connection signal="input_event" from="PhoneContainer/SubViewport/Node3D/PhonePivot/Buttons/2" to="." method="_on_button_1_input_event"]

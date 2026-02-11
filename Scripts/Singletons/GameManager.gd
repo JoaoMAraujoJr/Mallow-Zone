@@ -4,6 +4,8 @@ signal skin_changed(new_skin: String)
 
 var currentSaveSlot = 1
 
+var game_cursor: UtilityCursor
+
 var ammoMax : int = 0
 var ammo : int = ammoMax
 var kills : int = 0

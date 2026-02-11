@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Biomes/GrassLands.tres" id="8_or7tv"]
 [ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Biomes/ChessFields.tres" id="9_133si"]
 [ext_resource type="PackedScene" uid="uid://mok5m72dvxgh" path="res://Scenes/entities/npcs/zet.tscn" id="10_133si"]
+[ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="11_esopp"]
 
 [node name="Level" type="Node2D" unique_id=2090904306]
 visibility_layer = 3
@@ -24,8 +25,6 @@ script = ExtResource("1_tj5wv")
 isthisroot = true
 
 [node name="Player" parent="." unique_id=419890577 instance=ExtResource("2_8rbpu")]
-z_index = 1
-y_sort_enabled = true
 position = Vector2(-8, 17)
 
 [node name="EnemyTimer" type="Timer" parent="." unique_id=1139771370]
@@ -67,5 +66,8 @@ warpBiome = ExtResource("9_133si")
 
 [node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("10_133si")]
 position = Vector2(-194, 178)
+
+[node name="weaponDropped" parent="." unique_id=344169487 instance=ExtResource("11_esopp")]
+position = Vector2(205, -200)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://d18i2trwgehmc"]
+
+[ext_resource type="Script" uid="uid://drj3k2l12qwd2" path="res://Scenes/UI/UtilityCursor.gd" id="1_1kvup"]
+[ext_resource type="Texture2D" uid="uid://ff0ix7ywirfq" path="res://Assets/Textures/UI/cursors/cursor_1_arrow.png" id="2_hbj1m"]
+[ext_resource type="Script" uid="uid://ckvyj7tgpwms6" path="res://Scripts/Resources/CursorStyle.gd" id="3_8dmni"]
+[ext_resource type="Texture2D" uid="uid://l5205cixyofi" path="res://Assets/Textures/UI/cursors/cursor_1_loading.png" id="3_po4a8"]
+[ext_resource type="Texture2D" uid="uid://q3q7yh560i7n" path="res://Assets/Textures/UI/cursors/cursor_1_pressed.png" id="4_dmv43"]
+[ext_resource type="Texture2D" uid="uid://cnbm00nf1xvsa" path="res://Assets/Textures/UI/cursors/cursor_1_unpressed.png" id="6_wror3"]
+[ext_resource type="Texture2D" uid="uid://crlqvllfwfrwj" path="res://Assets/Textures/UI/cursors/cursor_crosshair_3.png" id="7_77pyh"]
+[ext_resource type="Texture2D" uid="uid://blrpo4f68kefs" path="res://Assets/Textures/UI/cursors/cursor_crosshair_4_pressed.png" id="8_jx86x"]
+[ext_resource type="Texture2D" uid="uid://d0or3h6rxu0cr" path="res://Assets/Textures/UI/cursors/cursor_crosshair_4_unpressed.png" id="9_0h12q"]
+[ext_resource type="Texture2D" uid="uid://52h7ctlpivcq" path="res://Assets/Textures/UI/cursors/cursor_0_arrow.png" id="10_kgevl"]
+[ext_resource type="Texture2D" uid="uid://bo2yawtxqhhwb" path="res://Assets/Textures/UI/cursors/cursor_0_loading.png" id="11_2qguc"]
+[ext_resource type="Texture2D" uid="uid://di2bh2ugb40bk" path="res://Assets/Textures/UI/cursors/cursor_0_pressed.png" id="12_tf5vk"]
+[ext_resource type="Texture2D" uid="uid://bttf54asv47yw" path="res://Assets/Textures/UI/cursors/cursor_0_unpressed.png" id="13_54ukf"]
+
+[sub_resource type="Resource" id="Resource_omna4"]
+script = ExtResource("3_8dmni")
+arrow_cursor = ExtResource("2_hbj1m")
+unpressed_cursor = ExtResource("6_wror3")
+pressed_cursor = ExtResource("4_dmv43")
+loading_cursor = ExtResource("3_po4a8")
+metadata/_custom_type_script = "uid://ckvyj7tgpwms6"
+
+[sub_resource type="Resource" id="Resource_e8mgo"]
+script = ExtResource("3_8dmni")
+arrow_cursor = ExtResource("7_77pyh")
+unpressed_cursor = ExtResource("9_0h12q")
+pressed_cursor = ExtResource("8_jx86x")
+loading_cursor = ExtResource("3_po4a8")
+metadata/_custom_type_script = "uid://ckvyj7tgpwms6"
+
+[sub_resource type="Resource" id="Resource_yjrfr"]
+script = ExtResource("3_8dmni")
+arrow_cursor = ExtResource("10_kgevl")
+unpressed_cursor = ExtResource("13_54ukf")
+pressed_cursor = ExtResource("12_tf5vk")
+loading_cursor = ExtResource("11_2qguc")
+metadata/_custom_type_script = "uid://ckvyj7tgpwms6"
+
+[node name="Cursor" type="Node2D" unique_id=2116295921]
+process_mode = 3
+z_index = 30
+scale = Vector2(0.044071198, 0.044071198)
+script = ExtResource("1_1kvup")
+default_CS = SubResource("Resource_omna4")
+crosshair_CS = SubResource("Resource_e8mgo")
+phone_CS = SubResource("Resource_yjrfr")
+
+[node name="cursorSprite" type="Sprite2D" parent="." unique_id=786883183]
+position = Vector2(385.73944, 363.0489)
+scale = Vector2(31.096167, 31.096167)
+texture = ExtResource("6_wror3")
+
+[node name="crosshairSprite" type="Sprite2D" parent="." unique_id=1380751830]
+scale = Vector2(42.821587, 42.821587)
+texture = ExtResource("8_jx86x")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1439174153]
+position = Vector2(158.8339, 136.14334)
+emitting = false

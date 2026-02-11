@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djc2ce8udn5pc"
+path="res://.godot/imported/Ahh, Relief, Drink, Soda, Exhale, Male.wav-e496a36dc67703b8591dc3bd2fed0372.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/soundEffects/damage/Ahh, Relief, Drink, Soda, Exhale, Male.wav"
+dest_files=["res://.godot/imported/Ahh, Relief, Drink, Soda, Exhale, Male.wav-e496a36dc67703b8591dc3bd2fed0372.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -17,6 +17,9 @@ class_name PlayerSkinManager
 @onready var animPlayer := $AnimationPlayer
 @onready var eyeAnimPlayer := $EyesAnimationPlayer
 @onready var footstepsAudioStream := $FootstepsAudioStream
+@onready var skullParticleEmitter : GPUParticles2D = $SkullParticleEmitter
+@onready var skullCrashingAudioStream :AudioStreamPlayer2D = $SkullCrashingAudioStream
+
 func _ready() -> void:
 	currentAction = "Idle"
 	_loadSkin(thisSkin)
@@ -55,6 +58,8 @@ func _assertAction():
 			animPlayer.play("Idle")
 		"Walking":
 			animPlayer.play("Walking")
+		"Die":
+			animPlayer.play("Die")
 
 func _setBackwards(Bool : bool):
 	isBackwards = Bool

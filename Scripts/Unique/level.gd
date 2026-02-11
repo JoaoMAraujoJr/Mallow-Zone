@@ -3,6 +3,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GameManager.game_cursor.cur_cursorType = GameManager.game_cursor.CursorTypeList.CROSSHAIR
+	GameManager.game_cursor.matchCursorType()
 	pass # Replace with function body.
 
 

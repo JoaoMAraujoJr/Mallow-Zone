@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dykkt314can4l"]
+[gd_scene format=3 uid="uid://bb7b1i44ux3p0"]
 
-[ext_resource type="Script" uid="uid://d4iycqdfuokf8" path="res://Scripts/UI/mousefollow.gd" id="1_iojfn"]
-[ext_resource type="Texture2D" uid="uid://b8bdaqyc53o8w" path="res://Assets/Textures/UI/cursor/action_cursor.png" id="1_triaj"]
+[ext_resource type="Texture2D" uid="uid://b8bdaqyc53o8w" path="res://Assets/Textures/UI/cursors/action_cursor.png" id="1_triaj"]
 
-[node name="Mousefollow" type="Sprite2D"]
+[sub_resource type="GDScript" id="GDScript_8ewyr"]
+script/source = "extends Node2D
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	var mouse_pos = get_global_mouse_position()
+	position = mouse_pos
+"
+
+[node name="Mousefollow" type="Sprite2D" unique_id=1031818120]
 scale = Vector2(3.681573, 3.5560646)
 texture = ExtResource("1_triaj")
-script = ExtResource("1_iojfn")
+script = SubResource("GDScript_8ewyr")

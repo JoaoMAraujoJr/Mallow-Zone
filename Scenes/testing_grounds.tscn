@@ -13,3 +13,9 @@ position = Vector2(-18, -173)
 position = Vector2(396, -144)
 
 [node name="Interface" parent="." unique_id=1650993913 instance=ExtResource("3_abtgi")]
+
+[node name="Label" type="Label" parent="." unique_id=1947105349]
+offset_left = -89.0
+offset_top = -16.0
+offset_right = -27.0
+offset_bottom = 7.0

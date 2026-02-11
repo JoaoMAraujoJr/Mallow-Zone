@@ -84,7 +84,6 @@ animations = [{
 visibility_layer = 3
 y_sort_enabled = true
 disable_mode = 2
-collision_mask = 3
 script = ExtResource("1_hghv2")
 
 [node name="EffectHandler" parent="." unique_id=731600442 instance=ExtResource("2_5d1s0")]

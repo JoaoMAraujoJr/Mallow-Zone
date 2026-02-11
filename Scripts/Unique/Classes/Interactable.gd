@@ -33,7 +33,7 @@ var currentInteractionCount : int = 0 :
 @onready var cooldownTimer : Timer = Timer.new()
 
 @export var canInteract : bool = true
-@onready var interactionArea :Area2D
+@export var interactionArea :Area2D
 
 #check for interactions
 func checkAreasInInteractable() -> void:
@@ -47,22 +47,24 @@ func checkAreasInInteractable() -> void:
 			InteractionTypes.BUTTON:
 				if area.is_in_group("PlayerArea"):
 					if Input.is_action_just_pressed("Interact"):
-						Interact()
+						Interact.call_deferred()
 
 			InteractionTypes.APPROACH:
 				if area.is_in_group("PlayerArea"):
-					Interact()
+					Interact.call_deferred()
 
 			InteractionTypes.SHOT:
 				if area.is_in_group("canInteract"):
-					Interact()
+					if area.get_parent() is Bullet:
+						area.get_parent().queue_free()
+						Interact.call_deferred()
 
 			InteractionTypes.SHOTANDBUTTON:
 				if area.is_in_group("canInteract"):
-					Interact()
+					Interact.call_deferred()
 				if area.is_in_group("PlayerArea"):
 					if Input.is_action_just_pressed("Interact"):
-						Interact()
+						Interact.call_deferred()
 
 #actual interaction logic
 func Interact():
