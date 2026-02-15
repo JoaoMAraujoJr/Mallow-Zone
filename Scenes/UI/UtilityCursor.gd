@@ -19,6 +19,7 @@ var cur_cursorStyle:CursorStyle
 
 
 func _ready() -> void:
+	matchCursorType()
 	GameManager.game_cursor = self
 	pass # Replace with function body.
 

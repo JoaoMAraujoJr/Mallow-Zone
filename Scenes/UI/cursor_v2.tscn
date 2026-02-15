@@ -53,6 +53,7 @@ scale = Vector2(31.096167, 31.096167)
 texture = ExtResource("6_wror3")
 
 [node name="crosshairSprite" type="Sprite2D" parent="." unique_id=1380751830]
+visible = false
 scale = Vector2(42.821587, 42.821587)
 texture = ExtResource("8_jx86x")
 

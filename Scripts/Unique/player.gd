@@ -1,13 +1,13 @@
 # Attach this script to a CharacterBody2D node
 extends CharacterEntity
 class_name Player
-
+#bools :
 @onready var _iswalking : bool = false
 @onready var _isbackwards: bool= false
 @onready var _canmove: bool = true
+@onready var can_shoot : bool = true
 
 @onready var camera : Camera2D = $Camera2D
-
 @onready var _PlayerArea : Area2D = $PlayerArea2D
 @onready var _lifebar : TextureProgressBar= $LifeBar
 var _gun : Node2D 
@@ -16,14 +16,10 @@ var _gun : Node2D
 @onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
 @onready var playerSkin : PlayerSkinManager = $PlayerSkinNode
 
-#bools go here i guess:
-@onready var can_shoot : bool = true
-
 
 
 @export var recoil_strength: float = 100.0  # tweak this value for push force
 @export var recoil_decay: float = 80.0       # how fast recoil decay
-
 var recoil_velocity: Vector2 = Vector2.ZERO
 
 @export var max_camzoom :float = 0.4
@@ -33,20 +29,22 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 @onready var cur_camzoom :float = target_zoom
 @onready var viewBobbing : float = 3
 
+var gold_wallet:int = 0
+
 func _ready():
 	super._ready()
 	isAffectable = true
-	GameManager.thisPlayer=self
+	GameManager.thisPlayer= self
 	call_deferred("_equipGun")
 	GameManager.player_health = health
+	gold_wallet = GameManager.gold_wallet
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 
 func _physics_process(delta: float) -> void:
 	adjustCameraZoom(delta)
 	
-	
-	_lifebar.value = health
+	updatePlayerData()
 	
 	if _canmove:
 		direction_and_action_handler()
@@ -106,6 +104,10 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		updateExternalForces("pull", pullingforce.move_toward(Vector2.ZERO, pullingforce.length() * 3 *delta))
 		move_and_slide()
 
+
+func updatePlayerData():
+	_lifebar.value = health #updateLifeBar
+	gold_wallet = move_toward(gold_wallet, GameManager.gold_wallet, 1) #updatewallet
 func mouse_actions_handler():
 	if !isAlive:
 		return
@@ -116,15 +118,14 @@ func mouse_actions_handler():
 			recoil_velocity = recoil_direction * recoil_strength
 			print("just shooted")
 
-		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 :
-			_outofAmmoAudioStream.play()
+		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 and GameManager.game_cursor:
+			if GameManager.game_cursor.cur_cursorType == GameManager.game_cursor.CursorTypeList.CROSSHAIR:
+				_outofAmmoAudioStream.play()
 		elif Input.is_action_just_pressed("DropAction") and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			_dropGun()
 
 
 #AddTo Methods
-
-
 func uponDamage():
 	GameManager.player_health = health
 
@@ -216,7 +217,8 @@ func _playReloadSound():
 
 #TimerMethods
 func _on_regen_timer_timeout() -> void:
-	health += 3
+	if isAlive:
+		addToHealth(2)
 
 
 #GetMethods

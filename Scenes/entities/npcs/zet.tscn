@@ -32,6 +32,11 @@ func _ready() -> void:
 	timer_to_delete_dialog.wait_time = 4.0
 	timer_to_delete_dialog.timeout.connect(deleteOldestText_timeout)
 	add_child(timer_to_delete_dialog)
+	
+	await get_tree().process_frame
+	for area in $Zet_Domain_area.get_overlapping_areas():
+		if area.get_parent().has_signal(\"pickable_purchased\"):
+			area.get_parent().pickable_purchased.connect(uponItemPurchased)
 	pass
 
 func _process(_delta: float) -> void:
@@ -68,7 +73,13 @@ func _on_dialogue_entering_area_body_entered(body: Node2D) -> void:
 	pass # Replace with function body.
 
 
-
+func uponItemPurchased():
+	print(\"item brought from Zet\")
+	printDialog(\"HO HO HO that's a good one!!!\")
+	printDialog(\"I'm very thankfull\")
+	anim_tree.set(\"parameters/conditions/dancing\",true)
+	anim_tree.set(\"parameters/conditions/idle\",false)
+	anim_tree.set(\"parameters/conditions/bobling\",false)
 
 func deleteOldestText_timeout():
 	if dialogContainer.get_children(): 
@@ -78,7 +89,7 @@ func deleteOldestText_timeout():
 
 func _on_zet_domain_area_body_exited(body: Node2D) -> void:
 	if body is Player:
-		
+		anim_tree.set(\"parameters/conditions/dancing\",false)
 		anim_tree.set(\"parameters/conditions/idle\",false)
 		anim_tree.set(\"parameters/conditions/bobling\",true)
 	else:

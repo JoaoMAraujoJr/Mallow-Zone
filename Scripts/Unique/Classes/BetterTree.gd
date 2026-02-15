@@ -1,5 +1,5 @@
 extends Interactable
-class_name BetterTree
+class_name ForestTree
 
 @export var tree_spr : Sprite2D
 @export var animPlayer : AnimationPlayer
@@ -10,8 +10,9 @@ class_name BetterTree
 
 @export var fruitList : Array[PackedScene] 
 @export var trunk_texture : Texture2D 
-@export var tree_particle: PackedScene 
 
+@export var tree_particle_texture:CompressedTexture2D
+@export var tree_particle: PackedScene 
 
 var TurnedOn : bool = false
 var isTrimmed := false
@@ -61,12 +62,15 @@ func spawnFruit() -> void:
 
 func spawnTreeParticles():
 	if tree_particle:
-		var TreePart = tree_particle.instantiate()
+		var TreePart : DestroyedTreeParticle = tree_particle.instantiate()
 		tree_lightOccluder.queue_free()
 		TreePart.global_position = particle_pos.global_position
+			
+		if tree_particle_texture:
+			TreePart.tree_texture = tree_particle_texture   # ✅ AQUI
+			
 		TreePart.z_index = 2
 		get_tree().current_scene.add_child(TreePart)
-
 func updateTrimState():
 	if isBeingTrimmed:
 		spawnTreeParticles()

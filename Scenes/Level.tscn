@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="8_5rrr5"]
 [ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Biomes/GrassLands.tres" id="8_or7tv"]
 [ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Biomes/ChessFields.tres" id="9_133si"]
+[ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Biomes/DeepWinter.tres" id="9_b10nm"]
 [ext_resource type="PackedScene" uid="uid://mok5m72dvxgh" path="res://Scenes/entities/npcs/zet.tscn" id="10_133si"]
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="11_esopp"]
 
@@ -26,7 +27,6 @@ isthisroot = true
 
 [node name="Player" parent="." unique_id=419890577 instance=ExtResource("2_8rbpu")]
 position = Vector2(-8, 17)
-max_health = 100
 
 [node name="EnemyTimer" type="Timer" parent="." unique_id=1139771370]
 wait_time = 5.0
@@ -59,6 +59,11 @@ PickableName = "rifle"
 z_index = 3
 position = Vector2(-115, -167)
 warpBiome = ExtResource("8_or7tv")
+
+[node name="LevelWarper3" parent="otherNodes" unique_id=1990565622 instance=ExtResource("7_ienac")]
+z_index = 3
+position = Vector2(-342, -167)
+warpBiome = ExtResource("9_b10nm")
 
 [node name="LevelWarper2" parent="otherNodes" unique_id=426941485 instance=ExtResource("7_ienac")]
 z_index = 3

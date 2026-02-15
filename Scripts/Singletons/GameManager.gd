@@ -9,6 +9,7 @@ var game_cursor: UtilityCursor
 var ammoMax : int = 0
 var ammo : int = ammoMax
 var kills : int = 0
+var gold_wallet : int = 0
 var enemySpeed: float = 50.0
 var player_health : int = 100
 var can_shoot: bool = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7xbhtxd03xn4"]
+[gd_scene format=3 uid="uid://c7xbhtxd03xn4"]
 
 [ext_resource type="Script" uid="uid://bfpfh5q8n3err" path="res://Scripts/effects/particles.gd" id="1_k6j3c"]
 [ext_resource type="Texture2D" uid="uid://cm0sua2ppph2m" path="res://Assets/objects/tree_leaves.png" id="1_oeaq8"]
@@ -35,12 +35,12 @@ scale_max = 3.1999998
 scale_curve = SubResource("CurveTexture_vmj2t")
 alpha_curve = SubResource("CurveTexture_k6j3c")
 
-[node name="treeExplossionParticles" type="Node2D"]
+[node name="treeExplossionParticles" type="Node2D" unique_id=1367992448]
 script = ExtResource("1_k6j3c")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1780447899]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=429181375]
 emitting = false
 amount = 1
 texture = ExtResource("1_oeaq8")

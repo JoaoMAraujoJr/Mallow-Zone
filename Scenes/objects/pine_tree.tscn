@@ -1,36 +1,46 @@
-[gd_scene format=3 uid="uid://cbf4muc7d60h"]
+[gd_scene format=3 uid="uid://dqiecpoqsouu3"]
 
-[ext_resource type="Script" uid="uid://cfae0dk0eoxt4" path="res://Scripts/Unique/Classes/BetterTree.gd" id="1_hf2i0"]
-[ext_resource type="Texture2D" uid="uid://b0417p1208j21" path="res://Assets/objects/tree.png" id="1_uvtpv"]
-[ext_resource type="PackedScene" uid="uid://kdb60air4lgi" path="res://Scenes/objects/Fruit.tscn" id="2_fh86l"]
-[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_n5ney"]
-[ext_resource type="Texture2D" uid="uid://bcxrb1qv2jc31" path="res://Assets/Textures/entities/objects/Forest/Tree/AppleTree/tree_root.png" id="3_j2xe8"]
-[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="3_j8h35"]
-[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="3_uopmo"]
-[ext_resource type="Texture2D" uid="uid://pyeyuw2no5le" path="res://Assets/Textures/entities/objects/Forest/Tree/AppleTree/tree_leaves.png" id="4_5u3r3"]
-[ext_resource type="PackedScene" uid="uid://c7xbhtxd03xn4" path="res://Scenes/particles/tree_explossion_particles.tscn" id="4_dkidj"]
-[ext_resource type="Texture2D" uid="uid://bvh7w4dj1y30c" path="res://Assets/Textures/UI/minimap_icons/structures/tree_2.png" id="5_dkidj"]
-[ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="6_j2xe8"]
-[ext_resource type="AudioStream" uid="uid://btsnqmg6ydpwl" path="res://Assets/Sounds/Wood Crash.wav" id="6_ryksv"]
+[ext_resource type="PackedScene" uid="uid://kdb60air4lgi" path="res://Scenes/objects/Fruit.tscn" id="1_m4s42"]
+[ext_resource type="Texture2D" uid="uid://skp3qsm7frey" path="res://Assets/Textures/entities/objects/Forest/Tree/PineTree/PineTree_trunk.png" id="2_gepu6"]
+[ext_resource type="Texture2D" uid="uid://cu7mwofs0giav" path="res://Assets/Textures/entities/objects/Forest/Tree/PineTree/PineTree_2_cutout_particle_spr.png" id="3_gcuxy"]
+[ext_resource type="PackedScene" uid="uid://c7xbhtxd03xn4" path="res://Scenes/particles/tree_explossion_particles.tscn" id="3_r0iv0"]
+[ext_resource type="Texture2D" uid="uid://bvh7w4dj1y30c" path="res://Assets/Textures/UI/minimap_icons/structures/tree_2.png" id="4_gcuxy"]
+[ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="5_ffeal"]
+[ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="6_xvha8"]
+[ext_resource type="Texture2D" uid="uid://bhy5usdpbpnhj" path="res://Scripts/shaders/new_noise_texture_2d.tres" id="7_8chem"]
+[ext_resource type="Texture2D" uid="uid://bce384ir0tcs5" path="res://Assets/Textures/entities/objects/Forest/Tree/PineTree/PineTree_2.png" id="8_m4s42"]
+[ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="9_y1k4v"]
+[ext_resource type="AudioStream" uid="uid://btsnqmg6ydpwl" path="res://Assets/Sounds/Wood Crash.wav" id="10_7sb3c"]
+
+[sub_resource type="GDScript" id="GDScript_sxnmr"]
+resource_name = "PineTree"
+script/source = "extends ForestTree
+
+func _ready() -> void:
+	super()
+	var scale_multiplier = randf_range(2.8,3.4)
+	self.scale.x *= scale_multiplier
+	self.scale.y *= scale_multiplier
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ryksv"]
-shader = ExtResource("2_n5ney")
-shader_parameter/noise_tex = ExtResource("3_uopmo")
+shader = ExtResource("6_xvha8")
+shader_parameter/noise_tex = ExtResource("7_8chem")
 shader_parameter/threshold = 1.0
 shader_parameter/edge_color = Color(1, 0.5, 0.1, 1)
 shader_parameter/edge_width = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvtpv"]
-radius = 2.8632417
-height = 12.025614
+radius = 5.726484
+height = 15.461506
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0yjm6"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gepu6"]
 cull_mode = 1
-polygon = PackedVector2Array(-4.410744e-06, 7.158107, -1.1453011, 6.8717823, -2.0042737, 6.0128098, -2.0042737, 2.8632436, -2.0042737, 0.85897446, -1.4316252, 1.9073486e-06, 0.28631976, -0.28632212, 1.7179407, -0.28632212, 2.8632371, 0.57265043, 2.8632371, 3.435892, 2.8632371, 6.585458, 1.7179407, 7.158107)
+polygon = PackedVector2Array(-1.7179495, 5.7264853, -3.4358947, 3.435892, -3.7222188, -0.57264614, -2.5769222, -2.8632398, -0.28632858, -4.2948604, 2.576913, -3.435888, 3.7222097, -2.2905912, 4.2948585, 1.431623, 3.7222097, 4.8675127, 2.0042646, 6.585458)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uopmo"]
-radius = 4.0085382
-height = 36.64949
+radius = 6.0128074
+height = 24.623875
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dkidj"]
 size = Vector2(86.469925, 16.166664)
@@ -97,21 +107,20 @@ _data = {
 &"treemovement": SubResource("Animation_uopmo")
 }
 
-[node name="appleTree" type="Node2D" unique_id=1299816080 node_paths=PackedStringArray("tree_spr", "animPlayer", "tree_lightOccluder", "tree_audioStream", "particle_pos", "interactionArea") groups=["Interactable"]]
+[node name="Pine_tree" type="Node2D" unique_id=1299816080 node_paths=PackedStringArray("tree_spr", "animPlayer", "tree_lightOccluder", "tree_audioStream", "particle_pos", "interactionArea") groups=["Interactable"]]
 visibility_layer = 3
 z_index = 1
 y_sort_enabled = true
-scale = Vector2(3.492545, 3.492545)
-script = ExtResource("1_hf2i0")
+script = SubResource("GDScript_sxnmr")
 tree_spr = NodePath("TreeSprite")
 animPlayer = NodePath("AnimationPlayer")
 tree_lightOccluder = NodePath("lightOccluder")
 tree_audioStream = NodePath("TreeCutterAudioStream")
 particle_pos = NodePath("ParticleSpawnMarker")
-fruitList = Array[PackedScene]([ExtResource("2_fh86l")])
-trunk_texture = ExtResource("3_j2xe8")
-tree_particle_texture = ExtResource("4_5u3r3")
-tree_particle = ExtResource("4_dkidj")
+fruitList = Array[PackedScene]([ExtResource("1_m4s42")])
+trunk_texture = ExtResource("2_gepu6")
+tree_particle_texture = ExtResource("3_gcuxy")
+tree_particle = ExtResource("3_r0iv0")
 interactionArea = NodePath("TreeArea2D")
 
 [node name="MiniMapIcon" type="Sprite2D" parent="." unique_id=28827612]
@@ -121,24 +130,24 @@ visibility_layer = 2
 y_sort_enabled = true
 position = Vector2(0, -40.371708)
 scale = Vector2(1.2475007, 1.2475007)
-texture = ExtResource("5_dkidj")
+texture = ExtResource("4_gcuxy")
 offset = Vector2(-1.4901161e-08, -3.9018097)
-script = ExtResource("6_j2xe8")
+script = ExtResource("5_ffeal")
 
 [node name="TreeSprite" type="Sprite2D" parent="." unique_id=1976192211]
 light_mask = 2
 material = SubResource("ShaderMaterial_ryksv")
-position = Vector2(4.4107437e-06, 4.867509)
-texture = ExtResource("1_uvtpv")
-offset = Vector2(3.9999957, -52.867508)
-script = ExtResource("3_j8h35")
+position = Vector2(-2.1175824e-22, 6.2991314)
+texture = ExtResource("8_m4s42")
+offset = Vector2(0.85043, -121.585304)
+script = ExtResource("9_y1k4v")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=209674158]
 position = Vector2(0.28632414, 6.012807)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1073409670]
-position = Vector2(2.9802322e-08, 9.536743e-07)
+position = Vector2(2.9802322e-08, -3.1495657)
 shape = SubResource("CapsuleShape2D_uvtpv")
 
 [node name="lightOccluder" type="LightOccluder2D" parent="." unique_id=1117087098]
@@ -146,16 +155,17 @@ light_mask = 7
 visibility_layer = 7
 position = Vector2(4.4107437e-06, 4.8675084)
 scale = Vector2(0.99999994, 0.99999994)
-occluder = SubResource("OccluderPolygon2D_0yjm6")
+occluder = SubResource("OccluderPolygon2D_gepu6")
 
 [node name="ParticleSpawnMarker" type="Marker2D" parent="." unique_id=98339698]
-position = Vector2(0, -27.200798)
+position = Vector2(0, -112)
 scale = Vector2(0.99999976, 0.99999976)
 
 [node name="TreeArea2D" type="Area2D" parent="." unique_id=1078829330 groups=["Interactable"]]
+position = Vector2(0.2863242, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TreeArea2D" unique_id=609479711]
-position = Vector2(0.28632414, -4.867511)
+position = Vector2(2.9802322e-08, -1.6940659e-21)
 shape = SubResource("CapsuleShape2D_uopmo")
 
 [node name="fruitSpawnableArea" type="Area2D" parent="." unique_id=1767967917]
@@ -169,10 +179,11 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=346947034]
 libraries/ = SubResource("AnimationLibrary_gbq6h")
+autoplay = &"treemovement"
 
 [node name="TreeCutterAudioStream" type="AudioStreamPlayer2D" parent="." unique_id=1245506797]
 position = Vector2(0, -26.914467)
 scale = Vector2(0.9999999, 0.9999999)
-stream = ExtResource("6_ryksv")
+stream = ExtResource("10_7sb3c")
 volume_db = -5.0
 bus = &"SFXReverb"

@@ -1,9 +1,18 @@
-[gd_scene format=3 uid="uid://dya4pn5fc83y8"]
+[gd_scene format=3 uid="uid://fiukuk2xjves"]
 
-[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="1_1nm5o"]
-[ext_resource type="Script" uid="uid://drb6e5j81566p" path="res://Scripts/Unique/Classes/Pickable.gd" id="1_47yf2"]
-[ext_resource type="Texture2D" uid="uid://chd3l01ioqd0j" path="res://Assets/Textures/UI/Buttons/key.png" id="2_4je43"]
-[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="4_hkno7"]
+[ext_resource type="Script" uid="uid://b7n34r7235wu6" path="res://Scripts/Unique/Classes/PurchasablePickable.gd" id="1_pnopi"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="2_6f653"]
+[ext_resource type="FontFile" uid="uid://wjrm0hs8lb2r" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_b6jqd"]
+[ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="2_x71ww"]
+[ext_resource type="Texture2D" uid="uid://ckedo14h4hdf7" path="res://Assets/Textures/items/guns/shotgun_spr.png" id="3_b6jqd"]
+[ext_resource type="Texture2D" uid="uid://chd3l01ioqd0j" path="res://Assets/Textures/UI/Buttons/key.png" id="3_pnopi"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="4_b6jqd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q822x"]
+font = ExtResource("2_b6jqd")
+font_size = 13
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_y5f0o"]
 length = 0.001
@@ -181,24 +190,43 @@ _data = {
 radius = 56.0357
 
 [sub_resource type="LabelSettings" id="LabelSettings_weh0v"]
-font = ExtResource("4_hkno7")
+font = ExtResource("4_b6jqd")
 font_size = 26
 
-[node name="PickableItem" type="Node2D" unique_id=1244783195 node_paths=PackedStringArray("BodyDetector", "itemSprite")]
-script = ExtResource("1_47yf2")
+[node name="PurchasablePickableItem" type="Node2D" unique_id=1244783195 node_paths=PackedStringArray("price_label", "BodyDetector", "itemSprite")]
+script = ExtResource("1_pnopi")
+price_label = NodePath("PriceTag")
+normalPickable = ExtResource("2_x71ww")
 BodyDetector = NodePath("Area2D")
 itemSprite = NodePath("ItemSpr")
 
+[node name="PriceTag" type="Label" parent="." unique_id=2075138342]
+z_index = 1
+y_sort_enabled = true
+offset_left = -26.0
+offset_top = -65.00001
+offset_right = 26.0
+offset_bottom = -42.000008
+scale = Vector2(2.122109, 2.122109)
+pivot_offset = Vector2(25.917614, 11.309504)
+text = "1000.00"
+label_settings = SubResource("LabelSettings_q822x")
+horizontal_alignment = 1
+autowrap_mode = 3
+autowrap_trim_flags = 0
+
 [node name="ItemSpr" type="Sprite2D" parent="." unique_id=1913542187]
+modulate = Color(0, 0, 0, 1)
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(1.7690611, 1.7690611)
+texture = ExtResource("3_b6jqd")
 
 [node name="shadow" type="Sprite2D" parent="." unique_id=1122983277]
 z_index = -1
 position = Vector2(2.3841858e-07, 16)
 scale = Vector2(1.9374999, 0.9477566)
-texture = ExtResource("1_1nm5o")
+texture = ExtResource("2_6f653")
 
 [node name="DroppedItemAnimation" type="AnimationPlayer" parent="." unique_id=126600717]
 libraries/ = SubResource("AnimationLibrary_xnjce")
@@ -221,7 +249,7 @@ z_index = 5
 y_sort_enabled = true
 position = Vector2(0, 0.9999924)
 scale = Vector2(1.5812603, 1.5812603)
-texture = ExtResource("2_4je43")
+texture = ExtResource("3_pnopi")
 
 [node name="Label" type="Label" parent="key" unique_id=1104220809]
 z_index = 5

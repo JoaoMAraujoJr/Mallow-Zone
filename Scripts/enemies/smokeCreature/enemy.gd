@@ -78,13 +78,13 @@ func update_player_location():
 
 
 func _on_enemy_vision_body_entered(body: Node2D) -> void:
-	if body.is_in_group("PlayerArea"):
+	if body.is_in_group("PlayerArea")and _animatedSprite:
 		_animatedSprite.play("normal")
 		playerLocation = body.getRandomPlayerAreaCoordinates()
 		followMode = true
 
 func _on_enemy_vision_body_exited(body: Node2D) -> void:
-	if body.is_in_group("PlayerArea"):
+	if body.is_in_group("PlayerArea") and _animatedSprite:
 		if _animatedSprite:
 			_animatedSprite.play("waiting")
 		followMode = false

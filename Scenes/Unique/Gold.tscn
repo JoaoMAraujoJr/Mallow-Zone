@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://dbayx1y3h5nev"]
+
+[ext_resource type="Texture2D" uid="uid://c3wb276fe5jtp" path="res://Assets/Textures/entities/Gold/gold_1.png" id="1_ga8y0"]
+[ext_resource type="Texture2D" uid="uid://chjgn7gf0ruli" path="res://Assets/Textures/entities/Gold/gold_0.png" id="2_ywer1"]
+[ext_resource type="AudioStream" uid="uid://cckko63g2shw5" path="res://Assets/Sounds/soundEffects/objects/gold.wav" id="3_ywer1"]
+
+[sub_resource type="GDScript" id="GDScript_a2bmv"]
+resource_name = "Gold"
+script/source = "extends Node2D
+class_name Gold
+
+var value:int = 2000
+var magnet_target :Node2D
+@export var collect_sfx :AudioStreamPlayer2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if magnet_target != null:
+		global_position = lerp(global_position,magnet_target.global_position,delta*2)
+	pass
+
+
+func addAmountToWallet(amount:int):
+	GameManager.gold_wallet += amount
+	collect_sfx.pitch_scale = randf_range(0.8,1.1)
+	collect_sfx.playing=true
+	$PlayerDetectorArea.queue_free()
+	$GoldTypesSpriteSheet.queue_free()
+	await collect_sfx.finished
+	queue_free()
+	print(\"currently player has \" + str(GameManager.thisPlayer.gold_wallet)+ \" $\")
+
+func uponPlayerCollision(body: Node2D) -> void:
+	if body is Player:
+		addAmountToWallet(value)
+
+func _on_magnet_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		magnet_target = body
+	pass # Replace with function body.
+func _on_magnet_area_body_exited(body: Node2D) -> void:
+	if body is Player:
+		magnet_target = null
+	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ga8y0"]
+radius = 11.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ywer1"]
+radius = 94.02127
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwf7s"]
+atlas = ExtResource("1_ga8y0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp0e5"]
+atlas = ExtResource("1_ga8y0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psqo5"]
+atlas = ExtResource("1_ga8y0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnufi"]
+atlas = ExtResource("1_ga8y0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddihi"]
+atlas = ExtResource("2_ywer1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcgbj"]
+atlas = ExtResource("2_ywer1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlxrn"]
+atlas = ExtResource("2_ywer1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr5fr"]
+atlas = ExtResource("2_ywer1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_swsms"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_vwf7s")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_lp0e5")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_psqo5")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_pnufi")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_ddihi")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_lcgbj")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_mlxrn")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_hr5fr")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}]
+
+[node name="Gold" type="Node2D" unique_id=683253461 node_paths=PackedStringArray("collect_sfx")]
+script = SubResource("GDScript_a2bmv")
+collect_sfx = NodePath("collect_sfx")
+
+[node name="PlayerDetectorArea" type="Area2D" parent="." unique_id=1091085868]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectorArea" unique_id=1111730319]
+shape = SubResource("CircleShape2D_ga8y0")
+
+[node name="MagnetArea" type="Area2D" parent="." unique_id=1430763710]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea" unique_id=77245189]
+shape = SubResource("CircleShape2D_ywer1")
+
+[node name="GoldTypesSpriteSheet" type="AnimatedSprite2D" parent="." unique_id=2092138307]
+sprite_frames = SubResource("SpriteFrames_swsms")
+animation = &"2"
+frame_progress = 0.6289225
+
+[node name="collect_sfx" type="AudioStreamPlayer2D" parent="." unique_id=789455695]
+stream = ExtResource("3_ywer1")
+volume_db = 12.0
+pitch_scale = 0.82
+bus = &"SFXReverb"
+
+[connection signal="body_entered" from="PlayerDetectorArea" to="." method="uponPlayerCollision"]
+[connection signal="body_entered" from="MagnetArea" to="." method="_on_magnet_area_body_entered"]
+[connection signal="body_exited" from="MagnetArea" to="." method="_on_magnet_area_body_exited"]

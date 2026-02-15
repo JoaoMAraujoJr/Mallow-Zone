@@ -6,8 +6,8 @@ class_name Pickable
 
 @onready var can_be_picked:bool = false
 
-@onready var BodyDetector : Area2D = $Area2D
-@onready var itemSprite: Sprite2D = $DroppedItem
+@export var BodyDetector : Area2D
+@export var itemSprite: Sprite2D
 
 enum Types{
 	CONSUMABLE,
