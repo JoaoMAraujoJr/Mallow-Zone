@@ -1,0 +1,305 @@
+[gd_scene format=3 uid="uid://dtkhf76oj53cs"]
+
+[ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="1_3h75r"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="1_6bybg"]
+[ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="2_3h75r"]
+[ext_resource type="Texture2D" uid="uid://fn3pmog47geq" path="res://Scenes/UI/main_menu/textoverlay.png" id="3_1alar"]
+[ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="4_1alar"]
+[ext_resource type="AudioStream" uid="uid://e3smry6huri4" path="res://Assets/Sounds/Music/Lullaby.wav" id="6_jwu4y"]
+
+[sub_resource type="Curve" id="Curve_rrcgd"]
+_data = [Vector2(0.008849561, 1), 0.0, 0.0, 0, 0, Vector2(0.1460177, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.38495576, 0.47191018), 0.0, 0.0, 0, 0, Vector2(0.50442475, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.6371681, 0), 0.0, 0.0, 0, 0, Vector2(0.88053095, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_17314"]
+curve = SubResource("Curve_rrcgd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkpk7"]
+shader = ExtResource("2_3h75r")
+shader_parameter/curve = SubResource("CurveTexture_17314")
+shader_parameter/rotation_speed = -0.52449197
+shader_parameter/distortion_strength = 0.41200001957
+shader_parameter/iridescence_scale = 5.2730002504675
+shader_parameter/iridescence_intensity = 0.3590000170525
+shader_parameter/light_dir = Vector2(0.5, -0.5)
+shader_parameter/scroll = Vector2(0, 0)
+shader_parameter/angle_deg = 0.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bybg"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.024656769, 0.022763666, 0.021040808, 1)
+ground_bottom_color = Color(0.027731022, 0.020158606, 0.013267187, 1)
+ground_horizon_color = Color(0.024656769, 0.022763666, 0.021040808, 1)
+
+[sub_resource type="Sky" id="Sky_3h75r"]
+sky_material = SubResource("ProceduralSkyMaterial_6bybg")
+
+[sub_resource type="Environment" id="Environment_1alar"]
+background_mode = 2
+sky = SubResource("Sky_3h75r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwu4y"]
+albedo_texture = ExtResource("4_1alar")
+uv1_scale = Vector3(0.705, 0.705, 0.705)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h75r"]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(0, 0, 0, 0.7019608)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1alar"]
+shader = ExtResource("1_3h75r")
+shader_parameter/grain_intensity = 0.1
+shader_parameter/min_lum = 0.0
+shader_parameter/max_lum = 1.0
+shader_parameter/time_scale = 0.5
+shader_parameter/vignette_darkness = 0.5
+shader_parameter/vignette_outer_radius = 0.7
+shader_parameter/vignette_inner_radius = 0.2
+shader_parameter/scanline_intensity = 0.2
+shader_parameter/barrel_distortion = 0.0
+shader_parameter/chromatic_aberration = 0.0030000001425
+shader_parameter/crt_vignette_power = 1.43200006802
+shader_parameter/pixel_resolution_x = 960
+shader_parameter/pixel_resolution_y = 540
+shader_parameter/enable_color_quantization = true
+shader_parameter/color_quant_steps = 32.0
+shader_parameter/warble_amount = 0.002
+shader_parameter/warble_speed = 1.36400006479
+
+[sub_resource type="Animation" id="Animation_rrcgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [18.295]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Filters/CRT:material:shader_parameter/grain_intensity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Menu/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3590000170525]
+}
+
+[sub_resource type="Animation" id="Animation_pkpk7"]
+resource_name = "glitch"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:pitch_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.90325534, 2.011796, 2.0391674, 5.3333335, 5.546049, 5.7, 5.8460493, 6.012716, 6.418587, 9.963181),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 1.0, 1.13, 1.13, 2.5599999999999996, 1.79, 0.82, 1.0732626, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.307512, 5.7059736, 6.05662, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [18.295, 18.295, 22.778, 18.295, 18.295]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Filters/CRT:material:shader_parameter/grain_intensity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.4, 5.766667, 5.9666667, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.1, 0.1, 0.7230000343425, 0.1, 0.1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Menu/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5.4333334, 5.7, 5.9333334, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.3590000170525, 0.3590000170525, 1.0, 0.3590000170525, 0.3590000170525]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q6hi6"]
+_data = {
+&"RESET": SubResource("Animation_rrcgd"),
+&"glitch": SubResource("Animation_pkpk7")
+}
+
+[node name="MainMenu" type="Control" unique_id=269973777]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="CanvasLayer" parent="." unique_id=911966369]
+
+[node name="Label" type="RichTextLabel" parent="Menu" unique_id=1540653330]
+clip_children = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.27185
+offset_top = 60.0
+offset_right = 127.27185
+offset_bottom = 150.41832
+grow_horizontal = 2
+scale = Vector2(2.7981057, 2.7981057)
+pivot_offset = Vector2(125.74513, 1.9073486e-06)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.2901961)
+theme_override_constants/line_separation = -14
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("1_6bybg")
+theme_override_fonts/bold_font = ExtResource("1_6bybg")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = " [shake rate=4 level=8][font_size=15]The[/font_size]
+ [wave amp=20 freq=5]Backyard [/wave][/shake]"
+scroll_active = false
+autowrap_mode = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Menu/Label" unique_id=743933914]
+material = SubResource("ShaderMaterial_pkpk7")
+position = Vector2(95.93509, 61.82754)
+scale = Vector2(0.6051924, 0.6051924)
+texture = ExtResource("3_1alar")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1667119085]
+layer = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=2127860401]
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=1098888383]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1667405742]
+transform = Transform3D(-0.9304176, -0.36302286, 0.050373588, 0, 0.13744454, 0.9905095, -0.36650115, 0.92158747, -0.12788083, 0, 0, 0)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="BackgroundScene" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1815383315]
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1383454774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0160055, 3.4160366)
+fov = 98.519745
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=373939453]
+environment = SubResource("Environment_1alar")
+
+[node name="floor" type="CSGBox3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1473547326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19368744, -0.18079138, -0.31607056)
+size = Vector3(7.3364105, 1, 6.6558228)
+material = SubResource("StandardMaterial3D_jwu4y")
+
+[node name="fog" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1551392558]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 1.3630619)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1548830721]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
+radius = 3.1428263
+material = SubResource("StandardMaterial3D_3h75r")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=843745894]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
+radius = 3.6936347
+material = SubResource("StandardMaterial3D_3h75r")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=2003326099]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
+radius = 4.0877376
+material = SubResource("StandardMaterial3D_3h75r")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1658748875]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
+radius = 4.716187
+material = SubResource("StandardMaterial3D_3h75r")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=216473130]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
+radius = 5.4354095
+material = SubResource("StandardMaterial3D_3h75r")
+
+[node name="Filters" type="CanvasLayer" parent="." unique_id=918578601]
+
+[node name="CRT" type="ColorRect" parent="Filters" unique_id=1781847719]
+z_index = 1
+material = SubResource("ShaderMaterial_1alar")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=2147231182]
+stream = ExtResource("6_jwu4y")
+volume_db = 18.295
+autoplay = true
+attenuation = 0.39229214
+bus = &"Music"
+
+[node name="MusicGlith" type="AnimationPlayer" parent="MenuMusic" unique_id=1535157751]
+libraries/ = SubResource("AnimationLibrary_q6hi6")
+autoplay = &"glitch"
