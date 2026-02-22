@@ -8,8 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://e3smry6huri4" path="res://Assets/Sounds/Music/Lullaby.wav" id="6_jwu4y"]
 
 [sub_resource type="Curve" id="Curve_rrcgd"]
-_data = [Vector2(0.008849561, 1), 0.0, 0.0, 0, 0, Vector2(0.1460177, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.38495576, 0.47191018), 0.0, 0.0, 0, 0, Vector2(0.50442475, 0.17977536), 0.0, 0.0, 0, 0, Vector2(0.6371681, 0), 0.0, 0.0, 0, 0, Vector2(0.88053095, 0), 0.0, 0.0, 0, 0]
-point_count = 6
+_data = [Vector2(0.008849561, 1), 0.0, 0.0, 0, 0, Vector2(0.1460177, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.6371681, 0), 0.0, 0.0, 0, 0, Vector2(0.88053095, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_17314"]
 curve = SubResource("Curve_rrcgd")
@@ -58,8 +58,8 @@ shader_parameter/min_lum = 0.0
 shader_parameter/max_lum = 1.0
 shader_parameter/time_scale = 0.5
 shader_parameter/vignette_darkness = 0.5
-shader_parameter/vignette_outer_radius = 0.7
-shader_parameter/vignette_inner_radius = 0.2
+shader_parameter/vignette_outer_radius = 1.05200004671012
+shader_parameter/vignette_inner_radius = 0.7750000368125
 shader_parameter/scanline_intensity = 0.2
 shader_parameter/barrel_distortion = 0.0
 shader_parameter/chromatic_aberration = 0.0030000001425
@@ -181,6 +181,68 @@ _data = {
 &"glitch": SubResource("Animation_pkpk7")
 }
 
+[sub_resource type="Animation" id="Animation_jwu4y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundScene/floor:material:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackgroundScene/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.0160055, 3.4160366)]
+}
+
+[sub_resource type="Animation" id="Animation_q6hi6"]
+resource_name = "walking"
+length = 8.166667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundScene/floor:material:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackgroundScene/Camera3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.90000004, 1.2, 1.5000001, 1.8000001, 2.1, 2.38, 2.68, 2.98, 3.2800002, 3.55, 3.85, 4.15, 4.45, 4.73, 5.03, 5.33, 5.63, 5.94, 6.2400002, 6.54, 6.84, 7.12, 7.42, 7.72, 8.0199995),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_urwbv"]
+_data = {
+&"RESET": SubResource("Animation_jwu4y"),
+&"walking": SubResource("Animation_q6hi6")
+}
+
 [node name="MainMenu" type="Control" unique_id=269973777]
 layout_mode = 3
 anchors_preset = 15
@@ -196,21 +258,25 @@ clip_children = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -127.27185
-offset_top = 60.0
-offset_right = 127.27185
-offset_bottom = 150.41832
+offset_left = -288.03195
+offset_top = 60.000004
+offset_right = 286.00183
+offset_bottom = 270.49957
 grow_horizontal = 2
-scale = Vector2(2.7981057, 2.7981057)
-pivot_offset = Vector2(125.74513, 1.9073486e-06)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.2901961)
-theme_override_constants/line_separation = -14
-theme_override_constants/outline_size = 4
+scale = Vector2(0.9441953, 0.9441953)
+pivot_offset = Vector2(287.28668, 0)
+theme_override_colors/font_outline_color = Color(0.56046253, 0.56046253, 0.56046253, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.28235295)
+theme_override_constants/line_separation = -33
+theme_override_constants/shadow_outline_size = 24
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 2
 theme_override_fonts/normal_font = ExtResource("1_6bybg")
 theme_override_fonts/bold_font = ExtResource("1_6bybg")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 72
 bbcode_enabled = true
-text = " [shake rate=4 level=8][font_size=15]The[/font_size]
+text = " [shake rate=4 level=8][font_size=35]The[/font_size]
  [wave amp=20 freq=5]Backyard [/wave][/shake]"
 scroll_active = false
 autowrap_mode = 1
@@ -218,8 +284,8 @@ vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Menu/Label" unique_id=743933914]
 material = SubResource("ShaderMaterial_pkpk7")
-position = Vector2(95.93509, 61.82754)
-scale = Vector2(0.6051924, 0.6051924)
+position = Vector2(291.25333, 130.26967)
+scale = Vector2(0.68365926, 0.38805124)
 texture = ExtResource("3_1alar")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1667119085]
@@ -303,3 +369,8 @@ bus = &"Music"
 [node name="MusicGlith" type="AnimationPlayer" parent="MenuMusic" unique_id=1535157751]
 libraries/ = SubResource("AnimationLibrary_q6hi6")
 autoplay = &"glitch"
+
+[node name="walking animation player" type="AnimationPlayer" parent="." unique_id=1039804610]
+root_node = NodePath("../CanvasLayer/SubViewportContainer/SubViewport")
+libraries/ = SubResource("AnimationLibrary_urwbv")
+autoplay = &"walking"
