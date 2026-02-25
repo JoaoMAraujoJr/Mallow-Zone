@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cru7r7xghq73o"]
+
+[ext_resource type="Texture2D" uid="uid://dupcvl7xvoa05" path="res://Assets/Textures/entities/Particles/effects/happy.png" id="1_ghikx"]
+[ext_resource type="Script" uid="uid://bu1kwsfgglkhg" path="res://Scenes/particles/selfDeleting_particle.gd" id="2_yyoxw"]
+
+[sub_resource type="Curve" id="Curve_yyoxw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35930735, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_v7res"]
+curve = SubResource("Curve_yyoxw")
+
+[sub_resource type="Curve" id="Curve_6gbw5"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.3370788), 0.0, 0.9678154, 0, 0, Vector2(0.36363637, 0.89887655), 0.0, 0.0, 0, 0, Vector2(0.96969694, 2), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xdocx"]
+curve = SubResource("Curve_6gbw5")
+
+[sub_resource type="Curve" id="Curve_h2dte"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.26839828, -20.2247), 0.0, 0.0, 0, 0, Vector2(0.5800866, 6.741577), 0.0, 0.0, 0, 0, Vector2(1, -11.235962), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_spi8t"]
+curve = SubResource("Curve_h2dte")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8w4yy"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -20, 0)
+tangential_accel_min = -5.210002
+tangential_accel_max = 4.4599977
+tangential_accel_curve = SubResource("CurveTexture_spi8t")
+scale_curve = SubResource("CurveTexture_xdocx")
+alpha_curve = SubResource("CurveTexture_v7res")
+
+[node name="HappyEffectParticle" type="GPUParticles2D" unique_id=1247814282]
+texture = ExtResource("1_ghikx")
+lifetime = 3.5599999999999996
+explosiveness = 0.45
+randomness = 0.5
+interpolate = false
+trail_lifetime = 0.58
+process_material = SubResource("ParticleProcessMaterial_8w4yy")
+script = ExtResource("2_yyoxw")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

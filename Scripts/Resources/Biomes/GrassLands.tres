@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://b1te6q7qlixwn" path="res://Scripts/Resources/BiomeSpawnEntry.gd" id="8_3uxnf"]
 [ext_resource type="Texture2D" uid="uid://dlgubbkv0pbk8" path="res://Assets/Textures/entities/StageWarper/levelart/Yard.png" id="9_wmwkd"]
 [ext_resource type="Resource" uid="uid://xxjnd60p1vxg" path="res://Scripts/Resources/Weather/windyLeafy.tres" id="10_qgh8n"]
+[ext_resource type="PackedScene" uid="uid://cck47anyjtal5" path="res://Scenes/objects/forest/sunflower field.tscn" id="12_wmwkd"]
+[ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="13_qgh8n"]
 [ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="13_wmwkd"]
 
 [sub_resource type="Resource" id="Resource_fdx75"]
@@ -77,6 +79,17 @@ SpawnableScene = ExtResource("7_46dm1")
 isRandomPosition = false
 metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 
+[sub_resource type="Resource" id="Resource_ra878"]
+script = ExtResource("1_cqk60")
+SpawnableScene = ExtResource("12_wmwkd")
+isRandomPosition = false
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
+[sub_resource type="Resource" id="Resource_hb8l3"]
+script = ExtResource("1_cqk60")
+SpawnableScene = ExtResource("13_qgh8n")
+metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
+
 [resource]
 script = ExtResource("2_kklgl")
 name = "GrassLands"
@@ -87,7 +100,7 @@ topTextureVariants = Array[Texture2D]([ExtResource("13_wmwkd")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_3uxnf")])
 enemiesList = Array[ExtResource("1_cqk60")]([SubResource("Resource_fdx75")])
 itemDropsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_k5la2"), SubResource("Resource_7uiy4")])
-objectsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_i7rku"), SubResource("Resource_ww40o"), SubResource("Resource_0afbt"), null, SubResource("Resource_pf4ip"), null])
+objectsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_i7rku"), SubResource("Resource_ww40o"), SubResource("Resource_0afbt"), null, SubResource("Resource_pf4ip"), null, SubResource("Resource_ra878"), SubResource("Resource_hb8l3"), null])
 locatablesList = Array[ExtResource("6_3uxnf")]([SubResource("Resource_qgh8n"), SubResource("Resource_eb26d")])
 nearbyBiomesList = Array[ExtResource("8_3uxnf")]([SubResource("Resource_wmwkd")])
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"

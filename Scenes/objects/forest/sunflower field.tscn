@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cck47anyjtal5"]
+
+[ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="1_u46uc"]
+
+[node name="SunflowerField" type="Node2D" unique_id=934993701]
+
+[node name="sunflower" parent="." unique_id=75144789 instance=ExtResource("1_u46uc")]
+position = Vector2(-23, 11)
+
+[node name="sunflower2" parent="." unique_id=1460341637 instance=ExtResource("1_u46uc")]
+position = Vector2(12, 28)
+scale = Vector2(-1, 1)
+
+[node name="sunflower3" parent="." unique_id=1064177807 instance=ExtResource("1_u46uc")]
+position = Vector2(45, 5)
+
+[node name="sunflower4" parent="." unique_id=1537252230 instance=ExtResource("1_u46uc")]
+position = Vector2(12, -11)
+scale = Vector2(-1, 1)
+
+[node name="sunflower5" parent="." unique_id=1258618645 instance=ExtResource("1_u46uc")]
+position = Vector2(62, 44)
+
+[node name="sunflower6" parent="." unique_id=1047432455 instance=ExtResource("1_u46uc")]
+position = Vector2(82, 7)
+scale = Vector2(-1, 1)
+
+[node name="sunflower7" parent="." unique_id=2113330697 instance=ExtResource("1_u46uc")]
+position = Vector2(57, -34)
+
+[node name="sunflower8" parent="." unique_id=330455834 instance=ExtResource("1_u46uc")]
+position = Vector2(101, -26)
+
+[node name="sunflower9" parent="." unique_id=1948245123 instance=ExtResource("1_u46uc")]
+position = Vector2(111, 23)
+scale = Vector2(-1, 1)
+
+[node name="sunflower10" parent="." unique_id=1459336014 instance=ExtResource("1_u46uc")]
+position = Vector2(133, -18)
+scale = Vector2(-1, 1)
+
+[node name="sunflower11" parent="." unique_id=1610688679 instance=ExtResource("1_u46uc")]
+position = Vector2(140, 27)
+
+[node name="sunflower12" parent="." unique_id=488539616 instance=ExtResource("1_u46uc")]
+position = Vector2(101, 55)
+
+[node name="sunflower13" parent="." unique_id=173765149 instance=ExtResource("1_u46uc")]
+position = Vector2(22, 61)
+scale = Vector2(-1, 1)
+
+[node name="sunflower14" parent="." unique_id=2098017821 instance=ExtResource("1_u46uc")]
+position = Vector2(-15, -29)
+scale = Vector2(-1, 1)

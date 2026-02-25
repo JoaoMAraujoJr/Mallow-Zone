@@ -76,8 +76,8 @@ func instantiateParticles(Particles:PackedScene):
 	if Particles == null:
 		return
 	var newParticles = Particles.instantiate()
-	newParticles.global_position = global_position
-	get_tree().current_scene.add_child(newParticles)
+	if GameManager.thisPlayer:
+		GameManager.thisPlayer.add_child(newParticles)
 
 func _on_timer_timeout() -> void:
 	applyEffects()

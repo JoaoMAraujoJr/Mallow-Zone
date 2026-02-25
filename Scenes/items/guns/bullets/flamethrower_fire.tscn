@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgnqylesw223s"]
+[gd_scene format=3 uid="uid://dgnqylesw223s"]
 
 [ext_resource type="Texture2D" uid="uid://clhiem0tjokhe" path="res://Assets/particle/fire.png" id="1_gfg05"]
 
@@ -111,21 +111,19 @@ _data = {
 &"RESET": SubResource("Animation_fq2qc")
 }
 
-[node name="FlameParticle" type="GPUParticles2D"]
+[node name="FlameParticle" type="GPUParticles2D" unique_id=2131775919]
 z_index = 1
 amount = 200
 texture = ExtResource("1_gfg05")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_cn20f")
 
-[node name="fireArea" type="Area2D" parent="."]
+[node name="fireArea" type="Area2D" parent="." unique_id=934135117]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fireArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fireArea" unique_id=1447585964]
 shape = SubResource("CircleShape2D_aug8o")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_cd8in")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2092100234]
+libraries/ = SubResource("AnimationLibrary_cd8in")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

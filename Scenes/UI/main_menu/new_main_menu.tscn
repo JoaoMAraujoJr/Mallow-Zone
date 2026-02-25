@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://fn3pmog47geq" path="res://Scenes/UI/main_menu/textoverlay.png" id="3_1alar"]
 [ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="4_1alar"]
 [ext_resource type="AudioStream" uid="uid://e3smry6huri4" path="res://Assets/Sounds/Music/Lullaby.wav" id="6_jwu4y"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="7_rrcgd"]
 
 [sub_resource type="Curve" id="Curve_rrcgd"]
 _data = [Vector2(0.008849561, 1), 0.0, 0.0, 0, 0, Vector2(0.1460177, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.6371681, 0), 0.0, 0.0, 0, 0, Vector2(0.88053095, 0), 0.0, 0.0, 0, 0]
@@ -24,6 +25,32 @@ shader_parameter/iridescence_intensity = 0.3590000170525
 shader_parameter/light_dir = Vector2(0.5, -0.5)
 shader_parameter/scroll = Vector2(0, 0)
 shader_parameter/angle_deg = 0.0
+
+[sub_resource type="Theme" id="Theme_rrcgd"]
+default_base_scale = 0.28
+default_font = ExtResource("1_6bybg")
+default_font_size = 14
+
+[sub_resource type="GDScript" id="GDScript_rrcgd"]
+resource_name = "play"
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_pressed() -> void:
+	GameManager.canPause=true
+	LoadManager.LoadScene(\"res://Scenes/Level.tscn\")
+	pass # Replace with function body.
+"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bybg"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -63,9 +90,9 @@ shader_parameter/vignette_inner_radius = 0.7750000368125
 shader_parameter/scanline_intensity = 0.2
 shader_parameter/barrel_distortion = 0.0
 shader_parameter/chromatic_aberration = 0.0030000001425
-shader_parameter/crt_vignette_power = 1.43200006802
+shader_parameter/crt_vignette_power = 0.750000035625
 shader_parameter/pixel_resolution_x = 960
-shader_parameter/pixel_resolution_y = 540
+shader_parameter/pixel_resolution_y = 480
 shader_parameter/enable_color_quantization = true
 shader_parameter/color_quant_steps = 32.0
 shader_parameter/warble_amount = 0.002
@@ -112,7 +139,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Menu/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
+tracks/3/path = NodePath("../1_Menu/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -165,7 +192,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Menu/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
+tracks/3/path = NodePath("../1_Menu/Label/Sprite2D:material:shader_parameter/iridescence_intensity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -251,9 +278,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="CanvasLayer" parent="." unique_id=911966369]
+[node name="1_Menu" type="CanvasLayer" parent="." unique_id=911966369]
 
-[node name="Label" type="RichTextLabel" parent="Menu" unique_id=1540653330]
+[node name="Label" type="RichTextLabel" parent="1_Menu" unique_id=1540653330]
 clip_children = 2
 anchors_preset = 5
 anchor_left = 0.5
@@ -282,11 +309,65 @@ scroll_active = false
 autowrap_mode = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Menu/Label" unique_id=743933914]
+[node name="Sprite2D" type="Sprite2D" parent="1_Menu/Label" unique_id=743933914]
 material = SubResource("ShaderMaterial_pkpk7")
 position = Vector2(291.25333, 130.26967)
 scale = Vector2(0.68365926, 0.38805124)
 texture = ExtResource("3_1alar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="1_Menu" unique_id=61446148]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -8.0
+offset_right = 41.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.3983164, 2.3983164)
+pivot_offset = Vector2(40.919556, 33.98143)
+theme_override_constants/separation = -3
+alignment = 1
+
+[node name="Play" type="Button" parent="1_Menu/VBoxContainer" unique_id=1817331672]
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_rrcgd")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.27022174, 0.27022198, 0.27022186, 1)
+theme_override_colors/font_hover_color = Color(0.50534385, 0.505344, 0.505345, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+text = "play"
+script = SubResource("GDScript_rrcgd")
+
+[node name="options" type="Button" parent="1_Menu/VBoxContainer" unique_id=581749081]
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_rrcgd")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.27022174, 0.27022198, 0.27022186, 1)
+theme_override_colors/font_hover_color = Color(0.50534385, 0.505344, 0.505345, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+text = "options"
+
+[node name="quit" type="Button" parent="1_Menu/VBoxContainer" unique_id=1859631016]
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_rrcgd")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.27022174, 0.27022198, 0.27022186, 1)
+theme_override_colors/font_hover_color = Color(0.50534385, 0.505344, 0.505345, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+text = "quit"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1667119085]
 layer = 0
@@ -347,6 +428,10 @@ transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 5.4354095
 material = SubResource("StandardMaterial3D_3h75r")
 
+[node name="mouse" type="CanvasLayer" parent="." unique_id=986388149]
+
+[node name="Cursor" parent="mouse" unique_id=2116295921 instance=ExtResource("7_rrcgd")]
+
 [node name="Filters" type="CanvasLayer" parent="." unique_id=918578601]
 
 [node name="CRT" type="ColorRect" parent="Filters" unique_id=1781847719]
@@ -370,7 +455,9 @@ bus = &"Music"
 libraries/ = SubResource("AnimationLibrary_q6hi6")
 autoplay = &"glitch"
 
-[node name="walking animation player" type="AnimationPlayer" parent="." unique_id=1039804610]
+[node name="Walking" type="AnimationPlayer" parent="." unique_id=1039804610]
 root_node = NodePath("../CanvasLayer/SubViewportContainer/SubViewport")
 libraries/ = SubResource("AnimationLibrary_urwbv")
 autoplay = &"walking"
+
+[connection signal="pressed" from="1_Menu/VBoxContainer/Play" to="1_Menu/VBoxContainer/Play" method="_on_pressed"]

@@ -169,6 +169,7 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=346947034]
 libraries/ = SubResource("AnimationLibrary_gbq6h")
+autoplay = &"treemovement"
 
 [node name="TreeCutterAudioStream" type="AudioStreamPlayer2D" parent="." unique_id=1245506797]
 position = Vector2(0, -26.914467)
