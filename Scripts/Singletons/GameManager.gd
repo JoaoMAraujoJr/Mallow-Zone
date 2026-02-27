@@ -28,7 +28,7 @@ var isPaused:bool = false
 #current
 var currentSpawnedChunks :={}
 var currentEquipedWeaponType : String = "none"
-var currentPlayerSkin: String = ""
+var currentPlayerSkin: String = "Kilo"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

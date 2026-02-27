@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://drl84kcujatcl" path="res://Assets/3D/Rhok the Boulder/model_0.png" id="1_acjef"]
 [ext_resource type="Texture2D" uid="uid://cvbv5bo6u7af4" path="res://Assets/Textures/UI/minimap_icons/boss/boulder_boss.png" id="2_mxrxc"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_llr1c"]
+[ext_resource type="Texture2D" uid="uid://ddwth17sxb5wm" path="res://Assets/Textures/entities/Particles/trail/grass_trail_under.png" id="4_llr1c"]
+[ext_resource type="Texture2D" uid="uid://bwcq3xe6hfri0" path="res://Assets/Textures/entities/Particles/trail/dirt_trail_dark.png" id="4_wp7sp"]
+[ext_resource type="Texture2D" uid="uid://c0pcd1y3eq3u1" path="res://Assets/Textures/entities/Particles/trail/dirt_trail_highlight.png" id="5_wrmn5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mxrxc"]
 
@@ -272,6 +275,79 @@ _data = {
 &"camera animation": SubResource("Animation_llr1c")
 }
 
+[sub_resource type="Curve" id="Curve_6bkmo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75757575, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8jx7f"]
+curve = SubResource("Curve_6bkmo")
+
+[sub_resource type="Curve" id="Curve_wrmn5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7619047, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uiqr3"]
+curve = SubResource("Curve_wrmn5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrmn5"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+gravity = Vector3(0, 0, 0)
+scale_min = 4.2
+scale_max = 4.45
+scale_curve = SubResource("CurveTexture_uiqr3")
+alpha_curve = SubResource("CurveTexture_8jx7f")
+
+[sub_resource type="Curve" id="Curve_uiqr3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86147183, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4hkjh"]
+curve = SubResource("Curve_uiqr3")
+
+[sub_resource type="Curve" id="Curve_4hkjh"]
+_data = [Vector2(0.7532467, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_udyir"]
+curve = SubResource("Curve_4hkjh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uiqr3"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+gravity = Vector3(0, 0, 0)
+scale_min = 4.2
+scale_max = 4.45
+scale_curve = SubResource("CurveTexture_udyir")
+alpha_curve = SubResource("CurveTexture_4hkjh")
+
+[sub_resource type="Curve" id="Curve_udyir"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7532467, 1), 0.0, 0.0, 0, 0, Vector2(0.90476185, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f2eya"]
+curve = SubResource("Curve_udyir")
+
+[sub_resource type="Curve" id="Curve_f2eya"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74891776, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6bkmo"]
+curve = SubResource("Curve_f2eya")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wp7sp"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+gravity = Vector3(0, 0, 0)
+damping_max = 0.44500002
+scale_min = 4.2
+scale_max = 4.5
+scale_curve = SubResource("CurveTexture_6bkmo")
+alpha_curve = SubResource("CurveTexture_f2eya")
+
 [node name="Rohk The Boulder" type="RigidBody2D" unique_id=318558332 groups=["Enemy"]]
 light_mask = 3
 visibility_layer = 3
@@ -299,14 +375,17 @@ debug_color = Color(0.47843137, 0.85490197, 0.25882354, 0.047058824)
 [node name="Hitbox Area" type="Area2D" parent="." unique_id=1586494144]
 
 [node name="Hitbox Collision" type="CollisionShape2D" parent="Hitbox Area" unique_id=1690971786]
+visible = false
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_llr1c")
 debug_color = Color(0.63435644, 0.51454425, 0.33671847, 0.41960785)
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1458731370]
+visible = false
 shape = SubResource("CircleShape2D_acjef")
 
 [node name="Visuals" type="SubViewportContainer" parent="." unique_id=2025704012]
+visible = false
 z_index = 1
 y_sort_enabled = true
 offset_left = -258.0
@@ -322,7 +401,7 @@ own_world_3d = true
 world_3d = SubResource("World3D_wk8e1")
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="Visuals/SubViewport" unique_id=968720156]
 
@@ -360,3 +439,30 @@ rotation_smoothing_enabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1224450750]
 libraries/ = SubResource("AnimationLibrary_wp7sp")
 autoplay = &"camera animation"
+
+[node name="particles" type="Node2D" parent="." unique_id=22044414]
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="particles" unique_id=837569509]
+z_index = -4
+amount = 20
+texture = ExtResource("4_llr1c")
+lifetime = 10.0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_wrmn5")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="particles" unique_id=1806338762]
+z_index = -4
+amount = 20
+texture = ExtResource("4_wp7sp")
+lifetime = 10.0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_uiqr3")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="particles" unique_id=601466142]
+z_index = -3
+amount = 20
+texture = ExtResource("5_wrmn5")
+lifetime = 10.0
+fixed_fps = 10
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_wp7sp")

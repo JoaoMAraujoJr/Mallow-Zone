@@ -71,9 +71,9 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 
 [node name="LifeBar" type="TextureProgressBar" parent="." unique_id=326574726]
 offset_left = -23.0
-offset_top = 25.000002
+offset_top = -43.0
 offset_right = 77.8757
-offset_bottom = 38.450096
+offset_bottom = -29.549906
 scale = Vector2(0.44609356, 0.44609356)
 nine_patch_stretch = true
 stretch_margin_left = 2
