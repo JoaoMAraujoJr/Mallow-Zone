@@ -5,8 +5,38 @@
 [ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="2_3h75r"]
 [ext_resource type="Texture2D" uid="uid://fn3pmog47geq" path="res://Scenes/UI/main_menu/textoverlay.png" id="3_1alar"]
 [ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="4_1alar"]
+[ext_resource type="PackedScene" uid="uid://b471kfbc41iv0" path="res://Scenes/Unique/save_select_button.tscn" id="4_pkpk7"]
+[ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="5_q6hi6"]
 [ext_resource type="AudioStream" uid="uid://e3smry6huri4" path="res://Assets/Sounds/Music/Lullaby.wav" id="6_jwu4y"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="7_rrcgd"]
+[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_urwbv"]
+
+[sub_resource type="GDScript" id="GDScript_q6hi6"]
+resource_name = "MainMenu"
+script/source = "extends Control
+
+enum MenuWindows {
+	MAIN_MENU,
+	SAVE_SELECT,
+	OPTIONS
+}
+
+@onready var cur_menu:MenuWindows =MenuWindows.MAIN_MENU
+
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func play_pressed() -> void:
+	cur_menu = MenuWindows.SAVE_SELECT
+	$AnimationPlayer.play(\"menu_to_save_selection\")
+	pass # Replace with function body.
+"
 
 [sub_resource type="Curve" id="Curve_rrcgd"]
 _data = [Vector2(0.008849561, 1), 0.0, 0.0, 0, 0, Vector2(0.1460177, 0.7191012), 0.0, 0.0, 0, 0, Vector2(0.6371681, 0), 0.0, 0.0, 0, 0, Vector2(0.88053095, 0), 0.0, 0.0, 0, 0]
@@ -31,26 +61,7 @@ default_base_scale = 0.28
 default_font = ExtResource("1_6bybg")
 default_font_size = 14
 
-[sub_resource type="GDScript" id="GDScript_rrcgd"]
-resource_name = "play"
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_pressed() -> void:
-	GameManager.canPause=true
-	LoadManager.LoadScene(\"res://Scenes/Level.tscn\")
-	pass # Replace with function body.
-"
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urwbv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bybg"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -89,14 +100,31 @@ shader_parameter/vignette_outer_radius = 1.05200004671012
 shader_parameter/vignette_inner_radius = 0.7750000368125
 shader_parameter/scanline_intensity = 0.2
 shader_parameter/barrel_distortion = 0.0
-shader_parameter/chromatic_aberration = 0.0030000001425
+shader_parameter/chromatic_aberration = 0.0010000000475
 shader_parameter/crt_vignette_power = 0.750000035625
-shader_parameter/pixel_resolution_x = 960
-shader_parameter/pixel_resolution_y = 480
+shader_parameter/pixel_resolution_x = 1280
+shader_parameter/pixel_resolution_y = 720
 shader_parameter/enable_color_quantization = true
-shader_parameter/color_quant_steps = 32.0
+shader_parameter/color_quant_steps = 9.0000003325
 shader_parameter/warble_amount = 0.002
 shader_parameter/warble_speed = 1.36400006479
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_co37i"]
+shader = ExtResource("9_urwbv")
+shader_parameter/resolution = Vector2(768, 432)
+shader_parameter/scan_line_amount = 0.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.0130000006175
+shader_parameter/interference_amount = 0.0
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -10.393999923715
+shader_parameter/pixel_strength = -4.0
 
 [sub_resource type="Animation" id="Animation_rrcgd"]
 length = 0.001
@@ -270,6 +298,283 @@ _data = {
 &"walking": SubResource("Animation_q6hi6")
 }
 
+[sub_resource type="Animation" id="Animation_urwbv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../1_Menu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(218.00002, 411.58047)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.007843138)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../1_Menu/Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../1_Menu/Label/Sprite2D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../1_Menu/VBoxContainer:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../1_Menu/VBoxContainer/Play:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../1_Menu/VBoxContainer/options:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../1_Menu/VBoxContainer/quit:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Label:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_co37i"]
+resource_name = "menu_to_save_selection"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../1_Menu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35596865, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4000001, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4000001, 0.8000001, 0.8900001, 1.0900002),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(218.00002, 917), Vector2(218, 390), Vector2(218.00002, 411.58047), Vector2(218.00002, 411.58047)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HBoxContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.46081424, 0.95666677, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.007843138), Color(1, 1, 1, 0.007843138), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../1_Menu/Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.34861642),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../1_Menu/Label/Sprite2D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.34861642),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../1_Menu/VBoxContainer:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.34861642),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../1_Menu/VBoxContainer/Play:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.34861642),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../1_Menu/VBoxContainer/options:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.34861642),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../1_Menu/VBoxContainer/quit:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.18194968),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Label:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.38253596, 0.6666667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hshsc"]
+_data = {
+&"RESET": SubResource("Animation_urwbv"),
+&"menu_to_save_selection": SubResource("Animation_co37i")
+}
+
 [node name="MainMenu" type="Control" unique_id=269973777]
 layout_mode = 3
 anchors_preset = 15
@@ -277,6 +582,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_q6hi6")
 
 [node name="1_Menu" type="CanvasLayer" parent="." unique_id=911966369]
 
@@ -343,7 +649,6 @@ theme_override_colors/font_hover_color = Color(0.50534385, 0.505344, 0.505345, 1
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 1
 text = "play"
-script = SubResource("GDScript_rrcgd")
 
 [node name="options" type="Button" parent="1_Menu/VBoxContainer" unique_id=581749081]
 layout_mode = 2
@@ -369,61 +674,120 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 1
 text = "quit"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1667119085]
+[node name="2_SaveSelect" type="CanvasLayer" parent="." unique_id=1717271486]
+visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="2_SaveSelect" unique_id=112542539]
+modulate = Color(1, 1, 1, 0.007843138)
+anchors_preset = -1
+anchor_left = 0.072000004
+anchor_top = 0.27
+anchor_right = 0.93600005
+anchor_bottom = 0.785
+offset_left = 125.84001
+offset_top = 217.18047
+offset_right = -392.08008
+offset_bottom = -153.61954
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4473741, 1.4473741)
+theme_override_constants/separation = 196
+
+[node name="SaveSelect" parent="2_SaveSelect/HBoxContainer" unique_id=469829838 instance=ExtResource("4_pkpk7")]
+layout_mode = 2
+
+[node name="SaveSelect2" parent="2_SaveSelect/HBoxContainer" unique_id=1659875315 instance=ExtResource("4_pkpk7")]
+layout_mode = 2
+Slot = 2
+
+[node name="SaveSelect3" parent="2_SaveSelect/HBoxContainer" unique_id=239608307 instance=ExtResource("4_pkpk7")]
+layout_mode = 2
+Slot = 3
+
+[node name="SaveSelect4" parent="2_SaveSelect/HBoxContainer" unique_id=2027224675 instance=ExtResource("4_pkpk7")]
+layout_mode = 2
+Slot = 4
+
+[node name="Label" type="RichTextLabel" parent="2_SaveSelect" unique_id=711331914]
+material = SubResource("ShaderMaterial_urwbv")
+anchors_preset = -1
+anchor_left = 0.081
+anchor_top = 0.083000004
+anchor_right = 0.33800003
+anchor_bottom = 0.314
+offset_left = 0.32000732
+offset_top = 0.24000168
+offset_right = -7.860718
+offset_bottom = 13.919998
+scale = Vector2(1.0290242, 1.0290242)
+pivot_offset = Vector2(72, 20)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.30980393)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("5_q6hi6")
+theme_override_font_sizes/normal_font_size = 59
+bbcode_enabled = true
+text = "[wave amp=10 freq=3][font_size=99]S[/font_size]elect Save[/wave]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="BG" type="CanvasLayer" parent="." unique_id=1667119085]
 layer = 0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=2127860401]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="BG" unique_id=2127860401]
 offset_right = 1280.0
 offset_bottom = 720.0
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=1098888383]
+[node name="SubViewport" type="SubViewport" parent="BG/SubViewportContainer" unique_id=1098888383]
 handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1667405742]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="BG/SubViewportContainer/SubViewport" unique_id=1667405742]
 transform = Transform3D(-0.9304176, -0.36302286, 0.050373588, 0, 0.13744454, 0.9905095, -0.36650115, 0.92158747, -0.12788083, 0, 0, 0)
 light_energy = 1.4
 shadow_enabled = true
 
-[node name="BackgroundScene" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1815383315]
+[node name="BackgroundScene" type="Node3D" parent="BG/SubViewportContainer/SubViewport" unique_id=1815383315]
 
-[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1383454774]
+[node name="Camera3D" type="Camera3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1383454774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0160055, 3.4160366)
 fov = 98.519745
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=373939453]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=373939453]
 environment = SubResource("Environment_1alar")
 
-[node name="floor" type="CSGBox3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1473547326]
+[node name="floor" type="CSGBox3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1473547326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19368744, -0.18079138, -0.31607056)
 size = Vector3(7.3364105, 1, 6.6558228)
 material = SubResource("StandardMaterial3D_jwu4y")
 
-[node name="fog" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1551392558]
+[node name="fog" type="Node3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1551392558]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 1.3630619)
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1548830721]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1548830721]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 3.1428263
 material = SubResource("StandardMaterial3D_3h75r")
 
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=843745894]
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=843745894]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 3.6936347
 material = SubResource("StandardMaterial3D_3h75r")
 
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=2003326099]
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=2003326099]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 4.0877376
 material = SubResource("StandardMaterial3D_3h75r")
 
-[node name="CSGSphere3D4" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1658748875]
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1658748875]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 4.716187
 material = SubResource("StandardMaterial3D_3h75r")
 
-[node name="CSGSphere3D5" type="CSGSphere3D" parent="CanvasLayer/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=216473130]
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=216473130]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 5.4354095
 material = SubResource("StandardMaterial3D_3h75r")
@@ -444,6 +808,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="CRT velho" type="ColorRect" parent="Filters" unique_id=2090782185]
+visible = false
+z_index = 41
+material = SubResource("ShaderMaterial_co37i")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
 [node name="MenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=2147231182]
 stream = ExtResource("6_jwu4y")
 volume_db = 18.295
@@ -456,8 +832,12 @@ libraries/ = SubResource("AnimationLibrary_q6hi6")
 autoplay = &"glitch"
 
 [node name="Walking" type="AnimationPlayer" parent="." unique_id=1039804610]
-root_node = NodePath("../CanvasLayer/SubViewportContainer/SubViewport")
+root_node = NodePath("../BG/SubViewportContainer/SubViewport")
 libraries/ = SubResource("AnimationLibrary_urwbv")
 autoplay = &"walking"
 
-[connection signal="pressed" from="1_Menu/VBoxContainer/Play" to="1_Menu/VBoxContainer/Play" method="_on_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1144834030]
+root_node = NodePath("../2_SaveSelect")
+libraries/ = SubResource("AnimationLibrary_hshsc")
+
+[connection signal="pressed" from="1_Menu/VBoxContainer/Play" to="." method="play_pressed"]

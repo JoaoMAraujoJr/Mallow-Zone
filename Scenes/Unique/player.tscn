@@ -40,7 +40,7 @@ script = ExtResource("3_6nq75")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=571946010]
 z_index = -2
-position = Vector2(0, 24)
+position = Vector2(0, 29)
 texture = ExtResource("8_8erm5")
 
 [node name="PlayerSkinNode" parent="." unique_id=1590478521 instance=ExtResource("3_d05bs")]

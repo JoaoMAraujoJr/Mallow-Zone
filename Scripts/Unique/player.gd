@@ -36,7 +36,8 @@ func _ready():
 	isAffectable = true
 	GameManager.thisPlayer= self
 	call_deferred("_equipGun")
-	GameManager.player_health = health
+	max_health = GameManager.max_hp
+	health = GameManager.cur_hp
 	gold_wallet = GameManager.gold_wallet
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
@@ -127,7 +128,7 @@ func mouse_actions_handler():
 
 #AddTo Methods
 func uponDamage():
-	GameManager.player_health = health
+	GameManager.cur_hp = health
 
 func Die():
 	GameManager.currentEquipedWeaponType = "none"

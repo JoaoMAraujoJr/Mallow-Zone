@@ -76,8 +76,9 @@ func Interact():
 	if (usageType == UsageTypes.ONCE and currentInteractionCount >= 1):
 		usageType = UsageTypes.NONE
 		return
-	canInteract = false
-	cooldownTimer.start()
+	if cooldownTimeInSeconds > 0.0:
+		canInteract = false
+		cooldownTimer.start()
 	currentInteractionCount +=1
 
 func _ready():

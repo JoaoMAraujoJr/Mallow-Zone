@@ -1,0 +1,1054 @@
+[gd_scene format=3 uid="uid://b471kfbc41iv0"]
+
+[ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="1_tgrdc"]
+[ext_resource type="Texture2D" uid="uid://cy41t53s14wyy" path="res://Assets/Textures/UI/Buttons/save_select/save _select_bg_2.png" id="2_tycyy"]
+[ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="3_tycyy"]
+[ext_resource type="Texture2D" uid="uid://c8a5vtmj6rlgy" path="res://Assets/Textures/sprite_masks/light_mask/round_mask.png" id="4_lm4ow"]
+[ext_resource type="Script" uid="uid://xrll1n3wr3dg" path="res://Scripts/Unique/player_skin_node.gd" id="5_pkd7i"]
+[ext_resource type="Texture2D" uid="uid://dd4dpbbcudkuc" path="res://Assets/Textures/player_skins/kilo/leg_front_spr.png" id="6_58e04"]
+[ext_resource type="Texture2D" uid="uid://mel4mjmjjc6a" path="res://Assets/Textures/player_skins/kilo/torso_front_spr.png" id="7_uiiok"]
+[ext_resource type="Texture2D" uid="uid://b8nnm4dinplg0" path="res://Assets/Textures/player_skins/kilo/head_front_spr.png" id="8_pb1pl"]
+[ext_resource type="Texture2D" uid="uid://dmaqkc6tvwbct" path="res://Assets/Textures/player_skins/kilo/eyes_front_open_spr.png" id="9_bs6jk"]
+[ext_resource type="AudioStream" uid="uid://bqx2jk7kpk6l7" path="res://Assets/Sounds/Steps_grass.ogg" id="10_b0uw0"]
+[ext_resource type="AudioStream" uid="uid://037ilk65ckll" path="res://Assets/Sounds/soundEffects/damage/blood_rain.wav" id="11_j8vd7"]
+[ext_resource type="AudioStream" uid="uid://xqjtfnee2x7u" path="res://Assets/Sounds/soundEffects/Blast_2.wav" id="12_tpyar"]
+[ext_resource type="Texture2D" uid="uid://bcmvwj418c0j2" path="res://Assets/Textures/entities/Particles/blood/blood_0.png" id="13_21l00"]
+[ext_resource type="Texture2D" uid="uid://du4en80t3llkg" path="res://Assets/Textures/player_skins/playerSkull.png" id="14_vlspv"]
+
+[sub_resource type="GDScript" id="GDScript_tycyy"]
+resource_name = "SaveSelectButton"
+script/source = "extends Control
+
+@export var Slot :int = 1
+@export var thisSaveFile :SaveFile
+
+func _ready() -> void:
+	var path:= \"user://saves/save_%d.tres\" % Slot
+	if ResourceLoader.exists(path): 
+		_setSaveFile(ResourceLoader.load(path))
+		$Empty.visible =false
+		$NotEmpty.visible = true
+	else:
+		$Empty.visible =true
+		$NotEmpty.visible = false
+
+func _setSaveFile (save:SaveFile):
+	thisSaveFile = save
+	$NotEmpty/skin_mask/PlayerSkinNode._loadSkin(thisSaveFile.cur_skin)
+	$NotEmpty/data.text = \\
+	\"[wave amp=10 freq=3]%s/%s hp[/wave]\\n\" % [thisSaveFile.cur_hp, thisSaveFile.max_hp] + \\
+	\"[wave amp=10 freq=3]%s$[/wave]\\n\" % thisSaveFile.money + \\
+	\"[wave amp=10 freq=3]\"+ thisSaveFile.cur_weapon +\"[/wave]\"
+
+
+func _on_newgame_pressed() -> void:
+	SaveManager.create_new_save(Slot)
+	LoadManager.LoadScene(\"res://Scenes/Level.tscn\")
+	pass # Replace with function body.
+
+
+func _on_newgame_mouse_entered() -> void:
+	$Empty/newgame_anim.play(\"pop\")
+	pass # Replace with function body.
+
+
+func _on_newgame_mouse_exited() -> void:
+	$Empty/newgame_anim.play_backwards(\"pop\")
+	pass # Replace with function body.
+
+
+
+func _on_play_pressed() -> void:
+	SaveManager.load_game(Slot)
+	GameManager.load_from_current_save()
+	LoadManager.LoadScene(\"res://Scenes/Level.tscn\")
+	pass # Replace with function body.
+
+
+func _on_play_mouse_entered() -> void:
+	$NotEmpty/select_anim.play(\"pop\")
+	pass # Replace with function body.
+
+
+func _on_play_mouse_exited() -> void:
+	$NotEmpty/select_anim.play_backwards(\"pop\")
+	pass # Replace with function body.
+
+
+func _on_mouse_entered() -> void:
+	$card_anim.play(\"pop\")
+	pass # Replace with function body.
+
+
+func _on_mouse_exited() -> void:
+	$card_anim.play_backwards(\"pop\")
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkd7i"]
+size = Vector2(185, 260)
+
+[sub_resource type="Curve" id="Curve_lm4ow"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.020576127, -0.011235952), 0.0, 0.0, 0, 0, Vector2(0.7818931, -0.011235952), 0.0, 0.0, 0, 0, Vector2(0.8806585, -0.505618), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_81gsa"]
+curve = SubResource("Curve_lm4ow")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvtbk"]
+shader = ExtResource("1_tgrdc")
+shader_parameter/curve = SubResource("CurveTexture_81gsa")
+shader_parameter/rotation_speed = -1.0
+shader_parameter/distortion_strength = 0.6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tycyy"]
+
+[sub_resource type="Animation" id="Animation_tycyy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("play:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lm4ow"]
+resource_name = "pop"
+length = 0.43333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("play:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81gsa"]
+_data = {
+&"RESET": SubResource("Animation_tycyy"),
+&"pop": SubResource("Animation_lm4ow")
+}
+
+[sub_resource type="Animation" id="Animation_shdt4"]
+resource_name = "Die"
+length = 7.0666666
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/head_sprites:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BloodParticleEmitter_neck:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BloodSplashAudioStream:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7iifb"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/head_sprites:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -4), Vector2(0, -2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skin/head_sprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.88000053)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skin/torso_and_legs/torso:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skin/torso_and_legs/legs:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.075, 1.045)]
+}
+
+[sub_resource type="Animation" id="Animation_koh5w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/head_sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skin/head_sprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skin/torso_and_legs/torso:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skin/torso_and_legs/legs:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("skin/torso_and_legs/legs/left_leg:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skin/torso_and_legs/legs/right_leg:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(7, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("skin/head_sprites:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BloodParticleEmitter_neck:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = false
+tracks/8/path = NodePath("BloodSplashAudioStream:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("skin/torso_and_legs/legs/right_leg/leg:skew")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.08726646]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("skin/torso_and_legs/legs/left_leg/leg:skew")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.08726646]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("skin/torso_and_legs/torso:skew")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.017453292]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("skin/torso_and_legs:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_7psrb"]
+resource_name = "Walking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/torso_and_legs/legs/left_leg:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.52, 1, 1.5333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-7, 0), Vector2(-7, -10), Vector2(-7, 0), Vector2(-7, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skin/torso_and_legs/legs/right_leg:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.52, 1.01, 1.53),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(7, -10), Vector2(7, 0), Vector2(7, -10), Vector2(7, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.04, 1.54),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playFootsteps"
+}, {
+"args": [],
+"method": &"playFootsteps"
+}, {
+"args": [],
+"method": &"playFootsteps"
+}, {
+"args": [],
+"method": &"playFootsteps"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skin/head_sprites:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.51, 1.0333333, 1.5433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -4), Vector2(0, -1), Vector2(0, -4), Vector2(0, -1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("skin/torso_and_legs/torso:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skin/torso_and_legs/legs/right_leg/leg:skew")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.01, 0.51, 1.02, 1.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.08726646259971647, 0.08726646259971647, -0.08726646259971647, 0.08726646259971647]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("skin/torso_and_legs/legs/left_leg/leg:skew")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.52, 1.03, 1.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.08726646, 0.08726646, -0.08726646, 0.08726646]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("skin/torso_and_legs/torso:skew")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.52, 1.04, 1.56),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.017453292, -0.017453292, 0.017453292, -0.017453292]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("skin/torso_and_legs:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.51, 1.0333334, 1.5433334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -4), Vector2(0, -3), Vector2(0, -4), Vector2(0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_koh5w"]
+_data = {
+&"Die": SubResource("Animation_shdt4"),
+&"Idle": SubResource("Animation_7iifb"),
+&"RESET": SubResource("Animation_koh5w"),
+&"Walking": SubResource("Animation_7psrb")
+}
+
+[sub_resource type="Animation" id="Animation_4d2b6"]
+resource_name = "Blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/head_sprites/eyes:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.55), Vector2(1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"Blink"
+}, {
+"args": [],
+"method": &"OpenEyes"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_knrqm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin/head_sprites/eyes:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_shdt4"]
+_data = {
+&"Blink": SubResource("Animation_4d2b6"),
+&"RESET": SubResource("Animation_knrqm")
+}
+
+[sub_resource type="Curve" id="Curve_wrd75"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7619047, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3370787), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_smfr6"]
+curve = SubResource("Curve_wrd75")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w5mbv"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 75.47
+initial_velocity_max = 132.08
+angular_velocity_min = -321.19
+angular_velocity_max = 187.35999
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -39.4
+radial_accel_max = 6.6999974
+scale_curve = SubResource("CurveTexture_smfr6")
+
+[sub_resource type="Curve" id="Curve_7e0pt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.89610386, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d5crs"]
+curve = SubResource("Curve_7e0pt")
+
+[sub_resource type="Curve" id="Curve_4d2b6"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpops"]
+curve = SubResource("Curve_4d2b6")
+
+[sub_resource type="Curve" id="Curve_gjvsw"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.995671, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ld74d"]
+curve = SubResource("Curve_gjvsw")
+
+[sub_resource type="Curve" id="Curve_1f6ua"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.06926407, 0.9550562), 0.0, 0.0, 0, 0, Vector2(0.95238096, 5), 7.3206563, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3m82a"]
+curve = SubResource("Curve_1f6ua")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vhf7t"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+angle_curve = SubResource("CurveTexture_fpops")
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 144.98
+initial_velocity_max = 237.92
+angular_velocity_min = -64.24001
+angular_velocity_max = 96.359985
+angular_velocity_curve = SubResource("CurveTexture_ld74d")
+gravity = Vector3(0, 100, 0)
+scale_curve = SubResource("CurveTexture_3m82a")
+alpha_curve = SubResource("CurveTexture_d5crs")
+
+[sub_resource type="Animation" id="Animation_pkd7i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NotEmpty:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Empty:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_58e04"]
+resource_name = "pop"
+length = 0.46666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NotEmpty:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Empty:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uiiok"]
+_data = {
+&"RESET": SubResource("Animation_pkd7i"),
+&"pop": SubResource("Animation_58e04")
+}
+
+[node name="SaveSelect" type="Control" unique_id=1506632854]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_tycyy")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1105127559]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=458740664]
+position = Vector2(3, -3)
+shape = SubResource("RectangleShape2D_pkd7i")
+
+[node name="Empty" type="Control" parent="." unique_id=1618359976]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="background" type="Sprite2D" parent="Empty" unique_id=2093853170]
+material = SubResource("ShaderMaterial_tvtbk")
+texture = ExtResource("2_tycyy")
+
+[node name="Label" type="RichTextLabel" parent="Empty" unique_id=513629954]
+material = SubResource("ShaderMaterial_tycyy")
+layout_mode = 0
+offset_left = -77.0
+offset_top = -91.0
+offset_right = 72.0
+offset_bottom = -57.0
+rotation = -0.11953255
+scale = Vector2(1.1505201, 1.1505201)
+pivot_offset = Vector2(72, 20)
+theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
+theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("3_tycyy")
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "[wave amp=10 freq=3] Empty Slot[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="newgame" type="Button" parent="Empty" unique_id=493818069]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 38.0
+offset_right = 39.0
+offset_bottom = 101.0
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(40, 32)
+flat = true
+
+[node name="Label" type="RichTextLabel" parent="Empty/newgame" unique_id=1851478844]
+material = SubResource("ShaderMaterial_tycyy")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -24.5
+offset_right = 49.030014
+offset_bottom = 24.173641
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1505201, 1.1505201)
+pivot_offset = Vector2(50.322346, 19.742825)
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
+theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
+theme_override_constants/line_separation = -9
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("3_tycyy")
+theme_override_font_sizes/normal_font_size = 23
+bbcode_enabled = true
+text = "[wave amp=10 freq=3]New
+Game[/wave]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="newgame_anim" type="AnimationPlayer" parent="Empty" unique_id=1078685427]
+libraries/ = SubResource("AnimationLibrary_81gsa")
+
+[node name="NotEmpty" type="Control" parent="." unique_id=313016416]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="background" type="Sprite2D" parent="NotEmpty" unique_id=1166853664]
+material = SubResource("ShaderMaterial_tvtbk")
+texture = ExtResource("2_tycyy")
+
+[node name="Label" type="RichTextLabel" parent="NotEmpty" unique_id=669008630]
+material = SubResource("ShaderMaterial_tycyy")
+layout_mode = 0
+offset_left = -77.0
+offset_top = -100.41952
+offset_right = 72.0
+offset_bottom = -66.41952
+scale = Vector2(1.0290242, 1.0290242)
+pivot_offset = Vector2(72, 20)
+theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
+theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("3_tycyy")
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "[wave amp=10 freq=3]Saved Game[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="data" type="RichTextLabel" parent="NotEmpty" unique_id=1850808733]
+material = SubResource("ShaderMaterial_tycyy")
+layout_mode = 0
+offset_left = -49.0
+offset_top = -40.0
+offset_right = 100.0
+offset_bottom = 56.0
+scale = Vector2(0.72371125, 0.72371125)
+pivot_offset = Vector2(72, 20)
+theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
+theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("3_tycyy")
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "[wave amp=10 freq=3]100/100 hp[/wave]
+[wave amp=10 freq=3]1000$[/wave]
+[wave amp=10 freq=3]25/25[font_size=20] ammo[/font_size][/wave]"
+fit_content = true
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="skin_mask" type="Sprite2D" parent="NotEmpty" unique_id=1762385770]
+clip_children = 1
+position = Vector2(-36, -18.419514)
+scale = Vector2(0.11512904, 0.11512904)
+texture = ExtResource("4_lm4ow")
+
+[node name="PlayerSkinNode" type="Node2D" parent="NotEmpty/skin_mask" unique_id=306020732]
+position = Vector2(0, 173.71811)
+scale = Vector2(9.792731, 9.792731)
+script = ExtResource("5_pkd7i")
+
+[node name="skin" type="Node2D" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=1446741899]
+
+[node name="torso_and_legs" type="Node2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin" unique_id=2073305741]
+position = Vector2(0, -4)
+
+[node name="legs" type="Node2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/torso_and_legs" unique_id=1762220821]
+position = Vector2(0, 23)
+
+[node name="left_leg" type="Node2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/torso_and_legs/legs" unique_id=974414367]
+position = Vector2(-7, 0)
+
+[node name="leg" type="Sprite2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/torso_and_legs/legs/left_leg" unique_id=984618660]
+light_mask = 6
+visibility_layer = 11
+position = Vector2(-1, 12)
+skew = -0.08726646
+texture = ExtResource("6_58e04")
+
+[node name="right_leg" type="Node2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/torso_and_legs/legs" unique_id=1745623248]
+position = Vector2(7, 0)
+
+[node name="leg" type="Sprite2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/torso_and_legs/legs/right_leg" unique_id=514993261]
+light_mask = 6
+visibility_layer = 7
+position = Vector2(1, 12)
+scale = Vector2(-1, 1)
+skew = 0.08726646
+texture = ExtResource("6_58e04")
+
+[node name="torso" type="Sprite2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/torso_and_legs" unique_id=431735476]
+light_mask = 6
+visibility_layer = 7
+position = Vector2(0, 10)
+skew = 0.017453292
+texture = ExtResource("7_uiiok")
+
+[node name="head_sprites" type="Node2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin" unique_id=1006605841]
+light_mask = 2
+position = Vector2(0, -4)
+
+[node name="head" type="Sprite2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/head_sprites" unique_id=702020436]
+light_mask = 6
+visibility_layer = 7
+position = Vector2(0, -22)
+texture = ExtResource("8_pb1pl")
+
+[node name="eyes" type="Sprite2D" parent="NotEmpty/skin_mask/PlayerSkinNode/skin/head_sprites" unique_id=554087502]
+light_mask = 6
+visibility_layer = 7
+position = Vector2(0, -13)
+texture = ExtResource("9_bs6jk")
+offset = Vector2(0, -7.079646)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=1881671385]
+libraries/ = SubResource("AnimationLibrary_koh5w")
+autoplay = &"Idle"
+
+[node name="EyesAnimationPlayer" type="AnimationPlayer" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=1628967410]
+libraries/ = SubResource("AnimationLibrary_shdt4")
+speed_scale = 2.0
+
+[node name="BlinkTimer" type="Timer" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=1637514747]
+wait_time = 10.0
+autostart = true
+
+[node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=872891569]
+stream = ExtResource("10_b0uw0")
+max_polyphony = 4
+bus = &"SFXReverb"
+
+[node name="BloodSplashAudioStream" type="AudioStreamPlayer2D" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=808531924]
+stream = ExtResource("11_j8vd7")
+volume_db = -11.644
+pitch_scale = 0.77
+attenuation = 1.624505
+bus = &"SFXReverb"
+
+[node name="SkullCrashingAudioStream" type="AudioStreamPlayer2D" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=1891422141]
+stream = ExtResource("12_tpyar")
+volume_db = 2.0
+pitch_scale = 0.62
+attenuation = 1.624505
+bus = &"SFXReverb"
+
+[node name="BloodParticleEmitter_neck" type="GPUParticles2D" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=408635724]
+position = Vector2(0, -7)
+emitting = false
+amount = 20
+texture = ExtResource("13_21l00")
+lifetime = 1.5
+explosiveness = 0.05
+randomness = 0.35
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_w5mbv")
+
+[node name="SkullParticleEmitter" type="GPUParticles2D" parent="NotEmpty/skin_mask/PlayerSkinNode" unique_id=632682334]
+z_index = 5
+position = Vector2(0, -7)
+emitting = false
+amount = 1
+texture = ExtResource("14_vlspv")
+lifetime = 6.0
+one_shot = true
+explosiveness = 0.05
+randomness = 0.35
+process_material = SubResource("ParticleProcessMaterial_vhf7t")
+
+[node name="play" type="Button" parent="NotEmpty" unique_id=592215622]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 38.0
+offset_right = 39.0
+offset_bottom = 101.0
+pivot_offset = Vector2(40, 32)
+mouse_filter = 1
+flat = true
+
+[node name="Label" type="RichTextLabel" parent="NotEmpty/play" unique_id=496889170]
+material = SubResource("ShaderMaterial_tycyy")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -24.5
+offset_right = 49.030014
+offset_bottom = 24.173641
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1505201, 1.1505201)
+pivot_offset = Vector2(50.322346, 19.742825)
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
+theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
+theme_override_constants/line_separation = -9
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("3_tycyy")
+theme_override_font_sizes/normal_font_size = 23
+bbcode_enabled = true
+text = "[wave amp=10 freq=3]Select Save[/wave]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="select_anim" type="AnimationPlayer" parent="NotEmpty" unique_id=1628873457]
+libraries/ = SubResource("AnimationLibrary_81gsa")
+
+[node name="card_anim" type="AnimationPlayer" parent="." unique_id=1604521425]
+libraries/ = SubResource("AnimationLibrary_uiiok")
+speed_scale = 4.0
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Empty/newgame" to="." method="_on_newgame_mouse_entered"]
+[connection signal="mouse_exited" from="Empty/newgame" to="." method="_on_newgame_mouse_exited"]
+[connection signal="pressed" from="Empty/newgame" to="." method="_on_newgame_pressed"]
+[connection signal="timeout" from="NotEmpty/skin_mask/PlayerSkinNode/BlinkTimer" to="NotEmpty/skin_mask/PlayerSkinNode" method="_on_blink_timer_timeout"]
+[connection signal="mouse_entered" from="NotEmpty/play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="NotEmpty/play" to="." method="_on_play_mouse_exited"]
+[connection signal="pressed" from="NotEmpty/play" to="." method="_on_play_pressed"]

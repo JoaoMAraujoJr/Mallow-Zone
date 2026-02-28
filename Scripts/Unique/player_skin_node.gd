@@ -9,7 +9,7 @@ class_name PlayerSkinManager
 @onready var leg_l := $skin/torso_and_legs/legs/left_leg/leg
 @onready var leg_r := $skin/torso_and_legs/legs/right_leg/leg
 
-@onready var thisSkin : String = GameManager.currentPlayerSkin
+@export var thisSkin : String = GameManager.currentPlayerSkin
 @onready var currentAction := "Idle"
 @onready var isBackwards := false
 @onready var eyesClosed := false
@@ -22,7 +22,12 @@ class_name PlayerSkinManager
 
 func _ready() -> void:
 	currentAction = "Idle"
-	_loadSkin(thisSkin)
+
+	if thisSkin in SkinData.PlayerSkins:
+		_loadSkin(thisSkin)
+	else:
+		_loadSkin(GameManager.currentPlayerSkin)
+
 	GameManager.connect("skin_changed",Callable(self,"on_Skin_Changed"))
 
 

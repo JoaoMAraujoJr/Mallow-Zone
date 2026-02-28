@@ -9,9 +9,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if GameManager.player_health <= 0:
+	if GameManager.cur_hp <= 0:
 		visible = true
-	if Input.is_action_pressed("RestartButton") and GameManager.player_health <= 0:
+	if Input.is_action_pressed("RestartButton") and GameManager.cur_hp <= 0:
 		$HoldAnimPlayer.play("hold")
 		if progressBar.value == progressBar.max_value:
 			GameManager.kills= 0
@@ -19,6 +19,7 @@ func _process(_delta: float) -> void:
 			GameManager.ammo= GameManager.ammoMax
 			GameManager.currentEquipedWeaponType = "none"
 			GameManager.thisPlayer = null
+			GameManager.cur_hp = GameManager.max_hp
 			GameManager.currentSpawnedChunks = {}
 			BiomeManager.currentBiome= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
 			GameManager.can_shoot = true

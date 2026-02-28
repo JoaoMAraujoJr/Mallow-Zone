@@ -6,15 +6,21 @@ var currentSaveSlot = 1
 
 var game_cursor: UtilityCursor
 
+
+var kills : int = 0
+
+var enemySpeed: float = 50.0
+
+
+#PlayerData
+var thisPlayer : Player
+var cur_hp : int = 100
+var max_hp : int = 100
+var can_shoot: bool = true
 var ammoMax : int = 0
 var ammo : int = ammoMax
-var kills : int = 0
 var gold_wallet : int = 0
-var enemySpeed: float = 50.0
-var player_health : int = 100
-var can_shoot: bool = true
 
-var thisPlayer : Player
 var weatherManager : WeatherManager
 
 #Pause Menu:
@@ -68,34 +74,24 @@ func ensure_pause_menu():
 func _input(event):
 	if event.is_action_pressed("Pause"):
 		pause()
-	if event.is_action_pressed("SaveGameDebug"):
-		saveDataOnSlot(currentSaveSlot)
 	if event.is_action_pressed("UnlockMouse"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CONFINED_HIDDEN:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("SaveGameDebug"):
-		saveDataOnSlot(currentSaveSlot)
 
-
-func saveDataOnSlot(slot:int):
-	var saveData = {
-		"player" : thisPlayer,
-		"current_ammo": ammo,
-		"player_skin": currentPlayerSkin,
-		"player_equiped_weapon_type":  currentEquipedWeaponType,
-
-	}
-	var dir = "user://saves/"
-	DirAccess.make_dir_recursive_absolute(dir)
-	var file_path = dir + "save_%d.json" % slot
-	var file = FileAccess.open(file_path, FileAccess.WRITE)
-	if file:
-		file.store_string(JSON.stringify(saveData))
-		file.close()
-		print("game was saved on slot " + str(slot))
-	
+func load_from_current_save():
+	if SaveManager.current_save:
+		max_hp = SaveManager.current_save.max_hp
+		cur_hp = SaveManager.current_save.cur_hp
+		currentPlayerSkin = SaveManager.current_save.cur_skin
+		currentEquipedWeaponType = SaveManager.current_save.cur_weapon
+		gold_wallet = SaveManager.current_save.money
+		if currentEquipedWeaponType in ItemData.weapons:
+			ammo = ItemData.weapons[currentEquipedWeaponType]["max_ammo"]
+			ammoMax = ItemData.weapons[currentEquipedWeaponType]["max_ammo"]
+		if SaveManager.current_save.cur_biome != null:
+			BiomeManager.currentBiome = SaveManager.current_save.cur_biome
+		else: 
+			BiomeManager.currentBiome = preload("res://Scripts/Resources/Biomes/GrassLands.tres")

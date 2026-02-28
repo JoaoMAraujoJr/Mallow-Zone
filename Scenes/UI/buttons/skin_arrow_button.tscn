@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://wwdg8ykw35u3"]
+[gd_scene format=3 uid="uid://wwdg8ykw35u3"]
 
 [ext_resource type="Script" uid="uid://k48qn5otiqpl" path="res://Scenes/UI/buttons/b_skin_arrow.gd" id="1_8csyl"]
 [ext_resource type="Texture2D" uid="uid://cgu8hnurwjw7p" path="res://Assets/Textures/UI/Buttons/b_PointingArrow_normal.png" id="2_gusb2"]
@@ -108,12 +108,12 @@ _data = {
 &"Squish": SubResource("Animation_ahrp5")
 }
 
-[node name="SkinArrowButton" type="Control"]
+[node name="SkinArrowButton" type="Control" unique_id=1560868774]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_8csyl")
 
-[node name="ArrowButton" type="TextureButton" parent="."]
+[node name="ArrowButton" type="TextureButton" parent="." unique_id=1465023177]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021000002
@@ -128,15 +128,11 @@ pivot_offset = Vector2(17.128002, 15.984)
 texture_normal = ExtResource("2_gusb2")
 texture_pressed = ExtResource("3_xe2hl")
 
-[node name="FloatAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ahrp5")
-}
-autoplay = "LoopFloat"
+[node name="FloatAnimationPlayer" type="AnimationPlayer" parent="." unique_id=486664751]
+libraries/ = SubResource("AnimationLibrary_ahrp5")
+autoplay = &"LoopFloat"
 
-[node name="SquishAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_kd31v")
-}
+[node name="SquishAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1315175992]
+libraries/ = SubResource("AnimationLibrary_kd31v")
 
 [connection signal="pressed" from="ArrowButton" to="." method="_on_arrow_button_pressed"]

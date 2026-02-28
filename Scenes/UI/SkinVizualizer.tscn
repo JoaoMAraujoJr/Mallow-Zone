@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://nnkkbaw0dku5"]
+[gd_scene format=3 uid="uid://nnkkbaw0dku5"]
 
 [ext_resource type="Script" uid="uid://xrll1n3wr3dg" path="res://Scripts/Unique/player_skin_node.gd" id="1_qgork"]
 [ext_resource type="Texture2D" uid="uid://5xlg4kwok2x1" path="res://Assets/Textures/player_skins/red_jim/leg_front_spr.png" id="2_lttxc"]
@@ -271,90 +271,83 @@ _data = {
 &"RESET": SubResource("Animation_knrqm")
 }
 
-[node name="SubViewportContainer" type="SubViewportContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" unique_id=2109442425]
 offset_left = 170.0
 offset_top = 16.0
 offset_right = 234.0
 offset_bottom = 107.0
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1851363451]
 handle_input_locally = false
 size = Vector2i(64, 96)
 render_target_update_mode = 4
 
-[node name="PlayerSkinNode" type="Node2D" parent="SubViewport"]
+[node name="PlayerSkinNode" type="Node2D" parent="SubViewport" unique_id=833474037]
 position = Vector2(32, 54)
 script = ExtResource("1_qgork")
 
-[node name="skin" type="Node2D" parent="SubViewport/PlayerSkinNode"]
+[node name="skin" type="Node2D" parent="SubViewport/PlayerSkinNode" unique_id=790613564]
 
-[node name="torso_and_legs" type="Node2D" parent="SubViewport/PlayerSkinNode/skin"]
+[node name="torso_and_legs" type="Node2D" parent="SubViewport/PlayerSkinNode/skin" unique_id=392325880]
 position = Vector2(0, -4)
 
-[node name="legs" type="Node2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs"]
+[node name="legs" type="Node2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs" unique_id=202631259]
 position = Vector2(0, 23)
-scale = Vector2(1.0002437, 1.0001462)
 
-[node name="left_leg" type="Node2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs"]
+[node name="left_leg" type="Node2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs" unique_id=333214532]
 position = Vector2(-7, 0)
 
-[node name="leg" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs/left_leg"]
+[node name="leg" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs/left_leg" unique_id=1276043606]
 light_mask = 6
 visibility_layer = 11
 position = Vector2(0, 7)
 texture = ExtResource("2_lttxc")
 
-[node name="right_leg" type="Node2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs"]
+[node name="right_leg" type="Node2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs" unique_id=2139867938]
 position = Vector2(7, 0)
 
-[node name="leg" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs/right_leg"]
+[node name="leg" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs/legs/right_leg" unique_id=1323948900]
 light_mask = 6
 visibility_layer = 7
 position = Vector2(0, 7)
 scale = Vector2(-1, 1)
 texture = ExtResource("2_lttxc")
 
-[node name="torso" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs"]
+[node name="torso" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/torso_and_legs" unique_id=282143420]
 light_mask = 6
 visibility_layer = 7
 position = Vector2(0, 10)
-scale = Vector2(1.0003248, 1.0003248)
 texture = ExtResource("3_egyfb")
 
-[node name="head_sprites" type="Node2D" parent="SubViewport/PlayerSkinNode/skin"]
+[node name="head_sprites" type="Node2D" parent="SubViewport/PlayerSkinNode/skin" unique_id=1083118198]
 light_mask = 2
-position = Vector2(0, -3.9992824)
-scale = Vector2(1, 0.9996101)
+position = Vector2(0, -4)
 
-[node name="head" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/head_sprites"]
+[node name="head" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/head_sprites" unique_id=494990944]
 light_mask = 6
 visibility_layer = 7
 position = Vector2(0, -22)
 texture = ExtResource("4_fo1df")
 
-[node name="eyes" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/head_sprites"]
+[node name="eyes" type="Sprite2D" parent="SubViewport/PlayerSkinNode/skin/head_sprites" unique_id=2027778414]
 light_mask = 6
 visibility_layer = 7
 position = Vector2(0, -22)
 texture = ExtResource("5_32wti")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/PlayerSkinNode"]
-libraries = {
-&"": SubResource("AnimationLibrary_koh5w")
-}
-autoplay = "Idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/PlayerSkinNode" unique_id=321283146]
+libraries/ = SubResource("AnimationLibrary_koh5w")
+autoplay = &"Idle"
 
-[node name="EyesAnimationPlayer" type="AnimationPlayer" parent="SubViewport/PlayerSkinNode"]
-libraries = {
-&"": SubResource("AnimationLibrary_shdt4")
-}
+[node name="EyesAnimationPlayer" type="AnimationPlayer" parent="SubViewport/PlayerSkinNode" unique_id=1687486815]
+libraries/ = SubResource("AnimationLibrary_shdt4")
 speed_scale = 2.0
 
-[node name="BlinkTimer" type="Timer" parent="SubViewport/PlayerSkinNode"]
+[node name="BlinkTimer" type="Timer" parent="SubViewport/PlayerSkinNode" unique_id=934776623]
 wait_time = 10.0
 autostart = true
 
-[node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="SubViewport/PlayerSkinNode"]
+[node name="FootstepsAudioStream" type="AudioStreamPlayer2D" parent="SubViewport/PlayerSkinNode" unique_id=1479500738]
 stream = ExtResource("6_uum47")
 volume_db = -6.0
 max_polyphony = 4
