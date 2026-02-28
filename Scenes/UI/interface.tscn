@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="9_hbxki"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="9_kp8ok"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_apajn"]
+[ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="10_kp8ok"]
 [ext_resource type="PackedScene" uid="uid://dpqahfejiw8a7" path="res://Scenes/UI/buttons/reset_button.tscn" id="11_apajn"]
 [ext_resource type="PackedScene" uid="uid://dwyntrhkd73bo" path="res://Scenes/UI/CoorRadar.tscn" id="12_na5jw"]
 
@@ -50,6 +51,26 @@ outline_color = Color(1, 1, 1, 0.52156866)
 shadow_size = 46
 shadow_color = Color(1.469, 1.469, 1.469, 0.329)
 shadow_offset = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0njm"]
+shader = ExtResource("10_kp8ok")
+shader_parameter/grain_intensity = 0.1
+shader_parameter/min_lum = 0.0
+shader_parameter/max_lum = 1.0
+shader_parameter/time_scale = 0.5
+shader_parameter/vignette_darkness = 0.5
+shader_parameter/vignette_outer_radius = 1.05200004671012
+shader_parameter/vignette_inner_radius = 0.7750000368125
+shader_parameter/scanline_intensity = 0.2
+shader_parameter/barrel_distortion = 0.0
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/crt_vignette_power = 0.750000035625
+shader_parameter/pixel_resolution_x = 1280
+shader_parameter/pixel_resolution_y = 720
+shader_parameter/enable_color_quantization = true
+shader_parameter/color_quant_steps = 9.0000003325
+shader_parameter/warble_amount = 0.002
+shader_parameter/warble_speed = 1.36400006479
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aq0n2"]
 shader = ExtResource("9_hbxki")
@@ -245,7 +266,18 @@ max_lines_visible = 2
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
+[node name="CRT2" type="ColorRect" parent="InterfaceCanvaLayer" unique_id=213834355]
+z_index = 1
+material = SubResource("ShaderMaterial_w0njm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="CRT" type="ColorRect" parent="InterfaceCanvaLayer" unique_id=1120040036]
+visible = false
 z_index = 41
 material = SubResource("ShaderMaterial_aq0n2")
 anchors_preset = 15

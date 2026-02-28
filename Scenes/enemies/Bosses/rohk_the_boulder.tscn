@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ddwth17sxb5wm" path="res://Assets/Textures/entities/Particles/trail/grass_trail_under.png" id="4_llr1c"]
 [ext_resource type="Texture2D" uid="uid://bwcq3xe6hfri0" path="res://Assets/Textures/entities/Particles/trail/dirt_trail_dark.png" id="4_wp7sp"]
 [ext_resource type="Texture2D" uid="uid://c0pcd1y3eq3u1" path="res://Assets/Textures/entities/Particles/trail/dirt_trail_highlight.png" id="5_wrmn5"]
+[ext_resource type="AudioStream" uid="uid://d1qd6r3a2qsyj" path="res://Assets/Sounds/soundEffects/monsters/Rohk/scream.ogg" id="7_uiqr3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mxrxc"]
 
@@ -15,6 +16,7 @@ script/source = "extends RigidBoss
 
 
 @onready var visual : SubViewportContainer = $Visuals
+@onready var Rohk_anim_player:=$Visuals/SubViewport/Node3D/AnimationPlayer
 @onready var playerDetector : Area2D = $\"PlayerDetector Area\"
 var can_move : bool = false
 
@@ -43,6 +45,7 @@ func rotateTowardsPlayer():
 func moveTowardsPlayer():
 	if !can_move:
 		return
+	Rohk_anim_player.play(\"Rolling foward\")
 	for body in playerDetector.get_overlapping_bodies():
 		if body is Player:
 			linear_velocity = (body.global_position - global_position).normalized() * curSpeed
@@ -154,6 +157,45 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.23333333, 1, 1, 1, 1, 0.26666668, 1, 1, 0.99665, 1, 0.33333334, 1, 1, 0.9832499, 1, 0.36666667, 1, 1, 0.9684661, 1, 0.4, 1, 1, 0.9509513, 1, 0.43333334, 1, 1, 0.93136096, 1, 0.46666667, 1, 1, 0.91038686, 1, 0.53333336, 1, 1, 0.8671279, 1, 0.56666666, 1, 1, 0.8479017, 1, 0.6, 1, 1, 0.82947654, 1, 0.6333333, 1, 1, 0.8131634, 1, 0.7, 1, 1, 0.79320896, 1, 0.73333335, 1, 1, 0.79350024, 1, 0.76666665, 1, 1, 0.7972144, 1, 0.8, 1, 1, 0.8088, 1, 0.8666667, 1, 1, 0.87920004, 1, 0.9, 1, 1, 0.93359995, 1, 0.93333334, 1, 1, 0.9944, 1, 0.96666664, 1, 1, 1.0567999, 1, 1.0333333, 1, 1, 1.1912, 1, 1.0666667, 1, 1, 1.253, 1, 1.1, 1, 1, 1.3074, 1, 1.1333333, 1, 1, 1.3522, 1, 1.1666666, 1, 1, 1.385, 1, 1.2083334, 1, 1, 1.4, 1)
 
+[sub_resource type="Animation" id="Animation_wrmn5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rohk the Boulder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../AudioStreamPlayer2D:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.14]
+}
+
 [sub_resource type="Animation" id="Animation_my67n"]
 resource_name = "Rolling foward"
 length = 2.0
@@ -180,10 +222,52 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.06666667, 1, 1.0006915, 1.0006915, 1.0006915, 0.1, 1, 1.0014497, 1.0014497, 1.0014497, 0.13333334, 1, 1.0024942, 1.0024942, 1.0024942, 0.2, 1, 1.0052603, 1.0052603, 1.0052603, 0.23333333, 1, 1.0070081, 1.0070081, 1.0070081, 0.26666668, 1, 1.0088773, 1.0088773, 1.0088773, 0.3, 1, 1.010816, 1.010816, 1.010816, 0.33333334, 1, 1.0129629, 1.0129629, 1.0129629, 0.36666667, 1, 1.0152488, 1.0152488, 1.0152488, 0.4, 1, 1.0176128, 1.0176128, 1.0176128, 0.43333334, 1, 1.0200377, 1.0200377, 1.0200377, 0.46666667, 1, 1.0225058, 1.0225058, 1.0225058, 0.53333336, 1, 1.0274942, 1.0274942, 1.0274942, 0.6, 1, 1.0323611, 1.0323611, 1.0323611, 0.6333333, 1, 1.0347338, 1.0347338, 1.0347338, 0.7, 1, 1.0391667, 1.0391667, 1.0391667, 0.73333335, 1, 1.0411227, 1.0411227, 1.0411227, 0.76666665, 1, 1.0429919, 1.0429919, 1.0429919, 0.8, 1, 1.0447396, 1.0447396, 1.0447396, 0.8666667, 1, 1.0475057, 1.0475057, 1.0475057, 0.9, 1, 1.0484202, 1.0484202, 1.0484202, 0.93333334, 1, 1.0491782, 1.0491782, 1.0491782, 0.96666664, 1, 1.0497975, 1.0497975, 1.0497975, 1.0666667, 1, 1.0492129, 1.0492129, 1.0492129, 1.1, 1, 1.0485504, 1.0485504, 1.0485504, 1.1333333, 1, 1.0475405, 1.0475405, 1.0475405, 1.1666666, 1, 1.0462962, 1.0462962, 1.0462962, 1.2, 1, 1.0447743, 1.0447743, 1.0447743, 1.2333333, 1, 1.04307, 1.04307, 1.04307, 1.2666667, 1, 1.0412008, 1.0412008, 1.0412008, 1.3, 1, 1.039184, 1.039184, 1.039184, 1.3333334, 1, 1.037037, 1.037037, 1.037037, 1.3666667, 1, 1.0347512, 1.0347512, 1.0347512, 1.4, 1, 1.0323871, 1.0323871, 1.0323871, 1.4333333, 1, 1.0299624, 1.0299624, 1.0299624, 1.4666667, 1, 1.0274942, 1.0274942, 1.0274942, 1.5333333, 1, 1.0225058, 1.0225058, 1.0225058, 1.5666667, 1, 1.0200377, 1.0200377, 1.0200377, 1.6, 1, 1.0176128, 1.0176128, 1.0176128, 1.6333333, 1, 1.0152488, 1.0152488, 1.0152488, 1.6666666, 1, 1.0129629, 1.0129629, 1.0129629, 1.7, 1, 1.010816, 1.010816, 1.010816, 1.7333333, 1, 1.0087992, 1.0087992, 1.0087992, 1.7666667, 1, 1.00693, 1.00693, 1.00693, 1.8, 1, 1.0052257, 1.0052257, 1.0052257, 1.8333334, 1, 1.0037037, 1.0037037, 1.0037037, 1.8666667, 1, 1.0024594, 1.0024594, 1.0024594, 1.9, 1, 1.0014497, 1.0014497, 1.0014497, 1.9333333, 1, 1.000787, 1.000787, 1.000787, 2, 1, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_uiqr3"]
+resource_name = "Scream"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rohk the Boulder:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.2333333, 1.9333333, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.5235988, -0.27925268, 0), Vector3(-0.43633232, 0, 0), Vector3(-0.5235988, 0.27925268, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../AudioStreamPlayer2D:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eouac"]
 _data = {
 &"Jump": SubResource("Animation_ahx5o"),
-&"Rolling foward": SubResource("Animation_my67n")
+&"RESET": SubResource("Animation_wrmn5"),
+&"Rolling foward": SubResource("Animation_my67n"),
+&"Scream": SubResource("Animation_uiqr3")
 }
 
 [sub_resource type="Animation" id="Animation_mxrxc"]
@@ -385,7 +469,6 @@ visible = false
 shape = SubResource("CircleShape2D_acjef")
 
 [node name="Visuals" type="SubViewportContainer" parent="." unique_id=2025704012]
-visible = false
 z_index = 1
 y_sort_enabled = true
 offset_left = -258.0
@@ -401,7 +484,7 @@ own_world_3d = true
 world_3d = SubResource("World3D_wk8e1")
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="Visuals/SubViewport" unique_id=968720156]
 
@@ -423,7 +506,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_llr1c")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/SubViewport/Node3D" unique_id=1191750699]
 libraries/ = SubResource("AnimationLibrary_eouac")
-autoplay = &"Rolling foward"
+autoplay = &"Scream"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Visuals/SubViewport/Node3D" unique_id=1650844030]
 transform = Transform3D(1, 0, 0, 0, 0.84657425, 0.5322706, 0, -0.5322706, 0.84657425, 0, 1.840774, 2.2991316)
@@ -466,3 +549,9 @@ lifetime = 10.0
 fixed_fps = 10
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_wp7sp")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=13817764]
+stream = ExtResource("7_uiqr3")
+volume_db = 6.0
+pitch_scale = 1.14
+bus = &"SFXReverb"
