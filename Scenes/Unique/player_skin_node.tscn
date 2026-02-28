@@ -625,4 +625,7 @@ explosiveness = 0.05
 randomness = 0.35
 process_material = SubResource("ParticleProcessMaterial_vhf7t")
 
+[node name="trailParticles" type="Node2D" parent="." unique_id=1005900840]
+position = Vector2(0, 38)
+
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_blink_timer_timeout"]

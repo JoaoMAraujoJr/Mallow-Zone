@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bpoir3q5krjs7"]
+
+[ext_resource type="Texture2D" uid="uid://la1o6yhj347h" path="res://Assets/Textures/entities/Particles/trail/snow/bottom.png" id="1_pfbb5"]
+[ext_resource type="Texture2D" uid="uid://bnol2pjfwddrm" path="res://Assets/Textures/entities/Particles/trail/snow/mid.png" id="2_pfbb5"]
+[ext_resource type="Texture2D" uid="uid://db45nmep3t3wc" path="res://Assets/Textures/entities/Particles/trail/snow/top.png" id="3_tklfi"]
+
+[sub_resource type="Curve" id="Curve_sdtkn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75757575, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8jx7f"]
+curve = SubResource("Curve_sdtkn")
+
+[sub_resource type="Curve" id="Curve_00x7p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7619047, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uiqr3"]
+curve = SubResource("Curve_00x7p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0bfse"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+gravity = Vector3(0, 0, 0)
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_uiqr3")
+alpha_curve = SubResource("CurveTexture_8jx7f")
+
+[sub_resource type="Curve" id="Curve_uay51"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.86147183, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4hkjh"]
+curve = SubResource("Curve_uay51")
+
+[sub_resource type="Curve" id="Curve_bl24k"]
+_data = [Vector2(0.7532467, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_udyir"]
+curve = SubResource("Curve_bl24k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02suk"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+gravity = Vector3(0, 0, 0)
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_udyir")
+alpha_curve = SubResource("CurveTexture_4hkjh")
+
+[sub_resource type="Curve" id="Curve_ykqmp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7532467, 1), 0.0, 0.0, 0, 0, Vector2(0.90476185, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f2eya"]
+curve = SubResource("Curve_ykqmp")
+
+[sub_resource type="Curve" id="Curve_yteac"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74891776, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6bkmo"]
+curve = SubResource("Curve_yteac")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0kj53"]
+particle_flag_disable_z = true
+angle_min = -9.9999895
+angle_max = 10.0000105
+gravity = Vector3(0, 0, 0)
+damping_max = 0.44500002
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_6bkmo")
+alpha_curve = SubResource("CurveTexture_f2eya")
+
+[node name="SnowTrailParticle" type="Node2D" unique_id=640215877]
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="." unique_id=507392425]
+z_index = -4
+position = Vector2(0, -13)
+amount = 30
+texture = ExtResource("1_pfbb5")
+lifetime = 8.0
+speed_scale = 1.2
+interpolate = false
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_0bfse")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=263215594]
+z_index = -4
+position = Vector2(0, -13)
+amount = 60
+texture = ExtResource("2_pfbb5")
+lifetime = 8.0
+speed_scale = 1.2
+interpolate = false
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_02suk")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=644392960]
+z_index = -3
+position = Vector2(0, -13)
+amount = 60
+texture = ExtResource("3_tklfi")
+lifetime = 8.0
+speed_scale = 1.2
+fixed_fps = 10
+interpolate = false
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_0kj53")

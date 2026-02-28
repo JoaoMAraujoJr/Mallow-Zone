@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_nxvmt"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="3_6wd1u"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1njt7"]
-[ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="5_s3jpe"]
+[ext_resource type="Texture2D" uid="uid://b8031gxnv3lcp" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_2.png" id="5_s3jpe"]
 [ext_resource type="Texture2D" uid="uid://6okmu1we6x4" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom_256.png" id="7_kxp8e"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="8_1njt7"]
 [ext_resource type="Texture2D" uid="uid://bpw75fena71mc" path="res://Assets/Textures/UI/minimap_icons/floor_top_minimap.png" id="8_s3jpe"]
@@ -37,6 +37,7 @@ script = ExtResource("1_dpfye")
 levelWarpScene = ExtResource("2_1njt7")
 
 [node name="StageArea" type="Area2D" parent="." unique_id=862584341 groups=["Stage"]]
+visible = false
 z_index = -2
 monitoring = false
 
@@ -46,6 +47,7 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_a6xb7")
 
 [node name="EnemySpawnArea" type="Area2D" parent="." unique_id=1438610677]
+visible = false
 z_index = -2
 monitoring = false
 
@@ -56,6 +58,7 @@ shape = SubResource("RectangleShape2D_a6xb7")
 debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
 
 [node name="ObjectSpawnArea" type="Area2D" parent="." unique_id=929205691]
+visible = false
 z_index = -2
 monitoring = false
 
@@ -71,17 +74,18 @@ rect = Rect2(-206, -204, 413, 615)
 z_index = -10
 texture_filter = 1
 material = SubResource("ShaderMaterial_idggg")
-position = Vector2(0.5000058, 0.49999508)
-scale = Vector2(1.6054689, 1.6054688)
+scale = Vector2(1.6152716, 1.6114693)
 texture = ExtResource("5_s3jpe")
+offset = Vector2(1.1045606, 0.79805845)
 script = ExtResource("5_1njt7")
 
 [node name="bottom" type="Sprite2D" parent="." unique_id=2052867290]
 z_index = -11
 material = SubResource("ShaderMaterial_r4p5m")
-position = Vector2(1, 307)
-scale = Vector2(1.6054688, 0.79687494)
+position = Vector2(-1.1920929e-07, 307)
+scale = Vector2(1.61, 0.797)
 texture = ExtResource("7_kxp8e")
+offset = Vector2(0.6228711, 0)
 script = ExtResource("5_1njt7")
 
 [node name="top_minimap" type="Sprite2D" parent="." unique_id=43845966]

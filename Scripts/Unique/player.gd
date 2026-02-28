@@ -11,10 +11,10 @@ class_name Player
 @onready var _PlayerArea : Area2D = $PlayerArea2D
 @onready var _lifebar : TextureProgressBar= $LifeBar
 var _gun : Node2D 
-@onready var _gunPivot : Marker2D = $GunPivot
+@onready var _gunPivot : Marker2D = $Mask/GunPivot
 @onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $Sounds/NeedsAmmoAudioStream
 @onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
-@onready var playerSkin : PlayerSkinManager = $PlayerSkinNode
+@onready var playerSkin : PlayerSkinManager = $Mask/PlayerSkinNode
 
 
 
@@ -33,6 +33,7 @@ var gold_wallet:int = 0
 
 func _ready():
 	super._ready()
+	updatePlayerMask()
 	isAffectable = true
 	GameManager.thisPlayer= self
 	call_deferred("_equipGun")
@@ -95,7 +96,10 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 
 
 		velocity = ((input_vector * speed) + recoil_velocity + pushingforce + pullingforce)
-
+		if velocity != Vector2.ZERO:
+			playerSkin.updateTrailParticle(true)
+		else:
+			playerSkin.updateTrailParticle(false)
 		if velocity.length() > max_speed:
 			velocity = velocity.normalized() * max_speed
 		
@@ -124,7 +128,17 @@ func mouse_actions_handler():
 				_outofAmmoAudioStream.play()
 		elif Input.is_action_just_pressed("DropAction") and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			_dropGun()
-
+func updatePlayerMask():
+	if BiomeManager.currentBiome:
+		if BiomeManager.currentBiome.player_mask:
+			$Shadow.visible=false
+			$Mask.texture = BiomeManager.currentBiome.player_mask
+			$Mask.clip_children = ClipChildrenMode.CLIP_CHILDREN_ONLY
+	else:
+		$Shadow.visible=true
+		$Mask.texture = null
+		$Mask.clip_children = ClipChildrenMode.CLIP_CHILDREN_DISABLED
+			
 
 #AddTo Methods
 func uponDamage():

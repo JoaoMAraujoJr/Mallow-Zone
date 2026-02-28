@@ -39,16 +39,22 @@ texture = ExtResource("2_yiw7m")
 script = ExtResource("3_6nq75")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=571946010]
-z_index = -2
-position = Vector2(0, 29)
+z_index = -3
+position = Vector2(-4.2632564e-14, 28.999996)
+scale = Vector2(0.9999997, 0.99999976)
 texture = ExtResource("8_8erm5")
 
-[node name="PlayerSkinNode" parent="." unique_id=1590478521 instance=ExtResource("3_d05bs")]
-position = Vector2(0, 2)
-scale = Vector2(0.64923275, 0.64923275)
+[node name="Mask" type="Sprite2D" parent="." unique_id=1344524052]
+position = Vector2(-1.7881393e-07, -5.0000005)
+scale = Vector2(0.96874994, 1.281)
 
-[node name="GunPivot" type="Marker2D" parent="." unique_id=1092457507]
-position = Vector2(0, 7)
+[node name="PlayerSkinNode" parent="Mask" unique_id=1590478521 instance=ExtResource("3_d05bs")]
+position = Vector2(1.8458212e-07, 5.464481)
+scale = Vector2(0.67017573, 0.5068171)
+
+[node name="GunPivot" type="Marker2D" parent="Mask" unique_id=1092457507]
+position = Vector2(1.8458212e-07, 9.3676815)
+scale = Vector2(1.032258, 0.78064007)
 
 [node name="PlayerArea2D" type="Area2D" parent="." unique_id=1064755649 groups=["Damageble", "PlayerArea"]]
 scale = Vector2(0.14770508, 0.14770508)

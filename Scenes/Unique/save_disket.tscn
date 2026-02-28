@@ -30,6 +30,9 @@ func Interact():
 	$AnimationPlayer.play(\"idle\")
 
 func save_data():
+	if !SaveManager.current_save:
+		print(\"Save Slot Not Found\")
+		return
 	print(\"DataWasSaved\")
 	SaveManager.current_save.cur_hp = GameManager.cur_hp
 	SaveManager.current_save.max_hp = GameManager.max_hp

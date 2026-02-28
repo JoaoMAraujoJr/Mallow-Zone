@@ -29,6 +29,14 @@ func _ready() -> void:
 		_loadSkin(GameManager.currentPlayerSkin)
 
 	GameManager.connect("skin_changed",Callable(self,"on_Skin_Changed"))
+	
+	if BiomeManager:
+		if BiomeManager.currentBiome:
+			if BiomeManager.currentBiome.has_trail and BiomeManager.currentBiome.trailParticles!=null:
+				if !BiomeManager.currentBiome.trailParticles.is_empty():
+					for particle in BiomeManager.currentBiome.trailParticles:
+						var new_trail_particle := particle.instantiate()
+						$trailParticles.add_child(new_trail_particle)
 
 
 
@@ -102,6 +110,20 @@ func _on_blink_timer_timeout() -> void:
 	$BlinkTimer.start()
 	pass # Replace with function body.
 
+func updateTrailParticle(isActive:bool):
+	match isActive:
+		true:
+			for trailScene in $trailParticles.get_children():
+				for trail in trailScene.get_children():
+					if trail is GPUParticles2D:
+						trail.emitting = true
+			pass
+		false:
+			for trailScene in $trailParticles.get_children():
+				for trail in trailScene.get_children():
+					if trail is GPUParticles2D:
+						trail.emitting = false
+			pass
 
 func on_Skin_Changed(new_skin: String) -> void:
 	_loadSkin(new_skin)

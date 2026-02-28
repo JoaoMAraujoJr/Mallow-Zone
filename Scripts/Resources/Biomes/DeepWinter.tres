@@ -7,7 +7,9 @@
 [ext_resource type="Resource" uid="uid://c7e4pxjbd4syb" path="res://Scripts/Resources/Weather/snowing.tres" id="3_tl7jt"]
 [ext_resource type="Script" uid="uid://b1te6q7qlixwn" path="res://Scripts/Resources/BiomeSpawnEntry.gd" id="4_aqxu0"]
 [ext_resource type="PackedScene" uid="uid://dqiecpoqsouu3" path="res://Scenes/objects/pine_tree.tscn" id="5_qefhv"]
+[ext_resource type="Texture2D" uid="uid://xtmguwro6tod" path="res://Assets/Textures/sprite_masks/player_mask/snow_mask.png" id="6_ddik0"]
 [ext_resource type="Texture2D" uid="uid://bp3jy8kg8lv3k" path="res://Assets/Textures/floors/winter_forest/DeepWinter_upper_spr.png" id="6_qefhv"]
+[ext_resource type="PackedScene" uid="uid://bpoir3q5krjs7" path="res://Scenes/particles/trail/snow_trail_particle.tscn" id="8_skpwh"]
 
 [sub_resource type="Resource" id="Resource_skpwh"]
 script = ExtResource("1_cwix2")
@@ -22,5 +24,8 @@ biome_id = "deepwinter"
 weather = ExtResource("3_tl7jt")
 topTextureVariants = Array[Texture2D]([ExtResource("6_qefhv")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_aqxu0")])
+player_mask = ExtResource("6_ddik0")
+has_trail = true
+trailParticles = Array[PackedScene]([ExtResource("8_skpwh")])
 objectsList = Array[ExtResource("1_cwix2")]([SubResource("Resource_skpwh")])
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"
