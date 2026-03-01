@@ -1,0 +1,876 @@
+[gd_scene format=3 uid="uid://cr5roi1wve5kq"]
+
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="1_aacap"]
+[ext_resource type="Texture2D" uid="uid://bwskkx1wvn1bp" path="res://Assets/Textures/floors/tutorial/plastic_albedo.png" id="2_5lcuj"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="2_wnt2n"]
+[ext_resource type="Texture2D" uid="uid://c03jmk5l58y3t" path="res://Assets/Textures/sprite_masks/light_mask/light_pixel.png" id="3_5t6jh"]
+[ext_resource type="Texture2D" uid="uid://c3iqsfvshsrt0" path="res://Assets/Textures/floors/tutorial/plastic_normal.png" id="3_dx1te"]
+[ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="4_5t6jh"]
+[ext_resource type="Texture2D" uid="uid://bgx0y0wyimlka" path="res://Assets/Textures/floors/tutorial/plastic_height.png" id="4_co576"]
+[ext_resource type="Texture2D" uid="uid://c8a5vtmj6rlgy" path="res://Assets/Textures/sprite_masks/light_mask/round_mask.png" id="4_ifgeu"]
+[ext_resource type="PackedScene" uid="uid://dya4pn5fc83y8" path="res://Scenes/items/pickable_item.tscn" id="5_63ib1"]
+[ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_ifgeu"]
+[ext_resource type="PackedScene" uid="uid://c3xq3kyge52j8" path="res://Scenes/UI/Phone.tscn" id="6_dym68"]
+[ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="7_63ib1"]
+[ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="8_bdx5g"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="9_5npxw"]
+[ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_gh778"]
+[ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="11_rfejq"]
+[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="12_15ame"]
+[ext_resource type="PackedScene" uid="uid://dpqahfejiw8a7" path="res://Scenes/UI/buttons/reset_button.tscn" id="13_ir3vo"]
+[ext_resource type="Texture2D" uid="uid://b51gydmbpyodp" path="res://Assets/Textures/backgrounds/dark.png" id="17_ifgeu"]
+[ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="19_5t6jh"]
+[ext_resource type="Texture2D" uid="uid://boxi4sjtyc2c6" path="res://Assets/Textures/closed_environment/2.png" id="21_dym68"]
+[ext_resource type="Texture2D" uid="uid://e3ntj0y2ycbl" path="res://Assets/Textures/entities/Enemies/dummy/dummy.png" id="23_bdx5g"]
+[ext_resource type="PackedScene" uid="uid://cwafg83fwk8i6" path="res://Scenes/particles/feather_explosion_particle.tscn" id="24_5npxw"]
+[ext_resource type="AudioStream" uid="uid://dgym5gk162xhq" path="res://Assets/Sounds/soundEffects/Blast_3.wav" id="24_gh778"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ifgeu"]
+blend_mode = 3
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dym68"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7l867"]
+shader = ExtResource("4_5t6jh")
+shader_parameter/use_screen = true
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/strength = 2.0
+shader_parameter/radius = 1.32800006308
+shader_parameter/zoom = 0.3850000182875
+shader_parameter/aspect = 0.64900002756762
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r04jc"]
+shader = ExtResource("7_63ib1")
+shader_parameter/inner_radius = 0.45
+shader_parameter/outer_radius = 0.775
+shader_parameter/vignette_strength = 0.89
+shader_parameter/dither_strength = 0.125
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wpqjx"]
+font = ExtResource("8_bdx5g")
+font_size = 22
+outline_size = 6
+outline_color = Color(1.269618, 1.269618, 1.269618, 0.3137255)
+shadow_size = 10
+shadow_color = Color(2.454227, 2.454227, 2.454227, 0.29803923)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="GDScript" id="GDScript_5npxw"]
+resource_name = "ammo interface"
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = str(GameManager.ammo) + \"/\"+ str(GameManager.ammoMax) + \" ammo\"
+	pass
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0njm"]
+shader = ExtResource("11_rfejq")
+shader_parameter/grain_intensity = 0.1
+shader_parameter/min_lum = 0.0
+shader_parameter/max_lum = 1.0
+shader_parameter/time_scale = 0.5
+shader_parameter/vignette_darkness = 0.5
+shader_parameter/vignette_outer_radius = 1.05200004671012
+shader_parameter/vignette_inner_radius = 0.7750000368125
+shader_parameter/scanline_intensity = 0.2
+shader_parameter/barrel_distortion = 0.0
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/crt_vignette_power = 0.750000035625
+shader_parameter/pixel_resolution_x = 1280
+shader_parameter/pixel_resolution_y = 720
+shader_parameter/enable_color_quantization = true
+shader_parameter/color_quant_steps = 9.0000003325
+shader_parameter/warble_amount = 0.002
+shader_parameter/warble_speed = 1.36400006479
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq0n2"]
+shader = ExtResource("12_15ame")
+shader_parameter/resolution = Vector2(768, 432)
+shader_parameter/scan_line_amount = 0.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.0130000006175
+shader_parameter/interference_amount = 0.0
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -10.393999923715
+shader_parameter/pixel_strength = -4.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gr5gi"]
+diffuse_texture = ExtResource("2_5lcuj")
+normal_texture = ExtResource("3_dx1te")
+specular_texture = ExtResource("4_co576")
+texture_filter = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trj03"]
+size = Vector2(70.5, 2329)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5npxw"]
+size = Vector2(631, 1129)
+
+[sub_resource type="Gradient" id="Gradient_wnt2n"]
+offsets = PackedFloat32Array(0, 0.2939189, 1)
+colors = PackedColorArray(0, 0, 0.0627451, 1, 0.25550973, 0.21084356, 0.18943366, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5t6jh"]
+gradient = SubResource("Gradient_wnt2n")
+fill_from = Vector2(0.41025642, 0)
+
+[sub_resource type="Environment" id="Environment_ifgeu"]
+background_mode = 3
+tonemap_exposure = 1.3
+glow_enabled = true
+glow_levels/1 = 0.95
+glow_levels/2 = 2.85
+glow_levels/3 = 3.48
+glow_levels/4 = 3.8
+glow_normalized = true
+glow_intensity = 0.95
+glow_bloom = 0.29
+adjustment_enabled = true
+adjustment_brightness = 0.88
+adjustment_color_correction = SubResource("GradientTexture2D_5t6jh")
+
+[sub_resource type="GDScript" id="GDScript_63ib1"]
+resource_name = "change cursor type tutorial area"
+script/source = "extends Area2D
+
+var i:int = 0
+
+func _on_body_entered(body: Node2D) -> void:
+	$AnimationPlayer.play(\"ammo\")
+	if GameManager.game_cursor:
+		GameManager.game_cursor.cur_cursorType = GameManager.game_cursor.CursorTypeList.CROSSHAIR
+		GameManager.game_cursor.matchCursorType()
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63ib1"]
+size = Vector2(476, 211)
+
+[sub_resource type="Animation" id="Animation_gh778"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Interface/InterfaceCanvaLayer/Ammo:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Interface/InterfaceCanvaLayer/Ammo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rfejq"]
+resource_name = "ammo"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Interface/InterfaceCanvaLayer/Ammo:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Interface/InterfaceCanvaLayer/Ammo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15ame"]
+_data = {
+&"RESET": SubResource("Animation_gh778"),
+&"ammo": SubResource("Animation_rfejq")
+}
+
+[sub_resource type="GDScript" id="GDScript_bdx5g"]
+resource_name = "dummy_tutorial"
+script/source = "extends Sprite2D
+
+@export var particle_scene:PackedScene
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if GameManager.currentEquipedWeaponType != \"none\" and GameManager.ammo == 0:
+		print(\"loserrr with hard R\")
+	var body = area.get_parent()
+	if body is Bullet:
+		self.visible=false
+		$AudioStreamPlayer2D.pitch_scale = randf_range(0.7,1.2)
+		$AudioStreamPlayer2D.play()
+		if particle_scene:
+			var new_explosion = particle_scene.instantiate()
+			new_explosion.global_position = global_position
+			get_tree().current_scene.add_child(new_explosion)
+	await $AudioStreamPlayer2D.finished
+	queue_free()
+	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdx5g"]
+radius = 21.095022
+
+[node name="TutorialLevel" type="Node2D" unique_id=443742657]
+y_sort_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1540441449]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=228992434]
+visible = false
+material = SubResource("CanvasItemMaterial_ifgeu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.40392157, 0.44313726, 0.49803922, 0.24705882)
+
+[node name="Player" parent="." unique_id=118340029 instance=ExtResource("1_aacap")]
+position = Vector2(1, 1024)
+target_zoom = 1.3
+
+[node name="PointLight2D2" type="PointLight2D" parent="Player" unique_id=271394073]
+z_index = 4
+scale = Vector2(0.13071667, 0.13071667)
+texture = ExtResource("3_5t6jh")
+texture_scale = 5.73
+height = 7.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=951247774]
+z_index = 4
+scale = Vector2(0.49708122, 0.49708122)
+texture = ExtResource("2_wnt2n")
+height = 42.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1958918590]
+modulate = Color(1, 1, 1, 0.38039216)
+z_index = 3
+scale = Vector2(0.6230362, 0.6230362)
+texture = ExtResource("3_5t6jh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Player" unique_id=1766692513]
+visible = false
+modulate = Color(1, 1, 1, 0.38039216)
+z_index = -1
+material = SubResource("CanvasItemMaterial_dym68")
+scale = Vector2(0.13292824, 0.13292824)
+texture = ExtResource("4_ifgeu")
+
+[node name="Interface" type="Control" parent="." unique_id=1650993913]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="FishEyeEffectLayer" type="CanvasLayer" parent="Interface" unique_id=1978402482]
+
+[node name="eyefish" type="ColorRect" parent="Interface/FishEyeEffectLayer" unique_id=473675474]
+z_index = 1
+material = SubResource("ShaderMaterial_7l867")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InterfaceCanvaLayer" type="CanvasLayer" parent="Interface" unique_id=1821217240]
+
+[node name="FPS" type="RichTextLabel" parent="Interface/InterfaceCanvaLayer" unique_id=700342857]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 86.0
+offset_top = -209.0
+offset_right = 621.09406
+offset_bottom = -47.356995
+grow_vertical = 2
+scale = Vector2(0.5277668, 0.5277668)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
+theme_override_font_sizes/bold_italics_font_size = 50
+theme_override_font_sizes/italics_font_size = 50
+theme_override_font_sizes/mono_font_size = 50
+bbcode_enabled = true
+text = "0 FPS"
+fit_content = true
+scroll_active = false
+
+[node name="Phone" parent="Interface/InterfaceCanvaLayer" unique_id=827125536 instance=ExtResource("6_dym68")]
+visible = false
+offset_left = 5.0000005
+offset_top = 6.0000114
+offset_right = 5.0
+offset_bottom = 6.0
+scale = Vector2(1.0032183, 1.0032183)
+
+[node name="Vignette" type="ColorRect" parent="Interface/InterfaceCanvaLayer" unique_id=1229175021]
+material = SubResource("ShaderMaterial_r04jc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Ammo" type="Label" parent="Interface/InterfaceCanvaLayer" unique_id=2088555551]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.845
+anchor_top = 0.11800001
+anchor_right = 0.845
+anchor_bottom = 0.11800001
+offset_left = -142.96002
+offset_top = -39.976
+offset_right = 119.287415
+offset_bottom = 37.34506
+grow_horizontal = 0
+text = "Ammo: 0/25"
+label_settings = SubResource("LabelSettings_wpqjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = SubResource("GDScript_5npxw")
+
+[node name="Kills" type="Label" parent="Interface/InterfaceCanvaLayer" unique_id=1635399923]
+visible = false
+anchors_preset = -1
+anchor_left = 0.18800001
+anchor_top = 0.11800001
+anchor_right = 0.18800001
+anchor_bottom = 0.11800001
+offset_left = -105.32001
+offset_top = -20.480003
+offset_right = 91.63692
+offset_bottom = 29.52
+grow_horizontal = 0
+text = "0 kills"
+label_settings = SubResource("LabelSettings_wpqjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Gold" type="Label" parent="Interface/InterfaceCanvaLayer" unique_id=2109894628]
+visible = false
+anchors_preset = -1
+anchor_left = 0.18800001
+anchor_top = 0.11800001
+anchor_right = 0.18800001
+anchor_bottom = 0.11800001
+offset_left = -105.32001
+offset_top = 7.0399933
+offset_right = 91.6369
+offset_bottom = 57.039993
+grow_horizontal = 0
+text = "0 $"
+label_settings = SubResource("LabelSettings_wpqjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Cursor" parent="Interface/InterfaceCanvaLayer" unique_id=2116295921 instance=ExtResource("9_5npxw")]
+process_priority = 1
+z_index = 0
+
+[node name="BossBar" parent="Interface/InterfaceCanvaLayer" unique_id=33436801 instance=ExtResource("10_gh778")]
+mouse_filter = 1
+mouse_behavior_recursive = 1
+
+[node name="CRT2" type="ColorRect" parent="Interface/InterfaceCanvaLayer" unique_id=213834355]
+z_index = 1
+material = SubResource("ShaderMaterial_w0njm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CRT" type="ColorRect" parent="Interface/InterfaceCanvaLayer" unique_id=1120040036]
+visible = false
+z_index = 41
+material = SubResource("ShaderMaterial_aq0n2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="reset button" parent="Interface" unique_id=1918029492 instance=ExtResource("13_ir3vo")]
+
+[node name="Background2" type="Parallax2D" parent="." unique_id=490305025]
+z_index = -20
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(256, 256)
+repeat_times = 18
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background2" unique_id=1563227639]
+z_index = -4
+texture = ExtResource("17_ifgeu")
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="Background" type="Parallax2D" parent="." unique_id=1308390421]
+z_index = -10
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(256, 256)
+repeat_times = 8
+follow_viewport = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=966056575]
+texture = SubResource("CanvasTexture_gr5gi")
+region_rect = Rect2(0, 0, 256, 256)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1070410939]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1950336155]
+position = Vector2(-1180.5, -5.5)
+shape = SubResource("RectangleShape2D_trj03")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=604414399]
+position = Vector2(2, -1178)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_trj03")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=698309883]
+position = Vector2(1.9999998, 1177.25)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_trj03")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1669166587]
+position = Vector2(1180, -5.5)
+shape = SubResource("RectangleShape2D_trj03")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=1389886633]
+position = Vector2(-524.5, 623.5)
+shape = SubResource("RectangleShape2D_5npxw")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D" unique_id=1238344672]
+position = Vector2(534, 623.5)
+shape = SubResource("RectangleShape2D_5npxw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=391639987]
+environment = SubResource("Environment_ifgeu")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=1514968820]
+environment = SubResource("Environment_ifgeu")
+
+[node name="Texts" type="Node2D" parent="." unique_id=1258275165]
+
+[node name="welcome" type="Node2D" parent="Texts" unique_id=1137432700]
+z_index = 3
+y_sort_enabled = true
+position = Vector2(0, 793)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Texts/welcome" unique_id=148166391]
+z_index = 1
+offset_left = -180.0
+offset_top = -54.0
+offset_right = 606.32837
+offset_bottom = 139.39429
+scale = Vector2(0.47054136, 0.47054136)
+theme_override_colors/font_outline_color = Color(0.6872149, 0.68721503, 0.6872149, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 7
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][rainbow freq=0.2 sat=0.5 val=0.9 speed=0.4] Welcome to The Backyard Tutorial [/rainbow]
+here you will learn the basics :D"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Texts/welcome" unique_id=1472364996]
+modulate = Color(1, 1, 1, 0.07058824)
+z_index = -6
+offset_left = -140.0
+offset_top = -23.0
+offset_right = 646.32837
+offset_bottom = 170.39429
+scale = Vector2(0.3727906, 0.3727906)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.6872149, 0.68721503, 0.6872149, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4392157)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 7
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1]Welcome to The Backyard Tutorial [/rainbow]
+here you will learn the basics :D"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Texts/welcome" unique_id=1706632310]
+z_index = 4
+scale = Vector2(0.49708122, 0.49708122)
+energy = 0.14
+texture = ExtResource("2_wnt2n")
+height = 277.0
+
+[node name="movement" type="Node2D" parent="Texts" unique_id=752346053]
+z_index = 3
+y_sort_enabled = true
+position = Vector2(0, 541)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Texts/movement" unique_id=553251660]
+offset_left = -131.99998
+offset_top = -71.0
+offset_right = 692.87726
+offset_bottom = 312.66394
+scale = Vector2(0.3228057, 0.3228057)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6789437, 0.6789437, 0.6789437, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_fonts/bold_font = ExtResource("19_5t6jh")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]
+[wave amp=20.0 freq=5.0 connected=1][font_size=43][rainbow freq=0.2 sat=0.3 val=0.9 speed=1]FIRST OF ALL[/rainbow][/font_size]
+[color=#ffffff]You can move with [color=#ffd60a][WASD][/color][/color]
+[color=#ffffff]Adjust camera zoom using the 
+[color=#ffd60a][mouse scroll][/color][/color]
+[color=#ffffff]Hold [color=#ffd60a][RIGHT MOUSE BUTTON][/color]
+to move towards the cursor[/color]
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Texts/movement" unique_id=2002943817]
+modulate = Color(0, 0, 0, 0.050980393)
+z_index = -3
+offset_left = -131.99998
+offset_top = -56.0
+offset_right = 692.87726
+offset_bottom = 327.66394
+scale = Vector2(0.3228057, 0.3228057)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49411765)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 6
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_fonts/bold_font = ExtResource("19_5t6jh")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]
+[wave amp=20.0 freq=5.0 connected=1]FIRST OF ALL
+You can move with [WASD]
+Adjust camera zoom using the 
+[mouse scroll]
+Hold [RIGHT MOUSE BUTTON]
+to move towards the cursor
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Texts/movement" unique_id=1039641151]
+z_index = 4
+scale = Vector2(0.49708122, 0.49708122)
+energy = 0.14
+texture = ExtResource("2_wnt2n")
+height = 277.0
+
+[node name="Get into Action" type="Node2D" parent="Texts" unique_id=1573865553]
+z_index = 3
+y_sort_enabled = true
+position = Vector2(1, 236)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Texts/Get into Action" unique_id=152262960]
+modulate = Color(1, 1, 1, 0.043137256)
+z_index = -3
+offset_left = -128.0
+offset_top = -44.0
+offset_right = 696.87726
+offset_bottom = 417.57794
+scale = Vector2(0.30763808, 0.30763808)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.34901962)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_fonts/bold_font = ExtResource("19_5t6jh")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center][wave amp=20.0 freq=5.0 connected=1][font_size=43]GET INTO ACTION!![/font_size][/wave]
+You can interact with many things
+mostly by pressing [E]
+(other times by shooting)
+
+Pickable itens like weapons can also be dropped with [Q][/center]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Texts/Get into Action" unique_id=891198333]
+offset_left = -134.0
+offset_top = -71.0
+offset_right = 690.87726
+offset_bottom = 390.57794
+scale = Vector2(0.3228057, 0.3228057)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6789437, 0.6789437, 0.6789437, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_fonts/bold_font = ExtResource("19_5t6jh")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]
+[wave amp=20.0 freq=5.0 connected=1][font_size=43][rainbow freq=0.2 sat=0.3 val=0.9 speed=1]GET INTO ACTION!![/rainbow][/font_size]
+[color=#ffffff]You can interact with many things
+mostly by pressing [color=#ffd60a][E][/color]
+(other times by shooting)
+
+Pickable itens like weapons can also be dropped with [color=#ffd60a][Q][/color]
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Texts/Get into Action" unique_id=148165544]
+z_index = 4
+scale = Vector2(0.49708122, 0.49708122)
+energy = 0.14
+texture = ExtResource("2_wnt2n")
+height = 277.0
+
+[node name="Get into Action2" type="Node2D" parent="Texts" unique_id=2056375888]
+z_index = 3
+y_sort_enabled = true
+position = Vector2(0, -39)
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Texts/Get into Action2" unique_id=1046709881]
+modulate = Color(1, 1, 1, 0.05490196)
+z_index = -3
+offset_left = -126.0
+offset_top = -48.0
+offset_right = 698.87726
+offset_bottom = 413.57794
+scale = Vector2(0.30763808, 0.30763808)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.34901962)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_fonts/bold_font = ExtResource("19_5t6jh")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]
+[wave amp=20.0 freq=5.0 connected=1][color=#ffffff]Here, pick this give it a try[/color]
+
+
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Texts/Get into Action2" unique_id=1136001273]
+offset_left = -131.99998
+offset_top = -71.0
+offset_right = 692.87726
+offset_bottom = 390.57794
+scale = Vector2(0.3228057, 0.3228057)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6789437, 0.6789437, 0.6789437, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("5_ifgeu")
+theme_override_fonts/bold_font = ExtResource("19_5t6jh")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]
+[wave amp=20.0 freq=5.0 connected=1][color=#ffffff]Here, pick this give it a try[/color]
+
+
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="Texts/Get into Action2" unique_id=884384652]
+z_index = 4
+position = Vector2(-4.9999995, 0)
+scale = Vector2(0.49708122, 0.49708122)
+energy = 0.14
+texture = ExtResource("2_wnt2n")
+height = 277.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=648874617]
+offset_left = 205.0
+offset_top = 57.0
+offset_right = 864.0
+offset_bottom = 1152.0
+texture = ExtResource("21_dym68")
+patch_margin_left = 26
+patch_margin_top = 22
+patch_margin_right = 26
+patch_margin_bottom = 38
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=2067712767]
+offset_left = -854.0
+offset_top = 57.0
+offset_right = -195.0
+offset_bottom = 1152.0
+texture = ExtResource("21_dym68")
+patch_margin_left = 26
+patch_margin_top = 22
+patch_margin_right = 26
+patch_margin_bottom = 38
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="PickableItem5" parent="." unique_id=1244783195 instance=ExtResource("5_63ib1")]
+position = Vector2(0, 1)
+PickableName = "shotgun"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=984001068]
+script = SubResource("GDScript_63ib1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=407160449]
+position = Vector2(26, -36.5)
+shape = SubResource("RectangleShape2D_63ib1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D" unique_id=1150278101]
+libraries/ = SubResource("AnimationLibrary_15ame")
+
+[node name="dummies" type="Node2D" parent="." unique_id=757405285]
+y_sort_enabled = true
+position = Vector2(-81, -1303)
+
+[node name="Dummy" type="Sprite2D" parent="dummies" unique_id=1890084721]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-55, 1030)
+texture = ExtResource("23_bdx5g")
+script = SubResource("GDScript_bdx5g")
+particle_scene = ExtResource("24_5npxw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="dummies/Dummy" unique_id=1505374185]
+stream = ExtResource("24_gh778")
+volume_db = -1.0
+pitch_scale = 0.73
+
+[node name="shadow" type="Sprite2D" parent="dummies/Dummy" unique_id=639289761]
+modulate = Color(0, 0, 0, 0.1764706)
+z_index = -3
+position = Vector2(-12.000002, 13)
+scale = Vector2(1.0365565, 0.6761069)
+skew = -0.56723213
+texture = ExtResource("23_bdx5g")
+
+[node name="Area2D" type="Area2D" parent="dummies/Dummy" unique_id=1643782732]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dummies/Dummy/Area2D" unique_id=1349087452]
+shape = SubResource("CircleShape2D_bdx5g")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="area_entered" from="dummies/Dummy/Area2D" to="dummies/Dummy" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="dummies/Dummy/Area2D" to="dummies/Dummy" method="_on_area_2d_body_entered"]

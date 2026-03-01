@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cwafg83fwk8i6"]
+
+[ext_resource type="Texture2D" uid="uid://cu546jjrm2j63" path="res://Assets/Textures/entities/Particles/other/feather_2.png" id="1_1qrh2"]
+[ext_resource type="Texture2D" uid="uid://5e78sjjmbm11" path="res://Assets/Textures/entities/Particles/other/feather.png" id="2_vb6pk"]
+
+[sub_resource type="GDScript" id="GDScript_1qrh2"]
+resource_name = "feather particle"
+script/source = "extends Node2D
+
+var i :int = 0
+
+
+func _ready() -> void:
+	$GPUParticles2D.one_shot = true
+	$GPUParticles2D2.one_shot= true
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if i >= 2:
+		queue_free()
+	pass
+
+
+func _on_gpu_particles_2d_finished() -> void:
+	i+=1
+	pass # Replace with function body.
+
+
+func _on_gpu_particles_2d_2_finished() -> void:
+	i+=1
+	pass # Replace with function body.
+"
+
+[sub_resource type="Curve" id="Curve_1qrh2"]
+_data = [Vector2(0.38528138, 1), 0.0, 0.0, 0, 0, Vector2(0.7142857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vb6pk"]
+curve = SubResource("Curve_1qrh2")
+
+[sub_resource type="Curve" id="Curve_q7f6t"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.50561804), 0.0, 0.0, 0, 0, Vector2(0.06493506, 1), 0.0, 0.0, 0, 0, Vector2(0.4069264, 1.3707867), 0.0, 0.0, 0, 0, Vector2(0.978355, 0.42696643), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qa4ui"]
+curve = SubResource("Curve_q7f6t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_crqvn"]
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 40.89
+angular_velocity_min = -20.000015
+angular_velocity_max = 19.999983
+gravity = Vector3(0, 10, 0)
+radial_accel_min = -14.870002
+radial_accel_max = 14.129997
+tangential_accel_min = -19.330002
+tangential_accel_max = 18.579998
+scale_curve = SubResource("CurveTexture_qa4ui")
+alpha_curve = SubResource("CurveTexture_vb6pk")
+
+[node name="feather explosion particle" type="Node2D" unique_id=357065546]
+z_index = 5
+script = SubResource("GDScript_1qrh2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=373430832]
+amount = 10
+texture = ExtResource("1_1qrh2")
+lifetime = 5.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_crqvn")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=714770001]
+amount = 10
+texture = ExtResource("2_vb6pk")
+lifetime = 5.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_crqvn")
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]
+[connection signal="finished" from="GPUParticles2D2" to="." method="_on_gpu_particles_2d_2_finished"]

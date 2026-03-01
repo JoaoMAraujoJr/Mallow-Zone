@@ -77,14 +77,16 @@ func loadPlayerSkin():
 		hand_R.texture = SkinData.PlayerSkins[thisSkin]["hand"]
 
 
-func _on_damage_area_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Damageble") and !area.is_in_group("PlayerArea"):
-		var enemy = area.get_parent()
-		if enemy.has_method("setHealth"):
-			enemy.setHealth(-damage)
-	pass # Replace with function body.
+
 
 
 func _on_ammo_waste_cooldown_timeout() -> void:
 	canWaste=true
 	pass # Replace with function body.
+
+
+func _upon_body_entering_chainsaw_area(body: Node2D) -> void:
+		if body.has_method("addToHealth") and !(body is Player):
+			body.addToHealth(-damage)
+		elif body.has_method("setHealth") and !(body is Player):
+			body.setHealth(-damage)
