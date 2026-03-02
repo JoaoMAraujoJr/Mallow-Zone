@@ -686,20 +686,21 @@ visible = false
 [node name="HBoxContainer" type="HBoxContainer" parent="2_SaveSelect" unique_id=112542539]
 modulate = Color(1, 1, 1, 0.007843138)
 anchors_preset = -1
-anchor_left = 0.072000004
-anchor_top = 0.27
-anchor_right = 0.93600005
-anchor_bottom = 0.785
-offset_left = 125.84001
-offset_top = 217.18047
-offset_right = -392.08008
-offset_bottom = -153.61954
+anchor_left = 0.503
+anchor_top = 0.59900004
+anchor_right = 0.503
+anchor_bottom = 0.59900004
+offset_left = -425.84003
+offset_top = -19.699554
+offset_right = 358.15997
+offset_bottom = 3.4448242
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.4473741, 1.4473741)
+scale = Vector2(1.2530047, 1.2530047)
+pivot_offset = Vector2(293.69403, 11.971222)
 theme_override_constants/separation = 196
 
-[node name="SaveSelect" parent="2_SaveSelect/HBoxContainer" unique_id=469829838 instance=ExtResource("4_pkpk7")]
+[node name="SaveSelect1" parent="2_SaveSelect/HBoxContainer" unique_id=1506632854 instance=ExtResource("4_pkpk7")]
 layout_mode = 2
 
 [node name="SaveSelect2" parent="2_SaveSelect/HBoxContainer" unique_id=1659875315 instance=ExtResource("4_pkpk7")]
@@ -708,25 +709,30 @@ Slot = 2
 
 [node name="SaveSelect3" parent="2_SaveSelect/HBoxContainer" unique_id=239608307 instance=ExtResource("4_pkpk7")]
 layout_mode = 2
+size_flags_horizontal = 4
 Slot = 3
 
 [node name="SaveSelect4" parent="2_SaveSelect/HBoxContainer" unique_id=2027224675 instance=ExtResource("4_pkpk7")]
 layout_mode = 2
 Slot = 4
 
+[node name="SaveSelect5" parent="2_SaveSelect/HBoxContainer" unique_id=868640021 instance=ExtResource("4_pkpk7")]
+layout_mode = 2
+Slot = 5
+
 [node name="Label" type="RichTextLabel" parent="2_SaveSelect" unique_id=711331914]
 material = SubResource("ShaderMaterial_urwbv")
 anchors_preset = -1
-anchor_left = 0.081
-anchor_top = 0.083000004
-anchor_right = 0.33800003
-anchor_bottom = 0.314
-offset_left = 0.32000732
-offset_top = 0.24000168
-offset_right = -7.860718
-offset_bottom = 13.919998
+anchor_left = 0.148
+anchor_top = 0.15900001
+anchor_right = 0.38000003
+anchor_bottom = 0.31300002
+offset_left = 0.5600281
+offset_top = 0.5200043
+offset_right = -9.089264
+offset_bottom = -2.354309
 scale = Vector2(1.0290242, 1.0290242)
-pivot_offset = Vector2(72, 20)
+pivot_offset = Vector2(143.91277, 54.012794)
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.30980393)
 theme_override_constants/shadow_outline_size = 0
