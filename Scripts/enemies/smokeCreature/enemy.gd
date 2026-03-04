@@ -92,7 +92,7 @@ func _on_enemy_vision_body_exited(body: Node2D) -> void:
 func _on_damage_timer_timeout() -> void:
 	can_damage = true
 
-func setHealth(addedAmount : int)-> void:
+func addToHealth(addedAmount : int)-> void:
 	hp += addedAmount
 	
 	if hp <= 0 and !is_dead:
@@ -173,7 +173,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	
 	timerToDie.timeout.connect(
 		func():
-			setHealth(-1000)
+			addToHealth(-1000)
 			print("enemy deleted for being inactive")
 	)
 

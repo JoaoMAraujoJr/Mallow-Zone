@@ -108,11 +108,9 @@ func _on_damagehitbox_body_entered(body: Node2D) -> void:
 	if !can_damage or _itstoped:
 		return
 	
-	if body is Player:
+	if body.has_method("addToHealth") and !body.is_in_group("Boss"):
 		body.addToHealth(damage)
 		print("damaged by saw")
-	elif body.has_method("setHealth") and !body.is_in_group("Boss"):
-		body.setHealth(damage)
 	else:
 		return
 	

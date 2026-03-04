@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="6_pc1jd"]
 [ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Biomes/DeepWinter.tres" id="7_sgel4"]
 [ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="8_sgel4"]
+[ext_resource type="PackedScene" uid="uid://l5wsw1fkpbqq" path="res://Scenes/enemies/basic_creature.tscn" id="9_d8xu4"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1572845358]
 y_sort_enabled = true
@@ -66,3 +67,19 @@ position = Vector2(-255, 148)
 
 [node name="sunflower2" parent="." unique_id=1316244666 instance=ExtResource("8_sgel4")]
 position = Vector2(-232, 153)
+
+[node name="BasicCreature" parent="." unique_id=765802427 instance=ExtResource("9_d8xu4")]
+position = Vector2(-583, 73)
+angular_damp_mode = 1
+angular_damp = 23.765
+cur_personality = 0
+can_move = true
+shy_speed_multiplier = 1.0
+stay_in_place_time = 0.5
+wander_speed_multiplier = 1.0
+curiosity_point = Vector2(0, 0)
+wander_radius = 12.0
+max_speed = 900.0
+speed = 200.0
+max_health = 20
+health = 20

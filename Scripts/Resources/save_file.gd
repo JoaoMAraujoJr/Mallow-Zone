@@ -9,6 +9,7 @@ class_name SaveFile
 @export_group("Equipment")
 @export var cur_skin:String = "Kilo"
 @export var cur_weapon:String = "none"
+@export var inventory :Array[InventoryItem] =[]
 
 @export_group("Others")
 @export var money:int = 0

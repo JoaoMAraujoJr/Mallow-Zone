@@ -29,8 +29,8 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 		body.addToHealth(-damage)
 		uponHit()
 		return
-	if body.has_method(\"setHealth\"):
-		body.setHealth(-damage)
+	if body.has_method(\"addToHealth\"):
+		body.addToHealth(-damage)
 		uponHit()
 	pass # Replace with function body.
 "

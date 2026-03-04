@@ -16,7 +16,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Mellow Zone"
+config/name="The Backyard"
+config/description="The Backyard is a dream-like , procedurally generated , adventure game. Beat monsters, discover new Biomes and Structures in the edge of reality, where time is just a mere ilusion."
 run/main_scene="uid://dtkhf76oj53cs"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60

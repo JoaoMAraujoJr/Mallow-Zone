@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cvdqy26p77c8p"]
+
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_w34uy"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="3_abtgi"]
+[ext_resource type="PackedScene" uid="uid://mok5m72dvxgh" path="res://Scenes/entities/npcs/zet.tscn" id="3_xwgi5"]
+[ext_resource type="PackedScene" uid="uid://dbayx1y3h5nev" path="res://Scenes/Unique/Gold.tscn" id="4_w34uy"]
+[ext_resource type="PackedScene" uid="uid://fiukuk2xjves" path="res://Scenes/items/purchasable_pickable_item.tscn" id="5_xwgi5"]
+[ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="6_pc1jd"]
+[ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Biomes/DeepWinter.tres" id="7_sgel4"]
+[ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="8_sgel4"]
+[ext_resource type="PackedScene" uid="uid://l5wsw1fkpbqq" path="res://Scenes/enemies/basic_creature.tscn" id="9_d8xu4"]
+
+[node name="Testing Grounds" type="Node2D" unique_id=1572845358]
+y_sort_enabled = true
+
+[node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_w34uy")]
+position = Vector2(-246, 152.00002)
+scale = Vector2(2.6082387, 2.6082387)
+
+[node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("3_xwgi5")]
+position = Vector2(396, -144)
+
+[node name="Interface" parent="." unique_id=1650993913 instance=ExtResource("3_abtgi")]
+
+[node name="Label" type="Label" parent="." unique_id=1947105349]
+offset_left = -89.0
+offset_top = -16.0
+offset_right = -27.0
+offset_bottom = 7.0
+
+[node name="Gold" parent="." unique_id=683253461 instance=ExtResource("4_w34uy")]
+position = Vector2(-350, -122)
+
+[node name="Gold2" parent="." unique_id=528789725 instance=ExtResource("4_w34uy")]
+position = Vector2(-250, -279)
+
+[node name="Gold3" parent="." unique_id=2132746207 instance=ExtResource("4_w34uy")]
+position = Vector2(-202, -58)
+
+[node name="Gold4" parent="." unique_id=561454465 instance=ExtResource("4_w34uy")]
+position = Vector2(-102, -399)
+
+[node name="Gold5" parent="." unique_id=614866788 instance=ExtResource("4_w34uy")]
+position = Vector2(37, -346)
+
+[node name="PurchasablePickableItem" parent="." unique_id=1244783195 instance=ExtResource("5_xwgi5")]
+position = Vector2(725, 48)
+price = 500
+PickableName = "chainsaw"
+
+[node name="PurchasablePickableItem2" parent="." unique_id=2090185333 instance=ExtResource("5_xwgi5")]
+position = Vector2(297, 55)
+price = 500
+PickableName = "shotgun"
+
+[node name="PurchasablePickableItem3" parent="." unique_id=7547140 instance=ExtResource("5_xwgi5")]
+position = Vector2(86, 39)
+price = 500
+PickableName = "flamethrower"
+
+[node name="LevelWarper" parent="." unique_id=674484480 instance=ExtResource("6_pc1jd")]
+position = Vector2(-406.00006, -456)
+warpBiome = ExtResource("7_sgel4")
+
+[node name="sunflower" parent="." unique_id=75144789 instance=ExtResource("8_sgel4")]
+position = Vector2(-255, 148)
+
+[node name="sunflower2" parent="." unique_id=1316244666 instance=ExtResource("8_sgel4")]
+position = Vector2(-232, 153)
+
+[node name="BasicCreature" parent="." unique_id=765802427 instance=ExtResource("9_d8xu4")]
+position = Vector2(-583, 73)
+angular_damp_mode = 1
+angular_damp = 23.765
+cur_personality = 0
+can_move = true
+shy_speed_multiplier = 1.0
+stay_in_place_time = 0.0
+wander_speed_multiplier = 1.0
+curiosity_point = Vector2(0, 0)
+wander_radius = 12.0
+max_speed = 900.0
+speed = 200.0
+max_health = 20
+health = 20

@@ -45,6 +45,7 @@ monitoring = false
 z_index = -2
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_a6xb7")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="EnemySpawnArea" type="Area2D" parent="." unique_id=1438610677]
 visible = false
@@ -55,7 +56,7 @@ monitoring = false
 z_index = -2
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_a6xb7")
-debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
+debug_color = Color(0.80784315, 0.38431373, 0.4392157, 0)
 
 [node name="ObjectSpawnArea" type="Area2D" parent="." unique_id=929205691]
 visible = false
@@ -65,7 +66,7 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectSpawnArea" unique_id=2035214393]
 z_index = -2
 shape = SubResource("RectangleShape2D_ycj2y")
-debug_color = Color(0.80609375, 0.38307732, 0.4375254, 0.41960785)
+debug_color = Color(0.80784315, 0.38431373, 0.4392157, 0)
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=29587247]
 rect = Rect2(-206, -204, 413, 615)

@@ -1726,8 +1726,9 @@ libraries/ = SubResource("AnimationLibrary_j15rv")
 position = Vector2(-908, -73)
 
 [node name="LevelWarper" parent="exit" unique_id=1504512995 instance=ExtResource("28_ir3vo")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-59, 75.00001)
-scale = Vector2(0.84188735, 0.84188735)
+scale = Vector2(1.79941, 1.79941)
 warpBiome = ExtResource("29_prc6h")
 
 [node name="visuals" type="Node2D" parent="exit" unique_id=839788910]
@@ -1794,8 +1795,9 @@ position = Vector2(886, 61)
 rotation = -3.1415927
 
 [node name="LevelWarper" parent="exit2" unique_id=1003311479 instance=ExtResource("28_ir3vo")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-59, 75.00001)
-scale = Vector2(0.84188735, 0.84188735)
+scale = Vector2(-1.3600768, -1.3600768)
 warpBiome = ExtResource("29_prc6h")
 
 [node name="visuals" type="Node2D" parent="exit2" unique_id=40419957]

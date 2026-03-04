@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://l5wsw1fkpbqq"]
+
+[ext_resource type="Texture2D" uid="uid://8gji82sfg7v7" path="res://Assets/Textures/items/guns/projectile/bullet_debug.png" id="1_ixgnn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ixgnn"]
+
+[sub_resource type="GDScript" id="GDScript_ixgnn"]
+resource_name = "Creature"
+script/source = "extends RigidEntity
+
+enum Personalities {
+	SHY,
+	FOLLOWER,
+	STALKER,
+	WANDER,
+	OTHER
+}
+@export var cur_personality : Personalities
+@export var can_move:bool = true
+@export var player_detector : Area2D
+@export var target:PhysicalBone2D
+
+@export_group(\"Shy Config\")
+@export var shy_speed_multiplier :float= 1.0
+
+@export_group(\"Wander Config\")
+@export var stay_in_place_time:float
+@export var wander_speed_multiplier :float = 1.0
+@export var curiosity_point:Vector2 = Vector2.ZERO
+@export var wander_radius :float=12.0
+var wander_stay_timer:Timer =Timer.new()
+var can_wander :bool = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	super()
+	wander_stay_timer.wait_time = stay_in_place_time
+	wander_stay_timer.timeout.connect(func():can_wander=true)
+	
+	pass # Replace with function body.
+
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	if cur_personality and can_move:
+		apply_movement_behaviour()
+		pass
+		
+	pass
+
+
+func apply_movement_behaviour():
+	var movement_vector: Vector2 = Vector2.ZERO
+	if cur_personality:
+		match cur_personality:
+			Personalities.SHY:
+				if target:
+					var dir:Vector2 = (global_position - target.global_position).normalized() 
+					movement_vector= dir * (speed * shy_speed_multiplier)
+			Personalities.WANDER:
+				if can_wander:
+					if curiosity_point == Vector2.ZERO:
+						var radius = randf_range(0.0, wander_radius)
+						var angle = randf_range(0.0, TAU)
+						curiosity_point = global_position + (Vector2.RIGHT.rotated(angle) * radius)
+					var dir :Vector2= curiosity_point - global_position
+					if dir.length() < 5:
+						can_wander = false
+						wander_stay_timer.start()
+						curiosity_point = Vector2.ZERO
+					else:
+						movement_vector = dir.normalized() * speed
+				
+				
+	if can_move:
+		linear_velocity = movement_vector + pullingforce + pushingforce
+	else:
+		linear_velocity = pullingforce + pushingforce
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ixgnn"]
+radius = 51.1957
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8eelf"]
+
+[node name="BasicCreature" type="RigidBody2D" unique_id=765802427]
+mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_ixgnn")
+gravity_scale = 0.0
+script = SubResource("GDScript_ixgnn")
+metadata/_custom_type_script = "uid://bivh1bo7pht0s"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=112725641]
+scale = Vector2(4.5924516, 4.5924516)
+texture = ExtResource("1_ixgnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1772982614]
+shape = SubResource("CircleShape2D_ixgnn")
+
+[node name="playerDetector" type="Area2D" parent="." unique_id=521631619]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerDetector" unique_id=622981725]
+scale = Vector2(23.363909, 23.363909)
+shape = SubResource("CircleShape2D_8eelf")
