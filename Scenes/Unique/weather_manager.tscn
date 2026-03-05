@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://debg6fibu7vns"]
+[gd_scene format=3 uid="uid://debg6fibu7vns"]
 
 [ext_resource type="Script" uid="uid://rv6cpar42krj" path="res://Scenes/Unique/weather_manager.gd" id="1_hl32d"]
 
@@ -22,17 +22,31 @@ glow_levels/3 = 3.48
 glow_levels/4 = 3.8
 glow_normalized = true
 glow_bloom = 0.29
-glow_blend_mode = 1
 adjustment_enabled = true
 adjustment_contrast = 1.1
 adjustment_color_correction = SubResource("GradientTexture2D_5rrr5")
 
-[node name="Weather_Manager" type="CanvasLayer"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hl32d"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_dg4oq"]
+colors = PackedColorArray(0, 0, 0, 0, 0.08235294, 0.08235294, 0.10980392, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hl32d"]
+noise_type = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dg4oq"]
+noise = SubResource("FastNoiseLite_hl32d")
+color_ramp = SubResource("Gradient_dg4oq")
+seamless = true
+seamless_blend_skirt = 0.43
+
+[node name="Weather_Manager" type="CanvasLayer" unique_id=22657162]
 script = ExtResource("1_hl32d")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1752966592]
 
-[node name="WeatherOverlay" type="ColorRect" parent="."]
+[node name="WeatherOverlay" type="ColorRect" parent="." unique_id=718580919]
 z_index = 1
 material = SubResource("CanvasItemMaterial_dg4oq")
 anchors_preset = 15
@@ -42,5 +56,18 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1861810193]
 environment = SubResource("Environment_dg4oq")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=91951491]
+layer = 0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=62902399]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=1856393422]
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_hl32d")
+use_parent_material = true
+scale = Vector2(2.709386, 2.709386)
+texture = SubResource("NoiseTexture2D_dg4oq")

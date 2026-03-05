@@ -238,8 +238,7 @@ func _on_regen_timer_timeout() -> void:
 
 #GetMethods
 func getRandomPlayerAreaCoordinates() -> Vector2:
-	var shape : CircleShape2D = $PlayerArea2D/CollisionShape2D.shape
-	var randomRadius = shape.radius * sqrt(randf())
+	var randomRadius = 140.0 * sqrt(randf())
 	var randomAngle = randf() * TAU
 	var coordinates = Vector2(randomRadius * cos(randomAngle) , randomRadius * sin(randomAngle))
 	var global_coordinates = _PlayerArea.to_global(coordinates)

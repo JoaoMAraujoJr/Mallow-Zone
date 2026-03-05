@@ -10,8 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://yvfg5cl1j23" path="res://Assets/Sounds/Gun/OutofAmmo.wav" id="8_gymyn"]
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="9_tx1dd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cvnsp"]
-radius = 141.36693
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yiw7m"]
+radius = 128.6347
+height = 446.83636
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yiw7m"]
 radius = 785.3779
@@ -61,7 +62,7 @@ scale = Vector2(0.14770508, 0.14770508)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D" unique_id=1750442588]
 position = Vector2(0, 6.770248)
-shape = SubResource("CircleShape2D_cvnsp")
+shape = SubResource("CapsuleShape2D_yiw7m")
 debug_color = Color(0.7466245, 0.45141858, 0.28133497, 0.41960785)
 
 [node name="ChunkLoader" type="Area2D" parent="." unique_id=1567156909 groups=["ChunkLoader"]]

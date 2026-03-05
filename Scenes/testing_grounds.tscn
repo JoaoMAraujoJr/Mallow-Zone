@@ -15,7 +15,6 @@ y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_w34uy")]
 position = Vector2(-246, 152.00002)
-scale = Vector2(2.6082387, 2.6082387)
 
 [node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("3_xwgi5")]
 position = Vector2(396, -144)
@@ -69,17 +68,21 @@ position = Vector2(-255, 148)
 position = Vector2(-232, 153)
 
 [node name="BasicCreature" parent="." unique_id=765802427 instance=ExtResource("9_d8xu4")]
-position = Vector2(-583, 73)
+position = Vector2(-523, 91)
+angular_damp_mode = 1
+angular_damp = 23.765
+predict_margin = 300.0
+
+[node name="BasicCreature2" parent="." unique_id=1884788163 instance=ExtResource("9_d8xu4")]
+position = Vector2(-186, -153)
 angular_damp_mode = 1
 angular_damp = 23.765
 cur_personality = 0
-can_move = true
-shy_speed_multiplier = 1.0
-stay_in_place_time = 0.5
-wander_speed_multiplier = 1.0
-curiosity_point = Vector2(0, 0)
-wander_radius = 12.0
-max_speed = 900.0
-speed = 200.0
-max_health = 20
-health = 20
+predict_margin = 300.0
+
+[node name="BasicCreature3" parent="." unique_id=888128642 instance=ExtResource("9_d8xu4")]
+position = Vector2(-235, 537)
+angular_damp_mode = 1
+angular_damp = 23.765
+cur_personality = 3
+predict_margin = 300.0
