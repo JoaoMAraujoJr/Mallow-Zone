@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bayubii0oclpu"]
+
+[sub_resource type="GDScript" id="GDScript_oemkx"]
+resource_name = "Cow"
+script/source = "extends BasicCreatureEntity
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	super()
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	super(delta)
+	pass
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oemkx"]
+radius = 19.416489
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bn343"]
+radius = 131.09538
+
+[node name="BasicCreatureEntity" type="RigidBody2D" unique_id=311530610 node_paths=PackedStringArray("player_detector")]
+script = SubResource("GDScript_oemkx")
+player_detector = NodePath("Area2D")
+metadata/_custom_type_script = "uid://dnyegs256dgof"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=583814274]
+shape = SubResource("CircleShape2D_oemkx")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=875235340]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1138828626]
+shape = SubResource("CircleShape2D_bn343")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=600197367]
