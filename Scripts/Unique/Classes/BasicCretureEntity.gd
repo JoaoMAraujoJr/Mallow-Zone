@@ -62,7 +62,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if can_move:
 		if use_basic_behaviours:
 			apply_movement_behaviour()
@@ -106,7 +106,7 @@ func apply_movement_behaviour():
 						can_refresh=false
 						target_refresh_rate_timer.start()
 					var vector_dir = (follower_target_point - global_position)
-					if vector_dir.length() > 5:
+					if vector_dir.length() > 50:
 						movement_vector = vector_dir.normalized() * speed
 			Behaviours.IDLE:
 				movement_vector = Vector2.ZERO

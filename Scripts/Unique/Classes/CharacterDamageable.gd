@@ -15,6 +15,9 @@ var isAffectable : bool = true
 
 var _effectHandler : EffectHandler
 
+
+
+
 func _ready() -> void:
 	_effectHandler = find_child("EffectHandler")
 	

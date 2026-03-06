@@ -22,14 +22,6 @@ enum MenuWindows {
 
 @onready var cur_menu:MenuWindows =MenuWindows.MAIN_MENU
 
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 func play_pressed() -> void:
 	cur_menu = MenuWindows.SAVE_SELECT

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://l5wsw1fkpbqq"]
 
-[ext_resource type="Script" uid="uid://bivh1bo7pht0s" path="res://Scripts/Unique/Classes/RigidDamageable.gd" id="1_8eelf"]
+[ext_resource type="Script" uid="uid://dnyegs256dgof" path="res://Scripts/Unique/Classes/BasicCretureEntity.gd" id="1_8eelf"]
 [ext_resource type="Texture2D" uid="uid://8gji82sfg7v7" path="res://Assets/Textures/items/guns/projectile/bullet_debug.png" id="1_ixgnn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ixgnn"]
@@ -15,12 +15,13 @@ radius = 14.252751
 [sub_resource type="CircleShape2D" id="CircleShape2D_hnrs7"]
 radius = 165.21501
 
-[node name="BasicCreature" type="RigidBody2D" unique_id=765802427]
+[node name="BasicCreature" type="RigidBody2D" unique_id=765802427 node_paths=PackedStringArray("player_detector")]
 mass = 20.0
 physics_material_override = SubResource("PhysicsMaterial_ixgnn")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_8eelf")
+player_detector = NodePath("playerDetector")
 metadata/_custom_type_script = "uid://bivh1bo7pht0s"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=112725641]
