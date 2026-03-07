@@ -7,7 +7,8 @@ class_name SaveFile
 @export_range(0, 99999) var max_hp :int =100
 
 @export_group("Equipment")
-@export var cur_skin:String = "Kilo"
+@export var cur_skin:PlayerSkin 
+@export var unlocked_skins:Array[PlayerSkin] =[]
 @export var cur_weapon:String = "none"
 @export var inventory :Array[InventoryItem] =[]
 
@@ -18,4 +19,3 @@ class_name SaveFile
 @export_group("Progress")
 @export var cur_biome:Biome = null
 @export var defeated_bosses:Array[String] =[]
-@export var unlocked_skins:Array[String] =[]

@@ -68,6 +68,7 @@ z_index = 5
 script = SubResource("GDScript_1qrh2")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=373430832]
+process_priority = 1
 amount = 10
 texture = ExtResource("1_1qrh2")
 lifetime = 5.0
@@ -75,6 +76,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_crqvn")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=714770001]
+process_priority = 1
 amount = 10
 texture = ExtResource("2_vb6pk")
 lifetime = 5.0

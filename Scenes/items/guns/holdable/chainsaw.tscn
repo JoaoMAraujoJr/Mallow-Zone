@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cbry4l6aqwq6a"]
 
 [ext_resource type="Script" uid="uid://tw70m4qup3jg" path="res://Scenes/items/guns/holdable/chainsaw.gd" id="1_37sxq"]
+[ext_resource type="PackedScene" uid="uid://d0rbd767g0y85" path="res://Scenes/particles/confetti_particle_0.tscn" id="2_4m85u"]
 [ext_resource type="Texture2D" uid="uid://c3v6b738c3b26" path="res://Assets/Textures/items/guns/chainsaw_spr_sheet.png" id="2_i1o4l"]
-[ext_resource type="Texture2D" uid="uid://b8qei0yud7p7u" path="res://Assets/Textures/player_skins/red_jim/hand_spr.png" id="3_4m85u"]
+[ext_resource type="Texture2D" uid="uid://dg2vxke11u8qx" path="res://Assets/Textures/player_skins/skin_sheets/original_skin_sheet.png" id="3_2g7wb"]
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="4_i1o4l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2g7wb"]
@@ -47,6 +48,7 @@ height = 44.830173
 scale = Vector2(1.3991469, 1.3991469)
 script = ExtResource("1_37sxq")
 _Type = "chainsaw"
+bulletParticle = ExtResource("2_4m85u")
 TriggerMode = 1
 
 [node name="gun" type="AnimatedSprite2D" parent="." unique_id=275889265]
@@ -77,7 +79,9 @@ scale = Vector2(0.99, 0.985)
 [node name="hand_L" type="Sprite2D" parent="gun/LeftHand" unique_id=1976714565]
 position = Vector2(-4.200001, 5.9604645e-08)
 scale = Vector2(-0.46549737, 0.46549737)
-texture = ExtResource("3_4m85u")
+texture = ExtResource("3_2g7wb")
+region_enabled = true
+region_rect = Rect2(208, 149, 32, 32)
 
 [node name="RightHand" type="Node2D" parent="gun" unique_id=450904211]
 position = Vector2(0.12449196, -7.527593)
@@ -88,7 +92,9 @@ scale = Vector2(1.29, 1.255)
 position = Vector2(2.2418718, 0)
 rotation = 0.27684313
 scale = Vector2(0.3315387, 0.3315387)
-texture = ExtResource("3_4m85u")
+texture = ExtResource("3_2g7wb")
+region_enabled = true
+region_rect = Rect2(208, 149, 32, 32)
 
 [node name="AmmoWasteCooldown" type="Timer" parent="." unique_id=803385623]
 wait_time = 0.5

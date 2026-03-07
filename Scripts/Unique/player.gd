@@ -22,7 +22,7 @@ var _gun : Node2D
 @export var recoil_decay: float = 80.0       # how fast recoil decay
 var recoil_velocity: Vector2 = Vector2.ZERO
 
-@export var max_camzoom :float = 0.4
+@export var max_camzoom :float = 0.2
 @export var min_camzoom :float = 1.0
 @export var zoom_speed : float = 0.1 
 @export var target_zoom : float = 0.6 

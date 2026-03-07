@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://c780l2l2yqbnc" path="res://Scenes/particles/bullet_particle.tscn" id="1_6hj43"]
 [ext_resource type="PackedScene" uid="uid://bqvow658jyogb" path="res://Scenes/items/guns/bullets/common_bullet.tscn" id="1_mtb8l"]
 [ext_resource type="Texture2D" uid="uid://iv4hq3nefset" path="res://Assets/Textures/items/guns/shotgun.png" id="1_p5udl"]
-[ext_resource type="Texture2D" uid="uid://b8qei0yud7p7u" path="res://Assets/Textures/player_skins/red_jim/hand_spr.png" id="2_6hj43"]
 [ext_resource type="AudioStream" uid="uid://c4jymt15nn1kw" path="res://Assets/Sounds/Gun/ShootSoundOGG.ogg" id="3_mtb8l"]
+[ext_resource type="Texture2D" uid="uid://dg2vxke11u8qx" path="res://Assets/Textures/player_skins/skin_sheets/original_skin_sheet.png" id="4_h5fa8"]
 [ext_resource type="AudioStream" uid="uid://dssqsr1twe065" path="res://Assets/Sounds/Gun/Reload.ogg" id="5_h5fa8"]
 
 [sub_resource type="GDScript" id="GDScript_h5fa8"]
@@ -363,7 +363,9 @@ position = Vector2(6.666667, 3.8000002)
 [node name="hand_R" type="Sprite2D" parent="gun/RightHand" unique_id=2007921486]
 position = Vector2(3.3333333, -1.0000005)
 scale = Vector2(0.3315387, 0.3315387)
-texture = ExtResource("2_6hj43")
+texture = ExtResource("4_h5fa8")
+region_enabled = true
+region_rect = Rect2(208, 149, 32, 32)
 
 [node name="LeftHand" type="Node2D" parent="gun" unique_id=632674185]
 position = Vector2(21.333334, 4.6)
@@ -372,7 +374,9 @@ rotation = 1.5707964
 [node name="hand_L" type="Sprite2D" parent="gun/LeftHand" unique_id=56569789]
 position = Vector2(-4.200001, 5.9604645e-08)
 scale = Vector2(-0.34313205, 0.34313205)
-texture = ExtResource("2_6hj43")
+texture = ExtResource("4_h5fa8")
+region_enabled = true
+region_rect = Rect2(208, 149, 32, 32)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="gun" unique_id=85751665]
 libraries/ = SubResource("AnimationLibrary_0film")

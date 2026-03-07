@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func create_new_save(slot:int):
 	var save = SaveFile.new()
+	save.cur_skin = load("res://Scripts/Resources/PlayerSkins/retro_skin.tres")
 	current_save = save
 	current_slot = slot
 	save_game(slot)

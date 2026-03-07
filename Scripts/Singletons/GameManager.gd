@@ -1,6 +1,6 @@
 extends Node
 @warning_ignore("unused_signal")
-signal skin_changed(new_skin: String)
+signal skin_changed(new_skin: PlayerSkin)
 
 var currentSaveSlot = 1
 
@@ -34,7 +34,7 @@ var isPaused:bool = false
 #current
 var currentSpawnedChunks :={}
 var currentEquipedWeaponType : String = "none"
-var currentPlayerSkin: String = "Kilo"
+var cur_skin: PlayerSkin = preload("res://Scripts/Resources/PlayerSkins/normal_skin.tres")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -85,7 +85,8 @@ func load_from_current_save():
 	if SaveManager.current_save:
 		max_hp = SaveManager.current_save.max_hp
 		cur_hp = SaveManager.current_save.cur_hp
-		currentPlayerSkin = SaveManager.current_save.cur_skin
+		cur_skin = SaveManager.current_save.cur_skin
+		print(str(cur_skin))
 		currentEquipedWeaponType = SaveManager.current_save.cur_weapon
 		gold_wallet = SaveManager.current_save.money
 		if currentEquipedWeaponType in ItemData.weapons:

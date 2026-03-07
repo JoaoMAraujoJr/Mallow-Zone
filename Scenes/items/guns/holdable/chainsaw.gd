@@ -5,7 +5,7 @@ extends Node2D
 @export var _Type :String
 @export var bulletParticle : PackedScene = preload("res://Scenes/particles/bullet_particle.tscn")
 @onready var gunWaste : int = 1
-@export var damage: int = 3
+@export var damage: int = 2
 @onready var _damageArea:Area2D = $gun/damageArea
 
 @onready var hand_R := $gun/RightHand/hand_R
@@ -61,18 +61,23 @@ func shootLogic() -> void:
 			var bodies : = _damageArea.get_overlapping_bodies()
 			var hit_count:int = 0
 			for body in bodies:
-				print("enemy detected by chainsaw")
-				if body.has_method("addToHealth") and body is not Player and can_hit:
+				if body is not Player and can_hit:
 					hit_count+=1
 					print("enemy damaged")
-					body.addToHealth(-damage)
+					if body.has_method("updateExternalForces"):
+						print("someone was pushed")
+						var force_dir = body.pushingforce + ((body.global_position -global_position).normalized() * 100.0)
+						body.updateExternalForces("push",force_dir)
+					if body.has_method("addToHealth"):
+
+						body.addToHealth(-damage)
 			if hit_count >0:
 				can_hit = false
 				cooldown.start()
-			
-			var bulletPart = bulletParticle.instantiate()
-			bulletPart.global_position = global_position
-			get_tree().current_scene.add_child(bulletPart)
+			if bulletParticle:
+				var bulletPart = bulletParticle.instantiate()
+				bulletPart.global_position = global_position
+				get_tree().current_scene.add_child(bulletPart)
 			if canWaste and (GameManager.ammo - 1)>=0:
 				GameManager.ammo -= 1
 				canWaste = false
@@ -89,11 +94,9 @@ func _flipGun(is_backwards: bool):
 		_animatedSprite.scale.y = abs(_animatedSprite.scale.y)
 
 func loadPlayerSkin():
-	var thisSkin = GameManager.currentPlayerSkin
-	if thisSkin in SkinData.PlayerSkins:
-		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
-		hand_R.texture = SkinData.PlayerSkins[thisSkin]["hand"]
-
+	var thisSkin = GameManager.cur_skin
+	hand_L.texture = thisSkin.texture
+	hand_R.texture = thisSkin.texture
 
 func _on_ammo_waste_cooldown_timeout() -> void:
 	canWaste=true

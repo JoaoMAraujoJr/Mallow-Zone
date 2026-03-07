@@ -1,7 +1,9 @@
 extends Node2D
 class_name PlayerSkinManager
 
+@onready var back_hair := $skin/back_hair
 
+@onready var hat := $skin/head_sprites/hat
 @onready var head := $skin/head_sprites/head
 @onready var eyes := $skin/head_sprites/eyes
 
@@ -9,7 +11,7 @@ class_name PlayerSkinManager
 @onready var leg_l := $skin/torso_and_legs/legs/left_leg/leg
 @onready var leg_r := $skin/torso_and_legs/legs/right_leg/leg
 
-@export var thisSkin : String = GameManager.currentPlayerSkin
+@export var thisSkin : PlayerSkin = GameManager.cur_skin
 @onready var currentAction := "Idle"
 @onready var isBackwards := false
 @onready var eyesClosed := false
@@ -23,10 +25,9 @@ class_name PlayerSkinManager
 func _ready() -> void:
 	currentAction = "Idle"
 
-	if thisSkin in SkinData.PlayerSkins:
+	if thisSkin:
 		_loadSkin(thisSkin)
-	else:
-		_loadSkin(GameManager.currentPlayerSkin)
+
 
 	GameManager.connect("skin_changed",Callable(self,"on_Skin_Changed"))
 	
@@ -48,21 +49,23 @@ func _physics_process(_delta: float) -> void:
 func _assertFacing():
 	match isBackwards:
 		false:
-			eyes.texture = SkinData.PlayerSkins[thisSkin]["eyesClosed"] 
+			eyes.region_rect.position.x = 66
 			if !eyesClosed:
-				eyes.texture = SkinData.PlayerSkins[thisSkin]["eyesOpen"] 
-			head.texture = SkinData.PlayerSkins[thisSkin]["headFront"]
-			torso.texture = SkinData.PlayerSkins[thisSkin]["torsoFront"]
-			leg_l.texture = SkinData.PlayerSkins[thisSkin]["legFront"]
-			leg_r.texture = SkinData.PlayerSkins[thisSkin]["legFront"]
+				eyes.region_rect.position.x = 1
+			hat.region_rect.position.x = 4
+			head.region_rect.position.x = 1
+			torso.region_rect.position.x = 1
+			leg_l.region_rect.position.x = 131
+			leg_r.region_rect.position.x = 131
 			eyes.z_index = 0
 		true:
 			eyesClosed = false
-			eyes.texture = SkinData.PlayerSkins[thisSkin]["eyesBack"] 
-			head.texture = SkinData.PlayerSkins[thisSkin]["headBack"]
-			torso.texture = SkinData.PlayerSkins[thisSkin]["torsoBack"]
-			leg_l.texture = SkinData.PlayerSkins[thisSkin]["legBack"]
-			leg_r.texture = SkinData.PlayerSkins[thisSkin]["legBack"]
+			hat.region_rect.position.x = 69
+			eyes.region_rect.position.x = 131
+			head.region_rect.position.x = 66
+			torso.region_rect.position.x = 66
+			leg_l.region_rect.position.x = 152
+			leg_r.region_rect.position.x = 152
 			eyes.z_index = -1
 
 func _assertAction():
@@ -80,17 +83,17 @@ func _setBackwards(Bool : bool):
 func _setAction(Action : String):
 	currentAction = Action
 
-func _loadSkin(skin:String):
-	if skin in SkinData.PlayerSkins:
+func _loadSkin(skin:PlayerSkin):
+	if skin:
 		thisSkin = skin
-		eyes.texture = SkinData.PlayerSkins[thisSkin]["eyesOpen"] 
-		head.texture = SkinData.PlayerSkins[thisSkin]["headFront"]
-		torso.texture = SkinData.PlayerSkins[thisSkin]["torsoFront"]
-		leg_l.texture = SkinData.PlayerSkins[thisSkin]["legFront"]
-		leg_r.texture = SkinData.PlayerSkins[thisSkin]["legFront"]
-	else:
-		thisSkin = "Jim"
-		_loadSkin("Jim")
+		hat.texture = thisSkin.texture
+		back_hair.texture = thisSkin.texture
+		eyes.texture = thisSkin.texture
+		head.texture =  thisSkin.texture
+		torso.texture =  thisSkin.texture
+		leg_l.texture =  thisSkin.texture
+		leg_r.texture =  thisSkin.texture
+
 
 func Blink ():
 	if isBackwards:
@@ -125,5 +128,5 @@ func updateTrailParticle(isActive:bool):
 						trail.emitting = false
 			pass
 
-func on_Skin_Changed(new_skin: String) -> void:
+func on_Skin_Changed(new_skin: PlayerSkin) -> void:
 	_loadSkin(new_skin)

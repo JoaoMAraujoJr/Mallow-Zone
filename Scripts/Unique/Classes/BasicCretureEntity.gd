@@ -45,6 +45,8 @@ var can_refresh:bool = true
 
 func _ready() -> void:
 	super()
+	player_detector.body_entered.connect(_on_body_entered_detector)
+	
 	add_child(wander_stay_timer)
 	wander_stay_timer.wait_time = stay_in_place_time
 	wander_stay_timer.timeout.connect(func():can_wander=true)
@@ -60,9 +62,8 @@ func _ready() -> void:
 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
+	super(delta)
 	if can_move:
 		if use_basic_behaviours:
 			apply_movement_behaviour()
@@ -78,7 +79,7 @@ func apply_movement_behaviour():
 			Behaviours.SHY:
 				if target:
 					var dir:Vector2 = (global_position - target.global_position)
-					var t = clamp(dir.length() /350.0, 0.0, 1.0)
+					var t = clamp(dir.length() /500.0, 0.0, 1.0)
 					var speed_amplifier= 1.0 - t
 					movement_vector= dir.normalized() * (speed * shy_speed_multiplier)*speed_amplifier
 
@@ -115,6 +116,11 @@ func apply_movement_behaviour():
 	else:
 		linear_velocity = pullingforce + pushingforce
 
+func uponDamage():
+	print("creature "+str(self)+" damaged:" +str(health) + "/" +str(max_health))
+
+func Die():
+	print("creature died")
 
 func _on_body_entered_detector(body: Node2D) -> void:
 	if body is Player:

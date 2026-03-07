@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://c0t1t0pno1j1d"]
+
+[ext_resource type="Texture2D" uid="uid://bt2s8oqw60j6x" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/cow_particle_0.png" id="1_bh77h"]
+[ext_resource type="Texture2D" uid="uid://divc2i72g8c2d" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/cow_particle.png" id="2_64fkq"]
+[ext_resource type="Texture2D" uid="uid://bcmvwj418c0j2" path="res://Assets/Textures/entities/Particles/blood/blood_0.png" id="3_pojqv"]
+
+[sub_resource type="GDScript" id="GDScript_bh77h"]
+resource_name = "delete_self"
+script/source = "extends Node2D
+
+var i :int= 0
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$\"meat 1\".restart()
+	$\"meat 2\".restart()
+	$\"blood1\".restart()
+	$\"blood2\".restart()
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(_delta: float) -> void:
+	if i ==4:
+		queue_free()
+	pass
+
+
+func _on_meat_1_finished() -> void:
+	i+=1
+	pass # Replace with function body.
+
+
+func _on_meat_2_finished() -> void:
+	i+=1
+	pass # Replace with function body.
+
+
+func _on_blood_1_finished() -> void:
+	i+=1
+	pass # Replace with function body.
+
+
+func _on_blood_2_finished() -> void:
+	i+=1
+	pass # Replace with function body.
+"
+
+[sub_resource type="Curve" id="Curve_64fkq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7619048, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pojqv"]
+curve = SubResource("Curve_64fkq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qd34s"]
+particle_flag_disable_z = true
+angle_min = -89.99999
+angle_max = 90.000015
+direction = Vector3(0, -100, 0)
+spread = 97.226
+flatness = 0.445
+initial_velocity_min = 55.17
+initial_velocity_max = 93.1
+angular_velocity_min = -100.000015
+angular_velocity_max = 99.999985
+gravity = Vector3(0, 80, 0)
+scale_min = 0.39999998
+scale_curve = SubResource("CurveTexture_pojqv")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+sub_emitter_keep_velocity = true
+
+[sub_resource type="Curve" id="Curve_bh77h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74603176, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_64fkq"]
+curve = SubResource("Curve_bh77h")
+
+[sub_resource type="Curve" id="Curve_pojqv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8095239, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qd34s"]
+curve = SubResource("Curve_pojqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pdnuj"]
+particle_flag_disable_z = true
+angle_min = -29.99999
+angle_max = 30.000011
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_qd34s")
+alpha_curve = SubResource("CurveTexture_64fkq")
+
+[node name="cow_pieces_particles" type="Node2D" unique_id=1452327216]
+z_index = 1
+script = SubResource("GDScript_bh77h")
+
+[node name="meat 1" type="GPUParticles2D" parent="." unique_id=1889362051]
+process_priority = 1
+z_index = 1
+emitting = false
+amount = 1
+sub_emitter = NodePath("../blood1")
+texture = ExtResource("1_bh77h")
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_qd34s")
+
+[node name="meat 2" type="GPUParticles2D" parent="." unique_id=763341981]
+process_priority = 1
+z_index = 1
+emitting = false
+amount = 1
+sub_emitter = NodePath("../blood2")
+texture = ExtResource("2_64fkq")
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_qd34s")
+
+[node name="blood1" type="GPUParticles2D" parent="." unique_id=1682687981]
+process_priority = 1
+emitting = false
+amount = 10
+texture = ExtResource("3_pojqv")
+lifetime = 4.0
+one_shot = true
+speed_scale = 1.1
+fixed_fps = 15
+trail_enabled = true
+trail_lifetime = 1.8699999999999999
+trail_sections = 10
+trail_section_subdivisions = 8
+process_material = SubResource("ParticleProcessMaterial_pdnuj")
+
+[node name="blood2" type="GPUParticles2D" parent="." unique_id=663137426]
+process_priority = 1
+emitting = false
+amount = 10
+texture = ExtResource("3_pojqv")
+lifetime = 4.0
+one_shot = true
+speed_scale = 1.1
+fixed_fps = 15
+trail_enabled = true
+trail_lifetime = 1.8699999999999999
+trail_sections = 10
+trail_section_subdivisions = 8
+process_material = SubResource("ParticleProcessMaterial_pdnuj")
+
+[connection signal="finished" from="meat 1" to="." method="_on_meat_1_finished"]
+[connection signal="finished" from="meat 2" to="." method="_on_meat_2_finished"]
+[connection signal="finished" from="blood1" to="." method="_on_blood_1_finished"]
+[connection signal="finished" from="blood2" to="." method="_on_blood_2_finished"]

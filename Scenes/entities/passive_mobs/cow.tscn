@@ -1,40 +1,549 @@
 [gd_scene format=3 uid="uid://bayubii0oclpu"]
 
-[sub_resource type="GDScript" id="GDScript_oemkx"]
-resource_name = "Cow"
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="1_bp863"]
+[ext_resource type="Texture2D" uid="uid://dkfbx7v78ui2d" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/body_hurt_spr.png" id="2_1ngjv"]
+[ext_resource type="Texture2D" uid="uid://cn73qp8uploqb" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/spring_spr.png" id="2_1ysj8"]
+[ext_resource type="Texture2D" uid="uid://cpuw4aohs7pfh" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/body_spr.png" id="3_hw23f"]
+[ext_resource type="Texture2D" uid="uid://bs5y50i6n7v7h" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/body_mortified_spr.png" id="3_lwbuw"]
+[ext_resource type="Texture2D" uid="uid://m07vimn2uesr" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/head_sprt.png" id="4_bp863"]
+[ext_resource type="Texture2D" uid="uid://bfhm6itneh3hu" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/body_exposed_spr.png" id="4_xex3c"]
+[ext_resource type="Texture2D" uid="uid://b75t4duyefd4o" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/body_bloody_spr.png" id="5_l6fn5"]
+[ext_resource type="Texture2D" uid="uid://bl5uh74ssguwe" path="res://Assets/Textures/entities/Npcs/passive_mobs/cow/body_death_spr.png" id="6_kjv86"]
+[ext_resource type="PackedScene" uid="uid://c0t1t0pno1j1d" path="res://Scenes/entities/passive_mobs/cow/cow_pieces_particles.tscn" id="7_lwbuw"]
+
+[sub_resource type="GDScript" id="GDScript_hw23f"]
+resource_name = "cow"
 script/source = "extends BasicCreatureEntity
+
+@onready var visuals :Node2D = $Visuals
+@onready var AnimPlayer :AnimationPlayer = $Visuals/AnimationPlayer
+@onready var AnimTree:AnimationTree = $Visuals/AnimationTree
+
+@export var memory_time:float = 10.0
+var memory_timer:Timer
+@onready var timer_to_delete_self:Timer = $Timer
+@export var Damaged_sprite_list:Array[Texture2D]
+@export var meat_explosion_particles_scene :PackedScene
+@onready var body_sprite:Sprite2D=$Visuals/cow_pivot/cow/body
+@onready var head_sprite:Sprite2D=$Visuals/cow_pivot/cow/body/head
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
+	memory_timer = Timer.new()
+	add_child(memory_timer)
+	memory_timer.wait_time = memory_time
+	memory_timer.timeout.connect(func():
+		cur_Behaviour = Behaviours.WANDER)
+	
 	pass # Replace with function body.
 
+func uponDamage():
+	super()
+	cur_Behaviour = Behaviours.SHY
+	memory_timer.start()
+	UpdateDamagedCowSprite()
+
+func Die():
+	super()
+	spawnDamageParticles()
+	spawnDamageParticles()
+	spawnDamageParticles()
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
+	if linear_velocity != Vector2.ZERO:
+		AnimTree[\"parameters/conditions/is_eating\"]=false
+		AnimTree[\"parameters/conditions/is_walking\"]=true
+		if linear_velocity.x >=0:
+			visuals.scale.x = -1
+		elif linear_velocity.x <0:
+			visuals.scale.x = 1
+	else:
+		AnimTree[\"parameters/conditions/is_eating\"]=true
+		AnimTree[\"parameters/conditions/is_walking\"]=false
 	pass
+	
+func UpdateDamagedCowSprite():
+	var health_ratio = float(health) / float(max_health)
+
+	if health_ratio <= 0:
+		body_sprite.texture = Damaged_sprite_list[5]
+	elif health_ratio < 0.3:
+		spawnDamageParticles()
+		body_sprite.texture = Damaged_sprite_list[4]
+	elif health_ratio < 0.5:
+		spawnDamageParticles()
+		body_sprite.texture = Damaged_sprite_list[3]
+	elif health_ratio < 0.6:
+		spawnDamageParticles()
+		body_sprite.texture = Damaged_sprite_list[2]
+	elif health_ratio < 0.8:
+		spawnDamageParticles()
+		body_sprite.texture = Damaged_sprite_list[1]
+	else:
+		spawnDamageParticles()
+		body_sprite.texture = Damaged_sprite_list[0]
+
+
+
+func spawnDamageParticles():
+	if meat_explosion_particles_scene:
+		var part :Node2D= meat_explosion_particles_scene.instantiate()
+		part.global_position = body_sprite.global_position
+		get_tree().current_scene.add_child(part)
+
+
+func _exited_screen() -> void:
+	print(\"timer to delete cow started\")
+	timer_to_delete_self.start()
+
+func _entered_screen() -> void:
+	print(\"timer to delete cow stoped\")
+	timer_to_delete_self.stop()
+
+
+func _on_timer_timeout() -> void:
+	print(\"CoW Deleted\")
+	queue_free()
+	pass # Replace with function body.
 "
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oemkx"]
-radius = 19.416489
+[sub_resource type="Animation" id="Animation_bp863"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cow_pivot/cow/body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -73)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cow_pivot/cow/spring:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cow_pivot/cow:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cow_pivot/cow/body:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.7484555e-07]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cow_pivot/cow/spring:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("cow_pivot/cow/spring:skew")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("cow_pivot/cow/body/head:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("cow_pivot/shadow pivot/Sprite2D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.4597497, 3.4597497)]
+}
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bn343"]
-radius = 131.09538
+[sub_resource type="Animation" id="Animation_hw23f"]
+resource_name = "eating"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cow_pivot/cow/spring:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cow_pivot/cow/spring:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.58, 3.43, 3.97),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.525), Vector2(1, 0.525), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cow_pivot/cow/body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.57, 3.43, 3.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -73), Vector2(0, -61), Vector2(0, -61), Vector2(0, -73)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cow_pivot/cow/body:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.71, 1.43, 2.18, 2.74, 3.29, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.7484555e-07, -0.58817595, -0.7590105, -0.58817595, -0.7590105, -0.58817595, -1.7484555e-07]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cow_pivot/cow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("cow_pivot/cow/body/head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.033333335, 0.89, 1.3666667, 1.9, 2.4333334, 2.9333334, 3.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.36999136, 0.66497046, 0.36999136, 0.66497046, 0.36999136, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("cow_pivot/shadow pivot/Sprite2D:scale")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4266667, 2.1333332, 2.94, 3.5833335),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3.4597497, 3.4597497), Vector2(3.222429, 3.222429), Vector2(3.4597497, 3.4597497), Vector2(3.222429, 3.222429), Vector2(3.4597497, 3.4597497), Vector2(3.222429, 3.222429)]
+}
 
-[node name="BasicCreatureEntity" type="RigidBody2D" unique_id=311530610 node_paths=PackedStringArray("player_detector")]
-script = SubResource("GDScript_oemkx")
-player_detector = NodePath("Area2D")
-metadata/_custom_type_script = "uid://dnyegs256dgof"
+[sub_resource type="Animation" id="Animation_njw4y"]
+resource_name = "walking"
+length = 1.8333334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cow_pivot/cow/body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4333333, 0.88, 1.39),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -73), Vector2(0, -62), Vector2(0, -73), Vector2(0, -83)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cow_pivot/cow/spring:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.89, 1.3333334, 1.5666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.525), Vector2(1, 1), Vector2(1, 1.1), Vector2(1, 0.785)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cow_pivot/cow:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 1.13, 1.37, 1.81),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -10), Vector2(0, -12), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cow_pivot/cow/body:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.43, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-1.7484555e-07, -0.08547721, 0.059766345]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cow_pivot/cow/spring:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.91, 1.33, 1.5666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, -1), Vector2(2, -1), Vector2(0, -4), Vector2(-0.636, -12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("cow_pivot/cow/spring:skew")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.41, 0.82),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.08726646259971647, -0.17453292519943295]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("cow_pivot/cow/body/head:rotation")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.49, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.079382055, -0.1508016]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("cow_pivot/shadow pivot/Sprite2D:scale")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.6666667, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3.4597497, 3.4597497), Vector2(3.5, 3.5), Vector2(3.5, 3.5), Vector2(2.545, 2.2)]
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=583814274]
-shape = SubResource("CircleShape2D_oemkx")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wk0eu"]
+_data = {
+&"RESET": SubResource("Animation_bp863"),
+&"eating": SubResource("Animation_hw23f"),
+&"walking": SubResource("Animation_njw4y")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hw23f"]
+animation = &"eating"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bp863"]
+animation = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_njw4y"]
+advance_mode = 2
+
+[sub_resource type="Curve" id="Curve_hw23f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wk0eu"]
+xfade_time = 0.5
+xfade_curve = SubResource("Curve_hw23f")
+advance_mode = 2
+advance_condition = &"is_eating"
+
+[sub_resource type="Curve" id="Curve_bp863"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s1wi2"]
+xfade_time = 0.5
+xfade_curve = SubResource("Curve_bp863")
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"is_walking"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sphuo"]
+states/Start/position = Vector2(203, 100)
+states/eating/node = SubResource("AnimationNodeAnimation_hw23f")
+states/eating/position = Vector2(466, 21)
+states/walking/node = SubResource("AnimationNodeAnimation_bp863")
+states/walking/position = Vector2(466, 118)
+transitions = ["Start", "walking", SubResource("AnimationNodeStateMachineTransition_njw4y"), "walking", "eating", SubResource("AnimationNodeStateMachineTransition_wk0eu"), "eating", "walking", SubResource("AnimationNodeStateMachineTransition_s1wi2")]
+graph_offset = Vector2(18, -52)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ysj8"]
+radius = 18.027756
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwbuw"]
+radius = 44.0
+height = 94.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hw23f"]
+radius = 15.250695
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bp863"]
+radius = 69.18092
+
+[node name="cow" type="RigidBody2D" unique_id=272733001 node_paths=PackedStringArray("player_detector")]
+z_index = 1
+y_sort_enabled = true
+mass = 20.0
+gravity_scale = 0.0
+lock_rotation = true
+script = SubResource("GDScript_hw23f")
+Damaged_sprite_list = Array[Texture2D]([ExtResource("3_hw23f"), ExtResource("2_1ngjv"), ExtResource("3_lwbuw"), ExtResource("4_xex3c"), ExtResource("5_l6fn5"), ExtResource("6_kjv86")])
+meat_explosion_particles_scene = ExtResource("7_lwbuw")
+player_detector = NodePath("playerDetector")
+cur_Behaviour = 2
+shy_speed_multiplier = 5.0
+stay_in_place_time = 10.0
+speed = 40.0
+max_health = 10
+health = 10
+
+[node name="Visuals" type="Node2D" parent="." unique_id=262759729]
+position = Vector2(0, -27)
+
+[node name="cow_pivot" type="Node2D" parent="Visuals" unique_id=1419117213]
+position = Vector2(0, 28)
+
+[node name="shadow pivot" type="Node2D" parent="Visuals/cow_pivot" unique_id=2001954336]
+scale = Vector2(0.932, 0.932)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals/cow_pivot/shadow pivot" unique_id=1556332474]
+modulate = Color(1, 1, 1, 0.6431373)
+z_index = -3
+position = Vector2(0, 1)
+scale = Vector2(3.4597497, 3.4597497)
+skew = -0.25830877
+texture = ExtResource("1_bp863")
+
+[node name="cow" type="Node2D" parent="Visuals/cow_pivot" unique_id=1586447324]
+
+[node name="spring" type="Sprite2D" parent="Visuals/cow_pivot/cow" unique_id=1259292775]
+position = Vector2(0, -1)
+texture = ExtResource("2_1ysj8")
+offset = Vector2(0, -13)
+
+[node name="body" type="Sprite2D" parent="Visuals/cow_pivot/cow" unique_id=495291018]
+position = Vector2(0, -73)
+texture = ExtResource("3_hw23f")
+
+[node name="head" type="Sprite2D" parent="Visuals/cow_pivot/cow/body" unique_id=596134373]
+position = Vector2(-44, 1.9999921)
+texture = ExtResource("4_bp863")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=978526000]
+libraries/ = SubResource("AnimationLibrary_wk0eu")
+speed_scale = 1.5
+
+[node name="AnimationTree" type="AnimationTree" parent="Visuals" unique_id=628326818]
+tree_root = SubResource("AnimationNodeStateMachine_sphuo")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/is_eating = true
+parameters/conditions/is_walking = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1996786881]
+position = Vector2(0, -33)
+shape = SubResource("CircleShape2D_1ysj8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=267677800]
+position = Vector2(0, -64)
+shape = SubResource("CapsuleShape2D_lwbuw")
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="." unique_id=875235340]
+[node name="playerDetector" type="Area2D" parent="." unique_id=1644157145]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1138828626]
-shape = SubResource("CircleShape2D_bn343")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerDetector" unique_id=610583856]
+scale = Vector2(23.363909, 23.363909)
+shape = SubResource("CircleShape2D_hw23f")
 
-[node name="Visuals" type="Node2D" parent="." unique_id=600197367]
+[node name="chunkloader" type="Area2D" parent="." unique_id=1258695719 groups=["ChunkLoader"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chunkloader" unique_id=818820542]
+shape = SubResource("CircleShape2D_bp863")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1155686762]
+
+[node name="Timer" type="Timer" parent="." unique_id=1109711661]
+wait_time = 12.0
+
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_entered_screen"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_exited_screen"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

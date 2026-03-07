@@ -50,7 +50,7 @@ position = Vector2(-1.7881393e-07, -5.0000005)
 scale = Vector2(0.96874994, 1.281)
 
 [node name="PlayerSkinNode" parent="Mask" unique_id=1590478521 instance=ExtResource("3_d05bs")]
-position = Vector2(1.8458212e-07, 5.464481)
+position = Vector2(1.8458212e-07, 3.903201)
 scale = Vector2(0.67017573, 0.5068171)
 
 [node name="GunPivot" type="Marker2D" parent="Mask" unique_id=1092457507]
@@ -79,9 +79,9 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 
 [node name="LifeBar" type="TextureProgressBar" parent="." unique_id=326574726]
 offset_left = -23.0
-offset_top = -43.0
+offset_top = -51.0
 offset_right = 77.8757
-offset_bottom = -29.549906
+offset_bottom = -37.549908
 scale = Vector2(0.44609356, 0.44609356)
 nine_patch_stretch = true
 stretch_margin_left = 2

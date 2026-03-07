@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="6_pc1jd"]
 [ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Biomes/DeepWinter.tres" id="7_sgel4"]
 [ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="8_sgel4"]
-[ext_resource type="PackedScene" uid="uid://l5wsw1fkpbqq" path="res://Scenes/enemies/basic_creature.tscn" id="9_d8xu4"]
+[ext_resource type="PackedScene" uid="uid://bayubii0oclpu" path="res://Scenes/entities/passive_mobs/cow.tscn" id="9_d8xu4"]
+[ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="10_i4xt8"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1572845358]
 y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_w34uy")]
-position = Vector2(-246, 152.00002)
+position = Vector2(-127, 106)
 
 [node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("3_xwgi5")]
 position = Vector2(396, -144)
@@ -67,86 +68,60 @@ position = Vector2(-255, 148)
 [node name="sunflower2" parent="." unique_id=1316244666 instance=ExtResource("8_sgel4")]
 position = Vector2(-232, 153)
 
-[node name="BasicCreature" parent="." unique_id=765802427 instance=ExtResource("9_d8xu4")]
-position = Vector2(-523, 91)
-angular_damp_mode = 1
-angular_damp = 23.765
-can_move = null
-use_basic_behaviours = null
-cur_Behaviour = null
-detection_radius = null
-shy_speed_multiplier = null
-stay_in_place_time = null
-wander_speed_multiplier = null
-curiosity_point = null
-wander_radius = null
-predict_margin = null
-refresh_rate = null
-follower_target_point = null
-max_speed = null
-speed = null
-max_health = null
-health = null
+[node name="cow" parent="." unique_id=272733001 instance=ExtResource("9_d8xu4")]
+position = Vector2(-48, 129)
+stay_in_place_time = 2.0
 
-[node name="BasicCreature2" parent="." unique_id=1884788163 instance=ExtResource("9_d8xu4")]
-position = Vector2(-186, -153)
-angular_damp_mode = 1
-angular_damp = 23.765
-can_move = null
-use_basic_behaviours = null
-cur_Behaviour = 2
-detection_radius = null
-shy_speed_multiplier = null
-stay_in_place_time = null
-wander_speed_multiplier = null
-curiosity_point = null
-wander_radius = null
-predict_margin = null
-refresh_rate = null
-follower_target_point = null
-max_speed = null
-speed = null
-max_health = null
-health = null
+[node name="cow2" parent="." unique_id=508631836 instance=ExtResource("9_d8xu4")]
+position = Vector2(-168, 215)
+stay_in_place_time = 2.0
 
-[node name="BasicCreature3" parent="." unique_id=888128642 instance=ExtResource("9_d8xu4")]
-position = Vector2(-235, 537)
-angular_damp_mode = 1
-angular_damp = 23.765
-can_move = null
-use_basic_behaviours = null
-cur_Behaviour = 1
-detection_radius = null
-shy_speed_multiplier = null
-stay_in_place_time = null
-wander_speed_multiplier = null
-curiosity_point = null
-wander_radius = null
-predict_margin = null
-refresh_rate = null
-follower_target_point = null
-max_speed = null
-speed = null
-max_health = null
-health = null
+[node name="cow3" parent="." unique_id=679161043 instance=ExtResource("9_d8xu4")]
+position = Vector2(-62, 257)
+stay_in_place_time = 2.0
 
-[node name="BasicCreature4" parent="." unique_id=225236346 instance=ExtResource("9_d8xu4")]
-position = Vector2(-235, 537)
-angular_damp_mode = 1
-angular_damp = 23.765
-can_move = null
-use_basic_behaviours = null
-cur_Behaviour = 3
-detection_radius = null
-shy_speed_multiplier = null
-stay_in_place_time = null
-wander_speed_multiplier = null
-curiosity_point = null
-wander_radius = null
-predict_margin = null
-refresh_rate = null
-follower_target_point = null
-max_speed = null
-speed = null
-max_health = null
-health = null
+[node name="cow4" parent="." unique_id=1620732940 instance=ExtResource("9_d8xu4")]
+position = Vector2(-298, 87)
+stay_in_place_time = 2.0
+
+[node name="cow5" parent="." unique_id=1696185793 instance=ExtResource("9_d8xu4")]
+position = Vector2(-90, 13)
+stay_in_place_time = 2.0
+
+[node name="Node2D" type="Node2D" parent="." unique_id=96050493]
+position = Vector2(35, -140)
+
+[node name="ammo" parent="Node2D" unique_id=894297495 instance=ExtResource("10_i4xt8")]
+
+[node name="ammo2" parent="Node2D" unique_id=54605056 instance=ExtResource("10_i4xt8")]
+position = Vector2(-38, -126)
+
+[node name="ammo3" parent="Node2D" unique_id=1936711929 instance=ExtResource("10_i4xt8")]
+position = Vector2(141, -114)
+
+[node name="ammo4" parent="Node2D" unique_id=738581301 instance=ExtResource("10_i4xt8")]
+position = Vector2(114, -29)
+
+[node name="ammo5" parent="Node2D" unique_id=598267503 instance=ExtResource("10_i4xt8")]
+position = Vector2(728, -24)
+
+[node name="ammo6" parent="Node2D" unique_id=702477487 instance=ExtResource("10_i4xt8")]
+position = Vector2(690, -150)
+
+[node name="ammo7" parent="Node2D" unique_id=1225153560 instance=ExtResource("10_i4xt8")]
+position = Vector2(869, -138)
+
+[node name="ammo8" parent="Node2D" unique_id=2054625866 instance=ExtResource("10_i4xt8")]
+position = Vector2(842, -53)
+
+[node name="ammo9" parent="Node2D" unique_id=1270103693 instance=ExtResource("10_i4xt8")]
+position = Vector2(336, -318)
+
+[node name="ammo10" parent="Node2D" unique_id=1199970937 instance=ExtResource("10_i4xt8")]
+position = Vector2(298, -444)
+
+[node name="ammo11" parent="Node2D" unique_id=2015490445 instance=ExtResource("10_i4xt8")]
+position = Vector2(477, -432)
+
+[node name="ammo12" parent="Node2D" unique_id=525062872 instance=ExtResource("10_i4xt8")]
+position = Vector2(450, -347)

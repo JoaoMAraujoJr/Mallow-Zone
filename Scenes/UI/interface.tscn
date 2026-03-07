@@ -206,7 +206,6 @@ autowrap_mode = 3
 process_priority = 1
 
 [node name="CoordRadarRect" type="TextureRect" parent="InterfaceCanvaLayer" unique_id=1439140662]
-visible = false
 anchors_preset = -1
 anchor_left = 0.49400002
 anchor_right = 0.49400002

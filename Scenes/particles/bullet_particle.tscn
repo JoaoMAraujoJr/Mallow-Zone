@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c780l2l2yqbnc"]
+[gd_scene format=3 uid="uid://c780l2l2yqbnc"]
 
 [ext_resource type="Script" uid="uid://bfpfh5q8n3err" path="res://Scripts/effects/particles.gd" id="1_p0abn"]
 [ext_resource type="Texture2D" uid="uid://s54rrinyuibv" path="res://Assets/particle/bullet_effect.png" id="2_8g334"]
@@ -37,12 +37,12 @@ scale_min = 0.19999999
 scale_curve = SubResource("CurveTexture_fv5ml")
 scale_over_velocity_max = 6.94
 
-[node name="BulletParticle" type="Node2D"]
+[node name="BulletParticle" type="Node2D" unique_id=138355053]
 script = ExtResource("1_p0abn")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=69112867]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=771647465]
 material = SubResource("CanvasItemMaterial_p0abn")
 amount = 7
 texture = ExtResource("2_8g334")

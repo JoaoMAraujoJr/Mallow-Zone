@@ -83,7 +83,6 @@ func _flipGun(is_backwards: bool):
 		_sprite.scale.y = abs(_sprite.scale.y)
 
 func loadPlayerSkin():
-	var thisSkin = GameManager.currentPlayerSkin
-	if thisSkin in SkinData.PlayerSkins:
-		hand_L.texture = SkinData.PlayerSkins[thisSkin]["hand"]
-		hand_R.texture = SkinData.PlayerSkins[thisSkin]["hand"]
+	var thisSkin = GameManager.cur_skin
+	hand_L.texture = thisSkin.texture
+	hand_R.texture = thisSkin.texture

@@ -26,9 +26,11 @@ func _ready() -> void:
 	Speed = 120.0
 	curSpeed = Speed
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	rotateTowardsPlayer()
 	moveTowardsPlayer()
+	pushingforce = lerp(pushingforce,Vector2.ZERO,delta*2)
+	pullingforce = lerp(pullingforce,Vector2.ZERO,delta*2)
 	pass
 
 
@@ -48,7 +50,7 @@ func moveTowardsPlayer():
 	Rohk_anim_player.play(\"Rolling foward\")
 	for body in playerDetector.get_overlapping_bodies():
 		if body is Player:
-			linear_velocity = (body.global_position - global_position).normalized() * curSpeed
+			linear_velocity = ((body.global_position - global_position).normalized() * curSpeed) +pullingforce + pushingforce
 			return
 
 func uponDamage():

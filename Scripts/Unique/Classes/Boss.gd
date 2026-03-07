@@ -1,4 +1,4 @@
-extends RigidDamageable
+extends RigidEntity
 class_name RigidBoss
 
 signal change_on_boss_status(BossName:String  ,currentHP:int ,IsOnBoss:bool, IsBossDefeated: bool)
@@ -22,11 +22,3 @@ func addToHealth(i:int) -> void:
 		emit_signal("change_on_boss_status",boss_name,0,false,true)
 	else:
 		emit_signal("change_on_boss_status",boss_name,health,true,false)
-
-func addToSpeed(Added :float):
-	var percentage = 1 + Added
-	curSpeed *= percentage 
-
-func resetSpeed():
-	if curSpeed != Speed:
-		curSpeed = Speed

@@ -13,6 +13,10 @@ var pushingforce: Vector2 = Vector2.ZERO #empurrando
 var pullingforce: Vector2 = Vector2.ZERO #puxando
 
 
+func _physics_process(delta: float) -> void:
+	pullingforce = lerp(pullingforce,Vector2.ZERO,delta*2)
+	pushingforce = lerp(pushingforce,Vector2.ZERO,delta*2)
+	
 func updateExternalForces(Type:String,forceVector:Vector2) : 
 	match Type:
 		"push":

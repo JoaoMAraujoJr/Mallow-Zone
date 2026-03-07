@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerSkin" format=3 uid="uid://dcxennuxow74u"]
+
+[ext_resource type="Script" uid="uid://db8koqjdrehs6" path="res://Scripts/Resources/PlayerSkin.gd" id="1_vsxnn"]
+[ext_resource type="Texture2D" uid="uid://c6iw6qfrew5s6" path="res://Assets/Textures/player_skins/skin_sheets/retro_skin_sheet.png" id="2_1h3hl"]
+
+[resource]
+script = ExtResource("1_vsxnn")
+name = &"retro"
+texture = ExtResource("2_1h3hl")
+metadata/_custom_type_script = "uid://db8koqjdrehs6"

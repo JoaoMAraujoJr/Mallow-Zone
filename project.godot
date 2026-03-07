@@ -48,6 +48,10 @@ window/size/window_height_override=480
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/ADM/Documents/the-ia-game/GameArt/videos/video.avi"
+
 [file_customization]
 
 folder_colors={

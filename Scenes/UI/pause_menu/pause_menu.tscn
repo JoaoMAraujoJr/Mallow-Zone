@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://kviofjbantkf"]
+[gd_scene format=3 uid="uid://kviofjbantkf"]
 
 [ext_resource type="Script" uid="uid://ba1xa8mi2qtj3" path="res://Scripts/UI/pause_menu.gd" id="1_6y0ft"]
 [ext_resource type="Texture2D" uid="uid://ikj04knqcjh2" path="res://Assets/Textures/UI/PauseMenu/ScreemCrack.png" id="1_g2bbq"]
@@ -313,7 +313,7 @@ _data = {
 &"Show": SubResource("Animation_mwi5l")
 }
 
-[node name="PauseMenu" type="Control" groups=["PauseMenu"]]
+[node name="PauseMenu" type="Control" unique_id=1113213481 groups=["PauseMenu"]]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -321,13 +321,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("1_6y0ft")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1997721841]
 layer = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1486604127]
 material = SubResource("ShaderMaterial_6y0ft")
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,8 +335,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
+mouse_filter = 2
 
-[node name="screenCrack" type="Control" parent="CanvasLayer"]
+[node name="screenCrack" type="Control" parent="CanvasLayer" unique_id=1432820116]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -346,18 +347,18 @@ offset_bottom = 143.0
 grow_horizontal = 0
 pivot_offset = Vector2(170, 0)
 
-[node name="crack" type="Sprite2D" parent="CanvasLayer/screenCrack"]
+[node name="crack" type="Sprite2D" parent="CanvasLayer/screenCrack" unique_id=1379869340]
 position = Vector2(170, -1)
 texture = ExtResource("1_g2bbq")
 offset = Vector2(-129, 128)
 
-[node name="rainbow" type="Sprite2D" parent="CanvasLayer/screenCrack"]
+[node name="rainbow" type="Sprite2D" parent="CanvasLayer/screenCrack" unique_id=1983845865]
 clip_children = 1
 position = Vector2(170, -1)
 texture = ExtResource("2_mwi5l")
 offset = Vector2(-129, 128)
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/screenCrack/rainbow"]
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/screenCrack/rainbow" unique_id=2103649668]
 material = SubResource("ShaderMaterial_rtob6")
 anchors_preset = -1
 anchor_left = 1.008
@@ -367,13 +368,13 @@ offset_right = -257.048
 offset_bottom = 164.0
 metadata/_edit_use_anchors_ = true
 
-[node name="vhs" type="Sprite2D" parent="CanvasLayer/screenCrack"]
+[node name="vhs" type="Sprite2D" parent="CanvasLayer/screenCrack" unique_id=712356505]
 clip_children = 1
 position = Vector2(170, -1)
 texture = ExtResource("2_mwi5l")
 offset = Vector2(-129, 128)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/screenCrack/vhs"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/screenCrack/vhs" unique_id=1233824727]
 material = SubResource("ShaderMaterial_s0jth")
 anchors_preset = -1
 anchor_left = 1.008
@@ -381,8 +382,9 @@ anchor_right = 1.008
 offset_left = -417.048
 offset_right = -257.048
 offset_bottom = 164.0
+mouse_filter = 2
 
-[node name="SideMenu" type="Control" parent="CanvasLayer"]
+[node name="SideMenu" type="Control" parent="CanvasLayer" unique_id=283641389]
 layout_mode = 3
 anchors_preset = 4
 anchor_top = 0.5
@@ -392,20 +394,21 @@ offset_right = 202.0
 offset_bottom = 215.0
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SideMenu"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SideMenu" unique_id=502646249]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -785.03094
+offset_left = -634.00006
 offset_top = -826.1395
-offset_right = 174.16089
+offset_right = 325.19177
 offset_bottom = 976.1669
 grow_vertical = 2
 rotation = -0.059006196
+mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="Options" type="VBoxContainer" parent="CanvasLayer/SideMenu"]
+[node name="Options" type="VBoxContainer" parent="CanvasLayer/SideMenu" unique_id=314252195]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.064
@@ -419,7 +422,7 @@ offset_bottom = 91.22797
 grow_vertical = 2
 scale = Vector2(0.8456239, 0.8456239)
 
-[node name="resume" type="Button" parent="CanvasLayer/SideMenu/Options"]
+[node name="resume" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=316881648]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
@@ -429,7 +432,7 @@ flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="options" type="Button" parent="CanvasLayer/SideMenu/Options"]
+[node name="options" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=1321982545]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
@@ -438,16 +441,25 @@ flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="quit" type="Button" parent="CanvasLayer/SideMenu/Options"]
+[node name="quit" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=1431856079]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
-text = "Quit Game"
+text = "Exit Game"
 flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/SideMenu"]
+[node name="main menu" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=1630492828]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xf76s")
+theme_override_font_sizes/font_size = 26
+text = "Exit to Main Menu"
+flat = true
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/SideMenu" unique_id=433658201]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.054
@@ -462,16 +474,15 @@ grow_vertical = 2
 text = "Paused"
 label_settings = SubResource("LabelSettings_g2bbq")
 
-[node name="cursor" parent="CanvasLayer/SideMenu" instance=ExtResource("8_cngij")]
+[node name="cursor" parent="CanvasLayer/SideMenu" unique_id=826517490 instance=ExtResource("8_cngij")]
 position = Vector2(284, 162)
 
-[node name="AppearAnimPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_cngij")
-}
+[node name="AppearAnimPlayer" type="AnimationPlayer" parent="." unique_id=1800129319]
+libraries/ = SubResource("AnimationLibrary_cngij")
 
-[node name="PauseCooldown" type="Timer" parent="."]
+[node name="PauseCooldown" type="Timer" parent="." unique_id=1934695405]
 
 [connection signal="pressed" from="CanvasLayer/SideMenu/Options/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/SideMenu/Options/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/SideMenu/Options/main menu" to="." method="_on_main_menu_pressed"]
 [connection signal="timeout" from="PauseCooldown" to="." method="_on_pause_cooldown_timeout"]

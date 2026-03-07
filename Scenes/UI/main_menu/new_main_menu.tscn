@@ -21,7 +21,8 @@ enum MenuWindows {
 }
 
 @onready var cur_menu:MenuWindows =MenuWindows.MAIN_MENU
-
+func _ready() -> void:
+	GameManager.canPause=false
 
 func play_pressed() -> void:
 	cur_menu = MenuWindows.SAVE_SELECT

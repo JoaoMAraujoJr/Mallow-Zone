@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c7psppskhr7yr" path="res://Assets/Textures/items/guns/rifle.png" id="1_v4uw3"]
 [ext_resource type="PackedScene" uid="uid://0hmhkrf3c44n" path="res://Scenes/items/guns/bullets/rifleBullet.tscn" id="2_hpt7h"]
 [ext_resource type="AudioStream" uid="uid://c4jymt15nn1kw" path="res://Assets/Sounds/Gun/ShootSoundOGG.ogg" id="4_hpt7h"]
-[ext_resource type="Texture2D" uid="uid://b8qei0yud7p7u" path="res://Assets/Textures/player_skins/red_jim/hand_spr.png" id="6_nhom0"]
+[ext_resource type="Texture2D" uid="uid://dg2vxke11u8qx" path="res://Assets/Textures/player_skins/skin_sheets/original_skin_sheet.png" id="4_x8ll2"]
 
 [node name="Gun" type="Node2D" unique_id=1281981880]
 script = ExtResource("1_0xk6x")
@@ -33,7 +33,9 @@ position = Vector2(10.666667, 4.0000005)
 [node name="hand_R" type="Sprite2D" parent="gun/RightHand" unique_id=1381909064]
 position = Vector2(3.3333333, -1.0000005)
 scale = Vector2(0.3315387, 0.3315387)
-texture = ExtResource("6_nhom0")
+texture = ExtResource("4_x8ll2")
+region_enabled = true
+region_rect = Rect2(208, 149, 32, 32)
 
 [node name="LeftHand" type="Node2D" parent="gun" unique_id=338828597]
 position = Vector2(24.666668, 3.8000007)
@@ -42,7 +44,9 @@ rotation = 1.5707964
 [node name="hand_L" type="Sprite2D" parent="gun/LeftHand" unique_id=1049028631]
 position = Vector2(-4.200001, 5.9604645e-08)
 scale = Vector2(-0.34313205, 0.34313205)
-texture = ExtResource("6_nhom0")
+texture = ExtResource("4_x8ll2")
+region_enabled = true
+region_rect = Rect2(208, 149, 32, 32)
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=335495268]
 position = Vector2(-5, 0.25)
