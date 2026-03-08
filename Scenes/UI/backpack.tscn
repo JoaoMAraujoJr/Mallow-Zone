@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://cxjt50h0xqwdy"]
+
+[ext_resource type="Texture2D" uid="uid://cyuo3jq0smq1x" path="res://Assets/Textures/UI/inventory/backpack-Sheet.png" id="1_exgub"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="1_nisp7"]
+[ext_resource type="Script" uid="uid://dqeporxpne03o" path="res://Scripts/UI/Inventory.gd" id="1_p5ydr"]
+[ext_resource type="Texture2D" uid="uid://bq0j2ksbixye6" path="res://Assets/Textures/UI/inventory/backpack-Sheet_front.png" id="2_42s0m"]
+[ext_resource type="PackedScene" uid="uid://c1dgwatp8m46e" path="res://Scenes/UI/InventorySlot.tscn" id="3_42s0m"]
+[ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="4_nisp7"]
+[ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="7_xu6ap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcb2m"]
+atlas = ExtResource("1_exgub")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5f5y"]
+atlas = ExtResource("1_exgub")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytnjk"]
+atlas = ExtResource("1_exgub")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnj1s"]
+atlas = ExtResource("1_exgub")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkxpd"]
+atlas = ExtResource("1_exgub")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6rp4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcb2m")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5f5y")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_ytnjk")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_bnj1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkxpd")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nisp7"]
+atlas = ExtResource("1_exgub")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5ydr"]
+atlas = ExtResource("2_42s0m")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl31s"]
+atlas = ExtResource("2_42s0m")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu6ap"]
+atlas = ExtResource("2_42s0m")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t51d"]
+atlas = ExtResource("2_42s0m")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uh3e7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nisp7")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5ydr")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_wl31s")
+}, {
+"duration": 0.2,
+"texture": SubResource("AtlasTexture_xu6ap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t51d")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[node name="Backpack" type="CanvasLayer" unique_id=821909364]
+script = ExtResource("1_p5ydr")
+
+[node name="Cursor" parent="." unique_id=2116295921 instance=ExtResource("1_nisp7")]
+
+[node name="back_backpack" type="AnimatedSprite2D" parent="." unique_id=1962979793]
+z_index = -2
+position = Vector2(134, 575)
+scale = Vector2(4.2180758, 4.2180758)
+sprite_frames = SubResource("SpriteFrames_6rp4n")
+animation = &"open"
+frame = 3
+
+[node name="front_backpack" type="AnimatedSprite2D" parent="." unique_id=951226778]
+z_index = 3
+position = Vector2(134, 575)
+scale = Vector2(4.2180758, 4.2180758)
+sprite_frames = SubResource("SpriteFrames_uh3e7")
+animation = &"open"
+frame = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=790572788]
+offset_left = 82.0
+offset_top = 69.00001
+offset_right = 146.0
+offset_bottom = 465.0
+scale = Vector2(1.4631016, 1.4631016)
+theme_override_constants/separation = 19
+alignment = 1
+
+[node name="InventorySlot" parent="VBoxContainer" unique_id=32747748 instance=ExtResource("3_42s0m")]
+layout_mode = 2
+slot_item = ExtResource("4_nisp7")
+
+[node name="InventorySlot2" parent="VBoxContainer" unique_id=1466104472 instance=ExtResource("3_42s0m")]
+layout_mode = 2
+slot_item = ExtResource("7_xu6ap")
+
+[node name="InventorySlot3" parent="VBoxContainer" unique_id=1183918104 instance=ExtResource("3_42s0m")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="VBoxContainer" unique_id=2011564696 instance=ExtResource("3_42s0m")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="VBoxContainer" unique_id=230925612 instance=ExtResource("3_42s0m")]
+layout_mode = 2

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://bv26dvefxqww5"]
+
+[ext_resource type="Script" uid="uid://bw3531q3c7lfs" path="res://Scripts/Resources/InventoryItem.gd" id="1_xb1bo"]
+
+[resource]
+script = ExtResource("1_xb1bo")
+id = "mango"
+metadata/_custom_type_script = "uid://bw3531q3c7lfs"

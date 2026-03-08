@@ -76,8 +76,7 @@ func instantiateParticles(Particles:PackedScene):
 	if Particles == null:
 		return
 	var newParticles = Particles.instantiate()
-	if GameManager.thisPlayer:
-		GameManager.thisPlayer.add_child(newParticles)
+	get_parent().add_child(newParticles)
 
 func _on_timer_timeout() -> void:
 	applyEffects()

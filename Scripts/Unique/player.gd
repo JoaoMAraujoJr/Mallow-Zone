@@ -11,7 +11,7 @@ class_name Player
 @onready var _PlayerArea : Area2D = $PlayerArea2D
 @onready var _lifebar : TextureProgressBar= $LifeBar
 var _gun : Node2D 
-@onready var _gunPivot : Marker2D = $Mask/GunPivot
+@onready var _gunPivot : Node2D = $GunPivot
 @onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $Sounds/NeedsAmmoAudioStream
 @onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
 @onready var playerSkin : PlayerSkinManager = $Mask/PlayerSkinNode

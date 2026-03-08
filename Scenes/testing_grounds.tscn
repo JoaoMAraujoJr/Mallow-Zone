@@ -10,12 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="8_sgel4"]
 [ext_resource type="PackedScene" uid="uid://bayubii0oclpu" path="res://Scenes/entities/passive_mobs/cow.tscn" id="9_d8xu4"]
 [ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="10_i4xt8"]
+[ext_resource type="PackedScene" uid="uid://s53k1x3wisv0" path="res://Scenes/items/dropped_item.tscn" id="11_0ycfy"]
+[ext_resource type="PackedScene" uid="uid://cu5yy7uvyjf25" path="res://Scenes/objects/asphalt/explosive_barrel_throwable.tscn" id="12_xwlgn"]
+[ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="13_nag8a"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1572845358]
 y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_w34uy")]
-position = Vector2(-127, 106)
+position = Vector2(-60, -130)
 
 [node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("3_xwgi5")]
 position = Vector2(396, -144)
@@ -125,3 +128,18 @@ position = Vector2(477, -432)
 
 [node name="ammo12" parent="Node2D" unique_id=525062872 instance=ExtResource("10_i4xt8")]
 position = Vector2(450, -347)
+
+[node name="DroppedItem" parent="." unique_id=1987125379 instance=ExtResource("11_0ycfy")]
+position = Vector2(-192, 30)
+
+[node name="explosiveBarrelThrowable" parent="." unique_id=617521637 instance=ExtResource("12_xwlgn")]
+position = Vector2(-341, 108)
+
+[node name="explosiveBarrelThrowable2" parent="." unique_id=1203675515 instance=ExtResource("12_xwlgn")]
+position = Vector2(-138, 42)
+
+[node name="explosiveBarrelThrowable3" parent="." unique_id=199016635 instance=ExtResource("12_xwlgn")]
+position = Vector2(-247, -35)
+
+[node name="weaponDropped" parent="." unique_id=344169487 instance=ExtResource("13_nag8a")]
+position = Vector2(-146, -167)

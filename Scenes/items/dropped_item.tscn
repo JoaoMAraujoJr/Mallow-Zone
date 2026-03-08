@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://s53k1x3wisv0"]
+
+[ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="1_okhlh"]
+[ext_resource type="Texture2D" uid="uid://bk2nmybuc2xc8" path="res://Assets/Textures/items/food/apple.png" id="1_wr8t6"]
+
+[sub_resource type="GDScript" id="GDScript_okhlh"]
+resource_name = "DroppedItem"
+script/source = "extends Node2D
+
+
+@export var item:InventoryItem
+@onready var item_sprite:Sprite2D = $icon
+@onready var shadow_sprite:Sprite2D = $shadow
+
+var magnet_target :Node2D
+
+func _ready() -> void:
+	if item and item.texture:
+		shadow_sprite.texture = item.texture
+		item_sprite.texture = item.texture
+
+func _physics_process(delta: float) -> void:
+	if magnet_target != null:
+		global_position = lerp(global_position,magnet_target.global_position,delta*1)
+	pass
+
+
+
+func _on_player_detector_body_entered(body: Node2D) -> void:
+	if body is Player:
+		magnet_target = body
+	pass # Replace with function body.
+
+
+func _on_player_detector_body_exited(body: Node2D) -> void:
+	if body is Player:
+		magnet_target = null
+	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_or6ny"]
+radius = 16.03122
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_okhlh"]
+radius = 48.270073
+
+[node name="DroppedItem" type="Node2D" unique_id=1987125379]
+y_sort_enabled = true
+script = SubResource("GDScript_okhlh")
+item = ExtResource("1_okhlh")
+
+[node name="shadow" type="Sprite2D" parent="." unique_id=1013083604]
+modulate = Color(0, 0, 0, 0.39607844)
+z_index = -3
+position = Vector2(-7.999999, 8)
+scale = Vector2(1, 0.75000006)
+skew = -1.0471977
+texture = ExtResource("1_wr8t6")
+
+[node name="icon" type="Sprite2D" parent="." unique_id=1797655891]
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("1_wr8t6")
+
+[node name="collision_detector" type="Area2D" parent="." unique_id=410782334]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision_detector" unique_id=1618799091]
+shape = SubResource("CircleShape2D_or6ny")
+
+[node name="player_detector" type="Area2D" parent="." unique_id=1477912680]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detector" unique_id=1660080522]
+shape = SubResource("CircleShape2D_okhlh")
+
+[connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]

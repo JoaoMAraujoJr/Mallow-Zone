@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d2bnmkmil4vo5"]
+
+[ext_resource type="PackedScene" uid="uid://c1dgwatp8m46e" path="res://Scenes/UI/InventorySlot.tscn" id="1_j2yxh"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="1_rqf0h"]
+[ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="2_ori2n"]
+
+[node name="Node2D" type="Node2D" unique_id=1766640317]
+
+[node name="Cursor" parent="." unique_id=2116295921 instance=ExtResource("1_rqf0h")]
+position = Vector2(1, 0)
+
+[node name="item" parent="." unique_id=230925612 instance=ExtResource("1_j2yxh")]
+offset_left = 44.0
+offset_top = 174.0
+offset_right = 108.0
+offset_bottom = 238.0
+
+[node name="item2" parent="." unique_id=1641969953 instance=ExtResource("1_j2yxh")]
+offset_left = 355.0
+offset_top = 172.0
+offset_right = 419.0
+offset_bottom = 236.0
+slot_item = null
+
+[node name="item3" parent="." unique_id=2011929322 instance=ExtResource("1_j2yxh")]
+offset_left = 189.0
+offset_top = 85.0
+offset_right = 253.0
+offset_bottom = 149.0
+slot_item = ExtResource("2_ori2n")
+
+[node name="item4" parent="." unique_id=1007893687 instance=ExtResource("1_j2yxh")]
+offset_left = 197.0
+offset_top = 218.0
+offset_right = 261.0
+offset_bottom = 282.0
+slot_item = null

@@ -597,6 +597,7 @@ scale_curve = SubResource("CurveTexture_3m82a")
 alpha_curve = SubResource("CurveTexture_d5crs")
 
 [node name="PlayerSkinNode" type="Node2D" unique_id=306020732]
+y_sort_enabled = true
 script = ExtResource("1_7iifb")
 
 [node name="skin" type="Node2D" parent="." unique_id=1446741899]

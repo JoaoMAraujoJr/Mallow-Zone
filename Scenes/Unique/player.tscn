@@ -41,21 +41,22 @@ script = ExtResource("3_6nq75")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=571946010]
 z_index = -3
-position = Vector2(-4.2632564e-14, 28.999996)
+position = Vector2(-4.2632564e-14, 28)
 scale = Vector2(0.9999997, 0.99999976)
 texture = ExtResource("8_8erm5")
 
+[node name="GunPivot" type="Node2D" parent="." unique_id=962502127]
+position = Vector2(0, 4.999999)
+scale = Vector2(0.99999934, 0.9999996)
+
 [node name="Mask" type="Sprite2D" parent="." unique_id=1344524052]
-position = Vector2(-1.7881393e-07, -5.0000005)
+position = Vector2(-2.87e-42, 9.536743e-07)
 scale = Vector2(0.96874994, 1.281)
+offset = Vector2(-1.8458213e-07, 13.27088)
 
 [node name="PlayerSkinNode" parent="Mask" unique_id=1590478521 instance=ExtResource("3_d05bs")]
-position = Vector2(1.8458212e-07, 3.903201)
-scale = Vector2(0.67017573, 0.5068171)
-
-[node name="GunPivot" type="Marker2D" parent="Mask" unique_id=1092457507]
-position = Vector2(1.8458212e-07, 9.3676815)
-scale = Vector2(1.032258, 0.78064007)
+position = Vector2(1.845821e-07, 0)
+scale = Vector2(0.6701757, 0.5068171)
 
 [node name="PlayerArea2D" type="Area2D" parent="." unique_id=1064755649 groups=["Damageble", "PlayerArea"]]
 scale = Vector2(0.14770508, 0.14770508)

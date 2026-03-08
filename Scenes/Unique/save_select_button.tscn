@@ -607,7 +607,7 @@ scale = Vector2(0.11512904, 0.11512904)
 texture = ExtResource("4_lm4ow")
 
 [node name="PlayerSkinNode" parent="NotEmpty/skin_mask" unique_id=306020732 instance=ExtResource("5_xwbdc")]
-position = Vector2(0, 177.36197)
+position = Vector2(0, 420.56732)
 scale = Vector2(8.926918, 8.926918)
 
 [node name="trashIcon" type="TextureButton" parent="NotEmpty" unique_id=1574555780]

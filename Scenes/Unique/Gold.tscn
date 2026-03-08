@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if magnet_target != null:
 		global_position = lerp(global_position,magnet_target.global_position,delta*2)
 	pass

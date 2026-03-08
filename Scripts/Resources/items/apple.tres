@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://c84rkmlljtryb"]
+
+[ext_resource type="Texture2D" uid="uid://bk2nmybuc2xc8" path="res://Assets/Textures/items/food/apple.png" id="1_4oq8k"]
+[ext_resource type="Script" uid="uid://bw3531q3c7lfs" path="res://Scripts/Resources/InventoryItem.gd" id="3_vkcey"]
+
+[resource]
+script = ExtResource("3_vkcey")
+id = "apple"
+texture = ExtResource("1_4oq8k")
+metadata/_custom_type_script = "uid://bw3531q3c7lfs"

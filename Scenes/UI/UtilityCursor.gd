@@ -19,6 +19,7 @@ var cur_cursorStyle:CursorStyle
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	matchCursorType()
 	GameManager.game_cursor = self
 	pass # Replace with function body.
