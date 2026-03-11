@@ -18,6 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://cck47anyjtal5" path="res://Scenes/objects/forest/sunflower field.tscn" id="12_wmwkd"]
 [ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="13_qgh8n"]
 [ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="13_wmwkd"]
+[ext_resource type="Texture2D" uid="uid://cprythy3jbh1s" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_1.png" id="17_ra878"]
+[ext_resource type="Texture2D" uid="uid://cmjaal7y0dhei" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_2.png" id="18_hb8l3"]
+[ext_resource type="Texture2D" uid="uid://b8q3evsmf5672" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_3.png" id="19_o5pq4"]
+[ext_resource type="Texture2D" uid="uid://cyijx7oqprusx" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_5.png" id="20_gog04"]
+[ext_resource type="Texture2D" uid="uid://c7tttigbk20q4" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_6.png" id="21_stlos"]
+[ext_resource type="Texture2D" uid="uid://c6g1qmn4ycjbh" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_4.png" id="22_7yy0o"]
 
 [sub_resource type="Resource" id="Resource_fdx75"]
 script = ExtResource("1_cqk60")
@@ -102,7 +108,7 @@ name = "GrassLands"
 biome_id = "grasslands"
 weather = ExtResource("10_qgh8n")
 warpArt = ExtResource("9_wmwkd")
-topTextureVariants = Array[Texture2D]([ExtResource("13_wmwkd")])
+topTextureVariants = Array[Texture2D]([ExtResource("13_wmwkd"), ExtResource("13_wmwkd"), ExtResource("13_wmwkd"), ExtResource("17_ra878"), ExtResource("18_hb8l3"), ExtResource("19_o5pq4"), ExtResource("20_gog04"), ExtResource("21_stlos"), ExtResource("22_7yy0o")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_3uxnf")])
 enemiesList = Array[ExtResource("1_cqk60")]([SubResource("Resource_fdx75")])
 itemDropsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_k5la2"), SubResource("Resource_7uiy4")])

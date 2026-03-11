@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw7en77yhx7it"]
+[gd_scene format=3 uid="uid://dw7en77yhx7it"]
 
 [ext_resource type="Texture2D" uid="uid://dn2d5bkyctki" path="res://Assets/Textures/floors/terrain/mountain.png" id="1_cx0gk"]
 [ext_resource type="Script" uid="uid://chnaluor5aw1o" path="res://Scripts/Unique/terrain/mountain.gd" id="1_fttky"]
@@ -10,30 +10,33 @@ radius = 443.46512
 [sub_resource type="CircleShape2D" id="CircleShape2D_fttky"]
 radius = 155.32225
 
-[node name="mountain" type="StaticBody2D"]
+[node name="mountain" type="StaticBody2D" unique_id=1829976171]
 script = ExtResource("1_fttky")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2031486793]
 scale = Vector2(0.48108947, 0.48108947)
 texture = ExtResource("1_cx0gk")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1318759670]
 scale = Vector2(0.48108947, 0.48108947)
 texture = ExtResource("2_fttky")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=13081708]
 scale = Vector2(0.48108947, 0.48108947)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=173055505]
 shape = SubResource("CircleShape2D_cx0gk")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2141161948]
 scale = Vector2(1.0129993, 1.0129993)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2114691467]
 scale = Vector2(1.0129993, 1.0129993)
 shape = SubResource("CircleShape2D_fttky")
 disabled = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=941754016]
+rect = Rect2(-250, -273, 484, 531)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -60,6 +60,14 @@ func returnCameraToPlayer():
 	can_move = true
 	if GameManager.thisPlayer:
 		GameManager.thisPlayer.camera.make_current()
+
+
+func _on_hitbox_area_body_entered(body: Node2D) -> void:
+	if body.has_method(\"updateExternalForces\"):
+		var push_force = (body.global_position - global_position).normalized() * 1000.0
+		body.updateExternalForces(\"push\",push_force)
+		print(\"body pushed by boss\")
+	pass # Replace with function body.
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mxrxc"]
@@ -434,7 +442,7 @@ scale_max = 4.5
 scale_curve = SubResource("CurveTexture_6bkmo")
 alpha_curve = SubResource("CurveTexture_f2eya")
 
-[node name="Rohk The Boulder" type="RigidBody2D" unique_id=318558332 groups=["Enemy"]]
+[node name="Rohk The Boulder" type="RigidBody2D" unique_id=318558332 groups=["Boss", "Enemy"]]
 light_mask = 3
 visibility_layer = 3
 mass = 70.0
@@ -458,10 +466,9 @@ script = ExtResource("3_llr1c")
 shape = SubResource("CircleShape2D_mxrxc")
 debug_color = Color(0.47843137, 0.85490197, 0.25882354, 0.047058824)
 
-[node name="Hitbox Area" type="Area2D" parent="." unique_id=1586494144]
+[node name="Hitbox Area" type="Area2D" parent="." unique_id=1586494144 groups=["SawArea"]]
 
 [node name="Hitbox Collision" type="CollisionShape2D" parent="Hitbox Area" unique_id=1690971786]
-visible = false
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_llr1c")
 debug_color = Color(0.63435644, 0.51454425, 0.33671847, 0.41960785)
@@ -557,3 +564,5 @@ stream = ExtResource("7_uiqr3")
 volume_db = 6.0
 pitch_scale = 1.14
 bus = &"SFXReverb"
+
+[connection signal="body_entered" from="Hitbox Area" to="." method="_on_hitbox_area_body_entered"]

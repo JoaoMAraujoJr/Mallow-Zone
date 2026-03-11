@@ -5,50 +5,55 @@
 [node name="SunflowerField" type="Node2D" unique_id=934993701]
 
 [node name="sunflower" parent="." unique_id=75144789 instance=ExtResource("1_u46uc")]
-position = Vector2(-23, 11)
+position = Vector2(-1, -78)
 
-[node name="sunflower2" parent="." unique_id=1460341637 instance=ExtResource("1_u46uc")]
-position = Vector2(12, 28)
+[node name="sunflower2" parent="." unique_id=1717061588 instance=ExtResource("1_u46uc")]
+position = Vector2(-31, -57)
 scale = Vector2(-1, 1)
 
-[node name="sunflower3" parent="." unique_id=1064177807 instance=ExtResource("1_u46uc")]
-position = Vector2(45, 5)
+[node name="sunflower3" parent="." unique_id=1071437615 instance=ExtResource("1_u46uc")]
+position = Vector2(31, -57)
 
-[node name="sunflower4" parent="." unique_id=1537252230 instance=ExtResource("1_u46uc")]
-position = Vector2(12, -11)
+[node name="sunflower4" parent="." unique_id=2132750200 instance=ExtResource("1_u46uc")]
+position = Vector2(0, -36)
+
+[node name="sunflower5" parent="." unique_id=835653654 instance=ExtResource("1_u46uc")]
+position = Vector2(-51, -30)
 scale = Vector2(-1, 1)
 
-[node name="sunflower5" parent="." unique_id=1258618645 instance=ExtResource("1_u46uc")]
-position = Vector2(62, 44)
+[node name="sunflower6" parent="." unique_id=523848477 instance=ExtResource("1_u46uc")]
+position = Vector2(54, -31)
 
-[node name="sunflower6" parent="." unique_id=1047432455 instance=ExtResource("1_u46uc")]
-position = Vector2(82, 7)
+[node name="sunflower7" parent="." unique_id=1057161754 instance=ExtResource("1_u46uc")]
+position = Vector2(-24, -8)
+
+[node name="sunflower8" parent="." unique_id=965432149 instance=ExtResource("1_u46uc")]
+position = Vector2(26, -7)
 scale = Vector2(-1, 1)
 
-[node name="sunflower7" parent="." unique_id=2113330697 instance=ExtResource("1_u46uc")]
-position = Vector2(57, -34)
+[node name="sunflower9" parent="." unique_id=1876313355 instance=ExtResource("1_u46uc")]
+position = Vector2(-73, -4)
 
-[node name="sunflower8" parent="." unique_id=330455834 instance=ExtResource("1_u46uc")]
-position = Vector2(101, -26)
+[node name="sunflower10" parent="." unique_id=747499999 instance=ExtResource("1_u46uc")]
+position = Vector2(71, -1)
 
-[node name="sunflower9" parent="." unique_id=1948245123 instance=ExtResource("1_u46uc")]
-position = Vector2(111, 23)
+[node name="sunflower11" parent="." unique_id=1890765837 instance=ExtResource("1_u46uc")]
+position = Vector2(49, 22)
 scale = Vector2(-1, 1)
 
-[node name="sunflower10" parent="." unique_id=1459336014 instance=ExtResource("1_u46uc")]
-position = Vector2(133, -18)
+[node name="sunflower13" parent="." unique_id=1385568431 instance=ExtResource("1_u46uc")]
+position = Vector2(-58, 20)
+
+[node name="sunflower12" parent="." unique_id=63405935 instance=ExtResource("1_u46uc")]
+position = Vector2(0, 26)
+
+[node name="sunflower14" parent="." unique_id=967108236 instance=ExtResource("1_u46uc")]
+position = Vector2(-31, 49)
 scale = Vector2(-1, 1)
 
-[node name="sunflower11" parent="." unique_id=1610688679 instance=ExtResource("1_u46uc")]
-position = Vector2(140, 27)
+[node name="sunflower15" parent="." unique_id=1632102414 instance=ExtResource("1_u46uc")]
+position = Vector2(27, 50)
 
-[node name="sunflower12" parent="." unique_id=488539616 instance=ExtResource("1_u46uc")]
-position = Vector2(101, 55)
-
-[node name="sunflower13" parent="." unique_id=173765149 instance=ExtResource("1_u46uc")]
-position = Vector2(22, 61)
-scale = Vector2(-1, 1)
-
-[node name="sunflower14" parent="." unique_id=2098017821 instance=ExtResource("1_u46uc")]
-position = Vector2(-15, -29)
+[node name="sunflower16" parent="." unique_id=509127117 instance=ExtResource("1_u46uc")]
+position = Vector2(-4, 75)
 scale = Vector2(-1, 1)

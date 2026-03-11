@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmjaal7y0dhei"
-path="res://.godot/imported/Grassfloortexture_256_2.png-13a3a741c2bcd73eb9ba1b0cf1aac2dd.ctex"
+uid="uid://ugknhnx4drs0"
+path="res://.godot/imported/scroll_0.png-b716037cd97d3cfc9a515a3d825caa0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/floors/grass/Grassfloortexture_256_2.png"
-dest_files=["res://.godot/imported/Grassfloortexture_256_2.png-13a3a741c2bcd73eb9ba1b0cf1aac2dd.ctex"]
+source_file="res://Assets/Textures/UI/inventory/scroll_0.png"
+dest_files=["res://.godot/imported/scroll_0.png-b716037cd97d3cfc9a515a3d825caa0b.ctex"]
 
 [params]
 

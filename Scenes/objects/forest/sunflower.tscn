@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://tn1g7me5qb4l"]
 
 [ext_resource type="Texture2D" uid="uid://b55gkqdcxst4u" path="res://Assets/Textures/entities/objects/Forest/sunflower/sunflower body 2.png" id="1_582cf"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="1_ep6f1"]
 [ext_resource type="Texture2D" uid="uid://dptfrwnye4jr6" path="res://Assets/Textures/entities/objects/Forest/sunflower/sunflower head.png" id="2_87x6o"]
 [ext_resource type="Resource" uid="uid://2mstc0v8uvql" path="res://Scripts/Resources/Effects/happy.tres" id="3_ohqgt"]
 
@@ -57,14 +58,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D/Bone2D/Sprite2D:rotation")
+tracks/4/path = NodePath("Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D/Bone2D/Sprite2D:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("shadow:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ep6f1"]
@@ -73,38 +86,50 @@ length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D/Bone2D/Sprite2D:rotation")
+tracks/0/path = NodePath("Skeleton2D/Bone2D:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.56666666),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 6.2831855]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Skeleton2D/Bone2D:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.81),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-1.5707964, -1.4479421, -1.5707964]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Skeleton2D/Bone2D/Bone2D:rotation")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/Bone2D/Bone2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.81),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-1.5707964, -1.5293398, -1.5707964]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D/Bone2D/Sprite2D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.3, 0.4, 0.5, 0.59774715, 0.6977471, 0.78757226),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("shadow:offset")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(5, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ohqgt"]
@@ -162,14 +187,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D/Bone2D/Sprite2D:rotation")
+tracks/4/path = NodePath("shadow:offset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.2, 2.33, 3.17),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.2617994, 0.0, 0.2617994]
+"values": [Vector2(0, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ep6f1"]
@@ -214,6 +239,13 @@ radius = 25.019993
 z_index = 1
 y_sort_enabled = true
 
+[node name="shadow" type="Sprite2D" parent="." unique_id=1440974003]
+modulate = Color(1, 1, 1, 0.6862745)
+z_index = -3
+position = Vector2(0, 11)
+scale = Vector2(1.2366855, 1.2366855)
+texture = ExtResource("1_ep6f1")
+
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=597831518]
 y_sort_enabled = true
 position = Vector2(0, -11)
@@ -225,7 +257,6 @@ uv = PackedVector2Array(28.121979, 122.28075, 21.112091, 117.819916, 19.200317, 
 bones = ["Bone2D", PackedFloat32Array(1, 1, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1, 1), "Bone2D/Bone2D", PackedFloat32Array(0, 0, 0.5, 1, 1, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1, 1, 1, 0.5, 0, 0), "Bone2D/Bone2D/Bone2D", PackedFloat32Array(0, 0, 0, 0, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0, 0, 0, 0, 0, 0), "Bone2D/Bone2D/Bone2D/Bone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Bone2D/Bone2D/Bone2D/Bone2D/Bone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1, 1, 1, 1, 1, 0.5, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 
 [node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=927671913]
-z_index = 1
 y_sort_enabled = true
 position = Vector2(0, 15.900734)
 
@@ -234,6 +265,7 @@ y_sort_enabled = true
 rotation = -1.5707964
 scale = Vector2(0.99999976, 0.99999976)
 rest = Transform2D(-4.371139e-08, -1, 1, -4.371139e-08, 0, 0)
+editor_settings/show_bone_gizmo = false
 
 [node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D" unique_id=91799721]
 y_sort_enabled = true
@@ -241,12 +273,14 @@ position = Vector2(27, 1.1802075e-06)
 rotation = -1.5707964
 scale = Vector2(0.99999756, 0.99999756)
 rest = Transform2D(-4.371139e-08, -1, 1, -4.371139e-08, 27, 1.1802075e-06)
+editor_settings/show_bone_gizmo = false
 
 [node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D/Bone2D" unique_id=1238468922]
 y_sort_enabled = true
 position = Vector2(-2.2729919e-06, 26)
 rotation = -1.5707964
 rest = Transform2D(-4.371139e-08, -1, 1, -4.371139e-08, -2.2729919e-06, 26)
+editor_settings/show_bone_gizmo = false
 
 [node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D/Bone2D/Bone2D" unique_id=800901095]
 y_sort_enabled = true
@@ -254,6 +288,7 @@ position = Vector2(-26, -3.4094874e-06)
 rotation = -1.5707964
 scale = Vector2(0.9999999, 0.9999999)
 rest = Transform2D(-4.371139e-08, -1, 1, -4.371139e-08, -26, -3.4094874e-06)
+editor_settings/show_bone_gizmo = false
 
 [node name="Bone2D" type="Bone2D" parent="Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D" unique_id=1349044316]
 y_sort_enabled = true
@@ -263,12 +298,14 @@ rest = Transform2D(-4.371139e-08, -1, 1, -4.371139e-08, 4.371139e-06, -25)
 auto_calculate_length_and_angle = false
 length = 24.176
 bone_angle = 2.5044778e-06
+editor_settings/show_bone_gizmo = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Skeleton2D/Bone2D/Bone2D/Bone2D/Bone2D/Bone2D" unique_id=1906422082]
 y_sort_enabled = true
-position = Vector2(7, 1.5298997e-06)
+position = Vector2(-79.11248, -0.6503029)
 scale = Vector2(0.61355245, 0.61355245)
 texture = ExtResource("2_87x6o")
+offset = Vector2(140.35065, 1.0599003)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=350700405]
 libraries/ = SubResource("AnimationLibrary_ep6f1")
@@ -282,7 +319,10 @@ AnimPlayer = NodePath("../AnimationPlayer")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flower collision area" unique_id=1901701601]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_87x6o")
-debug_color = Color(0.663508, 0.51322645, 7.70092e-07, 0.41960785)
+debug_color = Color(0.6627451, 0.5137255, 0, 0)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2069849147]
+rect = Rect2(-33, -120, 63, 136)
 
 [connection signal="body_entered" from="flower collision area" to="flower collision area" method="_on_body_entered"]
 [connection signal="body_exited" from="flower collision area" to="flower collision area" method="_on_body_exited"]

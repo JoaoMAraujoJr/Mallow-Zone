@@ -382,6 +382,23 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xu6ap"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8t51d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uh3e7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hcb2m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y5f5y"]
+
+[sub_resource type="Theme" id="Theme_xu6ap"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_xu6ap")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8t51d")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_uh3e7")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_hcb2m")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_y5f5y")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hcb2m"]
 atlas = ExtResource("1_exgub")
 region = Rect2(0, 0, 64, 64)
@@ -563,9 +580,10 @@ layout_mode = 0
 offset_left = 4.0
 offset_top = 523.0
 offset_right = 76.0
-offset_bottom = 851.13104
+offset_bottom = 851.13116
 scale = Vector2(1.9663539, 1.9663539)
 pivot_offset = Vector2(-20, 0)
+theme = SubResource("Theme_xu6ap")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 

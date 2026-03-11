@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://bi1nep8s0yfp2" path="res://Scripts/shaders/reversedissolving.gdshader" id="2_nxvmt"]
 [ext_resource type="Texture2D" uid="uid://b3xkrbfkg6hqa" path="res://Scripts/shaders/noiseTexture2.tres" id="3_6wd1u"]
 [ext_resource type="Script" uid="uid://b7o53v5x8wumc" path="res://Scripts/effects/spriteCreation.gd" id="5_1njt7"]
-[ext_resource type="Texture2D" uid="uid://b8031gxnv3lcp" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_2.png" id="5_s3jpe"]
+[ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="5_s3jpe"]
 [ext_resource type="Texture2D" uid="uid://6okmu1we6x4" path="res://Assets/Textures/floors/grass/Grassfloortexture_bottom_256.png" id="7_kxp8e"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="8_1njt7"]
 [ext_resource type="Texture2D" uid="uid://bpw75fena71mc" path="res://Assets/Textures/UI/minimap_icons/floor_top_minimap.png" id="8_s3jpe"]
@@ -111,6 +111,9 @@ position = Vector2(-0.39999998, 307.2)
 scale = Vector2(6.4532747, 3.2109282)
 texture = ExtResource("10_kxp8e")
 script = ExtResource("8_1njt7")
+
+[node name="VisibleOnScreenEnabler2D2" type="VisibleOnScreenEnabler2D" parent="." unique_id=1988010673]
+rect = Rect2(-252, -264, 503, 741)
 
 [connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
