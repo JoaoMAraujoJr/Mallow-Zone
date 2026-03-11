@@ -13,12 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://s53k1x3wisv0" path="res://Scenes/items/dropped_item.tscn" id="11_0ycfy"]
 [ext_resource type="PackedScene" uid="uid://cu5yy7uvyjf25" path="res://Scenes/objects/asphalt/explosive_barrel_throwable.tscn" id="12_xwlgn"]
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="13_nag8a"]
+[ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="14_dye5w"]
+[ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="15_nwurf"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1572845358]
 y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_w34uy")]
-position = Vector2(-60, -130)
+position = Vector2(-560, -268)
 
 [node name="Zet" parent="." unique_id=1045541873 instance=ExtResource("3_xwgi5")]
 position = Vector2(396, -144)
@@ -143,3 +145,55 @@ position = Vector2(-247, -35)
 
 [node name="weaponDropped" parent="." unique_id=344169487 instance=ExtResource("13_nag8a")]
 position = Vector2(-146, -167)
+
+[node name="DroppedItem2" parent="." unique_id=1746876127 instance=ExtResource("11_0ycfy")]
+position = Vector2(-977, -196)
+item = ExtResource("14_dye5w")
+
+[node name="DroppedItem3" parent="." unique_id=2041088051 instance=ExtResource("11_0ycfy")]
+position = Vector2(-866, -219)
+item = ExtResource("14_dye5w")
+
+[node name="DroppedItem4" parent="." unique_id=705408748 instance=ExtResource("11_0ycfy")]
+position = Vector2(-912, -307)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem5" parent="." unique_id=22413618 instance=ExtResource("11_0ycfy")]
+position = Vector2(-916, -222)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem6" parent="." unique_id=1303296099 instance=ExtResource("11_0ycfy")]
+position = Vector2(-909, -161)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem7" parent="." unique_id=704232584 instance=ExtResource("11_0ycfy")]
+position = Vector2(-884, -186)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem8" parent="." unique_id=993264094 instance=ExtResource("11_0ycfy")]
+position = Vector2(-828, -197)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem9" parent="." unique_id=194228343 instance=ExtResource("11_0ycfy")]
+position = Vector2(-853, -170)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem10" parent="." unique_id=1716653337 instance=ExtResource("11_0ycfy")]
+position = Vector2(-873, -141)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem11" parent="." unique_id=1867074957 instance=ExtResource("11_0ycfy")]
+position = Vector2(-932, -108)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem12" parent="." unique_id=1117155537 instance=ExtResource("11_0ycfy")]
+position = Vector2(-969, -132)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem13" parent="." unique_id=1544222148 instance=ExtResource("11_0ycfy")]
+position = Vector2(-1052, -129)
+item = ExtResource("15_nwurf")
+
+[node name="DroppedItem14" parent="." unique_id=1028597900 instance=ExtResource("11_0ycfy")]
+position = Vector2(-1052, -129)
+item = ExtResource("15_nwurf")

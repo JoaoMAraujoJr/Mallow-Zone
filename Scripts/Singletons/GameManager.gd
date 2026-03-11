@@ -15,6 +15,7 @@ var enemySpeed: float = 50.0
 var thisPlayer : Player
 var cur_hp : int = 100
 var max_hp : int = 100
+var ui_backpack : BackpackInventory
 var cur_inventory :Array[InventoryItem] =[]
 var can_shoot: bool = true
 var ammoMax : int = 0

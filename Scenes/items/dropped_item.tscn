@@ -1,8 +1,5 @@
 [gd_scene format=3 uid="uid://s53k1x3wisv0"]
 
-[ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="1_okhlh"]
-[ext_resource type="Texture2D" uid="uid://bk2nmybuc2xc8" path="res://Assets/Textures/items/food/apple.png" id="1_wr8t6"]
-
 [sub_resource type="GDScript" id="GDScript_okhlh"]
 resource_name = "DroppedItem"
 script/source = "extends Node2D
@@ -11,7 +8,7 @@ script/source = "extends Node2D
 @export var item:InventoryItem
 var item_sprite:Sprite2D
 var shadow_sprite:Sprite2D
-
+var can_pick:bool = false
 var magnet_target :Node2D
 
 func _ready() -> void:
@@ -26,7 +23,22 @@ func _physics_process(delta: float) -> void:
 		global_position = lerp(global_position,magnet_target.global_position,delta*1)
 	pass
 
-
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"Interact\") and can_pick:
+		print(\"item picked\")
+		if GameManager.cur_inventory != null:
+			var index = GameManager.cur_inventory.find(null)
+			if index != -1:
+				GameManager.cur_inventory[index] = item
+			else:
+				GameManager.cur_inventory.append(item)
+			if GameManager.ui_backpack:
+				GameManager.ui_backpack.updateInventoryItemDisplay()
+				queue_free()
+			else:
+				printerr(\"no current player backpack\")
+		else:
+			printerr(\"no current player inventory\")
 
 func _on_player_detector_body_entered(body: Node2D) -> void:
 	if body is Player:
@@ -38,6 +50,16 @@ func _on_player_detector_body_exited(body: Node2D) -> void:
 	if body is Player:
 		magnet_target = null
 	pass # Replace with function body.
+
+
+func _on_collision_detector_body_entered(body: Node2D) -> void:
+	if body is Player:
+		can_pick = true
+
+
+
+func _on_collision_detector_body_exited(body: Node2D) -> void:
+	can_pick =false
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_or6ny"]
@@ -49,7 +71,6 @@ radius = 48.270073
 [node name="DroppedItem" type="Node2D" unique_id=1987125379]
 y_sort_enabled = true
 script = SubResource("GDScript_okhlh")
-item = ExtResource("1_okhlh")
 
 [node name="shadow" type="Sprite2D" parent="." unique_id=1013083604]
 modulate = Color(0, 0, 0, 0.39607844)
@@ -57,12 +78,10 @@ z_index = -3
 position = Vector2(-7.999999, 8)
 scale = Vector2(1, 0.75000006)
 skew = -1.0471977
-texture = ExtResource("1_wr8t6")
 
 [node name="icon" type="Sprite2D" parent="." unique_id=1797655891]
 z_index = 1
 y_sort_enabled = true
-texture = ExtResource("1_wr8t6")
 
 [node name="collision_detector" type="Area2D" parent="." unique_id=410782334]
 
@@ -74,5 +93,7 @@ shape = SubResource("CircleShape2D_or6ny")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detector" unique_id=1660080522]
 shape = SubResource("CircleShape2D_okhlh")
 
+[connection signal="body_entered" from="collision_detector" to="." method="_on_collision_detector_body_entered"]
+[connection signal="body_exited" from="collision_detector" to="." method="_on_collision_detector_body_exited"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]

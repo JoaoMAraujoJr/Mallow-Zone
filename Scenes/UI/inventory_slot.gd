@@ -55,24 +55,19 @@ func _can_drop_data(_pos, data):
 
 
 func _drop_data(_pos, data):
-	
+
 	var item : InventoryItem = data["item"]
-	var source : TextureRect = data["source_slot"]
-	print("item " +data["item"].id+ " droped")
+	var source : InventorySlot = data["source_slot"]
+
 	source.dragging = false
 	source.item_sprite.show()
 	source.item_shadow.show()
-	var temp = slot_item
+
+	var inv = GameManager.cur_inventory
+
+	var temp = inv[slot_index]
+
+	inv[slot_index] = item
+	inv[source.slot_index] = temp
 	
-	slot_item = item
-	item_sprite.texture = item.texture
-	item_shadow.texture = item.texture
-	
-	if temp == null:
-		source.slot_item =null
-		source.item_sprite.texture = null
-		source.item_shadow.texture=null
-	else:
-		source.slot_item=temp
-		source.item_sprite.texture=temp.texture
-		source.item_shadow.texture=temp.texture
+	GameManager.ui_backpack.updateInventoryItemDisplay()

@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name BackpackInventory
 
 @export var slot_scene :PackedScene
 @onready var AnimTree: AnimationTree = $AnimationTree
@@ -14,6 +15,23 @@ enum InventoryState {
 @onready var cur_state:InventoryState=InventoryState.CLOSED
 
 
+func _ready() -> void:
+	GameManager.ui_backpack = self
+	compact_inventory()
+	if GameManager.cur_inventory.size()<5:
+		GameManager.cur_inventory.resize(5)
+	updateInventoryItemDisplay()
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Inventory"):
+		if cur_state==InventoryState.CLOSED or cur_state==InventoryState.CLOSING:
+			CursorManager.set_cursor(CursorManager.types.DEFAULT)
+			$middle.mouse_filter = $middle.MOUSE_FILTER_IGNORE
+			updateInventoryState(InventoryState.OPENING)
+		else:
+			CursorManager.set_cursor(CursorManager.types.CROSSHAIR)
+			$middle.mouse_filter = $middle.MOUSE_FILTER_STOP
+			updateInventoryState(InventoryState.CLOSING)
 func _notification(what: int) -> void:
 	
 	if what == Node.NOTIFICATION_DRAG_BEGIN:
@@ -62,10 +80,22 @@ func updateInventoryItemDisplay():
 		slot.slot_item = inventory[i]
 		slot.update_ui_display()
 
+func compact_inventory():
+
+	var inv = GameManager.cur_inventory
+	var new_inv : Array[InventoryItem] = []
+
+	# pega apenas itens válidos
+	for item in inv:
+		if item != null:
+			new_inv.append(item)
+
+
+	GameManager.cur_inventory = new_inv
+
 
 
 func _on_button_pressed() -> void:
-	print("pressed")
 	if cur_state==InventoryState.CLOSED or cur_state==InventoryState.CLOSING:
 		CursorManager.set_cursor(CursorManager.types.DEFAULT)
 		$middle.mouse_filter = $middle.MOUSE_FILTER_IGNORE
