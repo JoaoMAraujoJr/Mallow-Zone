@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="2_75fju"]
 [ext_resource type="PackedScene" uid="uid://debg6fibu7vns" path="res://Scenes/Unique/weather_manager.tscn" id="2_na5jw"]
 [ext_resource type="Shader" uid="uid://bhyms4h256y5i" path="res://Scripts/shaders/vignette.gdshader" id="2_uwsgx"]
+[ext_resource type="PackedScene" uid="uid://cxjt50h0xqwdy" path="res://Scenes/UI/backpack.tscn" id="4_w0njm"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="5_hbxki"]
 [ext_resource type="PackedScene" uid="uid://c3xq3kyge52j8" path="res://Scenes/UI/Phone.tscn" id="6_cb0af"]
 [ext_resource type="Shader" uid="uid://chr7biofqin88" path="res://Scripts/shaders/fisheye.gdshader" id="9_7l867"]
@@ -107,6 +108,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Backpack" parent="." unique_id=821909364 instance=ExtResource("4_w0njm")]
 
 [node name="InterfaceCanvaLayer" type="CanvasLayer" parent="." unique_id=1821217240]
 

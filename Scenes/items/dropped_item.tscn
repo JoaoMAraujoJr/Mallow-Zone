@@ -6,15 +6,17 @@
 [sub_resource type="GDScript" id="GDScript_okhlh"]
 resource_name = "DroppedItem"
 script/source = "extends Node2D
-
+#dropped Item
 
 @export var item:InventoryItem
-@onready var item_sprite:Sprite2D = $icon
-@onready var shadow_sprite:Sprite2D = $shadow
+var item_sprite:Sprite2D
+var shadow_sprite:Sprite2D
 
 var magnet_target :Node2D
 
 func _ready() -> void:
+	item_sprite=$icon
+	shadow_sprite=$shadow
 	if item and item.texture:
 		shadow_sprite.texture = item.texture
 		item_sprite.texture = item.texture

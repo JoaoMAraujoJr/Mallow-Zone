@@ -468,6 +468,7 @@ shape = SubResource("RectangleShape2D_pkd7i")
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="background" type="Sprite2D" parent="Empty" unique_id=2093853170]
 material = SubResource("ShaderMaterial_tvtbk")
@@ -483,6 +484,7 @@ offset_bottom = -57.0
 rotation = -0.11953255
 scale = Vector2(1.1505201, 1.1505201)
 pivot_offset = Vector2(72, 20)
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
 theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
 theme_override_constants/shadow_outline_size = 0
@@ -549,6 +551,7 @@ libraries/ = SubResource("AnimationLibrary_bs6jk")
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="background" type="Sprite2D" parent="NotEmpty" unique_id=1166853664]
 material = SubResource("ShaderMaterial_tvtbk")
@@ -563,6 +566,7 @@ offset_right = 72.0
 offset_bottom = -66.41952
 scale = Vector2(1.0290242, 1.0290242)
 pivot_offset = Vector2(72, 20)
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
 theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
 theme_override_constants/shadow_outline_size = 0
@@ -585,6 +589,7 @@ offset_right = 100.0
 offset_bottom = 56.0
 scale = Vector2(0.72371125, 0.72371125)
 pivot_offset = Vector2(72, 20)
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
 theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
 theme_override_constants/shadow_outline_size = 0
@@ -607,7 +612,7 @@ scale = Vector2(0.11512904, 0.11512904)
 texture = ExtResource("4_lm4ow")
 
 [node name="PlayerSkinNode" parent="NotEmpty/skin_mask" unique_id=306020732 instance=ExtResource("5_xwbdc")]
-position = Vector2(0, 420.56732)
+position = Vector2(0, 186.04791)
 scale = Vector2(8.926918, 8.926918)
 
 [node name="trashIcon" type="TextureButton" parent="NotEmpty" unique_id=1574555780]
@@ -689,6 +694,7 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="background" type="Sprite2D" parent="AreUsure" unique_id=34949763]
 material = SubResource("ShaderMaterial_tvtbk")
@@ -703,6 +709,7 @@ offset_right = 72.0
 offset_bottom = -66.41952
 scale = Vector2(1.0290242, 1.0290242)
 pivot_offset = Vector2(72, 20)
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
 theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
 theme_override_constants/shadow_outline_size = 0

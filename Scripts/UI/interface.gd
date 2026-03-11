@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	fpsDisplay.text = "[shake rate=10 level=20][rainbow freq=1 sat=0.5 val=0.9]"+str(Engine.get_frames_per_second()) + " FPS [/rainbow][/shake]"
 	ammo = GameManager.ammo
 	_ammolabel.text = "Ammo: " + str(ammo) + "/ " + str(GameManager.ammoMax)

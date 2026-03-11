@@ -1,5 +1,7 @@
 extends TextureRect
-
+class_name  InventorySlot
+#inventory slot
+@export var slot_index : int
 @export var slot_item : InventoryItem
 @onready var item_sprite:TextureRect = $item
 @onready var item_shadow:Sprite2D = $shadow
@@ -23,7 +25,6 @@ func _get_drag_data(_at_position):
 
 	var preview_texture := TextureRect.new()
 	preview_texture.texture = slot_item.texture
-	preview_texture.expand_mode = 1
 	preview_texture.size = Vector2(82, 82)
 
 
@@ -36,7 +37,7 @@ func _get_drag_data(_at_position):
 	item_shadow.hide()
 	item_sprite.hide()
 	self_modulate = Color(1.0, 1.0, 1.0, 0.0)
-	var moving_item:InventoryItem = slot_item.duplicate()
+
 	print("item " +slot_item.id+ " moved")
 	
 	dragging = true
@@ -50,7 +51,7 @@ func _get_drag_data(_at_position):
 
 
 func _can_drop_data(_pos, data):
-	return data is Dictionary and data.has("item")
+	return data is Dictionary and data.has("item") and data is Dictionary and data.has("source_slot") 
 
 
 func _drop_data(_pos, data):

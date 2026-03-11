@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c1dgwatp8m46e" path="res://Scenes/UI/InventorySlot.tscn" id="1_j2yxh"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="1_rqf0h"]
 [ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="2_ori2n"]
+[ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="3_vv8c6"]
 
 [node name="Node2D" type="Node2D" unique_id=1766640317]
 
@@ -20,7 +21,7 @@ offset_left = 355.0
 offset_top = 172.0
 offset_right = 419.0
 offset_bottom = 236.0
-slot_item = null
+slot_item = ExtResource("3_vv8c6")
 
 [node name="item3" parent="." unique_id=2011929322 instance=ExtResource("1_j2yxh")]
 offset_left = 189.0
@@ -34,4 +35,3 @@ offset_left = 197.0
 offset_top = 218.0
 offset_right = 261.0
 offset_bottom = 282.0
-slot_item = null

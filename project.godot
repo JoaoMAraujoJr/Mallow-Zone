@@ -38,6 +38,7 @@ BiomeManager="*res://Scripts/Singletons/BiomeManager.gd"
 DayTimeManager="*res://Scripts/Singletons/DayTimeManager.gd"
 LoadManager="*res://Scripts/Singletons/LoadManager.gd"
 SaveManager="*uid://dgvmbpww5am"
+CursorManager="*uid://drj3k2l12qwd2"
 
 [display]
 

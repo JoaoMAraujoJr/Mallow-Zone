@@ -40,7 +40,6 @@ func _ready():
 	max_health = GameManager.max_hp
 	health = GameManager.cur_hp
 	gold_wallet = GameManager.gold_wallet
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
 
 func _physics_process(delta: float) -> void:
@@ -123,8 +122,8 @@ func mouse_actions_handler():
 			recoil_velocity = recoil_direction * recoil_strength
 			print("just shooted")
 
-		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 and GameManager.game_cursor:
-			if GameManager.game_cursor.cur_cursorType == GameManager.game_cursor.CursorTypeList.CROSSHAIR:
+		elif Input.is_action_just_pressed("Mouse_left") and GameManager.ammo <= 0 and CursorManager:
+			if CursorManager.cur_cursorType == CursorManager.types.CROSSHAIR:
 				_outofAmmoAudioStream.play()
 		elif Input.is_action_just_pressed("DropAction") and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			_dropGun()

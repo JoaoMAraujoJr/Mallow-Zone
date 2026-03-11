@@ -16,7 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="9_5npxw"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_gh778"]
 [ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="11_rfejq"]
+[ext_resource type="Resource" uid="uid://bx0jjy5lkudd" path="res://Scripts/Resources/cursors/default_cursor.tres" id="11_u3inf"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="12_15ame"]
+[ext_resource type="Resource" uid="uid://d2aw7a02mc126" path="res://Scripts/Resources/cursors/crosshair_cursor.tres" id="12_xk2ym"]
+[ext_resource type="Resource" uid="uid://bsl84wp8wmo1e" path="res://Scripts/Resources/cursors/phone_cursor.tres" id="13_f3lgg"]
 [ext_resource type="PackedScene" uid="uid://dpqahfejiw8a7" path="res://Scenes/UI/buttons/reset_button.tscn" id="13_ir3vo"]
 [ext_resource type="Texture2D" uid="uid://b51gydmbpyodp" path="res://Assets/Textures/backgrounds/dark.png" id="17_ifgeu"]
 [ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="19_5t6jh"]
@@ -167,9 +170,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if i != 0 and body is Player:
 		return
 	$AnimationPlayer.play(\"ammo\")
-	if GameManager.game_cursor:
-		GameManager.game_cursor.cur_cursorType = GameManager.game_cursor.CursorTypeList.CROSSHAIR
-		GameManager.game_cursor.matchCursorType()
+	if CursorManager:
+		CursorManager.set_cursor(CursorManager.types.CROSSHAIR)
 	pass # Replace with function body.
 "
 
@@ -835,6 +837,9 @@ autowrap_mode = 3
 [node name="Cursor" parent="Interface/InterfaceCanvaLayer" unique_id=2116295921 instance=ExtResource("9_5npxw")]
 process_priority = 1
 z_index = 0
+default_CS = ExtResource("11_u3inf")
+crosshair_CS = ExtResource("12_xk2ym")
+phone_CS = ExtResource("13_f3lgg")
 
 [node name="BossBar" parent="Interface/InterfaceCanvaLayer" unique_id=33436801 instance=ExtResource("10_gh778")]
 mouse_filter = 1

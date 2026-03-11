@@ -1,10 +1,9 @@
 extends Node
 @warning_ignore("unused_signal")
 signal skin_changed(new_skin: PlayerSkin)
+signal item_picked(item:InventoryItem)
 
 var currentSaveSlot = 1
-
-var game_cursor: UtilityCursor
 
 
 var kills : int = 0
@@ -16,6 +15,7 @@ var enemySpeed: float = 50.0
 var thisPlayer : Player
 var cur_hp : int = 100
 var max_hp : int = 100
+var cur_inventory :Array[InventoryItem] =[]
 var can_shoot: bool = true
 var ammoMax : int = 0
 var ammo : int = ammoMax
@@ -86,6 +86,7 @@ func load_from_current_save():
 		max_hp = SaveManager.current_save.max_hp
 		cur_hp = SaveManager.current_save.cur_hp
 		cur_skin = SaveManager.current_save.cur_skin
+		cur_inventory =SaveManager.current_save.inventory
 		print(str(cur_skin))
 		currentEquipedWeaponType = SaveManager.current_save.cur_weapon
 		gold_wallet = SaveManager.current_save.money

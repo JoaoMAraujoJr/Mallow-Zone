@@ -13,22 +13,7 @@ offset_right = 64.0
 offset_bottom = 64.0
 script = ExtResource("2_wycv1")
 
-[node name="item" type="TextureRect" parent="." unique_id=711641059]
-layout_mode = 0
-offset_right = 32.0
-offset_bottom = 32.0
-scale = Vector2(1.8, 1.8)
-
-[node name="shadow" type="Sprite2D" parent="." unique_id=492909814]
-modulate = Color(0, 0, 0, 0.39607844)
-show_behind_parent = true
-position = Vector2(15.325846, 45.713337)
-scale = Vector2(1.6904906, 1.0776068)
-skew = -1.1344641
-
 [node name="slot" type="TextureRect" parent="." unique_id=573554251]
-show_behind_parent = true
-z_index = -1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 8
@@ -47,9 +32,20 @@ pivot_offset = Vector2(31.821627, 31.821625)
 mouse_filter = 2
 texture = SubResource("CanvasTexture_dqrds")
 
+[node name="shadow" type="Sprite2D" parent="." unique_id=492909814]
+modulate = Color(0, 0, 0, 0.39607844)
+position = Vector2(15.325846, 45.713337)
+scale = Vector2(1.6904906, 1.0776068)
+skew = -1.1344641
+
+[node name="item" type="TextureRect" parent="." unique_id=711641059]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(1.8, 1.8)
+
 [node name="Panel" type="Panel" parent="." unique_id=1770212807]
 visible = false
-show_behind_parent = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -63,3 +59,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

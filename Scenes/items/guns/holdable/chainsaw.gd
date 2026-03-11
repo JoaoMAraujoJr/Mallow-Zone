@@ -52,12 +52,12 @@ func _physics_process(_delta: float) -> void:
 
 func shootLogic() -> void:
 	if GameManager.can_shoot:
+		$gun/damageArea.monitorable = true
 		if Input.is_action_just_pressed("Mouse_left") and GameManager.ammo> 0:
 			_ShootSound.pitch_scale =randf_range(0.34 , 0.5)
 			_ShootSound.play()
 		if Input.is_action_pressed("Mouse_left") and GameManager.ammo > 0:
 			_animatedSprite.play("on")
-			
 			var bodies : = _damageArea.get_overlapping_bodies()
 			var hit_count:int = 0
 			for body in bodies:
@@ -83,6 +83,7 @@ func shootLogic() -> void:
 				canWaste = false
 				_wastcooldown.start()
 		else:
+			$gun/damageArea.monitorable = false
 			_ShootSound.stop()
 			_animatedSprite.play("off")
 

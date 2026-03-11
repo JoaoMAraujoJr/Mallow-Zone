@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CursorStyle" format=3 uid="uid://d2aw7a02mc126"]
+
+[ext_resource type="Script" uid="uid://ckvyj7tgpwms6" path="res://Scripts/Resources/CursorStyle.gd" id="1_0j1ee"]
+[ext_resource type="Texture2D" uid="uid://d0or3h6rxu0cr" path="res://Assets/Textures/UI/cursors/cursor_crosshair_4_unpressed.png" id="1_mcrei"]
+[ext_resource type="Texture2D" uid="uid://bjfwgshmrwxmn" path="res://Assets/Textures/UI/cursors/cursor_crosshair_2.png" id="2_mcrei"]
+[ext_resource type="Texture2D" uid="uid://blrpo4f68kefs" path="res://Assets/Textures/UI/cursors/cursor_crosshair_4_pressed.png" id="3_fwjos"]
+
+[resource]
+script = ExtResource("1_0j1ee")
+arrow_cursor = ExtResource("1_mcrei")
+unpressed_cursor = ExtResource("1_mcrei")
+pressed_cursor = ExtResource("3_fwjos")
+loading_cursor = ExtResource("2_mcrei")
+metadata/_custom_type_script = "uid://ckvyj7tgpwms6"

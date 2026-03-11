@@ -7,7 +7,7 @@ class_name SaveFile
 @export_range(0, 99999) var max_hp :int =100
 
 @export_group("Equipment")
-@export var cur_skin:PlayerSkin 
+@export var cur_skin:PlayerSkin
 @export var unlocked_skins:Array[PlayerSkin] =[]
 @export var cur_weapon:String = "none"
 @export var inventory :Array[InventoryItem] =[]
