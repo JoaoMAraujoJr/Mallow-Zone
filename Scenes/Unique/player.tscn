@@ -50,9 +50,10 @@ position = Vector2(0, 4.999999)
 scale = Vector2(0.99999934, 0.9999996)
 
 [node name="Mask" type="Sprite2D" parent="." unique_id=1344524052]
+clip_children = 2
 position = Vector2(-2.87e-42, 9.536743e-07)
 scale = Vector2(0.96874994, 1.281)
-offset = Vector2(-1.8458213e-07, 13.27088)
+offset = Vector2(0, 6.561)
 
 [node name="PlayerSkinNode" parent="Mask" unique_id=1590478521 instance=ExtResource("3_d05bs")]
 position = Vector2(1.845821e-07, 0)
