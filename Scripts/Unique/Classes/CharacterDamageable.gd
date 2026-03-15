@@ -30,7 +30,10 @@ func addToHealth(i:int) -> void:
 	if isImortal:
 		return
 	health += i
-	uponDamage()
+	if i < 0:
+		uponDamage()
+	elif i>5:
+		uponHeal()
 	if health <= 0:
 		isAlive = false
 		Die()
@@ -43,7 +46,9 @@ func addEffectToSelf(effect : Effect):
 func uponDamage():
 	push_error("UponDamage() Has Not Been Implemented for This Damageable")
 	pass
-
+func uponHeal():
+	push_error("uponHeal() Has Not Been Implemented for This Damageable")
+	pass
 func Die():
 	push_error("Death (Die()) Not Implemented for This Damageable")
 	pass

@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="13_nag8a"]
 [ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="14_dye5w"]
 [ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="15_nwurf"]
-[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/testing_new_skin_node.tscn" id="16_nwurf"]
+[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/SkinManager.tscn" id="16_nwurf"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1572845358]
 y_sort_enabled = true

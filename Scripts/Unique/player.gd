@@ -1,4 +1,3 @@
-# Attach this script to a CharacterBody2D node
 extends CharacterEntity
 class_name Player
 #bools :
@@ -14,8 +13,7 @@ var _gun : Node2D
 @onready var _gunPivot : Node2D = $GunPivot
 @onready var _outofAmmoAudioStream : AudioStreamPlayer2D = $Sounds/NeedsAmmoAudioStream
 @onready var _reloadGunAudioStream : AudioStreamPlayer2D=  $Sounds/ReloadAudioStream
-@onready var playerSkin : PlayerSkinManager = $Mask/PlayerSkinNode
-
+@onready var skin_manager :SkinManager = $PlayerSkinManager
 
 
 @export var recoil_strength: float = 100.0  # tweak this value for push force
@@ -33,7 +31,6 @@ var gold_wallet:int = 0
 
 func _ready():
 	super._ready()
-	updatePlayerMask()
 	isAffectable = true
 	GameManager.thisPlayer= self
 	call_deferred("_equipGun")
@@ -44,7 +41,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	adjustCameraZoom(delta)
-	
+	update_skin_states()
 	updatePlayerData()
 	
 	if _canmove:
@@ -55,18 +52,6 @@ func _physics_process(delta: float) -> void:
 #PlayerBehavior Methods
 
 func direction_and_action_handler(): #handles direction and current actions
-	if !_iswalking and !_isbackwards:
-		playerSkin._setAction("Idle")
-		playerSkin._setBackwards(false)
-	elif !_iswalking and _isbackwards:
-		playerSkin._setAction("Idle")
-		playerSkin._setBackwards(true)
-	elif _iswalking and !_isbackwards:
-		playerSkin._setAction("Walking")
-		playerSkin._setBackwards(false)
-	elif _iswalking and _isbackwards:
-		playerSkin._setAction("Walking")
-		playerSkin._setBackwards(true)
 		
 	var mouse_dir = (get_global_mouse_position() - global_position).normalized()
 	_isbackwards = mouse_dir.y < 0
@@ -95,10 +80,7 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 
 
 		velocity = ((input_vector * speed) + recoil_velocity + pushingforce + pullingforce)
-		if velocity != Vector2.ZERO:
-			playerSkin.updateTrailParticle(true)
-		else:
-			playerSkin.updateTrailParticle(false)
+
 		if velocity.length() > max_speed:
 			velocity = velocity.normalized() * max_speed
 		
@@ -108,10 +90,22 @@ func update_player_motion(delta:float): #handles player current velocity and mov
 		updateExternalForces("pull", pullingforce.move_toward(Vector2.ZERO, pullingforce.length() * 3 *delta))
 		move_and_slide()
 
+func update_skin_states():
+	if _iswalking :
+		skin_manager.cur_action = skin_manager.action_states.WALKING
+	else:
+		skin_manager.cur_action = skin_manager.action_states.IDLE
+	if _isbackwards:
+		skin_manager.is_backwards = true
+	else:
+		skin_manager.is_backwards = false
+	skin_manager.update_action()
 
 func updatePlayerData():
 	_lifebar.value = health #updateLifeBar
+	@warning_ignore("narrowing_conversion")
 	gold_wallet = move_toward(gold_wallet, GameManager.gold_wallet, 1) #updatewallet
+	
 func mouse_actions_handler():
 	if !isAlive:
 		return
@@ -127,31 +121,21 @@ func mouse_actions_handler():
 				_outofAmmoAudioStream.play()
 		elif Input.is_action_just_pressed("DropAction") and (GameManager.currentEquipedWeaponType != "none" or GameManager.currentEquipedWeaponType != "") and _gun != null:
 			_dropGun()
-func updatePlayerMask():
-	if BiomeManager.currentBiome:
-		if BiomeManager.currentBiome.player_mask:
-			$Shadow.visible=false
-			$Mask.texture = BiomeManager.currentBiome.player_mask
-			$Mask.clip_children = ClipChildrenMode.CLIP_CHILDREN_ONLY
-	else:
-		$Shadow.visible=true
-		$Mask.texture = null
-		$Mask.clip_children = ClipChildrenMode.CLIP_CHILDREN_DISABLED
 			
 
 #AddTo Methods
 func uponDamage():
+	skin_manager.damage()
 	GameManager.cur_hp = health
+
+func uponHeal():
+	skin_manager.heal()
 
 func Die():
 	GameManager.currentEquipedWeaponType = "none"
 	if _gun:
 		_gun.queue_free()
 	isAlive = false
-	if _canmove and playerSkin.skullParticleEmitter:
-			playerSkin.skullCrashingAudioStream.play()
-			playerSkin.skullParticleEmitter.emitting = true
-	playerSkin._setAction("Die")
 	_canmove = false
 	GameManager.can_shoot=false
 

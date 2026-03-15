@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="3_tycyy"]
 [ext_resource type="Texture2D" uid="uid://c8a5vtmj6rlgy" path="res://Assets/Textures/sprite_masks/light_mask/round_mask.png" id="4_lm4ow"]
 [ext_resource type="AudioStream" uid="uid://bcvjtrm6je3ti" path="res://Assets/Sounds/soundEffects/UI/save_new_game_button_hover.wav" id="4_pb1pl"]
-[ext_resource type="PackedScene" uid="uid://bjxxblvb7g17" path="res://Scenes/Unique/player_skin_node.tscn" id="5_xwbdc"]
+[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/SkinManager.tscn" id="5_xwbdc"]
 [ext_resource type="Texture2D" uid="uid://cou6m66vghtkp" path="res://Assets/Textures/UI/menu_icons/delete_icon.png" id="15_bs6jk"]
 [ext_resource type="Texture2D" uid="uid://csabryldl5wd2" path="res://Assets/Textures/UI/menu_icons/go_back_icon.png" id="15_pb1pl"]
 [ext_resource type="Texture2D" uid="uid://dkwsgayi03su0" path="res://Assets/Textures/UI/menu_icons/delete_icon_p.png" id="16_j8vd7"]
@@ -18,6 +18,8 @@ script/source = "extends Control
 
 @export var Slot :int = 1
 @export var thisSaveFile :SaveFile
+
+@onready var skin_display = $NotEmpty/skin_mask/PlayerSkinManager
 
 func _ready() -> void:
 	var path:= \"user://saves/save_%d.tres\" % Slot
@@ -33,8 +35,7 @@ func _ready() -> void:
 
 func _setSaveFile (save:SaveFile):
 	thisSaveFile = save
-	print(\"\\n===============================\\nSlot \"+ str(Slot)+\"\\nSkin: \"+ thisSaveFile.cur_skin.name + \"\\nMoney: \" + str(thisSaveFile.money)  +\"\\n===============================\")
-	$NotEmpty/skin_mask/PlayerSkinNode._loadSkin(thisSaveFile.cur_skin)
+	#print(\"\\n===============================\\nSlot \"+ str(Slot)+\"\\nSkin: \"+ thisSaveFile.cur_skin.name + \"\\nMoney: \" + str(thisSaveFile.money)  +\"\\n===============================\")
 	$NotEmpty/data.text = \\
 	\"[wave amp=10 freq=3]%s/%s hp[/wave]\\n\" % [thisSaveFile.cur_hp, thisSaveFile.max_hp] + \\
 	\"[wave amp=10 freq=3]%s$[/wave]\\n\" % thisSaveFile.money + \\
@@ -611,9 +612,10 @@ position = Vector2(-36, -18.419514)
 scale = Vector2(0.11512904, 0.11512904)
 texture = ExtResource("4_lm4ow")
 
-[node name="PlayerSkinNode" parent="NotEmpty/skin_mask" unique_id=306020732 instance=ExtResource("5_xwbdc")]
-position = Vector2(0, 186.04791)
-scale = Vector2(8.926918, 8.926918)
+[node name="PlayerSkinManager" parent="NotEmpty/skin_mask" unique_id=1647972410 instance=ExtResource("5_xwbdc")]
+position = Vector2(0, 272.90692)
+scale = Vector2(8.685905, 8.685905)
+use_local_skin = true
 
 [node name="trashIcon" type="TextureButton" parent="NotEmpty" unique_id=1574555780]
 z_index = 1

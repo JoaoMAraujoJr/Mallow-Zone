@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://larfkbilg4uo" path="res://Scripts/Unique/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ctbnbsn8xk6we" path="res://Assets/Textures/UI/minimap_icons/player_2.png" id="2_yiw7m"]
 [ext_resource type="Script" uid="uid://c8yqb1b1kg6jo" path="res://Scenes/Unique/mini_map_icon.gd" id="3_6nq75"]
-[ext_resource type="PackedScene" uid="uid://bjxxblvb7g17" path="res://Scenes/Unique/player_skin_node.tscn" id="3_d05bs"]
 [ext_resource type="Texture2D" uid="uid://6n54r8v7nly6" path="res://Assets/Textures/UI/progressbars/lifebar_under.png" id="6_3smsa"]
+[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/SkinManager.tscn" id="6_6nq75"]
 [ext_resource type="Texture2D" uid="uid://4udvb0w0v0pb" path="res://Assets/Textures/UI/progressbars/lifebar_progress.png" id="7_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="8_8erm5"]
 [ext_resource type="AudioStream" uid="uid://yvfg5cl1j23" path="res://Assets/Sounds/Gun/OutofAmmo.wav" id="8_gymyn"]
@@ -45,19 +45,13 @@ position = Vector2(-4.2632564e-14, 28)
 scale = Vector2(0.9999997, 0.99999976)
 texture = ExtResource("8_8erm5")
 
+[node name="PlayerSkinManager" parent="." unique_id=1647972410 instance=ExtResource("6_6nq75")]
+position = Vector2(0, 6)
+scale = Vector2(0.57318324, 0.57318324)
+
 [node name="GunPivot" type="Node2D" parent="." unique_id=962502127]
-position = Vector2(0, 4.999999)
+position = Vector2(0, 6.0000005)
 scale = Vector2(0.99999934, 0.9999996)
-
-[node name="Mask" type="Sprite2D" parent="." unique_id=1344524052]
-clip_children = 2
-position = Vector2(-2.87e-42, 9.536743e-07)
-scale = Vector2(0.96874994, 1.281)
-offset = Vector2(0, 6.561)
-
-[node name="PlayerSkinNode" parent="Mask" unique_id=1590478521 instance=ExtResource("3_d05bs")]
-position = Vector2(1.845821e-07, 0)
-scale = Vector2(0.6701757, 0.5068171)
 
 [node name="PlayerArea2D" type="Area2D" parent="." unique_id=1064755649 groups=["Damageble", "PlayerArea"]]
 scale = Vector2(0.14770508, 0.14770508)
