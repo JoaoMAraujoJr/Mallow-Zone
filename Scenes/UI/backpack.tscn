@@ -495,6 +495,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytnjk"]
+
 [sub_resource type="GDScript" id="GDScript_6rp4n"]
 resource_name = "DropArea"
 script/source = "extends TextureRect
@@ -650,6 +652,7 @@ offset_left = 0.3199997
 offset_top = 92.079956
 offset_right = 0.23999023
 offset_bottom = 0.039978027
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ytnjk")
 shortcut_in_tooltip = false
 flat = true
 

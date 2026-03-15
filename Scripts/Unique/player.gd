@@ -157,7 +157,7 @@ func Die():
 
 
 #CameraMethods
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			target_zoom += zoom_speed  # ajusta a intenção

@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="13_nag8a"]
 [ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="14_dye5w"]
 [ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="15_nwurf"]
+[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/testing_new_skin_node.tscn" id="16_nwurf"]
 
 [node name="Testing Grounds" type="Node2D" unique_id=1572845358]
 y_sort_enabled = true
@@ -197,3 +198,6 @@ item = ExtResource("15_nwurf")
 [node name="DroppedItem14" parent="." unique_id=1028597900 instance=ExtResource("11_0ycfy")]
 position = Vector2(-1052, -129)
 item = ExtResource("15_nwurf")
+
+[node name="testing_new_skin_node" parent="." unique_id=1647972410 instance=ExtResource("16_nwurf")]
+position = Vector2(-774, -320)

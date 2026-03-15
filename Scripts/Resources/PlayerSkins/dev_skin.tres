@@ -1,10 +1,9 @@
 [gd_resource type="Resource" script_class="PlayerSkin" format=3 uid="uid://5hojg2fmh1g2"]
 
-[ext_resource type="Script" uid="uid://db8koqjdrehs6" path="res://Scripts/Resources/PlayerSkin.gd" id="1_0w54d"]
-[ext_resource type="Texture2D" uid="uid://bc36ishldw2vm" path="res://Assets/Textures/player_skins/skin_sheets/dev_skin_sheet.png" id="2_nbk6q"]
+[ext_resource type="Script" uid="uid://db8koqjdrehs6" path="res://Scripts/Resources/PlayerSkin.gd" id="1_nbk6q"]
+[ext_resource type="Texture2D" uid="uid://dg2vxke11u8qx" path="res://Assets/Textures/player_skins/skin_sheets/original_skin_sheet.png" id="2_nbk6q"]
 
 [resource]
-script = ExtResource("1_0w54d")
-name = &"dev"
+script = ExtResource("1_nbk6q")
 texture = ExtResource("2_nbk6q")
 metadata/_custom_type_script = "uid://db8koqjdrehs6"
