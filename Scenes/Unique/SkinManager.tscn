@@ -2322,9 +2322,10 @@ size = Vector2i(128, 149)
 render_target_update_mode = 4
 
 [node name="Pivot" type="Node2D" parent="SkinViewport" unique_id=1624083583]
-position = Vector2(64, 64)
+position = Vector2(64, 128)
 
 [node name="Body" type="Node2D" parent="SkinViewport/Pivot" unique_id=838347926]
+position = Vector2(0, -72)
 
 [node name="Torso and Head" type="Node2D" parent="SkinViewport/Pivot/Body" unique_id=113459810]
 

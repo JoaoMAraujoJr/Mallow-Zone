@@ -49,6 +49,7 @@ func _ready() -> void:
 	else:
 		skin = GameManager.cur_skin
 		update_skin(skin)
+	update_action()
 
 func update_skin(new_skin:PlayerSkin):
 	if new_skin == null:

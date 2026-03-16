@@ -59,7 +59,7 @@ func direction_and_action_handler(): #handles direction and current actions
 	var _flipGun = mouse_dir.x <0
 	if _gun:
 		_gun._flipGun(_flipGun)
-		_gun.z_index = -1 if _isbackwards else 0
+		_gun.z_index = -1 if _isbackwards else 1
 
 func update_player_motion(delta:float): #handles player current velocity and movement
 		var input_vector = Vector2.ZERO

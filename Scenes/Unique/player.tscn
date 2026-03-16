@@ -23,7 +23,6 @@ height = 50.0
 
 [node name="Player" type="CharacterBody2D" unique_id=118340029 groups=["PlayerArea"]]
 visibility_layer = 3
-z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_cvnsp")
 max_camzoom = 0.7
@@ -45,13 +44,16 @@ position = Vector2(-4.2632564e-14, 28)
 scale = Vector2(0.9999997, 0.99999976)
 texture = ExtResource("8_8erm5")
 
-[node name="PlayerSkinManager" parent="." unique_id=1647972410 instance=ExtResource("6_6nq75")]
-position = Vector2(0, 6)
-scale = Vector2(0.57318324, 0.57318324)
-
 [node name="GunPivot" type="Node2D" parent="." unique_id=962502127]
+z_index = 1
 position = Vector2(0, 6.0000005)
 scale = Vector2(0.99999934, 0.9999996)
+
+[node name="PlayerSkinManager" parent="." unique_id=1647972410 instance=ExtResource("6_6nq75")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, 13.000001)
+scale = Vector2(0.57318324, 0.57318324)
 
 [node name="PlayerArea2D" type="Area2D" parent="." unique_id=1064755649 groups=["Damageble", "PlayerArea"]]
 scale = Vector2(0.14770508, 0.14770508)

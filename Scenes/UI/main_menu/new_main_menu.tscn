@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://b471kfbc41iv0" path="res://Scenes/Unique/save_select_button.tscn" id="4_pkpk7"]
 [ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="5_q6hi6"]
 [ext_resource type="AudioStream" uid="uid://e3smry6huri4" path="res://Assets/Sounds/Music/Lullaby.wav" id="6_jwu4y"]
+[ext_resource type="Texture2D" uid="uid://bc53ib1gyvhb2" path="res://Assets/Textures/entities/shadows/shadow.png" id="7_hshsc"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="7_rrcgd"]
+[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/SkinManager.tscn" id="7_urwbv"]
+[ext_resource type="Resource" uid="uid://c4275m0buqrc" path="res://Scripts/Resources/PlayerSkins/normal_skin.tres" id="8_co37i"]
 
 [sub_resource type="GDScript" id="GDScript_q6hi6"]
 resource_name = "MainMenu"
@@ -80,6 +83,9 @@ uv1_world_triplanar = true
 transparency = 1
 cull_mode = 1
 albedo_color = Color(0, 0, 0, 0.7019608)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_co37i"]
+viewport_path = NodePath("BG/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1alar"]
 shader = ExtResource("1_3h75r")
@@ -797,6 +803,38 @@ transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
 radius = 5.4354095
 material = SubResource("StandardMaterial3D_3h75r")
 
+[node name="Sprite3D" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=932455704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9460968, 1.9948809)
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = SubResource("ViewportTexture_co37i")
+
+[node name="shadow" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/Sprite3D" unique_id=1924552696]
+transform = Transform3D(1.9679468, 0, 0, 0, -1.3696658e-07, 1.0000001, 0, -3.13343, -4.3711392e-08, 0, -0.6215163, 0)
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_hshsc")
+
+[node name="shadow2" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/Sprite3D" unique_id=1902807574]
+transform = Transform3D(1.9679468, 0, 0, 0, -1.3696658e-07, 1.0000001, 0, -3.13343, -4.3711392e-08, 0, -0.6215163, 0)
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_hshsc")
+
+[node name="SubViewport" type="SubViewport" parent="BG" unique_id=1973158620]
+transparent_bg = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(128, 128)
+
+[node name="PlayerSkinManager" parent="BG/SubViewport" unique_id=1647972410 instance=ExtResource("7_urwbv")]
+position = Vector2(64, 95)
+is_backwards = true
+cur_action = 1
+skin = ExtResource("8_co37i")
+
 [node name="mouse" type="CanvasLayer" parent="." unique_id=986388149]
 
 [node name="Cursor" parent="mouse" unique_id=2116295921 instance=ExtResource("7_rrcgd")]
@@ -818,6 +856,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=2147231182]
+visible = false
 stream = ExtResource("6_jwu4y")
 volume_db = 18.295
 autoplay = true

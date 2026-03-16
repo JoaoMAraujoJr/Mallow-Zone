@@ -22,7 +22,7 @@ shader_parameter/edge_width = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvtpv"]
 radius = 2.8632417
-height = 12.025614
+height = 8.589725
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0yjm6"]
 cull_mode = 1
@@ -138,7 +138,7 @@ position = Vector2(0.28632414, 6.012807)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1073409670]
-position = Vector2(2.9802322e-08, 9.536743e-07)
+position = Vector2(2.9802322e-08, -1.7179446)
 shape = SubResource("CapsuleShape2D_uvtpv")
 
 [node name="lightOccluder" type="LightOccluder2D" parent="." unique_id=1117087098]
