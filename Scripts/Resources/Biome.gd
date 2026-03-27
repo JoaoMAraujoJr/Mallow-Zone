@@ -6,7 +6,6 @@ class_name Biome
 @export_group("Biome Identifiers")
 @export var name :String
 @export var biome_id:String
-
 @export var weather : Weather
 @export var hasDayNightCycle :bool = false
 
