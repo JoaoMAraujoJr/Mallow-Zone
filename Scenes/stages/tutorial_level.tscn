@@ -16,10 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="9_5npxw"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_gh778"]
 [ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="11_rfejq"]
-[ext_resource type="Resource" uid="uid://bx0jjy5lkudd" path="res://Scripts/Resources/cursors/default_cursor.tres" id="11_u3inf"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="12_15ame"]
-[ext_resource type="Resource" uid="uid://d2aw7a02mc126" path="res://Scripts/Resources/cursors/crosshair_cursor.tres" id="12_xk2ym"]
-[ext_resource type="Resource" uid="uid://bsl84wp8wmo1e" path="res://Scripts/Resources/cursors/phone_cursor.tres" id="13_f3lgg"]
 [ext_resource type="PackedScene" uid="uid://dpqahfejiw8a7" path="res://Scenes/UI/buttons/reset_button.tscn" id="13_ir3vo"]
 [ext_resource type="Texture2D" uid="uid://b51gydmbpyodp" path="res://Assets/Textures/backgrounds/dark.png" id="17_ifgeu"]
 [ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="19_5t6jh"]
@@ -35,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="28_ir3vo"]
 [ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Biomes/GrassLands.tres" id="29_prc6h"]
 [ext_resource type="Texture2D" uid="uid://bwrqcib3vj164" path="res://Assets/Textures/entities/Particles/other/confetti.png" id="31_j15rv"]
+[ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Biomes/ChessFields.tres" id="32_rbtg8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ifgeu"]
 blend_mode = 3
@@ -837,9 +835,6 @@ autowrap_mode = 3
 [node name="Cursor" parent="Interface/InterfaceCanvaLayer" unique_id=2116295921 instance=ExtResource("9_5npxw")]
 process_priority = 1
 z_index = 0
-default_CS = ExtResource("11_u3inf")
-crosshair_CS = ExtResource("12_xk2ym")
-phone_CS = ExtResource("13_f3lgg")
 
 [node name="BossBar" parent="Interface/InterfaceCanvaLayer" unique_id=33436801 instance=ExtResource("10_gh778")]
 mouse_filter = 1
@@ -1734,7 +1729,7 @@ position = Vector2(-908, -73)
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-59, 75.00001)
 scale = Vector2(1.79941, 1.79941)
-warpBiome = ExtResource("29_prc6h")
+warpPlace = ExtResource("29_prc6h")
 
 [node name="visuals" type="Node2D" parent="exit" unique_id=839788910]
 z_index = 4
@@ -1803,7 +1798,7 @@ rotation = -3.1415927
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-59, 75.00001)
 scale = Vector2(-1.3600768, -1.3600768)
-warpBiome = ExtResource("29_prc6h")
+warpPlace = ExtResource("32_rbtg8")
 
 [node name="visuals" type="Node2D" parent="exit2" unique_id=40419957]
 z_index = 4

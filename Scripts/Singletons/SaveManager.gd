@@ -1,5 +1,6 @@
 extends Node
-
+signal save_deleted(slot:int)
+signal new_save_created(slot:int)
 
 var current_save : SaveFile
 var current_slot : int
@@ -11,11 +12,24 @@ func _ready() -> void:
 
 func create_new_save(slot:int):
 	var save = SaveFile.new()
-	save.cur_skin = load("res://Scripts/Resources/PlayerSkins/retro_skin.tres")
+	save.cur_skin = load("res://Scripts/Resources/PlayerSkins/normal_skin.tres")
 	current_save = save
 	current_slot = slot
 	save_game(slot)
+	new_save_created.emit(slot)
 	
+func delete_save(slot:int):
+	var path:= "user://saves/save_%d.tres" % slot
+	if ResourceLoader.exists(path): 
+		var error = DirAccess.remove_absolute(path)
+		if error == OK:
+			print("Save File deleted successfully: ", path)
+			save_deleted.emit(slot)
+		else:
+			print("Error deleting file: ", path, " Error code: ", error)
+	else:
+		print("File does not exist: ", path)
+		
 func save_game(slot:int):
 	if current_save == null:
 		return

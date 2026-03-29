@@ -29,15 +29,14 @@ buses/default_bus_layout="uid://dvwibohyco07e"
 
 [autoload]
 
-Global="*res://Scripts/Singletons/global.gd"
 ItemData="*res://Scripts/Singletons/ItemData.gd"
+GameManager="*res://Scripts/Singletons/GameManager.gd"
+SaveManager="*uid://dgvmbpww5am"
 BossManager="*res://Scripts/Singletons/BossManager.gd"
 SkinData="*res://Scripts/Singletons/SkinData.gd"
-GameManager="*res://Scripts/Singletons/GameManager.gd"
-BiomeManager="*res://Scripts/Singletons/BiomeManager.gd"
+LevelManager="*res://Scripts/Singletons/LevelManager.gd"
 DayTimeManager="*res://Scripts/Singletons/DayTimeManager.gd"
 LoadManager="*res://Scripts/Singletons/LoadManager.gd"
-SaveManager="*uid://dgvmbpww5am"
 CursorManager="*uid://drj3k2l12qwd2"
 
 [display]

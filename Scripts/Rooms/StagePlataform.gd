@@ -18,7 +18,7 @@ enum SpawnAreas{
 @export_range(0.0,1.0,0.01) var enemySpawnRate : float = 0.5
 @export_range(0.0,1.0,0.01) var dropSpawnRate : float = 0.5
 
-var thisBiome :Biome = BiomeManager.currentBiome
+var thisBiome :Place = LevelManager.cur_place
 @export var levelWarpScene:PackedScene
 
 # ===== RNG =====
@@ -80,7 +80,7 @@ func _spawn_entities_at_Stage():
 				var offset :int = 200
 				if (global_position.x < locatable.xCoordinate + offset) and (global_position.x > locatable.xCoordinate - offset) and (global_position.y < locatable.yCoordinate + offset) and (global_position.y > locatable.yCoordinate - offset):
 					print("locatable found")
-					var new_locatable := locatable.Scene.instantiate()
+					var new_locatable :Node2D= locatable.Scene.instantiate()
 					new_locatable.global_position = global_position
 					get_tree().current_scene.add_child(new_locatable)
 					return
@@ -97,8 +97,8 @@ func _spawn_entities_at_Stage():
 					print("locatable found")
 					var new_warper :LevelWarper= levelWarpScene.instantiate()
 					new_warper.global_position = global_position
-					if nearbyBiome.BiomeId in BiomeManager.biomeList:
-						new_warper.warpBiome = BiomeManager.biomeList[nearbyBiome.BiomeId]
+					if nearbyBiome.place_id in LevelManager.placeList:
+						new_warper.warpBiome = LevelManager.placeList[nearbyBiome.place_id]
 					get_tree().current_scene.add_child(new_warper)
 
 	if (thisBiome.enemiesList != null ) and (thisBiome.enemiesList.size() > 0):

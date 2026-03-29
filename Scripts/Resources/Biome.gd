@@ -1,11 +1,9 @@
-extends Resource
+extends Place
 class_name Biome
 
 
 @export_category("Player Stats")
 @export_group("Biome Identifiers")
-@export var name :String
-@export var biome_id:String
 @export var weather : Weather
 @export var hasDayNightCycle :bool = false
 
@@ -16,8 +14,6 @@ class_name Biome
 @export var player_mask :Texture2D
 @export var has_trail :bool= false
 @export var trailParticles : Array[PackedScene]
-
-
 
 @export_group("Spawning Lists")
 @export var enemiesList : Array[SpawnEntry]

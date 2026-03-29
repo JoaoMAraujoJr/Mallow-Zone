@@ -13,6 +13,5 @@ func _process(_delta: float) -> void:
 
 
 func _on_enemy_timer_timeout() -> void:
-	if Global.enemySpeed < 300.0:
-		Global.enemySpeed +=5.0
+
 	pass # Replace with function body.

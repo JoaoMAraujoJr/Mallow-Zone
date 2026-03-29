@@ -17,5 +17,5 @@ class_name SaveFile
 
 @export_category("World")
 @export_group("Progress")
-@export var cur_biome:Biome = null
+@export var cur_place:Place = null
 @export var defeated_bosses:Array[String] =[]

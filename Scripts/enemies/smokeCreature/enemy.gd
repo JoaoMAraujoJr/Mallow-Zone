@@ -29,8 +29,8 @@ var bloodscene = preload('res://Scenes/particles.tscn')
 var knockbackvelocity : Vector2 = Vector2.ZERO
 var followMode: bool = false
 
-var OriginalSpeed: float = Global.enemySpeed
-var CurrentSpeed: float = Global.enemySpeed
+var OriginalSpeed: float = 100.0
+var CurrentSpeed: float = 100.0
 
 func _ready() -> void:
 	_animatedSprite.play("normal")

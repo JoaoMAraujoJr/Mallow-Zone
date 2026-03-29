@@ -1,16 +1,21 @@
 [gd_scene format=4 uid="uid://b471kfbc41iv0"]
 
-[ext_resource type="Shader" uid="uid://cb8r4j58bph8c" path="res://Scenes/UI/Distortion.gdshader" id="1_tgrdc"]
-[ext_resource type="Texture2D" uid="uid://cy41t53s14wyy" path="res://Assets/Textures/UI/Buttons/save_select/save _select_bg_2.png" id="2_tycyy"]
-[ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="3_tycyy"]
-[ext_resource type="Texture2D" uid="uid://c8a5vtmj6rlgy" path="res://Assets/Textures/sprite_masks/light_mask/round_mask.png" id="4_lm4ow"]
 [ext_resource type="AudioStream" uid="uid://bcvjtrm6je3ti" path="res://Assets/Sounds/soundEffects/UI/save_new_game_button_hover.wav" id="4_pb1pl"]
-[ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/SkinManager.tscn" id="5_xwbdc"]
-[ext_resource type="Texture2D" uid="uid://cou6m66vghtkp" path="res://Assets/Textures/UI/menu_icons/delete_icon.png" id="15_bs6jk"]
-[ext_resource type="Texture2D" uid="uid://csabryldl5wd2" path="res://Assets/Textures/UI/menu_icons/go_back_icon.png" id="15_pb1pl"]
-[ext_resource type="Texture2D" uid="uid://dkwsgayi03su0" path="res://Assets/Textures/UI/menu_icons/delete_icon_p.png" id="16_j8vd7"]
+[ext_resource type="Texture2D" uid="uid://cwmk6mgj4k8a4" path="res://Assets/Textures/UI/game_menu/nine_path_textures/black_border.png" id="10_wsfmp"]
+[ext_resource type="Texture2D" uid="uid://8s0c6sohm625" path="res://Assets/Textures/UI/game_menu/null_player_icon.png" id="11_pkd7i"]
+[ext_resource type="Texture2D" uid="uid://df1i07c80kb0v" path="res://Assets/Textures/UI/game_menu/null_pet_icon.png" id="12_58e04"]
+[ext_resource type="FontFile" uid="uid://wjrm0hs8lb2r" path="res://Assets/fonts/PixelifySans-VariableFont_wght.ttf" id="13_uiiok"]
+[ext_resource type="Texture2D" uid="uid://c7grlh3hrvv5h" path="res://Assets/Textures/UI/game_menu/heart_0.png" id="14_pb1pl"]
+[ext_resource type="Texture2D" uid="uid://grkluy1cf4pu" path="res://Assets/Textures/UI/game_menu/energy.png" id="15_b0uw0"]
+[ext_resource type="Texture2D" uid="uid://gsb60fhtpkvh" path="res://Assets/Textures/UI/game_menu/delete_0.png" id="16_bs6jk"]
 [ext_resource type="AudioStream" uid="uid://bftkkspqlips" path="res://Assets/Sounds/soundEffects/UI/save_select_button_hover.wav" id="17_b0uw0"]
-[ext_resource type="Texture2D" uid="uid://2mqaskgibik8" path="res://Assets/Textures/UI/menu_icons/delete_icon_h.png" id="17_tpyar"]
+[ext_resource type="Texture2D" uid="uid://bc7d2tkdl0sv3" path="res://Assets/Textures/UI/game_menu/delete_pressed.png" id="17_vlspv"]
+[ext_resource type="Texture2D" uid="uid://dnlk4cdjsvy52" path="res://Assets/Textures/UI/game_menu/delete_hover.png" id="18_ccktu"]
+[ext_resource type="Texture2D" uid="uid://bb1xxrrhfsl1n" path="res://Assets/Textures/UI/game_menu/back_1.png" id="19_e71rx"]
+[ext_resource type="Texture2D" uid="uid://cosfyqwfgldrp" path="res://Assets/Textures/UI/game_menu/back_2.png" id="20_bu038"]
+[ext_resource type="Texture2D" uid="uid://c11xafi3xgw0g" path="res://Assets/Textures/UI/game_menu/back_0.png" id="21_t2l5c"]
+[ext_resource type="Texture2D" uid="uid://dy8cvbeiqirk0" path="res://Assets/Textures/UI/game_menu/new_0.png" id="22_e71rx"]
+[ext_resource type="Texture2D" uid="uid://bxel5y4rhejld" path="res://Assets/Textures/UI/game_menu/new_1.png" id="23_bu038"]
 
 [sub_resource type="GDScript" id="GDScript_tycyy"]
 resource_name = "SaveSelectButton"
@@ -19,48 +24,57 @@ script/source = "extends Control
 @export var Slot :int = 1
 @export var thisSaveFile :SaveFile
 
-@onready var skin_display = $NotEmpty/skin_mask/PlayerSkinManager
-
 func _ready() -> void:
-	var path:= \"user://saves/save_%d.tres\" % Slot
-	if ResourceLoader.exists(path): 
-		_setSaveFile(ResourceLoader.load(path))
-		$AreUsure.visible = false
-		$Empty.visible =false
-		$NotEmpty.visible = true
-	else:
-		$AreUsure.visible = false
-		$Empty.visible =true
-		$NotEmpty.visible = false
-
+	SaveManager.save_deleted.connect(_upon_display_save_deleted)
+	update_button_save_file()
+	
 func _setSaveFile (save:SaveFile):
 	thisSaveFile = save
-	#print(\"\\n===============================\\nSlot \"+ str(Slot)+\"\\nSkin: \"+ thisSaveFile.cur_skin.name + \"\\nMoney: \" + str(thisSaveFile.money)  +\"\\n===============================\")
-	$NotEmpty/data.text = \\
-	\"[wave amp=10 freq=3]%s/%s hp[/wave]\\n\" % [thisSaveFile.cur_hp, thisSaveFile.max_hp] + \\
-	\"[wave amp=10 freq=3]%s$[/wave]\\n\" % thisSaveFile.money + \\
-	\"[wave amp=10 freq=3]\"+ thisSaveFile.cur_weapon +\"[/wave]\"
+	if thisSaveFile.cur_skin.animated_icon:
+		$\"new_not_empty/player icon/AnimatedSprite2D\".sprite_frames = thisSaveFile.cur_skin.animated_icon
+		$\"new_not_empty/player icon/AnimatedSprite2D\".play(\"default\")
+		$new_not_empty/slot_display.text = \"Save_\"+str(Slot)+\" [img height=14]res://Assets/Textures/UI/game_menu/save_icon.png[/img]\"
+	$new_not_empty/hp/hp_amout.text = str(thisSaveFile.cur_hp) +\"|\"+ str(thisSaveFile.max_hp)
 
+func set_slot(num: int):
+	Slot = num
+	update_button_save_file()
+
+func update_button_save_file():
+	var path := \"user://saves/save_%d.tres\" % Slot
+	if ResourceLoader.exists(path): 
+		var loaded_save = ResourceLoader.load(path)
+		if loaded_save is SaveFile:
+			_setSaveFile(loaded_save)
+			$new_areUsure.visible = false
+			$new_empty.visible = false
+			$new_not_empty.visible = true
+	else:
+		$new_areUsure.visible = false
+		$new_empty.visible = true
+		$new_not_empty.visible = false
+
+func _upon_display_save_deleted(slot:int):
+	if Slot == slot:
+		queue_free()
+	
 
 func _on_newgame_pressed() -> void:
 	SaveManager.create_new_save(Slot)
-	GameManager.load_from_current_save()
-	GameManager.canPause = true
-	LoadManager.LoadScene(\"res://Scenes/stages/tutorial_level.tscn\")
+	update_button_save_file()
+	#GameManager.load_from_current_save()
+	#GameManager.canPause = true
+	#LoadManager.LoadScene(\"res://Scenes/stages/tutorial_level.tscn\")
 	pass # Replace with function body.
-
 
 func _on_newgame_mouse_entered() -> void:
 	$Empty/newgame_anim.play(\"pop\")
 	$hover_options_sound2.play()
 	pass # Replace with function body.
 
-
 func _on_newgame_mouse_exited() -> void:
 	$Empty/newgame_anim.play_backwards(\"pop\")
 	pass # Replace with function body.
-
-
 
 func _on_play_pressed() -> void:
 	GameManager.canPause = true
@@ -69,286 +83,120 @@ func _on_play_pressed() -> void:
 	LoadManager.LoadScene(\"res://Scenes/Level.tscn\")
 	pass # Replace with function body.
 
-
 func _on_play_mouse_entered() -> void:
 	$NotEmpty/select_anim.play(\"pop\")
 	$hover_options_sound.play()
 	pass # Replace with function body.
 
-
 func _on_play_mouse_exited() -> void:
 	$NotEmpty/select_anim.play_backwards(\"pop\")
 	pass # Replace with function body.
 
-
 func _on_mouse_entered() -> void:
-
 	$card_anim.play(\"pop\")
 	pass # Replace with function body.
-
 
 func _on_mouse_exited() -> void:
 	$card_anim.play_backwards(\"pop\")
 	pass # Replace with function body.
 
-
 func _on_delete_save_pressed() -> void:
-	var path:= \"user://saves/save_%d.tres\" % Slot
-	if ResourceLoader.exists(path): 
-		var error = DirAccess.remove_absolute(path)
-		if error == OK:
-			print(\"Save File deleted successfully: \", path)
-			thisSaveFile=null
-			$\"AreUsure\".visible =false
-			$NotEmpty.visible=false
-			$\"Empty\".visible =true
-		else:
-			print(\"Error deleting file: \", path, \" Error code: \", error)
-	else:
-		print(\"File does not exist: \", path)
-		
-	pass # Replace with function body.
-
+	SaveManager.delete_save(Slot)
 
 func _on_go_back_pressed() -> void:
-	$\"AreUsure\".visible =false
-	$NotEmpty.visible=true
-	$\"Empty\".visible =false
-	pass # Replace with function body.
-
+	$\"new_areUsure\".visible =false
+	$new_not_empty.visible=true
+	$\"new_empty\".visible =false
 
 func _on_trash_icon_pressed() -> void:
-	$\"AreUsure\".visible =true
-	$NotEmpty.visible=false
-	$\"Empty\".visible =false
+	$\"new_areUsure\".visible =true
+	$new_not_empty.visible=false
+	$\"new_empty\".visible =false
 	pass # Replace with function body.
-
 
 func _on_delete_save_mouse_entered() -> void:
 	$AreUsure/DeleteSave/AnimationPlayer.play(\"pop\")
 	pass # Replace with function body.
-
 
 func _on_delete_save_mouse_exited() -> void:
 	$AreUsure/DeleteSave/AnimationPlayer.play_backwards(\"pop\")
 	pass # Replace with function body.
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkd7i"]
-size = Vector2(185, 260)
+[sub_resource type="AtlasTexture" id="AtlasTexture_58e04"]
+atlas = ExtResource("11_pkd7i")
+region = Rect2(0, 0, 36, 36)
 
-[sub_resource type="Curve" id="Curve_lm4ow"]
-_limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0.020576127, -0.011235952), 0.0, 0.0, 0, 0, Vector2(0.7818931, -0.011235952), 0.0, 0.0, 0, 0, Vector2(0.8806585, -0.505618), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
-point_count = 4
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb1pl"]
+atlas = ExtResource("11_pkd7i")
+region = Rect2(0, 0, 36, 36)
 
-[sub_resource type="CurveTexture" id="CurveTexture_81gsa"]
-curve = SubResource("Curve_lm4ow")
+[sub_resource type="SpriteFrames" id="SpriteFrames_uiiok"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58e04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pb1pl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvtbk"]
-shader = ExtResource("1_tgrdc")
-shader_parameter/curve = SubResource("CurveTexture_81gsa")
-shader_parameter/rotation_speed = -1.0
-shader_parameter/distortion_strength = 0.6
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs6jk"]
+atlas = ExtResource("12_58e04")
+region = Rect2(0, 0, 18, 18)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tycyy"]
-
-[sub_resource type="Animation" id="Animation_uiiok"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("newgame:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_pb1pl"]
-resource_name = "pop"
-length = 0.36666667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("newgame:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36387566),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bs6jk"]
-_data = {
-&"RESET": SubResource("Animation_uiiok"),
-&"pop": SubResource("Animation_pb1pl")
-}
-
-[sub_resource type="Animation" id="Animation_tycyy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("play:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_lm4ow"]
-resource_name = "pop"
-length = 0.43333334
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("play:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_81gsa"]
-_data = {
-&"RESET": SubResource("Animation_tycyy"),
-&"pop": SubResource("Animation_lm4ow")
-}
-
-[sub_resource type="Animation" id="Animation_bs6jk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1.1505201, 1.1505201)]
-}
-
-[sub_resource type="Animation" id="Animation_b0uw0"]
-resource_name = "pop"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1.1505201, 1.1505201), Vector2(1.296, 1.296)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j8vd7"]
-_data = {
-&"RESET": SubResource("Animation_bs6jk"),
-&"pop": SubResource("Animation_b0uw0")
-}
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0uw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs6jk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_pkd7i"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NotEmpty:position")
+tracks/0/path = NodePath("card_select:stream")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [ExtResource("17_b0uw0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Empty:position")
+tracks/1/path = NodePath("card_select:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D:position")
+tracks/2/path = NodePath("card_select:pitch_scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("card_select:stream")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("17_b0uw0")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("card_select:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("card_select:pitch_scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
 "values": [0.8]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AreUsure:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_58e04"]
@@ -357,86 +205,38 @@ length = 0.46666667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NotEmpty:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath("card_select:stream")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -20)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Empty:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -20)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Area2D:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.46666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -16)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("card_select:stream")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("17_b0uw0")]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("card_select:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("card_select:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("card_select:pitch_scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("card_select:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.9]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AreUsure:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.46666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -20)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uiiok"]
@@ -451,346 +251,395 @@ format = 3
 stereo = true
 
 [node name="SaveSelect" type="Control" unique_id=1506632854]
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_right = 0.25100002
+anchor_bottom = 0.19900002
+offset_right = 958.72
+offset_bottom = 576.72
 script = SubResource("GDScript_tycyy")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1105127559]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=458740664]
-position = Vector2(3, -3)
-shape = SubResource("RectangleShape2D_pkd7i")
-
-[node name="Empty" type="Control" parent="." unique_id=1618359976]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-
-[node name="background" type="Sprite2D" parent="Empty" unique_id=2093853170]
-material = SubResource("ShaderMaterial_tvtbk")
-texture = ExtResource("2_tycyy")
-
-[node name="Label" type="RichTextLabel" parent="Empty" unique_id=513629954]
-material = SubResource("ShaderMaterial_tycyy")
-layout_mode = 0
-offset_left = -77.0
-offset_top = -91.0
-offset_right = 72.0
-offset_bottom = -57.0
-rotation = -0.11953255
-scale = Vector2(1.1505201, 1.1505201)
-pivot_offset = Vector2(72, 20)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 31
-bbcode_enabled = true
-text = "[wave amp=10 freq=3] Empty Slot[/wave]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="newgame" type="Button" parent="Empty" unique_id=493818069]
+[node name="new_not_empty" type="Control" parent="." unique_id=1061808413]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.012
-anchor_top = 1.7370001
-anchor_right = -0.012
-anchor_bottom = 1.7370001
-offset_left = -39.52
-offset_top = -31.480003
-offset_right = 39.48
-offset_bottom = 31.519997
-pivot_offset = Vector2(40, 32)
-flat = true
+anchors_preset = 0
+offset_left = 141.0
+offset_top = 69.0
+offset_right = 181.0
+offset_bottom = 109.0
 
-[node name="Label" type="RichTextLabel" parent="Empty/newgame" unique_id=1851478844]
-material = SubResource("ShaderMaterial_tycyy")
+[node name="background" type="NinePatchRect" parent="new_not_empty" unique_id=1927548996]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -49.5
-offset_top = -24.5
-offset_right = 49.030014
-offset_bottom = 24.173641
+offset_left = -74.0
+offset_top = -47.0
+offset_right = 36.486084
+offset_bottom = 7.411545
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.1505201, 1.1505201)
-pivot_offset = Vector2(50.322346, 19.742825)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/line_separation = -9
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 23
-bbcode_enabled = true
-text = "[wave amp=10 freq=3]New
-Game[/wave]"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
+scale = Vector2(2.4075775, 2.4075775)
+pivot_offset = Vector2(53.996185, 27.08356)
+texture = ExtResource("10_wsfmp")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
 
-[node name="newgame_anim" type="AnimationPlayer" parent="Empty" unique_id=644978352]
-libraries/ = SubResource("AnimationLibrary_bs6jk")
-
-[node name="NotEmpty" type="Control" parent="." unique_id=313016416]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-
-[node name="background" type="Sprite2D" parent="NotEmpty" unique_id=1166853664]
-material = SubResource("ShaderMaterial_tvtbk")
-texture = ExtResource("2_tycyy")
-
-[node name="Label" type="RichTextLabel" parent="NotEmpty" unique_id=669008630]
-material = SubResource("ShaderMaterial_tycyy")
-layout_mode = 0
-offset_left = -77.0
-offset_top = -100.41952
-offset_right = 72.0
-offset_bottom = -66.41952
-scale = Vector2(1.0290242, 1.0290242)
-pivot_offset = Vector2(72, 20)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 31
-bbcode_enabled = true
-text = "[wave amp=10 freq=3]Saved Game[/wave]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="data" type="RichTextLabel" parent="NotEmpty" unique_id=1850808733]
-material = SubResource("ShaderMaterial_tycyy")
-layout_mode = 0
-offset_left = -49.0
-offset_top = -40.0
-offset_right = 100.0
-offset_bottom = 56.0
-scale = Vector2(0.72371125, 0.72371125)
-pivot_offset = Vector2(72, 20)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 31
-bbcode_enabled = true
-text = "[wave amp=10 freq=3]100/100 hp[/wave]
-[wave amp=10 freq=3]1000$[/wave]
-[wave amp=10 freq=3]25/25[font_size=20] ammo[/font_size][/wave]"
-fit_content = true
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="skin_mask" type="Sprite2D" parent="NotEmpty" unique_id=1762385770]
-clip_children = 1
-position = Vector2(-36, -18.419514)
-scale = Vector2(0.11512904, 0.11512904)
-texture = ExtResource("4_lm4ow")
-
-[node name="PlayerSkinManager" parent="NotEmpty/skin_mask" unique_id=1647972410 instance=ExtResource("5_xwbdc")]
-position = Vector2(0, 272.90692)
-scale = Vector2(8.685905, 8.685905)
-use_local_skin = true
-
-[node name="trashIcon" type="TextureButton" parent="NotEmpty" unique_id=1574555780]
-z_index = 1
+[node name="player icon" type="NinePatchRect" parent="new_not_empty" unique_id=1126889953]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.2620001
-anchor_top = -3.1450002
-anchor_right = 2.0340002
-anchor_bottom = -2.237
-offset_left = -1.4800034
-offset_top = -1.1999893
-offset_right = 1.6399918
-offset_bottom = 2.4799957
-scale = Vector2(0.9084652, 0.9084652)
-pivot_offset = Vector2(16, 13)
-mouse_filter = 1
-action_mode = 0
-texture_normal = ExtResource("15_bs6jk")
-texture_pressed = ExtResource("16_j8vd7")
-texture_hover = ExtResource("17_tpyar")
-stretch_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -52.716278
+offset_right = -86.0
+offset_bottom = -18.716278
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.4075775, 2.4075775)
+pivot_offset = Vector2(16.978859, 17.15138)
+texture = ExtResource("10_wsfmp")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="NotEmpty/trashIcon" unique_id=1244735533]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="new_not_empty/player icon" unique_id=541200236]
+position = Vector2(16.987642, 17.088507)
+scale = Vector2(0.8860548, 0.8860548)
+sprite_frames = SubResource("SpriteFrames_uiiok")
+autoplay = "default"
+frame_progress = 0.45172083
+
+[node name="pet_icon" type="NinePatchRect" parent="new_not_empty" unique_id=1667361119]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -52.716278
+offset_right = -12.0
+offset_bottom = -30.716278
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.4075775, 2.4075775)
+pivot_offset = Vector2(16.978859, 17.15138)
+texture = ExtResource("10_wsfmp")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="new_not_empty/pet_icon" unique_id=944000540]
+position = Vector2(10.865, 11)
+scale = Vector2(1.1108062, 1.1108065)
+sprite_frames = SubResource("SpriteFrames_b0uw0")
+offset = Vector2(0.062646866, 0.06264496)
+
+[node name="weapon_icon" type="NinePatchRect" parent="new_not_empty" unique_id=1383241443]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = -61.716278
+offset_right = 74.51979
+offset_bottom = -40.15973
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.4075775, 2.4075775)
+pivot_offset = Vector2(21.183119, 10.858175)
+texture = ExtResource("10_wsfmp")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="money_amount" type="RichTextLabel" parent="new_not_empty" unique_id=2142313446]
+layout_mode = 0
+offset_left = -38.0
+offset_top = 13.283722
+offset_right = 50.0
+offset_bottom = 37.283722
+scale = Vector2(0.58097875, 0.58097875)
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+text = "$ 1.000,00"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="slot_display" type="RichTextLabel" parent="new_not_empty" unique_id=93067001]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 50.0
+offset_right = 173.0
+offset_bottom = 74.0
+scale = Vector2(0.58097875, 0.58097875)
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+text = "Save_1 [img height=14]res://Assets/Textures/UI/game_menu/save_icon.png[/img]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="hp" type="Control" parent="new_not_empty" unique_id=317244048]
+anchors_preset = 0
+offset_left = -39.0
+offset_top = 2.283722
+offset_right = 1.0
+offset_bottom = 42.283722
+
+[node name="Sprite2D" type="Sprite2D" parent="new_not_empty/hp" unique_id=737880104]
+position = Vector2(4, 4)
+scale = Vector2(1.2310479, 1.2310479)
+texture = ExtResource("14_pb1pl")
+
+[node name="hp_amout" type="RichTextLabel" parent="new_not_empty/hp" unique_id=1992109699]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -2.0
+offset_right = 98.0
+offset_bottom = 22.0
+scale = Vector2(0.58097875, 0.58097875)
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+text = "100|100"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="ammo" type="Control" parent="new_not_empty" unique_id=125193229]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 2.283722
+offset_right = 60.0
+offset_bottom = 42.283722
+
+[node name="Sprite2D" type="Sprite2D" parent="new_not_empty/ammo" unique_id=2005538055]
+position = Vector2(4, 4)
+scale = Vector2(1.2310479, 1.2310479)
+texture = ExtResource("15_b0uw0")
+
+[node name="ammo_amout" type="RichTextLabel" parent="new_not_empty/ammo" unique_id=2032724091]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -2.0
+offset_right = 98.0
+offset_bottom = 22.0
+scale = Vector2(0.58097875, 0.58097875)
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+text = "0|99"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="new_not_empty" unique_id=291308739]
+layout_mode = 0
+offset_left = -99.0
+offset_top = 37.283722
+offset_right = -67.098465
+offset_bottom = 46.975327
+scale = Vector2(2.4763699, 2.4763699)
+pivot_offset = Vector2(14.941227, 4.8458023)
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="1" type="HBoxContainer" parent="new_not_empty/VBoxContainer" unique_id=198193679]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="1" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=77789203]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="2" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1929904323]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="3" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=911589639]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="4" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1759055809]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="5" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=334344312]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="6" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1003252910]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="7" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1180214565]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="8" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1158261782]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="2" type="HBoxContainer" parent="new_not_empty/VBoxContainer" unique_id=988859351]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="1" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1307216257]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="2" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1404590864]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="3" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1430137485]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="4" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=72023620]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="5" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=958894099]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="6" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=166685235]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="7" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=147930581]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="8" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1928533252]
+layout_mode = 2
+texture = ExtResource("10_wsfmp")
+
+[node name="delete" type="TextureButton" parent="new_not_empty" unique_id=1918688490]
+layout_mode = 0
+offset_left = 140.00002
+offset_top = -65.0
+offset_right = 172.00002
+offset_bottom = -33.0
+scale = Vector2(1.1487377, 1.1487377)
+texture_normal = ExtResource("16_bs6jk")
+texture_pressed = ExtResource("17_vlspv")
+texture_hover = ExtResource("18_ccktu")
+
+[node name="new_areUsure" type="Control" parent="." unique_id=1617210329]
 visible = false
-position = Vector2(16, 16)
-scale = Vector2(0.8411571, 0.8411571)
-texture = ExtResource("15_bs6jk")
-
-[node name="play" type="Button" parent="NotEmpty" unique_id=592215622]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.7370001
-anchor_bottom = 1.7370001
-offset_left = -40.0
-offset_top = -31.480003
-offset_right = 39.0
-offset_bottom = 31.519997
-pivot_offset = Vector2(40, 32)
-mouse_filter = 1
-flat = true
-
-[node name="Label" type="RichTextLabel" parent="NotEmpty/play" unique_id=496889170]
-material = SubResource("ShaderMaterial_tycyy")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -49.5
-offset_top = -24.5
-offset_right = 49.030014
-offset_bottom = 24.173641
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.1505201, 1.1505201)
-pivot_offset = Vector2(50.322346, 19.742825)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/line_separation = -9
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 23
-bbcode_enabled = true
-text = "[wave amp=10 freq=3]Select Save[/wave]"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="select_anim" type="AnimationPlayer" parent="NotEmpty" unique_id=1628873457]
-libraries/ = SubResource("AnimationLibrary_81gsa")
-
-[node name="AreUsure" type="Control" parent="." unique_id=1956311292]
-visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
+offset_left = 141.0
+offset_top = 69.0
+offset_right = 181.0
+offset_bottom = 109.0
 
-[node name="background" type="Sprite2D" parent="AreUsure" unique_id=34949763]
-material = SubResource("ShaderMaterial_tvtbk")
-texture = ExtResource("2_tycyy")
-
-[node name="Label" type="RichTextLabel" parent="AreUsure" unique_id=1751329264]
-material = SubResource("ShaderMaterial_tycyy")
-layout_mode = 0
-offset_left = -77.0
-offset_top = -100.41952
-offset_right = 72.0
-offset_bottom = -66.41952
-scale = Vector2(1.0290242, 1.0290242)
-pivot_offset = Vector2(72, 20)
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 31
-bbcode_enabled = true
-text = "[wave amp=10 freq=3]Are You Sure?[/wave]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DeleteSave" type="Button" parent="AreUsure" unique_id=680695368]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.7370001
-anchor_bottom = 1.7370001
-offset_left = -54.0
-offset_top = -13.480003
-offset_right = 55.0
-offset_bottom = 13.519997
-pivot_offset = Vector2(54, 15)
-mouse_filter = 1
-flat = true
-
-[node name="Label" type="RichTextLabel" parent="AreUsure/DeleteSave" unique_id=306206273]
-material = SubResource("ShaderMaterial_tycyy")
+[node name="background" type="NinePatchRect" parent="new_areUsure" unique_id=1576518351]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -49.5
-offset_top = -24.5
-offset_right = 49.030014
-offset_bottom = 24.173641
+offset_left = -74.0
+offset_top = -47.0
+offset_right = 36.486084
+offset_bottom = 7.411545
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.1505201, 1.1505201)
-pivot_offset = Vector2(50.322346, 19.742825)
+scale = Vector2(2.4075775, 2.4075775)
+pivot_offset = Vector2(53.996185, 27.08356)
+texture = ExtResource("10_wsfmp")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="confirm_delete" type="TextureButton" parent="new_areUsure" unique_id=970713232]
+layout_mode = 0
+offset_left = 140.00002
+offset_top = -34.0
+offset_right = 172.00002
+offset_bottom = -2.0
+scale = Vector2(2.1279578, 2.1279578)
+texture_normal = ExtResource("16_bs6jk")
+texture_pressed = ExtResource("17_vlspv")
+texture_hover = ExtResource("18_ccktu")
+
+[node name="go_back" type="TextureButton" parent="new_areUsure" unique_id=1485778991]
+layout_mode = 0
+offset_left = -124.0
+offset_top = -60.000004
+offset_right = -108.0
+offset_bottom = -44.000004
+scale = Vector2(2.1279578, 2.1279578)
+texture_normal = ExtResource("19_e71rx")
+texture_pressed = ExtResource("20_bu038")
+texture_hover = ExtResource("21_t2l5c")
+
+[node name="text" type="RichTextLabel" parent="new_areUsure" unique_id=1559607991]
+layout_mode = 0
+offset_left = -120.0
+offset_top = -18.0
+offset_right = 319.13965
+offset_bottom = 60.0
+scale = Vector2(0.5624634, 0.5624634)
 mouse_filter = 2
-theme_override_colors/default_color = Color(0.21673062, 0.09938436, 0.067311324, 1)
-theme_override_colors/font_shadow_color = Color(0.21568628, 0.09803922, 0.06666667, 0.30980393)
-theme_override_constants/line_separation = -9
-theme_override_constants/shadow_outline_size = 0
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("3_tycyy")
-theme_override_font_sizes/normal_font_size = 23
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[wave amp=10 freq=3]delete save[/wave]"
+text = "[wave amp=20.0 freq=5.0 connected=0][color=red]Are you sure ?[/color][/wave] Do you want to delete this save?"
+fit_content = true
 scroll_active = false
-horizontal_alignment = 1
+autowrap_mode = 2
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AreUsure/DeleteSave" unique_id=185347062]
-libraries/ = SubResource("AnimationLibrary_j8vd7")
-
-[node name="GoBack" type="Button" parent="AreUsure" unique_id=1357510905]
+[node name="new_empty" type="Control" parent="." unique_id=240900280]
+visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.6500001
-anchor_top = -2.8370001
-anchor_right = 1.6500001
-anchor_bottom = -2.8370001
-offset_left = -18.0
-offset_top = -13.519997
-offset_right = 18.0
-offset_bottom = 13.480003
-pivot_offset = Vector2(16, 13)
-mouse_filter = 1
-flat = true
+anchors_preset = 0
+offset_left = 141.0
+offset_top = 69.0
+offset_right = 181.0
+offset_bottom = 109.0
 
-[node name="Sprite2D" type="Sprite2D" parent="AreUsure/GoBack" unique_id=767916200]
-position = Vector2(16, 16)
-scale = Vector2(0.8411571, 0.8411571)
-texture = ExtResource("15_pb1pl")
+[node name="create_save" type="TextureButton" parent="new_empty" unique_id=580878564]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.9503517, 1.9503517)
+pivot_offset = Vector2(16, 16)
+texture_normal = ExtResource("22_e71rx")
+texture_pressed = ExtResource("23_bu038")
 
 [node name="card_anim" type="AnimationPlayer" parent="." unique_id=1604521425]
 libraries/ = SubResource("AnimationLibrary_uiiok")
@@ -808,16 +657,7 @@ volume_db = 4.0
 stream = ExtResource("17_b0uw0")
 pitch_scale = 0.8
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="Empty/newgame" to="." method="_on_newgame_mouse_entered"]
-[connection signal="mouse_exited" from="Empty/newgame" to="." method="_on_newgame_mouse_exited"]
-[connection signal="pressed" from="Empty/newgame" to="." method="_on_newgame_pressed"]
-[connection signal="pressed" from="NotEmpty/trashIcon" to="." method="_on_trash_icon_pressed"]
-[connection signal="mouse_entered" from="NotEmpty/play" to="." method="_on_play_mouse_entered"]
-[connection signal="mouse_exited" from="NotEmpty/play" to="." method="_on_play_mouse_exited"]
-[connection signal="pressed" from="NotEmpty/play" to="." method="_on_play_pressed"]
-[connection signal="mouse_entered" from="AreUsure/DeleteSave" to="." method="_on_delete_save_mouse_entered"]
-[connection signal="mouse_exited" from="AreUsure/DeleteSave" to="." method="_on_delete_save_mouse_exited"]
-[connection signal="pressed" from="AreUsure/DeleteSave" to="." method="_on_delete_save_pressed"]
-[connection signal="pressed" from="AreUsure/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="new_not_empty/delete" to="." method="_on_trash_icon_pressed"]
+[connection signal="pressed" from="new_areUsure/confirm_delete" to="." method="_on_delete_save_pressed"]
+[connection signal="pressed" from="new_areUsure/go_back" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="new_empty/create_save" to="." method="_on_newgame_pressed"]

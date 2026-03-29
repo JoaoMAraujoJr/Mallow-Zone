@@ -40,8 +40,8 @@ func save_data():
 	SaveManager.current_save.cur_weapon = GameManager.currentEquipedWeaponType
 	SaveManager.current_save.inventory = GameManager.cur_inventory
 	SaveManager.current_save.money = GameManager.gold_wallet
-	if BiomeManager.currentBiome:
-		SaveManager.current_save.cur_biome = BiomeManager.currentBiome
+	if LevelManager.cur_place:
+		SaveManager.current_save.cur_place = LevelManager.cur_place
 	SaveManager.save_game(SaveManager.current_slot)
 
 

@@ -42,11 +42,11 @@ func _ready() -> void:
 		var key := Vector2i(global_position)
 		GameManager.currentSpawnedChunks[key]=true
 		
-	if BiomeManager.currentBiome==null:
+	if LevelManager.cur_place==null:
 		print("Biome Manager Current Biome is Null Reasigning is Being Made")
-		BiomeManager.currentBiome= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
+		LevelManager.cur_place= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
 	else:
-		var plataform :newStageBiome = BiomeManager.PlataforScene.instantiate().init(isthisroot)
+		var plataform :newStageBiome = LevelManager.PlataforScene.instantiate().init(isthisroot)
 		_setbiome(plataform)
 		
 func _on_trigger_left_entered(body):

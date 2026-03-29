@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="5_pvjly"]
 [ext_resource type="PackedScene" uid="uid://bodu84frg2ffg" path="res://Scenes/objects/medkit.tscn" id="6_kwf7b"]
 [ext_resource type="PackedScene" uid="uid://cdvi88e42jjsb" path="res://Scenes/enemies/follower_saw.tscn" id="7_fngwr"]
-[ext_resource type="Script" uid="uid://b8tl52g0ivgyc" path="res://Scripts/Resources/LocatableSpawnable.gd" id="7_rd4gk"]
-[ext_resource type="Script" uid="uid://b1te6q7qlixwn" path="res://Scripts/Resources/BiomeSpawnEntry.gd" id="8_rpxl2"]
 [ext_resource type="Texture2D" uid="uid://dmnoi65rgtqp1" path="res://Assets/Textures/floors/chess/floortexture.png" id="9_13ifo"]
 
 [sub_resource type="Resource" id="Resource_4lcwa"]
@@ -44,12 +42,19 @@ metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 
 [resource]
 script = ExtResource("2_7w3n0")
-name = "Ominous ChessFields"
-biome_id = "chessfields"
+hasDayNightCycle = null
 warpArt = ExtResource("9_13ifo")
 topTextureVariants = Array[Texture2D]([ExtResource("9_13ifo")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_tyuhy")])
+has_trail = null
+trailParticles = null
 enemiesList = Array[ExtResource("1_kfibf")]([SubResource("Resource_4lcwa"), SubResource("Resource_x785q")])
 itemDropsList = Array[ExtResource("1_kfibf")]([SubResource("Resource_w3vlq"), SubResource("Resource_2ao3k")])
 objectsList = Array[ExtResource("1_kfibf")]([SubResource("Resource_nx2u3"), null])
+locatablesList = null
+nearbyBiomesList = null
+place_id = "chessfield"
+display_name = "Chess Board"
+description = null
+level_path = "uid://216kvumeoqpb"
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"

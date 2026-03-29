@@ -1,7 +1,7 @@
 extends Node
-
-
-var weapons := {
+var weapons = {}
+func _ready() -> void:
+	weapons = {
 	"rifle":{
 		"weapon_scene": load("res://Scenes/items/guns/holdable/rifle.tscn"),
 		"bullet_scene": load("res://Scenes/items/guns/bullets/rifleBullet.tscn"),

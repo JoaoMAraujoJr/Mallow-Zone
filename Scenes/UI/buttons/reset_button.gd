@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 			GameManager.thisPlayer = null
 			GameManager.cur_hp = GameManager.max_hp
 			GameManager.currentSpawnedChunks = {}
-			BiomeManager.currentBiome= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
+			LevelManager.cur_place = preload("res://Scripts/Resources/Biomes/GrassLands.tres")
 			GameManager.can_shoot = true
 			BossManager._isOnBoss = false
 			BossManager.currentBossName = ""

@@ -14,13 +14,13 @@ var Bossbar : BossBar
 var BossList := {
 	"Ominous Car":{
 		"name": "The Ominous Car",
-		"BossScene": preload("res://Scenes/enemies/car_boss.tscn"),
+		"BossScene": load("res://Scenes/enemies/car_boss.tscn"),
 		"maxHP": 50 * multiplier,
 		"isDefeated": false,
 	},
 	"Rohk":{
 	"name": "Rohk The Boulder",
-	"BossScene": preload("res://Scenes/enemies/car_boss.tscn"),
+	"BossScene": load("res://Scenes/enemies/car_boss.tscn"),
 	"maxHP": 50 * multiplier,
 	"isDefeated": false,
 	}

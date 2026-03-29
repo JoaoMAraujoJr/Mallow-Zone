@@ -5,8 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://mok5m72dvxgh" path="res://Scenes/entities/npcs/zet.tscn" id="3_xwgi5"]
 [ext_resource type="PackedScene" uid="uid://dbayx1y3h5nev" path="res://Scenes/Unique/Gold.tscn" id="4_w34uy"]
 [ext_resource type="PackedScene" uid="uid://fiukuk2xjves" path="res://Scenes/items/purchasable_pickable_item.tscn" id="5_xwgi5"]
-[ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="6_pc1jd"]
-[ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Biomes/DeepWinter.tres" id="7_sgel4"]
 [ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="8_sgel4"]
 [ext_resource type="PackedScene" uid="uid://bayubii0oclpu" path="res://Scenes/entities/passive_mobs/cow.tscn" id="9_d8xu4"]
 [ext_resource type="PackedScene" uid="uid://ctgqpxo0oqo8t" path="res://Scenes/objects/ammo.tscn" id="10_i4xt8"]
@@ -63,10 +61,6 @@ PickableName = "shotgun"
 position = Vector2(86, 39)
 price = 500
 PickableName = "flamethrower"
-
-[node name="LevelWarper" parent="." unique_id=674484480 instance=ExtResource("6_pc1jd")]
-position = Vector2(-406.00006, -456)
-warpBiome = ExtResource("7_sgel4")
 
 [node name="sunflower" parent="." unique_id=75144789 instance=ExtResource("8_sgel4")]
 position = Vector2(-255, 148)

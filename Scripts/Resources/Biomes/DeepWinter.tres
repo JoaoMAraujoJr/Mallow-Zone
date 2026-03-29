@@ -3,9 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cj83ggelb8xdd" path="res://Assets/Textures/floors/winter_forest/DeepWinter_bottom_spr_png.png" id="1_aqxu0"]
 [ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="1_cwix2"]
 [ext_resource type="Script" uid="uid://eq8xeuv5a2or" path="res://Scripts/Resources/Biome.gd" id="2_tl7jt"]
-[ext_resource type="Script" uid="uid://b8tl52g0ivgyc" path="res://Scripts/Resources/LocatableSpawnable.gd" id="3_aqxu0"]
 [ext_resource type="Resource" uid="uid://c7e4pxjbd4syb" path="res://Scripts/Resources/Weather/snowing.tres" id="3_tl7jt"]
-[ext_resource type="Script" uid="uid://b1te6q7qlixwn" path="res://Scripts/Resources/BiomeSpawnEntry.gd" id="4_aqxu0"]
 [ext_resource type="PackedScene" uid="uid://dqiecpoqsouu3" path="res://Scenes/objects/pine_tree.tscn" id="5_qefhv"]
 [ext_resource type="Texture2D" uid="uid://xtmguwro6tod" path="res://Assets/Textures/sprite_masks/player_mask/snow_mask.png" id="6_ddik0"]
 [ext_resource type="Texture2D" uid="uid://bp3jy8kg8lv3k" path="res://Assets/Textures/floors/winter_forest/DeepWinter_upper_spr.png" id="6_qefhv"]
@@ -19,13 +17,20 @@ metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 
 [resource]
 script = ExtResource("2_tl7jt")
-name = "Deep Winter Cove"
-biome_id = "deepwinter"
 weather = ExtResource("3_tl7jt")
+hasDayNightCycle = null
 topTextureVariants = Array[Texture2D]([ExtResource("6_qefhv")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_aqxu0")])
 player_mask = ExtResource("6_ddik0")
 has_trail = true
 trailParticles = Array[PackedScene]([ExtResource("8_skpwh")])
+enemiesList = null
+itemDropsList = null
 objectsList = Array[ExtResource("1_cwix2")]([SubResource("Resource_skpwh")])
+locatablesList = null
+nearbyBiomesList = null
+place_id = "deepwinter"
+display_name = "Deep Winter"
+description = null
+level_path = "uid://216kvumeoqpb"
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"

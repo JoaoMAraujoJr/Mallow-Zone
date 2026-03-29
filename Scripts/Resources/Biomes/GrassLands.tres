@@ -104,15 +104,20 @@ metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 
 [resource]
 script = ExtResource("2_kklgl")
-name = "GrassLands"
-biome_id = "grasslands"
 weather = ExtResource("10_qgh8n")
+hasDayNightCycle = null
 warpArt = ExtResource("9_wmwkd")
 topTextureVariants = Array[Texture2D]([ExtResource("13_wmwkd"), ExtResource("13_wmwkd"), ExtResource("13_wmwkd"), ExtResource("17_ra878"), ExtResource("18_hb8l3"), ExtResource("19_o5pq4"), ExtResource("20_gog04"), ExtResource("21_stlos"), ExtResource("22_7yy0o")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_3uxnf")])
+has_trail = null
+trailParticles = null
 enemiesList = Array[ExtResource("1_cqk60")]([SubResource("Resource_fdx75")])
 itemDropsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_k5la2"), SubResource("Resource_7uiy4")])
 objectsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_i7rku"), SubResource("Resource_ww40o"), SubResource("Resource_0afbt"), SubResource("Resource_o5pq4"), SubResource("Resource_pf4ip"), null, SubResource("Resource_ra878"), SubResource("Resource_hb8l3"), null])
 locatablesList = Array[ExtResource("6_3uxnf")]([SubResource("Resource_qgh8n"), SubResource("Resource_eb26d")])
 nearbyBiomesList = Array[ExtResource("8_3uxnf")]([SubResource("Resource_wmwkd")])
+place_id = "grassland"
+display_name = "Grassland"
+description = "strange plains landscape"
+level_path = "uid://216kvumeoqpb"
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"
