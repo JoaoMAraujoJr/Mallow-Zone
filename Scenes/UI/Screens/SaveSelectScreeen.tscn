@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://6phxenms48ai"]
 
 [ext_resource type="PackedScene" uid="uid://b471kfbc41iv0" path="res://Scenes/Unique/save_select_button.tscn" id="1_cg2qq"]
-[ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="2_0oq3g"]
+[ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="2_cg2qq"]
 
 [sub_resource type="GDScript" id="GDScript_hshsc"]
 resource_name = "SaveScreen"
@@ -74,13 +74,13 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -157.0
-offset_top = 310.0
-offset_right = 281.32996
-offset_bottom = -41.7406
+offset_left = -238.0
+offset_top = 437.0
+offset_right = 181.3078
+offset_bottom = 2.1627197
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.2844206, 1.2844206)
+scale = Vector2(1.8384701, 1.8384701)
 pivot_offset = Vector2(1.0553589, 296.0905)
 vertical_scroll_mode = 2
 
@@ -89,7 +89,6 @@ custom_minimum_size = Vector2(0, 459)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 18
-alignment = 1
 
 [node name="Label" type="RichTextLabel" parent="." unique_id=1685816215]
 material = SubResource("ShaderMaterial_urwbv")
@@ -98,18 +97,18 @@ anchor_left = 0.148
 anchor_top = 0.15900001
 anchor_right = 0.38000003
 anchor_bottom = 0.31300002
-offset_left = -107.43998
-offset_top = 0.5200043
-offset_right = -117.089264
-offset_bottom = -2.354309
-scale = Vector2(1.0290242, 1.0290242)
+offset_left = -187.44
+offset_top = -61.480003
+offset_right = -197.0893
+offset_bottom = -56.360016
+scale = Vector2(0.7709067, 0.7709067)
 pivot_offset = Vector2(143.91277, 54.012794)
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.30980393)
 theme_override_constants/shadow_outline_size = 0
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = ExtResource("2_0oq3g")
+theme_override_fonts/normal_font = ExtResource("2_cg2qq")
 theme_override_font_sizes/normal_font_size = 59
 bbcode_enabled = true
 text = "[wave amp=10 freq=3][font_size=99]S[/font_size]elect Save[/wave]"

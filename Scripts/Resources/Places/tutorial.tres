@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Place" format=3 uid="uid://de7hxuqah1u4s"]
 
+[ext_resource type="Texture2D" uid="uid://b8xs3bovnc4eo" path="res://Assets/Textures/floors/tutorial/menu_icon.png" id="1_f6lty"]
 [ext_resource type="Script" uid="uid://cwb4yihnf1uiv" path="res://Scripts/Resources/Place.gd" id="1_fv20y"]
 
 [resource]
@@ -7,5 +8,6 @@ script = ExtResource("1_fv20y")
 place_id = "tutorial"
 display_name = "Tutorial"
 description = "Welcome to the Backyard"
+menu_icon = ExtResource("1_f6lty")
 level_path = "uid://cr5roi1wve5kq"
 metadata/_custom_type_script = "uid://cwb4yihnf1uiv"

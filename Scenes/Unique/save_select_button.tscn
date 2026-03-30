@@ -38,7 +38,9 @@ func _setSaveFile (save:SaveFile):
 	$new_not_empty/labels/last_saved_time/last_saved_time_label.text = get_formatted_datetime(thisSaveFile.last_saved_time)
 	$new_not_empty/slot_display.text = \"Save_\"+str(Slot)+\" [img height=14]res://Assets/Textures/UI/game_menu/save_icon.png[/img]\"
 	$new_not_empty/hp/hp_amout.text = str(thisSaveFile.cur_hp) +\"|\"+ str(thisSaveFile.max_hp)
-
+	if thisSaveFile.cur_place:
+		if thisSaveFile.cur_place.menu_icon:
+			$new_not_empty/labels/last_saved_place/last_saved_place_label.text = thisSaveFile.cur_place.display_name + \" [img height=14]\"+ thisSaveFile.cur_place.menu_icon.resource_path  + \"[/img]\"
 func set_slot(num: int):
 	Slot = num
 	update_button_save_file()
@@ -115,19 +117,42 @@ func _on_trash_icon_pressed() -> void:
 
 
 func _on_card_mouse_entered() -> void:
-	if $new_not_empty/select_save.current_animation == \"selected\" and $new_not_empty/select_save.speed_scale > 0:
-		return
-		
-	$new_not_empty/select_save.play(\"selected\")
+	var mouse_pos = get_global_mouse_position()
+	var card_rect = $new_not_empty/Panel.get_global_rect()
+	
+	if card_rect.has_point(mouse_pos):
+		if $new_not_empty/select_save.current_animation == \"selected\":
+			return
+		else:
+			$new_not_empty/select_save.play(\"select\")
+			await $new_not_empty/select_save.animation_finished
+			$new_not_empty/select_save.play_backwards(\"selected\")
+
 
 
 func _on_card_mouse_exited() -> void:
 	var mouse_pos = get_global_mouse_position()
-	var card_rect = get_global_rect()
+	var card_rect = $new_not_empty/Panel.get_global_rect()
 	
 	if not card_rect.has_point(mouse_pos):
-		$new_not_empty/select_save.play_backwards(\"selected\")
+		if $new_not_empty/select_save.current_animation == \"selected\":
+			$new_not_empty/select_save.play_backwards(\"select\")
+		else:
+			await $new_not_empty/select_save.animation_finished
+			$new_not_empty/select_save.play_backwards(\"select\")
 "
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs6jk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.26666668)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_58e04"]
 atlas = ExtResource("11_pkd7i")
@@ -192,9 +217,21 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-50, -18)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("labels/last_saved_place:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-30, 8)]
+}
 
 [sub_resource type="Animation" id="Animation_b0uw0"]
-resource_name = "selected"
+resource_name = "select"
 length = 1.1333333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -220,24 +257,65 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-50, -18), Vector2(112, -17.999998), Vector2(100, -18), Vector2(112, -17.999998)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("labels/last_saved_place:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.55666673, 0.76666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-24, 8), Vector2(123.045, 8), Vector2(111.506, 8), Vector2(120, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_j8vd7"]
+resource_name = "selected"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("labels/last_saved_time:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(112, -17.999998), Vector2(112, -17.999998)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("labels/play:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(107.00001, 31), Vector2(107.00001, 31)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("labels/last_saved_place:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(120, 8), Vector2(120, 8)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j8vd7"]
 _data = {
 &"RESET": SubResource("Animation_bs6jk"),
-&"selected": SubResource("Animation_b0uw0")
+&"select": SubResource("Animation_b0uw0"),
+&"selected": SubResource("Animation_j8vd7")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs6jk"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.26666668)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
 
 [sub_resource type="Animation" id="Animation_pkd7i"]
 length = 0.001
@@ -344,8 +422,17 @@ script = SubResource("GDScript_tycyy")
 layout_mode = 1
 anchors_preset = 0
 offset_left = 130.0
+offset_top = 69.0
 offset_right = 170.0
-offset_bottom = 40.0
+offset_bottom = 109.0
+
+[node name="Panel" type="Panel" parent="new_not_empty" unique_id=923081301]
+layout_mode = 0
+offset_left = -145.0
+offset_top = -67.0
+offset_right = 259.0
+offset_bottom = 68.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bs6jk")
 
 [node name="labels" type="Control" parent="new_not_empty" unique_id=1049518510]
 anchors_preset = 0
@@ -356,7 +443,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = 30.0
 offset_top = 31.0
-offset_right = 73.31963
+offset_right = 73.31985
 offset_bottom = 39.069355
 scale = Vector2(2.354587, 2.354587)
 mouse_filter = 1
@@ -400,7 +487,7 @@ flat = true
 layout_mode = 0
 offset_left = -50.0
 offset_top = -18.0
-offset_right = 23.898407
+offset_right = 23.898514
 offset_bottom = -8.2318325
 scale = Vector2(2.354587, 2.354587)
 texture = ExtResource("3_b0uw0")
@@ -419,6 +506,35 @@ mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("13_uiiok")
 theme_override_font_sizes/normal_font_size = 19
 text = "00|00|00 9:30 AM"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="last_saved_place" type="NinePatchRect" parent="new_not_empty/labels" unique_id=977960859]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 8.0
+offset_right = 43.898712
+offset_bottom = 17.768167
+scale = Vector2(2.002695, 2.002695)
+texture = ExtResource("3_b0uw0")
+region_rect = Rect2(0, 0, 16, 7)
+patch_margin_left = 1
+patch_margin_right = 5
+
+[node name="last_saved_place_label" type="RichTextLabel" parent="new_not_empty/labels/last_saved_place" unique_id=90675044]
+layout_mode = 0
+offset_left = 9.487214
+offset_top = 0.9986543
+offset_right = 156.48721
+offset_bottom = 24.998653
+scale = Vector2(0.36555675, 0.36555675)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+text = "Grass Plains"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -740,22 +856,14 @@ texture_hover = ExtResource("18_ccktu")
 [node name="select_save" type="AnimationPlayer" parent="new_not_empty" unique_id=1073619828]
 libraries/ = SubResource("AnimationLibrary_j8vd7")
 
-[node name="Panel" type="Panel" parent="new_not_empty" unique_id=923081301]
-layout_mode = 0
-offset_left = -145.0
-offset_top = -81.0
-offset_right = 259.0
-offset_bottom = 88.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_bs6jk")
-
 [node name="new_areUsure" type="Control" parent="." unique_id=1617210329]
 visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_left = 130.0
+offset_top = 69.0
 offset_right = 170.0
-offset_bottom = 40.0
+offset_bottom = 109.0
 
 [node name="background" type="NinePatchRect" parent="new_areUsure" unique_id=1576518351]
 layout_mode = 1
@@ -822,8 +930,9 @@ visible = false
 layout_mode = 1
 anchors_preset = 0
 offset_left = 130.0
+offset_top = 69.0
 offset_right = 170.0
-offset_bottom = 40.0
+offset_bottom = 109.0
 
 [node name="create_save" type="TextureButton" parent="new_empty" unique_id=580878564]
 layout_mode = 1
@@ -859,10 +968,10 @@ volume_db = 4.0
 stream = ExtResource("17_b0uw0")
 pitch_scale = 0.8
 
-[connection signal="pressed" from="new_not_empty/labels/play/play_button" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="new_not_empty/delete" to="." method="_on_trash_icon_pressed"]
 [connection signal="mouse_entered" from="new_not_empty/Panel" to="." method="_on_card_mouse_entered"]
 [connection signal="mouse_exited" from="new_not_empty/Panel" to="." method="_on_card_mouse_exited"]
+[connection signal="pressed" from="new_not_empty/labels/play/play_button" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="new_not_empty/delete" to="." method="_on_trash_icon_pressed"]
 [connection signal="pressed" from="new_areUsure/confirm_delete" to="." method="_on_delete_save_pressed"]
 [connection signal="pressed" from="new_areUsure/go_back" to="." method="_on_go_back_pressed"]
 [connection signal="pressed" from="new_empty/create_save" to="." method="_on_newgame_pressed"]

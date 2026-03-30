@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dw7en77yhx7it" path="res://Scenes/Unique/mountain.tscn" id="7_46dm1"]
 [ext_resource type="PackedScene" uid="uid://bhl7mtmnhud1k" path="res://Scenes/enemies/Bosses/rohk_the_boulder.tscn" id="7_wmwkd"]
 [ext_resource type="Script" uid="uid://b1te6q7qlixwn" path="res://Scripts/Resources/BiomeSpawnEntry.gd" id="8_3uxnf"]
+[ext_resource type="Texture2D" uid="uid://x1pwur5se34v" path="res://Assets/Textures/floors/grass/menu_icon.png" id="8_vn8t5"]
 [ext_resource type="Texture2D" uid="uid://dlgubbkv0pbk8" path="res://Assets/Textures/entities/StageWarper/levelart/Yard.png" id="9_wmwkd"]
 [ext_resource type="Resource" uid="uid://xxjnd60p1vxg" path="res://Scripts/Resources/Weather/windyLeafy.tres" id="10_qgh8n"]
 [ext_resource type="PackedScene" uid="uid://bayubii0oclpu" path="res://Scenes/entities/passive_mobs/cow.tscn" id="11_fdx75"]
@@ -119,5 +120,6 @@ nearbyBiomesList = Array[ExtResource("8_3uxnf")]([SubResource("Resource_wmwkd")]
 place_id = "grassland"
 display_name = "Grassland"
 description = "strange plains landscape"
+menu_icon = ExtResource("8_vn8t5")
 level_path = "uid://216kvumeoqpb"
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"
