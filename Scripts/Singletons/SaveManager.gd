@@ -13,6 +13,8 @@ func _ready() -> void:
 func create_new_save(slot:int):
 	var save = SaveFile.new()
 	save.cur_skin = load("res://Scripts/Resources/PlayerSkins/normal_skin.tres")
+	save.cur_place = load("res://Scripts/Resources/Places/tutorial.tres")
+	save.last_saved_time = Time.get_datetime_dict_from_system()
 	current_save = save
 	current_slot = slot
 	save_game(slot)

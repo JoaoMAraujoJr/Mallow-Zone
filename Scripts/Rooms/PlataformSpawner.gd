@@ -44,7 +44,7 @@ func _ready() -> void:
 		
 	if LevelManager.cur_place==null:
 		print("Biome Manager Current Biome is Null Reasigning is Being Made")
-		LevelManager.cur_place= preload("res://Scripts/Resources/Biomes/GrassLands.tres")
+		LevelManager.cur_place= preload("res://Scripts/Resources/Places/Biomes/GrassLands.tres")
 	else:
 		var plataform :newStageBiome = LevelManager.PlataforScene.instantiate().init(isthisroot)
 		_setbiome(plataform)

@@ -40,6 +40,7 @@ func save_data():
 	SaveManager.current_save.cur_weapon = GameManager.currentEquipedWeaponType
 	SaveManager.current_save.inventory = GameManager.cur_inventory
 	SaveManager.current_save.money = GameManager.gold_wallet
+	SaveManager.current_save.last_saved_time = Time.get_datetime_dict_from_system()
 	if LevelManager.cur_place:
 		SaveManager.current_save.cur_place = LevelManager.cur_place
 	SaveManager.save_game(SaveManager.current_slot)

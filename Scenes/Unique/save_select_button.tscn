@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://b471kfbc41iv0"]
 
+[ext_resource type="Texture2D" uid="uid://c0xqjhs03n764" path="res://Assets/Textures/UI/game_menu/nine_path_textures/label_white.png" id="1_bs6jk"]
+[ext_resource type="Texture2D" uid="uid://bj6224iq8yp8t" path="res://Assets/Textures/UI/game_menu/nine_path_textures/label_black.png" id="3_b0uw0"]
 [ext_resource type="AudioStream" uid="uid://bcvjtrm6je3ti" path="res://Assets/Sounds/soundEffects/UI/save_new_game_button_hover.wav" id="4_pb1pl"]
 [ext_resource type="Texture2D" uid="uid://cwmk6mgj4k8a4" path="res://Assets/Textures/UI/game_menu/nine_path_textures/black_border.png" id="10_wsfmp"]
 [ext_resource type="Texture2D" uid="uid://8s0c6sohm625" path="res://Assets/Textures/UI/game_menu/null_player_icon.png" id="11_pkd7i"]
@@ -33,7 +35,8 @@ func _setSaveFile (save:SaveFile):
 	if thisSaveFile.cur_skin.animated_icon:
 		$\"new_not_empty/player icon/AnimatedSprite2D\".sprite_frames = thisSaveFile.cur_skin.animated_icon
 		$\"new_not_empty/player icon/AnimatedSprite2D\".play(\"default\")
-		$new_not_empty/slot_display.text = \"Save_\"+str(Slot)+\" [img height=14]res://Assets/Textures/UI/game_menu/save_icon.png[/img]\"
+	$new_not_empty/labels/last_saved_time/last_saved_time_label.text = get_formatted_datetime(thisSaveFile.last_saved_time)
+	$new_not_empty/slot_display.text = \"Save_\"+str(Slot)+\" [img height=14]res://Assets/Textures/UI/game_menu/save_icon.png[/img]\"
 	$new_not_empty/hp/hp_amout.text = str(thisSaveFile.cur_hp) +\"|\"+ str(thisSaveFile.max_hp)
 
 func set_slot(num: int):
@@ -57,7 +60,27 @@ func update_button_save_file():
 func _upon_display_save_deleted(slot:int):
 	if Slot == slot:
 		queue_free()
+
+
+func get_formatted_datetime(dt:Dictionary) -> String:
+	if dt.is_empty() or not dt.has(\"day\"):
+		return \"Never Played\" 
+	# Formata o dia e mês com 2 dígitos (01, 02...)
+	var day = \"%02d\" % dt.day
+	var month = \"%02d\" % dt.month
+	# Pega os últimos dois dígitos do ano (2026 -> 26)
+	var year = str(dt.year).right(2)
 	
+	# Lógica para converter 24h para 12h (AM/PM)
+	var am_pm = \"AM\" if dt.hour < 12 else \"PM\"
+	var hour_12 = dt.hour % 12
+	if hour_12 == 0: 
+		hour_12 = 12 # Ajusta meia-noite e meio-dia
+	
+	var minute = \"%02d\" % dt.minute
+	
+	return \"{0}|{1}|{2} {3}:{4} {5}\".format([day, month, year, hour_12, minute, am_pm])
+
 
 func _on_newgame_pressed() -> void:
 	SaveManager.create_new_save(Slot)
@@ -67,37 +90,12 @@ func _on_newgame_pressed() -> void:
 	#LoadManager.LoadScene(\"res://Scenes/stages/tutorial_level.tscn\")
 	pass # Replace with function body.
 
-func _on_newgame_mouse_entered() -> void:
-	$Empty/newgame_anim.play(\"pop\")
-	$hover_options_sound2.play()
-	pass # Replace with function body.
-
-func _on_newgame_mouse_exited() -> void:
-	$Empty/newgame_anim.play_backwards(\"pop\")
-	pass # Replace with function body.
 
 func _on_play_pressed() -> void:
 	GameManager.canPause = true
 	SaveManager.load_game(Slot)
 	GameManager.load_from_current_save()
-	LoadManager.LoadScene(\"res://Scenes/Level.tscn\")
-	pass # Replace with function body.
-
-func _on_play_mouse_entered() -> void:
-	$NotEmpty/select_anim.play(\"pop\")
-	$hover_options_sound.play()
-	pass # Replace with function body.
-
-func _on_play_mouse_exited() -> void:
-	$NotEmpty/select_anim.play_backwards(\"pop\")
-	pass # Replace with function body.
-
-func _on_mouse_entered() -> void:
-	$card_anim.play(\"pop\")
-	pass # Replace with function body.
-
-func _on_mouse_exited() -> void:
-	$card_anim.play_backwards(\"pop\")
+	LoadManager.LoadScene(SaveManager.current_save.cur_place.level_path)
 	pass # Replace with function body.
 
 func _on_delete_save_pressed() -> void:
@@ -114,13 +112,21 @@ func _on_trash_icon_pressed() -> void:
 	$\"new_empty\".visible =false
 	pass # Replace with function body.
 
-func _on_delete_save_mouse_entered() -> void:
-	$AreUsure/DeleteSave/AnimationPlayer.play(\"pop\")
-	pass # Replace with function body.
 
-func _on_delete_save_mouse_exited() -> void:
-	$AreUsure/DeleteSave/AnimationPlayer.play_backwards(\"pop\")
-	pass # Replace with function body.
+
+func _on_card_mouse_entered() -> void:
+	if $new_not_empty/select_save.current_animation == \"selected\" and $new_not_empty/select_save.speed_scale > 0:
+		return
+		
+	$new_not_empty/select_save.play(\"selected\")
+
+
+func _on_card_mouse_exited() -> void:
+	var mouse_pos = get_global_mouse_position()
+	var card_rect = get_global_rect()
+	
+	if not card_rect.has_point(mouse_pos):
+		$new_not_empty/select_save.play_backwards(\"selected\")
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_58e04"]
@@ -159,6 +165,79 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_bs6jk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("labels/play:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 31)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("labels/last_saved_time:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-50, -18)]
+}
+
+[sub_resource type="Animation" id="Animation_b0uw0"]
+resource_name = "selected"
+length = 1.1333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("labels/play:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30.000008, 31), Vector2(107.00001, 31), Vector2(102.00001, 31), Vector2(107.00001, 31)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("labels/last_saved_time:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6333333, 0.8432616, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-50, -18), Vector2(112, -17.999998), Vector2(100, -18), Vector2(112, -17.999998)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j8vd7"]
+_data = {
+&"RESET": SubResource("Animation_bs6jk"),
+&"selected": SubResource("Animation_b0uw0")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bs6jk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.26666668)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="Animation" id="Animation_pkd7i"]
 length = 0.001
@@ -253,19 +332,97 @@ stereo = true
 [node name="SaveSelect" type="Control" unique_id=1506632854]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 3
-anchor_right = 0.25100002
-anchor_bottom = 0.19900002
-offset_right = 958.72
-offset_bottom = 576.72
+anchor_top = -0.093
+anchor_right = 0.259
+anchor_bottom = 0.101
+offset_top = 66.96
+offset_right = 948.48
+offset_bottom = 647.28
 script = SubResource("GDScript_tycyy")
 
 [node name="new_not_empty" type="Control" parent="." unique_id=1061808413]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 141.0
-offset_top = 69.0
-offset_right = 181.0
-offset_bottom = 109.0
+offset_left = 130.0
+offset_right = 170.0
+offset_bottom = 40.0
+
+[node name="labels" type="Control" parent="new_not_empty" unique_id=1049518510]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="play" type="NinePatchRect" parent="new_not_empty/labels" unique_id=417872481]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 31.0
+offset_right = 73.31963
+offset_bottom = 39.069355
+scale = Vector2(2.354587, 2.354587)
+mouse_filter = 1
+texture = ExtResource("1_bs6jk")
+region_rect = Rect2(0, 0, 16, 7)
+patch_margin_left = 1
+patch_margin_right = 5
+
+[node name="play" type="RichTextLabel" parent="new_not_empty/labels/play" unique_id=521461359]
+layout_mode = 0
+offset_left = 13.590489
+offset_top = -0.4247019
+offset_right = 92.59199
+offset_bottom = 23.575298
+scale = Vector2(0.36555675, 0.36555675)
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+text = "Play"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="play_button" type="Button" parent="new_not_empty/labels/play" unique_id=1308545381]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24800001
+anchor_top = 0.053000003
+anchor_right = 0.99300003
+anchor_bottom = 1.0
+offset_left = 0.016004562
+offset_top = -0.0029729605
+offset_right = 0.020225525
+offset_bottom = 0.35534763
+action_mode = 0
+flat = true
+
+[node name="last_saved_time" type="NinePatchRect" parent="new_not_empty/labels" unique_id=151595863]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -18.0
+offset_right = 23.898407
+offset_bottom = -8.2318325
+scale = Vector2(2.354587, 2.354587)
+texture = ExtResource("3_b0uw0")
+region_rect = Rect2(0, 0, 16, 7)
+patch_margin_left = 1
+patch_margin_right = 5
+
+[node name="last_saved_time_label" type="RichTextLabel" parent="new_not_empty/labels/last_saved_time" unique_id=1570006557]
+layout_mode = 0
+offset_left = 10.617573
+offset_top = 0.84940654
+offset_right = 157.61757
+offset_bottom = 24.849407
+scale = Vector2(0.36555675, 0.36555675)
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("13_uiiok")
+theme_override_font_sizes/normal_font_size = 19
+text = "00|00|00 9:30 AM"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
 
 [node name="background" type="NinePatchRect" parent="new_not_empty" unique_id=1927548996]
 layout_mode = 1
@@ -345,15 +502,15 @@ offset = Vector2(0.062646866, 0.06264496)
 
 [node name="weapon_icon" type="NinePatchRect" parent="new_not_empty" unique_id=1383241443]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 28.0
-offset_top = -61.716278
-offset_right = 74.51979
-offset_bottom = -40.15973
+anchors_preset = -1
+anchor_left = 1.7350001
+anchor_top = -0.776
+anchor_right = 1.7350001
+anchor_bottom = -0.776
+offset_left = -21.40001
+offset_top = -10.676277
+offset_right = 25.119781
+offset_bottom = 10.880272
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.4075775, 2.4075775)
@@ -371,6 +528,7 @@ offset_top = 13.283722
 offset_right = 50.0
 offset_bottom = 37.283722
 scale = Vector2(0.58097875, 0.58097875)
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("13_uiiok")
 theme_override_font_sizes/normal_font_size = 19
 text = "$ 1.000,00"
@@ -386,6 +544,7 @@ offset_top = 50.0
 offset_right = 173.0
 offset_bottom = 74.0
 scale = Vector2(0.58097875, 0.58097875)
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("13_uiiok")
 theme_override_font_sizes/normal_font_size = 19
 bbcode_enabled = true
@@ -399,8 +558,9 @@ vertical_alignment = 1
 anchors_preset = 0
 offset_left = -39.0
 offset_top = 2.283722
-offset_right = 1.0
-offset_bottom = 42.283722
+offset_right = 14.0
+offset_bottom = 15.0
+mouse_filter = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="new_not_empty/hp" unique_id=737880104]
 position = Vector2(4, 4)
@@ -408,12 +568,18 @@ scale = Vector2(1.2310479, 1.2310479)
 texture = ExtResource("14_pb1pl")
 
 [node name="hp_amout" type="RichTextLabel" parent="new_not_empty/hp" unique_id=1992109699]
-layout_mode = 0
-offset_left = 10.0
-offset_top = -2.0
-offset_right = 98.0
-offset_bottom = 22.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11400001
+anchor_top = 0.124000005
+anchor_right = 0.11400001
+anchor_bottom = 0.124000005
+offset_left = 4.957998
+offset_top = -3.8605404
+offset_right = 92.958
+offset_bottom = 20.13946
 scale = Vector2(0.58097875, 0.58097875)
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("13_uiiok")
 theme_override_font_sizes/normal_font_size = 19
 text = "100|100"
@@ -428,6 +594,7 @@ offset_left = 20.0
 offset_top = 2.283722
 offset_right = 60.0
 offset_bottom = 42.283722
+mouse_filter = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="new_not_empty/ammo" unique_id=2005538055]
 position = Vector2(4, 4)
@@ -435,12 +602,17 @@ scale = Vector2(1.2310479, 1.2310479)
 texture = ExtResource("15_b0uw0")
 
 [node name="ammo_amout" type="RichTextLabel" parent="new_not_empty/ammo" unique_id=2032724091]
-layout_mode = 0
-offset_left = 10.0
-offset_top = -2.0
-offset_right = 98.0
-offset_bottom = 22.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.124000005
+anchor_right = 0.25
+anchor_bottom = 0.124000005
+offset_top = -6.96
+offset_right = 88.0
+offset_bottom = 17.04
 scale = Vector2(0.58097875, 0.58097875)
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("13_uiiok")
 theme_override_font_sizes/normal_font_size = 19
 text = "0|99"
@@ -457,81 +629,100 @@ offset_right = -67.098465
 offset_bottom = 46.975327
 scale = Vector2(2.4763699, 2.4763699)
 pivot_offset = Vector2(14.941227, 4.8458023)
+mouse_filter = 2
 theme_override_constants/separation = 2
 alignment = 1
 
 [node name="1" type="HBoxContainer" parent="new_not_empty/VBoxContainer" unique_id=198193679]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 1
 
 [node name="1" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=77789203]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="2" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1929904323]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="3" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=911589639]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="4" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1759055809]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="5" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=334344312]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="6" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1003252910]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="7" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1180214565]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="8" type="TextureRect" parent="new_not_empty/VBoxContainer/1" unique_id=1158261782]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="2" type="HBoxContainer" parent="new_not_empty/VBoxContainer" unique_id=988859351]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 1
 
 [node name="1" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1307216257]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="2" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1404590864]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="3" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1430137485]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="4" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=72023620]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="5" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=958894099]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="6" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=166685235]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="7" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=147930581]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="8" type="TextureRect" parent="new_not_empty/VBoxContainer/2" unique_id=1928533252]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("10_wsfmp")
 
 [node name="delete" type="TextureButton" parent="new_not_empty" unique_id=1918688490]
@@ -541,18 +732,30 @@ offset_top = -65.0
 offset_right = 172.00002
 offset_bottom = -33.0
 scale = Vector2(1.1487377, 1.1487377)
+mouse_filter = 1
 texture_normal = ExtResource("16_bs6jk")
 texture_pressed = ExtResource("17_vlspv")
 texture_hover = ExtResource("18_ccktu")
+
+[node name="select_save" type="AnimationPlayer" parent="new_not_empty" unique_id=1073619828]
+libraries/ = SubResource("AnimationLibrary_j8vd7")
+
+[node name="Panel" type="Panel" parent="new_not_empty" unique_id=923081301]
+layout_mode = 0
+offset_left = -145.0
+offset_top = -81.0
+offset_right = 259.0
+offset_bottom = 88.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_bs6jk")
 
 [node name="new_areUsure" type="Control" parent="." unique_id=1617210329]
 visible = false
 layout_mode = 1
 anchors_preset = 0
-offset_left = 141.0
-offset_top = 69.0
-offset_right = 181.0
-offset_bottom = 109.0
+offset_left = 130.0
+offset_right = 170.0
+offset_bottom = 40.0
 
 [node name="background" type="NinePatchRect" parent="new_areUsure" unique_id=1576518351]
 layout_mode = 1
@@ -618,10 +821,9 @@ vertical_alignment = 1
 visible = false
 layout_mode = 1
 anchors_preset = 0
-offset_left = 141.0
-offset_top = 69.0
-offset_right = 181.0
-offset_bottom = 109.0
+offset_left = 130.0
+offset_right = 170.0
+offset_bottom = 40.0
 
 [node name="create_save" type="TextureButton" parent="new_empty" unique_id=580878564]
 layout_mode = 1
@@ -657,7 +859,10 @@ volume_db = 4.0
 stream = ExtResource("17_b0uw0")
 pitch_scale = 0.8
 
+[connection signal="pressed" from="new_not_empty/labels/play/play_button" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="new_not_empty/delete" to="." method="_on_trash_icon_pressed"]
+[connection signal="mouse_entered" from="new_not_empty/Panel" to="." method="_on_card_mouse_entered"]
+[connection signal="mouse_exited" from="new_not_empty/Panel" to="." method="_on_card_mouse_exited"]
 [connection signal="pressed" from="new_areUsure/confirm_delete" to="." method="_on_delete_save_pressed"]
 [connection signal="pressed" from="new_areUsure/go_back" to="." method="_on_go_back_pressed"]
 [connection signal="pressed" from="new_empty/create_save" to="." method="_on_newgame_pressed"]

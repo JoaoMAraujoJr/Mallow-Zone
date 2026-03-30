@@ -99,6 +99,6 @@ func load_from_current_save():
 			ammo = ItemData.weapons[currentEquipedWeaponType]["max_ammo"]
 			ammoMax = ItemData.weapons[currentEquipedWeaponType]["max_ammo"]
 		if SaveManager.current_save.cur_place != null:
-			LevelManager.cur_place = LevelManager.current_save.cur_place
+			LevelManager.cur_place = SaveManager.current_save.cur_place
 		else: 
-			LevelManager.cur_place = preload("res://Scripts/Resources/Biomes/GrassLands.tres")
+			LevelManager.cur_place = preload("res://Scripts/Resources/Places/Biomes/GrassLands.tres")

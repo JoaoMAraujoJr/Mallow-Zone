@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://6phxenms48ai"]
+
+[ext_resource type="PackedScene" uid="uid://b471kfbc41iv0" path="res://Scenes/Unique/save_select_button.tscn" id="1_cg2qq"]
+[ext_resource type="FontFile" uid="uid://bur8p4dmjn8ny" path="res://Assets/fonts/Jacquard12-Regular.ttf" id="2_0oq3g"]
+
+[sub_resource type="GDScript" id="GDScript_hshsc"]
+resource_name = "SaveScreen"
+script/source = "extends CanvasLayer
+@export var save_display_scene:PackedScene 
+var taken_slots := []
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	SaveManager.new_save_created.connect(_on_save_created)
+	SaveManager.save_deleted.connect(_on_save_deleted)
+	for file_name in SaveManager.get_all_saves():
+		var full_path = \"user://saves/\" + file_name # Adicione o prefixo do caminho!
+		if ResourceLoader.exists(full_path):
+			if ResourceLoader.load(full_path) is SaveFile:
+				var regex = RegEx.new()
+				regex.compile(\"\\\\d+\") # Procura por um ou mais dígitos
+				var result = regex.search(file_name.get_file())
+				if result:
+					var slot_number = result.get_string().to_int()
+					taken_slots.append(slot_number)
+					instantiate_save_display(slot_number)
+	add_extra_slot()
+
+func _on_save_created(slot:int):
+	if not taken_slots.has(slot):
+		taken_slots.append(slot)
+	add_extra_slot()
+func _on_save_deleted(slot:int):
+	if taken_slots.has(slot):
+			taken_slots.erase(slot)
+
+func instantiate_save_display(num: int):
+	var new_save_display = save_display_scene.instantiate()
+	new_save_display.set_slot(num)
+	$ScrollContainer/VBoxContainer.add_child(new_save_display)
+
+
+func add_extra_slot():
+	var new_slot_number :int = get_next_available_slot()
+	for child in $ScrollContainer/VBoxContainer.get_children():
+		if child.Slot == new_slot_number:
+			return
+	instantiate_save_display(new_slot_number)
+	
+func get_next_available_slot() -> int:
+	var taken = taken_slots.duplicate()
+	taken.sort()
+	
+	var candidate = 1
+	for slot in taken:
+		if slot == candidate:
+			candidate += 1
+			
+		elif slot > candidate:
+			break
+			
+	return candidate
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urwbv"]
+
+[node name="2_SaveSelect" type="CanvasLayer" unique_id=899521811]
+visible = false
+script = SubResource("GDScript_hshsc")
+save_display_scene = ExtResource("1_cg2qq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1065225788]
+clip_contents = false
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -157.0
+offset_top = 310.0
+offset_right = 281.32996
+offset_bottom = -41.7406
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2844206, 1.2844206)
+pivot_offset = Vector2(1.0553589, 296.0905)
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=310390]
+custom_minimum_size = Vector2(0, 459)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1685816215]
+material = SubResource("ShaderMaterial_urwbv")
+anchors_preset = -1
+anchor_left = 0.148
+anchor_top = 0.15900001
+anchor_right = 0.38000003
+anchor_bottom = 0.31300002
+offset_left = -107.43998
+offset_top = 0.5200043
+offset_right = -117.089264
+offset_bottom = -2.354309
+scale = Vector2(1.0290242, 1.0290242)
+pivot_offset = Vector2(143.91277, 54.012794)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.30980393)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/normal_font = ExtResource("2_0oq3g")
+theme_override_font_sizes/normal_font_size = 59
+bbcode_enabled = true
+text = "[wave amp=10 freq=3][font_size=99]S[/font_size]elect Save[/wave]"
+fit_content = true
+vertical_alignment = 1

@@ -30,14 +30,6 @@ func _ready() -> void:
 
 
 	GameManager.connect("skin_changed",Callable(self,"on_Skin_Changed"))
-	
-	if BiomeManager:
-		if BiomeManager.currentBiome:
-			if BiomeManager.currentBiome.has_trail and BiomeManager.currentBiome.trailParticles!=null:
-				if !BiomeManager.currentBiome.trailParticles.is_empty():
-					for particle in BiomeManager.currentBiome.trailParticles:
-						var new_trail_particle := particle.instantiate()
-						$trailParticles.add_child(new_trail_particle)
 
 
 

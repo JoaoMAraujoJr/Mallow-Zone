@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BiomeManagerConfig" load_steps=6 format=3 uid="uid://du8nkreii7dv6"]
+[gd_resource type="Resource" script_class="BiomeManagerConfig" format=3 uid="uid://du8nkreii7dv6"]
 
 [ext_resource type="Script" uid="uid://eq8xeuv5a2or" path="res://Scripts/Resources/Biome.gd" id="1_vjcuv"]
 [ext_resource type="Script" uid="uid://n53pk1b1f7xi" path="res://Scripts/Resources/BiomeManagerConfig.gd" id="2_p2rvo"]
-[ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Biomes/GrassLands.tres" id="2_xrpef"]
-[ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Biomes/ChessFields.tres" id="3_iau13"]
-[ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Biomes/DeepWinter.tres" id="4_0vuks"]
+[ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Places/Biomes/GrassLands.tres" id="2_xrpef"]
+[ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Places/Biomes/ChessFields.tres" id="3_iau13"]
+[ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Places/Biomes/DeepWinter.tres" id="4_0vuks"]
 
 [resource]
 script = ExtResource("2_p2rvo")

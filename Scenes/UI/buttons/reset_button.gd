@@ -21,11 +21,13 @@ func _process(_delta: float) -> void:
 			GameManager.thisPlayer = null
 			GameManager.cur_hp = GameManager.max_hp
 			GameManager.currentSpawnedChunks = {}
-			LevelManager.cur_place = preload("res://Scripts/Resources/Biomes/GrassLands.tres")
 			GameManager.can_shoot = true
 			BossManager._isOnBoss = false
 			BossManager.currentBossName = ""
-			get_tree().change_scene_to_file("res://Scenes/Level.tscn")
+			if SaveManager.current_save.cur_place:
+				LevelManager.last_cur_place = LevelManager.cur_place
+				LevelManager.cur_place = SaveManager.current_save.cur_place
+				get_tree().change_scene_to_file(SaveManager.current_save.cur_place.level_path)
 	else:
 		$IddleAnimPlayer.play("popping")
 		progressBar.value -= 1

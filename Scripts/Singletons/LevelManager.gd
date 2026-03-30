@@ -8,7 +8,7 @@ var config :BiomeManagerConfig= load("res://Scripts/Resources/Data/BiomeManagerD
 var placeList := {}
 
 func _ready() -> void:
-	cur_place = load("res://Scripts/Resources/Biomes/GrassLands.tres")
+	cur_place = load("res://Scripts/Resources/Places/Biomes/GrassLands.tres")
 	last_cur_place = cur_place
 
 	for place in config.biomeList:

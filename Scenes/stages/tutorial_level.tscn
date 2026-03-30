@@ -30,9 +30,9 @@
 [ext_resource type="AudioStream" uid="uid://bqm24rr2ql26t" path="res://Assets/Sounds/soundEffects/dialogue/party_won.ogg" id="27_15ame"]
 [ext_resource type="AudioStream" uid="uid://bh2t28c65ognd" path="res://Assets/Sounds/soundEffects/dialogue/Congratulations_tutorial.ogg" id="28_bj1kq"]
 [ext_resource type="PackedScene" uid="uid://dgep6su5k2jxi" path="res://Scenes/Unique/level_warper.tscn" id="28_ir3vo"]
-[ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Biomes/GrassLands.tres" id="29_prc6h"]
+[ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Places/Biomes/GrassLands.tres" id="29_prc6h"]
 [ext_resource type="Texture2D" uid="uid://bwrqcib3vj164" path="res://Assets/Textures/entities/Particles/other/confetti.png" id="31_j15rv"]
-[ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Biomes/ChessFields.tres" id="32_rbtg8"]
+[ext_resource type="Resource" uid="uid://dxgb3b06nceuu" path="res://Scripts/Resources/Places/Biomes/ChessFields.tres" id="32_rbtg8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ifgeu"]
 blend_mode = 3

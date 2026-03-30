@@ -13,6 +13,7 @@ class_name SaveFile
 @export var inventory :Array[InventoryItem] =[]
 
 @export_group("Others")
+@export var last_saved_time: Dictionary = {}
 @export var money:int = 0
 
 @export_category("World")
