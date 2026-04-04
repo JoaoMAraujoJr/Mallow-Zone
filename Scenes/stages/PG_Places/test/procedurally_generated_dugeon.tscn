@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://8wsfjywm3xfg"]
+
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="1_5tn2v"]
+[ext_resource type="Script" uid="uid://n8re2g16srfg" path="res://Scripts/Unique/procedurally_generated_place.gd" id="1_r5nbo"]
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="2_bq8cs"]
+[ext_resource type="PackedScene" uid="uid://c4ggb3nyxla0" path="res://Scenes/stages/PG_Places/test/rooms/room_0_NSEW.tscn" id="2_r5nbo"]
+
+[node name="Procedurally_GeneratedDugeon" type="Node2D" unique_id=970794625 groups=["Root"]]
+script = ExtResource("1_r5nbo")
+
+[node name="Interface" parent="." unique_id=1650993913 instance=ExtResource("2_bq8cs")]
+
+[node name="Player" parent="." unique_id=118340029 instance=ExtResource("1_5tn2v")]
+max_camzoom = 0.8
+min_camzoom = 2.3
+target_zoom = 1.1
+
+[node name="Procedurally_Generated_Tile" parent="." unique_id=913110438 instance=ExtResource("2_r5nbo")]
