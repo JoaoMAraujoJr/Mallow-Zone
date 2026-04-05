@@ -59,7 +59,8 @@ func _on_collision_detector_body_entered(body: Node2D) -> void:
 
 
 func _on_collision_detector_body_exited(body: Node2D) -> void:
-	can_pick =false
+	if body is Player:
+		can_pick =false
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvylg"]

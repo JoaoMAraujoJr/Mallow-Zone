@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://23heydpadgh5"]
+
+[ext_resource type="Script" uid="uid://barxgwe6aoaga" path="res://Scripts/Unique/test/WFCDungeonGenerator.gd" id="1_x6ost"]
+[ext_resource type="Script" uid="uid://blllogm3qtr7" path="res://Scripts/Resources/room_entry.gd" id="2_kxhgd"]
+[ext_resource type="PackedScene" uid="uid://b6uyr4hi8nux5" path="res://Scenes/stages/PG_Places/test/rooms/room_4_NSEW.tscn" id="3_ytbfg"]
+
+[sub_resource type="Resource" id="Resource_byx72"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://b6uyr4hi8nux5"
+north = true
+south = true
+east = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_7es5j"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://bffo0xhvsvdhh"
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_4s5hr"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://dqjr314twgtxg"
+north = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_nj0bs"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://ejyj6m86sxfl"
+south = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_hihqn"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://cl86iw13wdy4n"
+east = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_qtfrj"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://bf7nellf3fwm2"
+north = true
+south = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_0wda1"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://es4qalf0dhwb"
+east = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_s407b"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://ca5botrb7bvt7"
+north = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_0fcew"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://c3morhfyjhuoo"
+north = true
+east = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_5ecp5"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://b4ve4ckr18e2j"
+south = true
+east = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_cd8wk"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://bc5pd0jf3lxkv"
+south = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_ifa60"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://cnewal65nbvx"
+north = true
+south = true
+east = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_ytbfg"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://di73onj0nv8kf"
+north = true
+south = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_nt73q"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://bx08n2k7idxfl"
+north = true
+east = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_vgs7k"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://t0gyhwg0qe6h"
+south = true
+east = true
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[sub_resource type="Resource" id="Resource_wge6r"]
+script = ExtResource("2_kxhgd")
+room_path = "uid://bffo0xhvsvdhh"
+west = true
+metadata/_custom_type_script = "uid://blllogm3qtr7"
+
+[node name="DugeonGenerator" type="Node2D" unique_id=953690899]
+script = ExtResource("1_x6ost")
+all_rooms = Array[ExtResource("2_kxhgd")]([SubResource("Resource_byx72"), SubResource("Resource_7es5j"), SubResource("Resource_4s5hr"), SubResource("Resource_nj0bs"), SubResource("Resource_hihqn"), SubResource("Resource_qtfrj"), SubResource("Resource_0wda1"), SubResource("Resource_s407b"), SubResource("Resource_0fcew"), SubResource("Resource_5ecp5"), SubResource("Resource_cd8wk"), SubResource("Resource_ifa60"), SubResource("Resource_ytbfg"), SubResource("Resource_nt73q"), SubResource("Resource_vgs7k")])
+start_room = ExtResource("3_ytbfg")
+dead_end_rooms = Array[ExtResource("2_kxhgd")]([SubResource("Resource_4s5hr"), SubResource("Resource_nj0bs"), SubResource("Resource_hihqn"), SubResource("Resource_wge6r")])
