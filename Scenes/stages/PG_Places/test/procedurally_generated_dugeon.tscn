@@ -18,5 +18,4 @@ max_speed = 1900.0
 speed = 1000.0
 
 [node name="DugeonGenerator" parent="." unique_id=953690899 instance=ExtResource("4_bq8cs")]
-max_rooms = 20
-seed_value = "Icaro"
+max_rooms = 999

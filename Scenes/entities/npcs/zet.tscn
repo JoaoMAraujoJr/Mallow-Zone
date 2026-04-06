@@ -1338,6 +1338,8 @@ max_distance = 3000.0
 max_polyphony = 2
 bus = &"SFX"
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=103875865]
+
 [connection signal="body_entered" from="Zet_Domain_area" to="." method="_on_zet_domain_area_body_entered"]
 [connection signal="body_exited" from="Zet_Domain_area" to="." method="_on_zet_domain_area_body_exited"]
 [connection signal="body_entered" from="Dialogue_entering_area" to="." method="_on_dialogue_entering_area_body_entered"]

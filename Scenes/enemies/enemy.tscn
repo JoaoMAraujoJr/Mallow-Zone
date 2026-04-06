@@ -189,6 +189,9 @@ scale = Vector2(3.425647, 3.425647)
 texture = ExtResource("2_ulvqc")
 script = ExtResource("3_psabu")
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=387446507]
+rect = Rect2(-33, -37, 74, 74)
+
 [connection signal="body_entered" from="EnemyVision" to="." method="_on_enemy_vision_body_entered"]
 [connection signal="body_exited" from="EnemyVision" to="." method="_on_enemy_vision_body_exited"]
 [connection signal="finished" from="DeathAudioStream" to="." method="_on_death_audio_stream_finished"]
