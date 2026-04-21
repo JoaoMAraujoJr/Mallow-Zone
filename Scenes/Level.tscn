@@ -13,18 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://mok5m72dvxgh" path="res://Scenes/entities/npcs/zet.tscn" id="10_133si"]
 [ext_resource type="PackedScene" uid="uid://c3tikolqywyoa" path="res://Scenes/items/guns/pickable/droppedGun.tscn" id="11_esopp"]
 [ext_resource type="PackedScene" uid="uid://bskhmpbtpci18" path="res://Scenes/Unique/save_disket.tscn" id="14_bktio"]
+[ext_resource type="Resource" uid="uid://b1a4e70vr2qky" path="res://Scripts/Resources/Places/Dugeons/WFCDungeon.tres" id="15_nrlyp"]
 [ext_resource type="Script" uid="uid://cwb4yihnf1uiv" path="res://Scripts/Resources/Place.gd" id="15_pmxqn"]
 
 [sub_resource type="Resource" id="Resource_q24aw"]
 script = ExtResource("15_pmxqn")
 place_id = "tutorial"
 display_name = "Tutorial"
-metadata/_custom_type_script = "uid://cwb4yihnf1uiv"
-
-[sub_resource type="Resource" id="Resource_32npc"]
-script = ExtResource("15_pmxqn")
-place_id = "debug_grounds"
-display_name = "DebugGrounds"
 metadata/_custom_type_script = "uid://cwb4yihnf1uiv"
 
 [node name="Level" type="Node2D" unique_id=2090904306]
@@ -96,6 +91,6 @@ warpPlace = SubResource("Resource_q24aw")
 
 [node name="LevelWarper5" parent="." unique_id=842404917 instance=ExtResource("7_ienac")]
 position = Vector2(598, -130)
-warpPlace = SubResource("Resource_32npc")
+warpPlace = ExtResource("15_nrlyp")
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

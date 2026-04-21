@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Place" format=3 uid="uid://b1a4e70vr2qky"]
+
+[ext_resource type="Texture2D" uid="uid://b7tgjjck8k8r" path="res://Assets/Textures/floors/cave/menu_icon.png" id="1_4hb3a"]
+[ext_resource type="Script" uid="uid://cwb4yihnf1uiv" path="res://Scripts/Resources/Place.gd" id="1_wbgdc"]
+
+[resource]
+script = ExtResource("1_wbgdc")
+place_id = "WFCDugeon"
+display_name = "this is a wfc dugeon made for testing only"
+description = "a strange sequence of rooms with no deeper meaning"
+menu_icon = ExtResource("1_4hb3a")
+level_path = "uid://8wsfjywm3xfg"
+metadata/_custom_type_script = "uid://cwb4yihnf1uiv"

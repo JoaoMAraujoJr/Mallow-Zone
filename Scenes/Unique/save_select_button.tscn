@@ -147,7 +147,7 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.26666668)
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -408,23 +408,24 @@ format = 3
 stereo = true
 
 [node name="SaveSelect" type="Control" unique_id=1506632854]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(450, 200)
 layout_mode = 3
 anchor_top = -0.093
 anchor_right = 0.259
 anchor_bottom = 0.101
 offset_top = 66.96
-offset_right = 948.48
-offset_bottom = 647.28
+offset_right = -331.52002
+offset_bottom = 77.28
 script = SubResource("GDScript_tycyy")
 
 [node name="new_not_empty" type="Control" parent="." unique_id=1061808413]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 130.0
-offset_top = 69.0
-offset_right = 170.0
-offset_bottom = 109.0
+offset_left = 196.0
+offset_top = 98.0
+offset_right = 236.0
+offset_bottom = 138.0
+scale = Vector2(1.5, 1.5)
 
 [node name="Panel" type="Panel" parent="new_not_empty" unique_id=923081301]
 layout_mode = 0
@@ -857,13 +858,13 @@ texture_hover = ExtResource("18_ccktu")
 libraries/ = SubResource("AnimationLibrary_j8vd7")
 
 [node name="new_areUsure" type="Control" parent="." unique_id=1617210329]
-visible = false
 layout_mode = 1
 anchors_preset = 0
-offset_left = 130.0
-offset_top = 69.0
-offset_right = 170.0
-offset_bottom = 109.0
+offset_left = 196.0
+offset_top = 98.0
+offset_right = 236.0
+offset_bottom = 138.0
+scale = Vector2(1.5, 1.5)
 
 [node name="background" type="NinePatchRect" parent="new_areUsure" unique_id=1576518351]
 layout_mode = 1
@@ -926,13 +927,13 @@ autowrap_mode = 2
 vertical_alignment = 1
 
 [node name="new_empty" type="Control" parent="." unique_id=240900280]
-visible = false
 layout_mode = 1
 anchors_preset = 0
-offset_left = 130.0
-offset_top = 69.0
-offset_right = 170.0
-offset_bottom = 109.0
+offset_left = 196.0
+offset_top = 98.0
+offset_right = 236.0
+offset_bottom = 138.0
+scale = Vector2(1.5, 1.5)
 
 [node name="create_save" type="TextureButton" parent="new_empty" unique_id=580878564]
 layout_mode = 1

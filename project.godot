@@ -22,6 +22,7 @@ run/main_scene="uid://dtkhf76oj53cs"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
 config/icon="uid://bafwx55qj65xn"
+config/subwindows/embed_subwindows=false
 
 [audio]
 
@@ -45,6 +46,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/window_width_override=854
 window/size/window_height_override=480
+window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
@@ -166,7 +168,7 @@ Inventory={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=3
+textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/stretch/aspect="expand"
 2d/stretch/mode="viewport"
