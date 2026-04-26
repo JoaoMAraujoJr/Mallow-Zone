@@ -25,7 +25,7 @@ var recoil_velocity: Vector2 = Vector2.ZERO
 @export var zoom_speed : float = 0.1 
 @export var target_zoom : float = 0.6 
 @onready var cur_camzoom :float = target_zoom
-@onready var viewBobbing : float = 3
+@export var viewBobbing : float = 3
 
 var gold_wallet:int = 0
 

@@ -6,10 +6,21 @@ extends Control
 @onready var _coords: Label = $InterfaceCanvaLayer/CoordRadarRect/Coordinates
 
 @onready var fpsDisplay :RichTextLabel = $InterfaceCanvaLayer/FPS
+@onready var vignette_overlay :Control = $InterfaceCanvaLayer/Vignette
+@onready var fisheye_overlay :Control = $FishEyeEffectLayer/eyefish
+@onready var phone_overlay : Control = $InterfaceCanvaLayer/Phone
+@onready var psxfilters_overlay: Control = $InterfaceCanvaLayer/psx
 
-# Called when the node enters the scene tree for the first time.
+@export_category("Interface Info")
+@export var display_fps:bool = false
+@export var vignette : bool = true
+@export var fisheye : bool = true
+@export var phone : bool = false
+@export var psxfilters : bool = true
+
+
 func _ready() -> void:
-	pass # Replace with function body.
+	setup_interface()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,3 +38,26 @@ func _process(_delta: float) -> void:
 	
 	
 	pass
+
+
+func setup_interface():
+	if display_fps == true:
+		fpsDisplay.visible = true
+	else:
+		fpsDisplay.visible = false
+	if vignette == true:
+		vignette_overlay.visible = true
+	else:
+		vignette_overlay.visible = false
+	if fisheye == true:
+		fisheye_overlay.visible = true
+	else:
+		fisheye_overlay.visible = false
+	if phone == true:
+		phone_overlay.visible = true
+	else:
+		phone_overlay.visible = false
+	if psxfilters == true:
+		psxfilters_overlay.visible = true
+	else:
+		psxfilters_overlay.visible = false

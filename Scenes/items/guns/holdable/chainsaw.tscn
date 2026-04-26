@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cbry4l6aqwq6a"]
 
 [ext_resource type="Script" uid="uid://tw70m4qup3jg" path="res://Scenes/items/guns/holdable/chainsaw.gd" id="1_37sxq"]
-[ext_resource type="PackedScene" uid="uid://d0rbd767g0y85" path="res://Scenes/particles/confetti_particle_0.tscn" id="2_4m85u"]
+[ext_resource type="PackedScene" uid="uid://cacpu75j0o7gv" path="res://Scenes/particles/car_smoke_particle_emitter.tscn" id="2_4m85u"]
 [ext_resource type="Texture2D" uid="uid://c3v6b738c3b26" path="res://Assets/Textures/items/guns/chainsaw_spr_sheet.png" id="2_i1o4l"]
 [ext_resource type="Texture2D" uid="uid://dg2vxke11u8qx" path="res://Assets/Textures/player_skins/skin_sheets/original_skin_sheet.png" id="3_2g7wb"]
 [ext_resource type="AudioStream" uid="uid://bql1u6laqslhh" path="res://Assets/Sounds/OBJMisc_HairDryerOnOff04_InMotionAudio_BrokenHairDryer.wav" id="4_i1o4l"]

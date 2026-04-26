@@ -15,8 +15,7 @@
 [ext_resource type="FontFile" uid="uid://b56mqtmr75jhn" path="res://Assets/fonts/Coiny-Regular.ttf" id="8_bdx5g"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="9_5npxw"]
 [ext_resource type="PackedScene" uid="uid://dr7y78whn4dis" path="res://Scenes/UI/BossBar.tscn" id="10_gh778"]
-[ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="11_rfejq"]
-[ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="12_15ame"]
+[ext_resource type="Shader" uid="uid://bamjvjfvh5yoj" path="res://Scripts/shaders/MyPSXShader.gdshader" id="12_rw5lu"]
 [ext_resource type="PackedScene" uid="uid://dpqahfejiw8a7" path="res://Scenes/UI/buttons/reset_button.tscn" id="13_ir3vo"]
 [ext_resource type="Texture2D" uid="uid://b51gydmbpyodp" path="res://Assets/Textures/backgrounds/dark.png" id="17_ifgeu"]
 [ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="19_5t6jh"]
@@ -84,7 +83,10 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0njm"]
-shader = ExtResource("11_rfejq")
+shader = ExtResource("12_rw5lu")
+shader_parameter/jitter_intensity = 0.0
+shader_parameter/jitter_instability = 0.0
+shader_parameter/virtual_res_scale = 1.0
 shader_parameter/grain_intensity = 0.1
 shader_parameter/min_lum = 0.0
 shader_parameter/max_lum = 1.0
@@ -92,33 +94,11 @@ shader_parameter/time_scale = 0.5
 shader_parameter/vignette_darkness = 0.5
 shader_parameter/vignette_outer_radius = 1.05200004671012
 shader_parameter/vignette_inner_radius = 0.7750000368125
-shader_parameter/scanline_intensity = 0.2
-shader_parameter/barrel_distortion = 0.0
 shader_parameter/chromatic_aberration = 0.0010000000475
-shader_parameter/crt_vignette_power = 0.750000035625
-shader_parameter/pixel_resolution_x = 1280
-shader_parameter/pixel_resolution_y = 720
-shader_parameter/enable_color_quantization = true
-shader_parameter/color_quant_steps = 9.0000003325
 shader_parameter/warble_amount = 0.002
 shader_parameter/warble_speed = 1.36400006479
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq0n2"]
-shader = ExtResource("12_15ame")
-shader_parameter/resolution = Vector2(768, 432)
-shader_parameter/scan_line_amount = 0.0
-shader_parameter/warp_amount = 0.1
-shader_parameter/noise_amount = 0.0130000006175
-shader_parameter/interference_amount = 0.0
-shader_parameter/grille_amount = 0.1
-shader_parameter/grille_size = 1.0
-shader_parameter/vignette_amount = 0.6
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/aberation_amount = 0.5
-shader_parameter/roll_line_amount = 0.0
-shader_parameter/roll_speed = 1.0
-shader_parameter/scan_line_strength = -10.393999923715
-shader_parameter/pixel_strength = -4.0
+shader_parameter/enable_color_quantization = true
+shader_parameter/color_quant_steps = 9.0000003325
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_gr5gi"]
 diffuse_texture = ExtResource("2_5lcuj")
@@ -419,7 +399,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../Interface/InterfaceCanvaLayer/CRT2:material:shader_parameter/grain_intensity")
+tracks/8/path = NodePath("../Interface/InterfaceCanvaLayer/psxShader:material:shader_parameter/grain_intensity")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -431,7 +411,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Interface/InterfaceCanvaLayer/CRT2:material:shader_parameter/color_quant_steps")
+tracks/9/path = NodePath("../Interface/InterfaceCanvaLayer/psxShader:material:shader_parameter/color_quant_steps")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -443,7 +423,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../Interface/InterfaceCanvaLayer/CRT2:material:shader_parameter/chromatic_aberration")
+tracks/10/path = NodePath("../Interface/InterfaceCanvaLayer/psxShader:material:shader_parameter/chromatic_aberration")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -554,7 +534,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../Interface/InterfaceCanvaLayer/CRT2:material:shader_parameter/grain_intensity")
+tracks/7/path = NodePath("../Interface/InterfaceCanvaLayer/psxShader:material:shader_parameter/grain_intensity")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -566,7 +546,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../Interface/InterfaceCanvaLayer/CRT2:material:shader_parameter/color_quant_steps")
+tracks/8/path = NodePath("../Interface/InterfaceCanvaLayer/psxShader:material:shader_parameter/color_quant_steps")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -578,7 +558,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../Interface/InterfaceCanvaLayer/CRT2:material:shader_parameter/chromatic_aberration")
+tracks/9/path = NodePath("../Interface/InterfaceCanvaLayer/psxShader:material:shader_parameter/chromatic_aberration")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -840,7 +820,7 @@ z_index = 0
 mouse_filter = 1
 mouse_behavior_recursive = 1
 
-[node name="CRT2" type="ColorRect" parent="Interface/InterfaceCanvaLayer" unique_id=213834355]
+[node name="psxShader" type="ColorRect" parent="Interface/InterfaceCanvaLayer" unique_id=213834355]
 z_index = 1
 material = SubResource("ShaderMaterial_w0njm")
 anchors_preset = 15
@@ -849,18 +829,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="CRT" type="ColorRect" parent="Interface/InterfaceCanvaLayer" unique_id=1120040036]
-visible = false
-z_index = 41
-material = SubResource("ShaderMaterial_aq0n2")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
 
 [node name="reset button" parent="Interface" unique_id=1918029492 instance=ExtResource("13_ir3vo")]
 

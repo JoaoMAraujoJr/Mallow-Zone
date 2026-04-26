@@ -5,10 +5,9 @@ signal skin_changed(new_skin: PlayerSkin)
 signal item_picked(item:InventoryItem)
 
 var currentSaveSlot = 1
-
+var cur_settings :SavedSettings
 
 var kills : int = 0
-
 var enemySpeed: float = 50.0
 
 
@@ -38,9 +37,10 @@ var currentSpawnedChunks :={}
 var currentEquipedWeaponType : String = "none"
 var cur_skin: PlayerSkin = load("res://Scripts/Resources/PlayerSkins/normal_skin.tres")
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	pass # Replace with function body.
+	load_settings()
+
 
 
 func pause():
@@ -82,7 +82,6 @@ func _input(event):
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 
-
 func load_from_current_save():
 	if SaveManager.current_save:
 		max_hp = SaveManager.current_save.max_hp
@@ -102,3 +101,26 @@ func load_from_current_save():
 			LevelManager.cur_place = SaveManager.current_save.cur_place
 		else: 
 			LevelManager.cur_place = preload("res://Scripts/Resources/Places/Biomes/GrassLands.tres")
+
+
+func save_and_apply_settings(new_settings: SavedSettings):
+	var dir = DirAccess.open("user://")
+	if not dir.dir_exists("settings"):
+		dir.make_dir("settings")
+	cur_settings = new_settings
+	var path:= "user://settings/saved_settings.tres"
+	ResourceSaver.save(new_settings,path)
+func load_settings():
+	var path = "user://settings/saved_settings.tres"
+	if FileAccess.file_exists(path):
+		var loaded_res = ResourceLoader.load(path)
+		if loaded_res is SavedSettings:
+			cur_settings = loaded_res
+			print("Settings loaded successfully")
+			return
+	# If file doesn't exist or load failed:
+	print("No settings found, creating default")
+	cur_settings = SavedSettings.new()
+	save_and_apply_settings(cur_settings)
+		
+		

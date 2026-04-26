@@ -4,7 +4,8 @@ class_name BackpackInventory
 @export var slot_scene :PackedScene
 @onready var AnimTree: AnimationTree = $AnimationTree
 @onready var anim_state = AnimTree.get("parameters/playback")
-@onready var slotContainer :VBoxContainer= $Control/SlotBar/ScrollContainer/VBoxContainer
+@export var slotContainer :VBoxContainer
+@export var backpackbutton :Button
 var data_backup
 
 enum InventoryState {
@@ -26,11 +27,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Inventory"):
 		if cur_state==InventoryState.CLOSED or cur_state==InventoryState.CLOSING:
 			CursorManager.set_cursor(CursorManager.types.DEFAULT)
-			$middle.mouse_filter = $middle.MOUSE_FILTER_IGNORE
+			backpackbutton.mouse_filter = backpackbutton.MOUSE_FILTER_IGNORE
 			updateInventoryState(InventoryState.OPENING)
 		else:
 			CursorManager.set_cursor(CursorManager.types.CROSSHAIR)
-			$middle.mouse_filter = $middle.MOUSE_FILTER_STOP
+			backpackbutton.mouse_filter = backpackbutton.MOUSE_FILTER_STOP
 			updateInventoryState(InventoryState.CLOSING)
 func _notification(what: int) -> void:
 	
@@ -98,11 +99,11 @@ func compact_inventory():
 func _on_button_pressed() -> void:
 	if cur_state==InventoryState.CLOSED or cur_state==InventoryState.CLOSING:
 		CursorManager.set_cursor(CursorManager.types.DEFAULT)
-		$middle.mouse_filter = $middle.MOUSE_FILTER_IGNORE
+		backpackbutton.mouse_filter = backpackbutton.MOUSE_FILTER_IGNORE
 		updateInventoryState(InventoryState.OPENING)
 	else:
 		CursorManager.set_cursor(CursorManager.types.CROSSHAIR)
-		$middle.mouse_filter = $middle.MOUSE_FILTER_STOP
+		backpackbutton.mouse_filter = backpackbutton.MOUSE_FILTER_STOP
 		updateInventoryState(InventoryState.CLOSING)
 
 func _on_panel_mouse_entered() -> void:

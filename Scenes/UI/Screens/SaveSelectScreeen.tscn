@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://6phxenms48ai"]
 
 [ext_resource type="PackedScene" uid="uid://b471kfbc41iv0" path="res://Scenes/Unique/save_select_button.tscn" id="1_cg2qq"]
-[ext_resource type="FontFile" uid="uid://8hdlsuuv8m7p" path="res://Assets/fonts/BubblegumSans-Regular.ttf" id="2_cg2qq"]
+[ext_resource type="FontFile" uid="uid://rbecbd6xyer6" path="res://Assets/fonts/Jersey20-Regular.ttf" id="2_cg2qq"]
 
 [sub_resource type="GDScript" id="GDScript_hshsc"]
 resource_name = "SaveScreen"
@@ -82,15 +82,17 @@ layout_mode = 2
 
 [node name="Label" type="RichTextLabel" parent="BoxContainer/HBoxContainer" unique_id=1685816215]
 material = SubResource("ShaderMaterial_urwbv")
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.30980393)
+theme_override_constants/line_separation = -19
 theme_override_constants/shadow_outline_size = 0
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/normal_font = ExtResource("2_cg2qq")
-theme_override_font_sizes/normal_font_size = 59
+theme_override_font_sizes/normal_font_size = 68
 bbcode_enabled = true
 text = "[wave amp=10 freq=3][font_size=99]S[/font_size]elect Save[/wave]"
 fit_content = true

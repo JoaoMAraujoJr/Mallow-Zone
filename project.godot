@@ -21,7 +21,7 @@ config/description="The Backyard is a dream-like , procedurally generated , adve
 run/main_scene="uid://dtkhf76oj53cs"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
-config/icon="uid://bafwx55qj65xn"
+config/icon="uid://bnoyyubederp7"
 config/subwindows/embed_subwindows=false
 
 [audio]
@@ -168,7 +168,7 @@ Inventory={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=3
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/stretch/aspect="expand"
 2d/stretch/mode="viewport"

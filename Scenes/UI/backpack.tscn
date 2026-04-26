@@ -13,7 +13,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Backpack/back_backpack:frame")
+tracks/0/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/back_backpack:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Backpack/front_backpack:frame")
+tracks/1/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/front_backpack:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,58 +37,34 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Backpack:scale")
+tracks/2/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Backpack:position")
+tracks/3/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:mouse_filter")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(133, 613)]
+"values": [1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("DropArea:modulate")
+tracks/4/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("DropArea:mouse_filter")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Control/SlotBar/ScrollContainer:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -100,7 +76,7 @@ resource_name = "closed"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Backpack/back_backpack:frame")
+tracks/0/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/back_backpack:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -112,7 +88,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Backpack/front_backpack:frame")
+tracks/1/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/front_backpack:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -124,34 +100,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Backpack:position")
+tracks/2/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(135, 615), Vector2(135, 615)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("DropArea:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Control/SlotBar/ScrollContainer:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -163,7 +127,7 @@ resource_name = "closing"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Backpack/back_backpack:frame")
+tracks/0/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/back_backpack:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -175,7 +139,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Backpack/front_backpack:frame")
+tracks/1/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/front_backpack:frame")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -187,46 +151,34 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Backpack:position")
-tracks/2/interp = 2
+tracks/2/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:modulate")
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.088854305, 0.18578628, 0.2665629, 0.3392619, 0.40792203, 0.48465985, 0.55332, 0.650252, 0.73102856, 0.8198829),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(135, 615), Vector2(133, 613), Vector2(137, 613), Vector2(135, 617), Vector2(137, 613), Vector2(133, 615), Vector2(134, 617), Vector2(133, 613), Vector2(137, 613), Vector2(135, 617), Vector2(135, 615)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("DropArea:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.96666664),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.77, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 0, 1, 1]
+}
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("DropArea:mouse_filter")
-tracks/4/interp = 1
+tracks/4/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer:position")
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.77, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 0, 1, 1]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Control/SlotBar/ScrollContainer:position")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.16512325, 0.6666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -238,7 +190,7 @@ resource_name = "opening"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Backpack/back_backpack:frame")
+tracks/0/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/back_backpack:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -250,7 +202,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Backpack/front_backpack:frame")
+tracks/1/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/front_backpack:frame")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -262,58 +214,34 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Backpack:scale")
+tracks/2/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.16155328, 0.22213577, 0.8666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.755, 1), Vector2(1.175, 0.685), Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Backpack:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.16559212, 0.22213577, 0.8643101),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(135, 615), Vector2(135, 615), Vector2(135.00002, 632), Vector2(135, 615)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("DropArea:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.25, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("DropArea:mouse_filter")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("inventory/HBoxContainer/VBoxContainer2/DropArea:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.4, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [2, 2, 0, 0]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Control/SlotBar/ScrollContainer:position")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.19070573, 0.46666667, 0.63724464, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
@@ -370,18 +298,6 @@ states/Opening/position = Vector2(456, 19)
 transitions = ["Closed", "Opening", SubResource("AnimationNodeStateMachineTransition_hcb2m"), "Opening", "Closing", SubResource("AnimationNodeStateMachineTransition_ytnjk"), "Closing", "Closed", SubResource("AnimationNodeStateMachineTransition_bnj1s"), "Start", "Closed", SubResource("AnimationNodeStateMachineTransition_xu6ap")]
 graph_offset = Vector2(-64.55902, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu6ap"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xu6ap"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8t51d"]
@@ -398,6 +314,8 @@ VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_8t51d")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_uh3e7")
 VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_hcb2m")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_y5f5y")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytnjk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hcb2m"]
 atlas = ExtResource("1_exgub")
@@ -495,8 +413,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytnjk"]
-
 [sub_resource type="GDScript" id="GDScript_6rp4n"]
 resource_name = "DropArea"
 script/source = "extends TextureRect
@@ -535,9 +451,11 @@ func _drop_data(_pos, data):
 	GameManager.ui_backpack.updateInventoryItemDisplay()
 "
 
-[node name="Backpack" type="CanvasLayer" unique_id=821909364]
+[node name="Backpack" type="CanvasLayer" unique_id=821909364 node_paths=PackedStringArray("slotContainer", "backpackbutton")]
 script = ExtResource("1_p5ydr")
 slot_scene = ExtResource("2_xu6ap")
+slotContainer = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer/VBoxContainer")
+backpackbutton = NodePath("inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/middle")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=148875519]
 libraries/ = SubResource("AnimationLibrary_hcb2m")
@@ -549,136 +467,155 @@ parameters/conditions/is_closed = false
 parameters/conditions/is_closing = false
 parameters/conditions/is_opening = false
 
-[node name="back" type="Button" parent="." unique_id=541260083]
-z_index = 1
-anchors_preset = -1
-anchor_left = 0.031000001
-anchor_top = 0.73600006
-anchor_right = 0.16700001
-anchor_bottom = 0.99300003
-offset_left = -15.68
-offset_top = -16.920044
-offset_right = 13.23999
-offset_bottom = 8.079956
-flat = true
-
-[node name="Control" type="Control" parent="." unique_id=1240230416]
+[node name="inventory" type="Control" parent="." unique_id=318761443]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SlotBar" type="Panel" parent="Control" unique_id=1962369410]
-clip_children = 1
-layout_mode = 0
-offset_left = 36.0
-offset_top = 20.0
-offset_right = 468.0
-offset_bottom = 636.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_xu6ap")
+[node name="HBoxContainer" type="HBoxContainer" parent="inventory" unique_id=1655148215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 36
+alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/SlotBar" unique_id=1882368300]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 523.0
-offset_right = 76.0
-offset_bottom = 851.13116
+[node name="VBoxContainer" type="VBoxContainer" parent="inventory/HBoxContainer" unique_id=1489287679]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="BoxContainer" type="BoxContainer" parent="inventory/HBoxContainer/VBoxContainer" unique_id=348571483]
+custom_minimum_size = Vector2(0, 720)
+layout_mode = 2
+
+[node name="Container" type="Control" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer" unique_id=1127186930]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="middle" type="Button" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container" unique_id=1776820489]
+z_index = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.768
+anchor_right = 0.81000006
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 0.039978027
+offset_right = 20.999985
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container" unique_id=1882368300]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.117000006
+anchor_top = -0.012
+anchor_right = 0.90300006
+anchor_bottom = 0.9710001
+offset_left = -19.400002
+offset_top = 531.64
+offset_right = -96.600006
+offset_bottom = 183.9372
+grow_vertical = 2
 scale = Vector2(1.9663539, 1.9663539)
 pivot_offset = Vector2(-20, 0)
 theme = SubResource("Theme_xu6ap")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/SlotBar/ScrollContainer" unique_id=1027401547]
+[node name="VBoxContainer" type="VBoxContainer" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer" unique_id=1027401547]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 
-[node name="slot" parent="Control/SlotBar/ScrollContainer/VBoxContainer" unique_id=230925612 instance=ExtResource("2_xu6ap")]
+[node name="slot" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer/VBoxContainer" unique_id=230925612 instance=ExtResource("2_xu6ap")]
 layout_mode = 2
 
-[node name="slot2" parent="Control/SlotBar/ScrollContainer/VBoxContainer" unique_id=1293437791 instance=ExtResource("2_xu6ap")]
+[node name="slot2" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer/VBoxContainer" unique_id=1293437791 instance=ExtResource("2_xu6ap")]
 layout_mode = 2
 slot_index = 1
 
-[node name="slot3" parent="Control/SlotBar/ScrollContainer/VBoxContainer" unique_id=740985 instance=ExtResource("2_xu6ap")]
+[node name="slot3" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer/VBoxContainer" unique_id=740985 instance=ExtResource("2_xu6ap")]
 layout_mode = 2
 slot_index = 2
 
-[node name="slot4" parent="Control/SlotBar/ScrollContainer/VBoxContainer" unique_id=403745522 instance=ExtResource("2_xu6ap")]
+[node name="slot4" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer/VBoxContainer" unique_id=403745522 instance=ExtResource("2_xu6ap")]
 layout_mode = 2
 slot_index = 3
 
-[node name="slot5" parent="Control/SlotBar/ScrollContainer/VBoxContainer" unique_id=226074418 instance=ExtResource("2_xu6ap")]
+[node name="slot5" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/ScrollContainer/VBoxContainer" unique_id=226074418 instance=ExtResource("2_xu6ap")]
 layout_mode = 2
 slot_index = 4
 
-[node name="Backpack" type="Node2D" parent="." unique_id=1715111307]
-position = Vector2(133, 613)
+[node name="Backpack" type="Control" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container" unique_id=721222473]
+layout_mode = 1
+anchor_left = 0.53300005
+anchor_top = 0.9110001
+anchor_right = 0.53300005
+anchor_bottom = 0.9110001
+offset_left = -135.6
+offset_top = -152.92004
+offset_right = 135.4
+offset_bottom = 64.079956
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
 
-[node name="back_backpack" type="AnimatedSprite2D" parent="Backpack" unique_id=1962979793]
+[node name="front" type="Button" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack" unique_id=629524677]
+z_index = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ytnjk")
+shortcut_in_tooltip = false
+
+[node name="back_backpack" type="AnimatedSprite2D" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack" unique_id=1962979793]
 z_index = -2
-position = Vector2(-3.3011475, -40.039673)
+position = Vector2(134.97842, 74.978455)
 scale = Vector2(4.2180758, 4.2180758)
 sprite_frames = SubResource("SpriteFrames_6rp4n")
 animation = &"open"
 
-[node name="front_backpack" type="AnimatedSprite2D" parent="Backpack" unique_id=951226778]
+[node name="front_backpack" type="AnimatedSprite2D" parent="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack" unique_id=951226778]
 z_index = 3
-position = Vector2(-3.3011475, -40.039673)
+position = Vector2(134.97842, 74.978455)
 scale = Vector2(4.2180758, 4.2180758)
 sprite_frames = SubResource("SpriteFrames_uh3e7")
 animation = &"open"
 
-[node name="middle" type="Button" parent="." unique_id=1776820489]
-z_index = 4
-anchors_preset = -1
-anchor_left = 0.031000001
-anchor_top = 0.73600006
-anchor_right = 0.16700001
-anchor_bottom = 0.99300003
-offset_left = 0.3199997
-offset_top = 0.079956055
-offset_right = 6.23999
-offset_bottom = 7.039978
-flat = true
+[node name="VBoxContainer2" type="VBoxContainer" parent="inventory/HBoxContainer" unique_id=2128095963]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 
-[node name="front" type="Button" parent="." unique_id=629524677]
-z_index = 4
-anchors_preset = -1
-anchor_left = 0.031000001
-anchor_top = 0.73600006
-anchor_right = 0.16700001
-anchor_bottom = 0.99300003
-offset_left = 0.3199997
-offset_top = 92.079956
-offset_right = 0.23999023
-offset_bottom = 0.039978027
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ytnjk")
-shortcut_in_tooltip = false
-flat = true
-
-[node name="DropArea" type="TextureRect" parent="." unique_id=1413152346]
+[node name="DropArea" type="TextureRect" parent="inventory/HBoxContainer/VBoxContainer2" unique_id=1413152346]
 modulate = Color(1, 1, 1, 0)
 z_index = -2
-anchors_preset = -1
-anchor_left = 0.44900003
-anchor_top = 0.41000003
-anchor_right = 0.551
-anchor_bottom = 0.59000003
-offset_left = 0.27996826
-offset_top = -0.2000122
-offset_right = -0.2800293
-offset_bottom = 0.19998169
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(2.4875007, 2.4875007)
-pivot_offset = Vector2(65, 65)
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
 texture = ExtResource("9_hcb2m")
+expand_mode = 4
+stretch_mode = 4
 script = SubResource("GDScript_6rp4n")
 dropped_item = ExtResource("10_hcb2m")
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="inventory/HBoxContainer" unique_id=862551154]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
 [node name="Cursor" parent="." unique_id=2052081059 instance=ExtResource("1_nisp7")]
 
-[connection signal="pressed" from="back" to="." method="_on_button_pressed"]
-[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
-[connection signal="pressed" from="middle" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="front" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/middle" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="inventory/HBoxContainer/VBoxContainer/BoxContainer/Container/Backpack/front" to="." method="_on_button_pressed"]

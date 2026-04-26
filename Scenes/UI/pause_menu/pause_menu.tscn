@@ -5,9 +5,10 @@
 [ext_resource type="Shader" uid="uid://byliyvhuyk4ai" path="res://Scripts/shaders/blur.gdshader" id="1_mwi5l"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="1_xf76s"]
 [ext_resource type="Texture2D" uid="uid://d3g4d3o6uigpu" path="res://Assets/Textures/UI/PauseMenu/ScreemCrack_inside_mask.png" id="2_mwi5l"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="2_vmtwu"]
 [ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="3_6y0ft"]
 [ext_resource type="Shader" uid="uid://ceqwllmcdrbyo" path="res://Scripts/shaders/crt.gdshader" id="4_cngij"]
-[ext_resource type="PackedScene" uid="uid://8nfq8meb3toa" path="res://Scenes/UI/cursor.tscn" id="8_cngij"]
+[ext_resource type="PackedScene" uid="uid://be61tupco3w6l" path="res://Scenes/UI/Screens/options_window.tscn" id="9_vmtwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6y0ft"]
 shader = ExtResource("1_mwi5l")
@@ -66,7 +67,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -78,7 +79,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/screenCrack:modulate")
+tracks/1/path = NodePath("screenCrack:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -90,7 +91,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/SideMenu:modulate")
+tracks/2/path = NodePath("SideMenu:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -102,7 +103,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasLayer/SideMenu/ColorRect:modulate")
+tracks/3/path = NodePath("SideMenu/ColorRect:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -114,7 +115,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CanvasLayer/SideMenu/Options:modulate")
+tracks/4/path = NodePath("SideMenu/Options:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -126,7 +127,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CanvasLayer/SideMenu/Options/resume:modulate")
+tracks/5/path = NodePath("SideMenu/Options/resume:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -138,7 +139,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CanvasLayer/SideMenu/Options/options:modulate")
+tracks/6/path = NodePath("SideMenu/Options/options:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -150,7 +151,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CanvasLayer/SideMenu/Options/quit:modulate")
+tracks/7/path = NodePath("SideMenu/Options/quit:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -162,7 +163,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CanvasLayer/SideMenu/Label:modulate")
+tracks/8/path = NodePath("SideMenu/Label:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -183,13 +184,25 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Options Window:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_mwi5l"]
 resource_name = "Show"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -201,7 +214,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/screenCrack:modulate")
+tracks/1/path = NodePath("screenCrack:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -213,7 +226,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/SideMenu:modulate")
+tracks/2/path = NodePath("SideMenu:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -225,7 +238,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasLayer/SideMenu/ColorRect:modulate")
+tracks/3/path = NodePath("SideMenu/ColorRect:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -237,7 +250,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CanvasLayer/SideMenu/Options:modulate")
+tracks/4/path = NodePath("SideMenu/Options:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -249,7 +262,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CanvasLayer/SideMenu/Options/resume:modulate")
+tracks/5/path = NodePath("SideMenu/Options/resume:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -261,7 +274,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CanvasLayer/SideMenu/Options/options:modulate")
+tracks/6/path = NodePath("SideMenu/Options/options:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -273,7 +286,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CanvasLayer/SideMenu/Options/quit:modulate")
+tracks/7/path = NodePath("SideMenu/Options/quit:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -285,7 +298,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CanvasLayer/SideMenu/Label:modulate")
+tracks/8/path = NodePath("SideMenu/Label:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -306,6 +319,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Options Window:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cngij"]
 _data = {
@@ -313,21 +338,13 @@ _data = {
 &"Show": SubResource("Animation_mwi5l")
 }
 
-[node name="PauseMenu" type="Control" unique_id=1113213481 groups=["PauseMenu"]]
+[node name="PauseMenu" type="CanvasLayer" unique_id=868859235 groups=["PauseMenu"]]
 process_mode = 3
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("1_6y0ft")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1997721841]
-layer = 2
+[node name="Cursor" parent="." unique_id=2052081059 instance=ExtResource("2_vmtwu")]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1486604127]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1486604127]
 material = SubResource("ShaderMaterial_6y0ft")
 anchors_preset = 15
 anchor_right = 1.0
@@ -337,7 +354,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 
-[node name="screenCrack" type="Control" parent="CanvasLayer" unique_id=1432820116]
+[node name="screenCrack" type="Control" parent="." unique_id=1432820116]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -347,18 +364,18 @@ offset_bottom = 143.0
 grow_horizontal = 0
 pivot_offset = Vector2(170, 0)
 
-[node name="crack" type="Sprite2D" parent="CanvasLayer/screenCrack" unique_id=1379869340]
+[node name="crack" type="Sprite2D" parent="screenCrack" unique_id=1379869340]
 position = Vector2(170, -1)
 texture = ExtResource("1_g2bbq")
 offset = Vector2(-129, 128)
 
-[node name="rainbow" type="Sprite2D" parent="CanvasLayer/screenCrack" unique_id=1983845865]
+[node name="rainbow" type="Sprite2D" parent="screenCrack" unique_id=1983845865]
 clip_children = 1
 position = Vector2(170, -1)
 texture = ExtResource("2_mwi5l")
 offset = Vector2(-129, 128)
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/screenCrack/rainbow" unique_id=2103649668]
+[node name="ColorRect2" type="ColorRect" parent="screenCrack/rainbow" unique_id=2103649668]
 material = SubResource("ShaderMaterial_rtob6")
 anchors_preset = -1
 anchor_left = 1.008
@@ -368,13 +385,13 @@ offset_right = -257.048
 offset_bottom = 164.0
 metadata/_edit_use_anchors_ = true
 
-[node name="vhs" type="Sprite2D" parent="CanvasLayer/screenCrack" unique_id=712356505]
+[node name="vhs" type="Sprite2D" parent="screenCrack" unique_id=712356505]
 clip_children = 1
 position = Vector2(170, -1)
 texture = ExtResource("2_mwi5l")
 offset = Vector2(-129, 128)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/screenCrack/vhs" unique_id=1233824727]
+[node name="ColorRect" type="ColorRect" parent="screenCrack/vhs" unique_id=1233824727]
 material = SubResource("ShaderMaterial_s0jth")
 anchors_preset = -1
 anchor_left = 1.008
@@ -384,7 +401,7 @@ offset_right = -257.048
 offset_bottom = 164.0
 mouse_filter = 2
 
-[node name="SideMenu" type="Control" parent="CanvasLayer" unique_id=283641389]
+[node name="SideMenu" type="Control" parent="." unique_id=283641389]
 layout_mode = 3
 anchors_preset = 4
 anchor_top = 0.5
@@ -393,8 +410,9 @@ offset_top = -216.0
 offset_right = 202.0
 offset_bottom = 215.0
 grow_vertical = 2
+mouse_filter = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SideMenu" unique_id=502646249]
+[node name="ColorRect" type="ColorRect" parent="SideMenu" unique_id=502646249]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -408,7 +426,7 @@ rotation = -0.059006196
 mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="Options" type="VBoxContainer" parent="CanvasLayer/SideMenu" unique_id=314252195]
+[node name="Options" type="VBoxContainer" parent="SideMenu" unique_id=314252195]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.064
@@ -422,8 +440,9 @@ offset_bottom = 91.22797
 grow_vertical = 2
 scale = Vector2(0.8456239, 0.8456239)
 
-[node name="resume" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=316881648]
+[node name="resume" type="Button" parent="SideMenu/Options" unique_id=316881648]
 layout_mode = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
 shortcut = SubResource("Shortcut_vmtwu")
@@ -432,8 +451,9 @@ flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="options" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=1321982545]
+[node name="options" type="Button" parent="SideMenu/Options" unique_id=1321982545]
 layout_mode = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
 text = "Options"
@@ -441,8 +461,9 @@ flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="quit" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=1431856079]
+[node name="quit" type="Button" parent="SideMenu/Options" unique_id=1431856079]
 layout_mode = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
 text = "Exit Game"
@@ -450,8 +471,9 @@ flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="main menu" type="Button" parent="CanvasLayer/SideMenu/Options" unique_id=1630492828]
+[node name="main menu" type="Button" parent="SideMenu/Options" unique_id=1630492828]
 layout_mode = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_xf76s")
 theme_override_font_sizes/font_size = 26
 text = "Exit to Main Menu"
@@ -459,7 +481,7 @@ flat = true
 alignment = 0
 autowrap_trim_flags = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/SideMenu" unique_id=433658201]
+[node name="Label" type="Label" parent="SideMenu" unique_id=433658201]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.054
@@ -474,15 +496,16 @@ grow_vertical = 2
 text = "Paused"
 label_settings = SubResource("LabelSettings_g2bbq")
 
-[node name="cursor" parent="CanvasLayer/SideMenu" unique_id=826517490 instance=ExtResource("8_cngij")]
-position = Vector2(284, 162)
+[node name="Options Window" parent="." unique_id=1116742756 instance=ExtResource("9_vmtwu")]
+modulate = Color(1, 1, 1, 0)
+offset_left = 143.0
+offset_right = 143.0
 
 [node name="AppearAnimPlayer" type="AnimationPlayer" parent="." unique_id=1800129319]
 libraries/ = SubResource("AnimationLibrary_cngij")
 
 [node name="PauseCooldown" type="Timer" parent="." unique_id=1934695405]
 
-[connection signal="pressed" from="CanvasLayer/SideMenu/Options/resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="CanvasLayer/SideMenu/Options/quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="CanvasLayer/SideMenu/Options/main menu" to="." method="_on_main_menu_pressed"]
-[connection signal="timeout" from="PauseCooldown" to="." method="_on_pause_cooldown_timeout"]
+[connection signal="pressed" from="SideMenu/Options/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="SideMenu/Options/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="SideMenu/Options/main menu" to="." method="_on_main_menu_pressed"]

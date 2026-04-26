@@ -96,7 +96,6 @@ autostart = true
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1459522712]
 scale = Vector2(3.1200018, 3.1200018)
 ignore_rotation = false
-position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 0.3
 

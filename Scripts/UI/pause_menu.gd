@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 class_name PauseMenu
 
 @onready var AppearAnimPlayer:AnimationPlayer=$AppearAnimPlayer
@@ -18,6 +18,7 @@ func unPauseGame():
 	GameManager.isPaused=true
 	GameManager.pause()
 	get_tree().paused = false
+	queue_free()
 
 func _on_resume_pressed() -> void:
 	if canUnpause:
@@ -26,11 +27,13 @@ func _on_resume_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	if GameManager.canPause and GameManager.isPaused:
+		get_tree().quit()
 	pass # Replace with function body.
 
 
 func _on_main_menu_pressed() -> void:
-	unPauseGame()
-	LoadManager.LoadScene("res://Scenes/UI/main_menu/new_main_menu.tscn")
+	if GameManager.canPause and GameManager.isPaused:
+		unPauseGame()
+		LoadManager.LoadScene("res://Scenes/UI/main_menu/new_main_menu.tscn")
 	pass # Replace with function body.

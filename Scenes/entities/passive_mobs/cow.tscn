@@ -474,7 +474,7 @@ cur_Behaviour = 2
 shy_speed_multiplier = 5.0
 stay_in_place_time = 10.0
 speed = 40.0
-max_health = 10
+max_health = 7
 health = 10
 
 [node name="Visuals" type="Node2D" parent="." unique_id=262759729]

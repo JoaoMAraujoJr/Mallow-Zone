@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://dwa4u1un6myoy"]
+
+[ext_resource type="PackedScene" uid="uid://bbvngwwmb0afo" path="res://Scenes/UI/interface.tscn" id="1_lxo1e"]
+[ext_resource type="Texture2D" uid="uid://cis2try8ve07m" path="res://Assets/Textures/floors/main_hub/proto_hub.png" id="2_51j3x"]
+[ext_resource type="PackedScene" uid="uid://cb5khyq6wnglo" path="res://Scenes/Unique/player.tscn" id="2_lxo1e"]
+[ext_resource type="Texture2D" uid="uid://bhy36w1sjylc8" path="res://Assets/Textures/sprite_masks/light_mask/proto_light_2.png" id="3_koi6b"]
+[ext_resource type="PackedScene" uid="uid://blj7slrk720wa" path="res://Scenes/Unique/teleporter/teleporter.tscn" id="4_51j3x"]
+[ext_resource type="Texture2D" uid="uid://udbvbvyhaa5j" path="res://Assets/spider_body.png" id="5_6oeup"]
+[ext_resource type="PackedScene" uid="uid://s53k1x3wisv0" path="res://Scenes/items/dropped_item.tscn" id="6_xwi3s"]
+[ext_resource type="Texture2D" uid="uid://27m6pur4o0gi" path="res://Assets/Textures/floors/main_hub/proto_hub_normal.png" id="7_hitij"]
+[ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="7_pj7g0"]
+[ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="8_frost"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7ett"]
+radius = 64.92
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hnp7k"]
+diffuse_texture = ExtResource("2_51j3x")
+normal_texture = ExtResource("7_hitij")
+texture_filter = 1
+
+[node name="space_hub" type="Node2D" unique_id=974604230]
+
+[node name="Interface" parent="." unique_id=1650993913 instance=ExtResource("1_lxo1e")]
+fisheye = false
+
+[node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_lxo1e")]
+z_index = 1
+position = Vector2(416, -102)
+max_camzoom = 1.3
+min_camzoom = 4.0
+target_zoom = 1.5
+viewBobbing = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=499329384]
+position = Vector2(5, 0)
+energy = 3.92
+shadow_enabled = true
+texture = ExtResource("3_koi6b")
+texture_scale = 3.16
+height = 187.0
+
+[node name="teleporter" parent="." unique_id=1640721295 node_paths=PackedStringArray("area", "teleport_position") instance=ExtResource("4_51j3x")]
+position = Vector2(-20, 21)
+can_tp = true
+area = NodePath("Area2D")
+teleport_position = NodePath("Marker2D")
+
+[node name="Area2D" type="Area2D" parent="teleporter" unique_id=1478899409]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="teleporter/Area2D" unique_id=105026811]
+shape = SubResource("CircleShape2D_h7ett")
+
+[node name="Marker2D" type="Marker2D" parent="teleporter" unique_id=602451584]
+position = Vector2(-409, -64)
+
+[node name="Sprite2D" type="Sprite2D" parent="teleporter" unique_id=333216580]
+texture = ExtResource("5_6oeup")
+
+[node name="DroppedItem" parent="." unique_id=1637777639 instance=ExtResource("6_xwi3s")]
+position = Vector2(-522, 195)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("7_pj7g0")
+
+[node name="DroppedItem2" parent="." unique_id=1879831939 instance=ExtResource("6_xwi3s")]
+position = Vector2(-423, 195)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("7_pj7g0")
+
+[node name="DroppedItem3" parent="." unique_id=1047375070 instance=ExtResource("6_xwi3s")]
+position = Vector2(-436, 34)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("7_pj7g0")
+
+[node name="DroppedItem4" parent="." unique_id=24606730 instance=ExtResource("6_xwi3s")]
+position = Vector2(-300, 99)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("8_frost")
+
+[node name="DroppedItem5" parent="." unique_id=883655297 instance=ExtResource("6_xwi3s")]
+position = Vector2(-274, 243)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("8_frost")
+
+[node name="DroppedItem6" parent="." unique_id=135044756 instance=ExtResource("6_xwi3s")]
+position = Vector2(-219, 153)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("8_frost")
+
+[node name="DroppedItem7" parent="." unique_id=1636645691 instance=ExtResource("6_xwi3s")]
+position = Vector2(-340, -15)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("8_frost")
+
+[node name="DroppedItem8" parent="." unique_id=1344481581 instance=ExtResource("6_xwi3s")]
+position = Vector2(178, 304)
+scale = Vector2(0.8510244, 0.8510244)
+item = ExtResource("8_frost")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1292942181]
+scale = Vector2(0.8510244, 0.8510244)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=917615636]
+modulate = Color(0.27450982, 0.28627452, 0.29411766, 1)
+z_index = -2
+texture_filter = 1
+position = Vector2(-3, 134)
+scale = Vector2(1.1269207, 1.1269207)
+texture = SubResource("CanvasTexture_hnp7k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=363677098]
+polygon = PackedVector2Array(-744.9845, -204.45947, -285.53824, -203.28442, -278.4879, -207.98463, -266.73737, -243.23627, -262.03714, -245.58638, 238.95276, -245.58638, 249.11154, -239.7111, 262.03714, -209.15968, 267.9124, -204.45947, 666.0633, -202.12428, 670.95605, -200.93431, 781.5227, -153.0724, 784.93634, -150.40697, 1179, 537, 1180, 569, 1181, 40, 786, -649, 669, -695, -756, -689, -1170, 43, -1169, 565, -1166, 516, -752.03485, -200.93431)

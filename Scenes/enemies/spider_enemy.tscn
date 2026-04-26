@@ -1,0 +1,250 @@
+[gd_scene format=3 uid="uid://dk8q273ynl6sg"]
+
+[ext_resource type="Texture2D" uid="uid://0yjfiv0hoorl" path="res://Assets/spider_upper_leg.png" id="1_dcr2g"]
+[ext_resource type="Texture2D" uid="uid://doq8ey23sck1c" path="res://Assets/spider_lower_leg.png" id="2_ikuy5"]
+[ext_resource type="Texture2D" uid="uid://udbvbvyhaa5j" path="res://Assets/spider_body.png" id="3_ts256"]
+[ext_resource type="Texture2D" uid="uid://3napmgj71sin" path="res://Assets/spider_head.png" id="4_ikuy5"]
+
+[sub_resource type="GDScript" id="GDScript_h7ett"]
+resource_name = "spider"
+script/source = "extends Node2D
+
+# =========================
+# 🎨 TEXTURE EXPORTS
+# =========================
+@export var upper_leg_texture: Texture2D
+@export var lower_leg_texture: Texture2D
+
+@export var upper_leg_width := 10.0
+@export var lower_leg_width := 10.0
+
+@export var texture_scale := 1.0
+
+# =========================
+# ⚙️ IK + MOVEMENT CONFIG
+# =========================
+const LEG_COUNT := 8
+const STEP_HEIGHT := 14.0
+const STEP_SPEED := 3.0
+
+const UPPER_LEN := 28.0
+const LOWER_LEN := 28.0
+
+@export var speed := 100.0
+@export var movement_threshold := 30.0
+@export var max_stretch_ratio := 0.8
+@export var step_forward_offset := 30.0
+
+var velocity := Vector2.ZERO
+
+# =========================
+# 🧠 LEG CLASS
+# =========================
+class Leg:
+	var rest_offset: Vector2
+	var foot_pos: Vector2
+	var target_pos: Vector2
+	var stepping := false
+	var step_t := 0.0
+	var group := 0
+	var bend_dir := 1
+
+var legs: Array[Leg] = []
+
+# =========================
+# 🚀 INIT
+# =========================
+func _ready():
+	for i in LEG_COUNT:
+		var leg = Leg.new()
+
+		var angle = TAU * i / LEG_COUNT
+		leg.rest_offset = Vector2.RIGHT.rotated(angle) * 35
+
+		leg.foot_pos = global_position + leg.rest_offset
+		leg.target_pos = leg.foot_pos
+
+		leg.group = i % 2
+		leg.bend_dir = -1 if i < LEG_COUNT/2 else 1
+
+		legs.append(leg)
+
+# =========================
+# 🔁 LOOP
+# =========================
+func _process(delta):
+	update_movement(delta)
+	update_legs(delta)
+	queue_redraw()
+
+# =========================
+# 🧭 MOVEMENT
+# =========================
+func update_movement(delta):
+	var mouse = get_global_mouse_position()
+	var dir = (mouse - global_position).normalized()
+
+	velocity = velocity.lerp(dir * speed, 0.1)
+
+	if velocity.length() < 5.0:
+		velocity = Vector2.ZERO
+
+	global_position += velocity * delta
+
+# =========================
+# 🦵 LEG STEPPING
+# =========================
+func update_legs(delta):
+	var is_moving = velocity.length() > movement_threshold
+
+	for leg in legs:
+		var desired: Vector2
+
+		if is_moving:
+			desired = global_position + leg.rest_offset.rotated(velocity.angle())
+		else:
+			desired = leg.foot_pos
+
+		var stretch = global_position.distance_to(leg.foot_pos)
+		var max_reach = (UPPER_LEN + LOWER_LEN) * max_stretch_ratio
+
+		if is_moving and stretch > max_reach and not leg.stepping:
+			if not is_group_stepping(leg.group):
+				leg.stepping = true
+				leg.step_t = 0.0
+
+				var raw_target = desired
+				if velocity.length() > 0:
+					raw_target += velocity.normalized() * step_forward_offset
+
+				# 🔥 clamp target dentro do alcance
+				var to_target = raw_target - global_position
+				var max_len = (UPPER_LEN + LOWER_LEN) * 0.95
+
+				if to_target.length() > max_len:
+					to_target = to_target.normalized() * max_len
+
+				leg.target_pos = global_position + to_target
+
+		if leg.stepping:
+			leg.step_t += delta * STEP_SPEED
+			var t = leg.step_t
+
+			var lift = sin(t * PI) * STEP_HEIGHT
+			var pos = leg.foot_pos.lerp(leg.target_pos, t)
+			pos.y -= lift
+
+			if t >= 1.0:
+				leg.stepping = false
+				leg.foot_pos = leg.target_pos
+			else:
+				leg.foot_pos = pos
+
+func is_group_stepping(group_id):
+	for leg in legs:
+		if leg.group == group_id and leg.stepping:
+			return true
+	return false
+
+# =========================
+# 🎨 DRAW
+# =========================
+func _draw():
+	for leg in legs:
+		draw_leg_textured(global_position, leg.foot_pos, leg.bend_dir)
+
+	draw_circle(Vector2.ZERO, 10, Color.WHITE)
+
+# =========================
+# 🦴 IK SOLVER
+# =========================
+func solve_ik(root: Vector2, target: Vector2, bend_dir: float) -> Vector2:
+	var to_target = target - root
+	var dist = to_target.length()
+
+	dist = clamp(dist, 0.001, UPPER_LEN + LOWER_LEN - 0.001)
+
+	var dir = to_target.normalized()
+
+	var cos_angle = (UPPER_LEN*UPPER_LEN + dist*dist - LOWER_LEN*LOWER_LEN) / (2 * UPPER_LEN * dist)
+	cos_angle = clamp(cos_angle, -1.0, 1.0)
+
+	var angle = acos(cos_angle)
+	var base_angle = dir.angle()
+
+	var joint_angle = base_angle + angle * bend_dir
+
+	return root + Vector2.RIGHT.rotated(joint_angle) * UPPER_LEN
+
+# =========================
+# 🕷️ TEXTURED LEG DRAW
+# =========================
+func draw_leg_textured(root: Vector2, foot: Vector2, bend_dir: float):
+	var joint = solve_ik(root, foot, bend_dir)
+
+	draw_segment(root, joint, upper_leg_texture, upper_leg_width, UPPER_LEN)
+	draw_segment(joint, foot, lower_leg_texture, lower_leg_width, LOWER_LEN)
+
+# =========================
+# 🧩 SEGMENT DRAW (FIXED)
+# =========================
+func draw_segment(start: Vector2, end: Vector2, texture: Texture2D, width: float, segment_length: float):
+	if texture == null:
+		draw_line(start - global_position, end - global_position, Color.RED, width)
+		return
+
+	var dir = (end - start).normalized()
+	var angle = dir.angle()
+
+	# 🔥 posição baseada em comprimento FIXO
+	var center = start + dir * (segment_length * 0.5) - global_position
+
+	var tex_size = texture.get_size()
+
+	var scale_x = (segment_length / tex_size.x) * texture_scale
+	var scale_y = (width / tex_size.y) * texture_scale
+
+	var transform = Transform2D()
+	transform = transform.rotated(angle)
+	transform = transform.scaled(Vector2(scale_x, scale_y))
+	transform.origin = center
+
+	draw_set_transform_matrix(transform)
+	draw_texture(texture, -tex_size * 0.5)
+	draw_set_transform_matrix(Transform2D.IDENTITY)
+"
+
+[sub_resource type="GDScript" id="GDScript_ts256"]
+resource_name = "head"
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	look_at(get_global_mouse_position())
+	pass
+"
+
+[node name="spider" type="Node2D" unique_id=589596263]
+z_index = 2
+script = SubResource("GDScript_h7ett")
+upper_leg_texture = ExtResource("1_dcr2g")
+lower_leg_texture = ExtResource("2_ikuy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=77044827]
+scale = Vector2(0.7497835, 0.7497835)
+texture = ExtResource("3_ts256")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=699763213]
+z_index = 2
+script = SubResource("GDScript_ts256")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=577867911]
+position = Vector2(23, 1.0000001)
+scale = Vector2(0.65494156, 0.65494156)
+texture = ExtResource("4_ikuy5")

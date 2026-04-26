@@ -1,5 +1,90 @@
 [gd_scene format=3 uid="uid://be61tupco3w6l"]
 
+[sub_resource type="GDScript" id="GDScript_25sb4"]
+resource_name = "options"
+script/source = "extends Control
+
+@onready var settings :SavedSettings = GameManager.cur_settings
+
+@export var resolutions_options : OptionButton
+@export var fullscreen_checkbox : CheckBox
+@export var show_fps_checkbox : CheckBox
+@export var psx_filter_checkbox : CheckBox
+
+@export var master_vol_slider :HSlider
+@export var music_vol_slider :HSlider
+@export var ambience_vol_slider :HSlider
+@export var sfx_vol_slider :HSlider
+
+func _ready() -> void:
+	if GameManager.cur_settings == null:
+		GameManager.load_settings()
+
+	settings = GameManager.cur_settings
+	_print_settings(\"loaded settings\", GameManager.cur_settings)
+	setup()
+func setup():
+	if settings == null: return
+	#video====================================================
+	for index in range(resolutions_options.get_item_count()): #res
+		if resolutions_options.get_item_text(index) == settings.res:
+			resolutions_options.select(index)
+	if settings.fullscreen: #fullscreen
+		fullscreen_checkbox.button_pressed = true
+	else:
+		fullscreen_checkbox.button_pressed = false
+	if settings.show_fps: #show_fps
+		show_fps_checkbox.button_pressed = true
+	else:
+		show_fps_checkbox.button_pressed = false
+	if settings.psx_effects: #filters
+		psx_filter_checkbox.button_pressed = true
+	else:
+		psx_filter_checkbox.button_pressed = false
+	#audio====================================================
+	master_vol_slider.value = settings.master_vol
+	music_vol_slider.value = settings.music_vol
+	ambience_vol_slider.value = settings.ambience_vol
+	sfx_vol_slider.value = settings.sfx_vol
+	
+func save():
+	var current_index = resolutions_options.selected
+	settings.res = resolutions_options.get_item_text(current_index)
+	settings.fullscreen = fullscreen_checkbox.button_pressed
+	settings.show_fps = show_fps_checkbox.button_pressed
+	settings.psx_effects = psx_filter_checkbox.button_pressed
+	settings.master_vol = master_vol_slider.value
+	settings.music_vol = music_vol_slider.value
+	settings.ambience_vol = ambience_vol_slider.value
+	settings.sfx_vol = sfx_vol_slider.value
+	
+	GameManager.save_and_apply_settings(settings)
+	_print_settings(\"saved settings\", settings)
+	
+
+
+func _on_apply_changes_button_pressed() -> void:
+	print(\"saving settings....\")
+	save()
+
+
+func _print_settings(label: String, s: SavedSettings):
+	print(\"---\", label, \" ---\")
+	if s == null:
+		print(\"ERROR: Settings object is NULL\")
+		return
+	
+	print(\"Video Res: \", s.res)
+	print(\"Fullscreen: \", s.fullscreen)
+	print(\"PSX Effects: \", s.psx_effects)
+	print(\"Show FPS: \", s.show_fps)
+	print(\"Master Vol: \", s.master_vol)
+	print(\"Music Vol: \", s.music_vol)
+	print(\"Ambience Vol: \", s.ambience_vol)
+	print(\"SFX Vol: \", s.sfx_vol)
+	print(\"---------------------------------------\")
+"
+
 [sub_resource type="GDScript" id="GDScript_5fnky"]
 resource_name = "audio_manager"
 script/source = "extends VBoxContainer
@@ -34,7 +119,7 @@ func _sfx_vol_slider_value_changed(value: float) -> void:
 [sub_resource type="GDScript" id="GDScript_54cq6"]
 resource_name = "video_manager"
 script/source = "extends VBoxContainer
-
+@export var setting_manager :Control
 @onready var res_options :OptionButton= $\"HBoxContainer/1/resolution/resolution_options\"
 
 func _on_resolution_options_item_selected(index: int) -> void:
@@ -46,22 +131,32 @@ func _on_resolution_options_item_selected(index: int) -> void:
 	
 	get_window().content_scale_size = Vector2i(width, height)
 	DisplayServer.window_set_size(Vector2i(width, height))
-
+	setting_manager.settings.res = text
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	setting_manager.settings.fullscreen = toggled_on
 "
 
-[node name="Options Window" type="Control" unique_id=1116742756]
+[node name="Options Window" type="Control" unique_id=1116742756 node_paths=PackedStringArray("resolutions_options", "fullscreen_checkbox", "show_fps_checkbox", "psx_filter_checkbox", "master_vol_slider", "music_vol_slider", "ambience_vol_slider", "sfx_vol_slider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_25sb4")
+resolutions_options = NodePath("MarginContainer/options/VideoManager/HBoxContainer/1/resolution/resolution_options")
+fullscreen_checkbox = NodePath("MarginContainer/options/VideoManager/HBoxContainer/1/fullscreen/CheckBox")
+show_fps_checkbox = NodePath("MarginContainer/options/VideoManager/HBoxContainer/2/fps/CheckBox")
+psx_filter_checkbox = NodePath("MarginContainer/options/VideoManager/HBoxContainer/2/overlay/CheckBox")
+master_vol_slider = NodePath("MarginContainer/options/AudioManager/MASTER/master_vol_slider")
+music_vol_slider = NodePath("MarginContainer/options/AudioManager/MUSIC/music_vol_slider")
+ambience_vol_slider = NodePath("MarginContainer/options/AudioManager/AMBIENCE/ambience_vol_slider")
+sfx_vol_slider = NodePath("MarginContainer/options/AudioManager/SFX/sfx_vol_slider")
 
 [node name="Panel" type="Panel" parent="." unique_id=549071264]
 custom_minimum_size = Vector2(700, 0)
@@ -168,9 +263,10 @@ custom_minimum_size = Vector2(320, 30)
 layout_mode = 2
 value = 50.0
 
-[node name="VideoManager" type="VBoxContainer" parent="MarginContainer/options" unique_id=957468423]
+[node name="VideoManager" type="VBoxContainer" parent="MarginContainer/options" unique_id=957468423 node_paths=PackedStringArray("setting_manager")]
 layout_mode = 2
 script = SubResource("GDScript_54cq6")
+setting_manager = NodePath("../../..")
 
 [node name="video_options_label" type="Label" parent="MarginContainer/options/VideoManager" unique_id=1869616636]
 layout_mode = 2
@@ -202,20 +298,20 @@ custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 selected = 0
 item_count = 7
-popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
-popup/item_1/text = "1360x768"
-popup/item_1/id = 1
-popup/item_2/text = "1280x720"
-popup/item_2/id = 2
-popup/item_3/text = "1024x768"
-popup/item_3/id = 3
-popup/item_4/text = "800x600"
-popup/item_4/id = 4
-popup/item_5/text = "854x480"
-popup/item_5/id = 5
-popup/item_6/text = "640x480"
-popup/item_6/id = 6
+popup/item_0/text = "2560x1440"
+popup/item_0/id = 5
+popup/item_1/text = "1920x1080"
+popup/item_1/id = 0
+popup/item_2/text = "1368x768"
+popup/item_2/id = 6
+popup/item_3/text = "1360x768"
+popup/item_3/id = 1
+popup/item_4/text = "1280x720"
+popup/item_4/id = 2
+popup/item_5/text = "1024x768"
+popup/item_5/id = 3
+popup/item_6/text = "800x600"
+popup/item_6/id = 4
 
 [node name="fullscreen" type="HBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer/1" unique_id=639720941]
 layout_mode = 2
@@ -242,13 +338,39 @@ alignment = 1
 [node name="overlay_label" type="Label" parent="MarginContainer/options/VideoManager/HBoxContainer/2/overlay" unique_id=1541437284]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
-text = "VHS overlay"
+text = "PSX filter"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/options/VideoManager/HBoxContainer/2/overlay" unique_id=1247883950]
-custom_minimum_size = Vector2(200, 30)
+custom_minimum_size = Vector2(20, 30)
 layout_mode = 2
+
+[node name="fps" type="HBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer/2" unique_id=2053129948]
+layout_mode = 2
+alignment = 1
+
+[node name="fps_label" type="Label" parent="MarginContainer/options/VideoManager/HBoxContainer/2/fps" unique_id=2027105118]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+text = "Show FPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/options/VideoManager/HBoxContainer/2/fps" unique_id=1571012407]
+custom_minimum_size = Vector2(20, 30)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/options" unique_id=1818868076]
+custom_minimum_size = Vector2(0, 99.345)
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/options/HBoxContainer" unique_id=627616881]
+custom_minimum_size = Vector2(130, 35)
+layout_mode = 2
+size_flags_vertical = 4
+text = "apply changes"
 
 [connection signal="value_changed" from="MarginContainer/options/AudioManager/MASTER/master_vol_slider" to="MarginContainer/options/AudioManager" method="_master_vol_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/options/AudioManager/MUSIC/music_vol_slider" to="MarginContainer/options/AudioManager" method="_music_vol_slider_value_changed"]
@@ -256,3 +378,4 @@ layout_mode = 2
 [connection signal="value_changed" from="MarginContainer/options/AudioManager/SFX/sfx_vol_slider" to="MarginContainer/options/AudioManager" method="_sfx_vol_slider_value_changed"]
 [connection signal="item_selected" from="MarginContainer/options/VideoManager/HBoxContainer/1/resolution/resolution_options" to="MarginContainer/options/VideoManager" method="_on_resolution_options_item_selected"]
 [connection signal="toggled" from="MarginContainer/options/VideoManager/HBoxContainer/1/fullscreen/CheckBox" to="MarginContainer/options/VideoManager" method="_on_check_box_toggled"]
+[connection signal="pressed" from="MarginContainer/options/HBoxContainer/Button" to="." method="_on_apply_changes_button_pressed"]

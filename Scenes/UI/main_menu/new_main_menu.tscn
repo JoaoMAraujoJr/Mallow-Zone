@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dtkhf76oj53cs"]
 
-[ext_resource type="Shader" uid="uid://dxdgulnkqc0ir" path="res://Scripts/shaders/PsxCrtShader.gdshader" id="1_3h75r"]
 [ext_resource type="FontFile" uid="uid://cy7kwhw6oc1hg" path="res://Assets/fonts/Scrambled_Eggs_Short_Lower_Bold.ttf" id="1_6bybg"]
 [ext_resource type="Shader" uid="uid://d4go74yt5e7il" path="res://Scripts/shaders/ChromeShader.gdshader" id="2_3h75r"]
 [ext_resource type="Texture2D" uid="uid://fn3pmog47geq" path="res://Scenes/UI/main_menu/textoverlay.png" id="3_1alar"]
@@ -15,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bbg17wnxnnagf" path="res://Scenes/Unique/SkinManager.tscn" id="7_urwbv"]
 [ext_resource type="Resource" uid="uid://c4275m0buqrc" path="res://Scripts/Resources/PlayerSkins/normal_skin.tres" id="8_co37i"]
 [ext_resource type="Texture2D" uid="uid://c11xafi3xgw0g" path="res://Assets/Textures/UI/game_menu/back_0.png" id="8_os8pt"]
+[ext_resource type="Texture2D" uid="uid://cprythy3jbh1s" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_1.png" id="11_os8pt"]
+[ext_resource type="Texture2D" uid="uid://cyijx7oqprusx" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_5.png" id="12_os8pt"]
+[ext_resource type="Shader" uid="uid://bamjvjfvh5yoj" path="res://Scripts/shaders/MyPSXShader.gdshader" id="16_os8pt"]
 
 [sub_resource type="GDScript" id="GDScript_q6hi6"]
 resource_name = "MainMenu"
@@ -95,6 +97,44 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_l5e4d"]
 events = [SubResource("InputEventKey_os8pt")]
 
+[sub_resource type="Animation" id="Animation_os8pt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/SubViewport/BackgroundScene/planet:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l5e4d"]
+resource_name = "walking"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer/SubViewport/BackgroundScene/planet:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.37350047, 0), Vector3(-6.2831855, -0.37350047, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6emda"]
+_data = {
+&"RESET": SubResource("Animation_os8pt"),
+&"walking": SubResource("Animation_l5e4d")
+}
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6bybg"]
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0.024656769, 0.022763666, 0.021040808, 1)
@@ -110,39 +150,81 @@ sky = SubResource("Sky_3h75r")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwu4y"]
-albedo_texture = ExtResource("4_1alar")
-uv1_scale = Vector3(0.705, 0.705, 0.705)
-uv1_triplanar = true
-uv1_world_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3h75r"]
-transparency = 1
-cull_mode = 1
-albedo_color = Color(0, 0, 0, 0.7019608)
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_co37i"]
 viewport_path = NodePath("BG/SubViewport")
 
+[sub_resource type="Gradient" id="Gradient_6l05r"]
+offsets = PackedFloat32Array(0, 0.20564516, 0.22177419, 0.5403226, 0.54435486, 0.7782258, 0.78629035, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0612641, 0.0612641, 0.0612641, 1, 0.25947148, 0.25947148, 0.25947148, 1, 0.42401433, 0.42401433, 0.42401433, 1, 0.733871, 0.733871, 0.733871, 1, 0.7746931, 0.7746931, 0.7746931, 1, 0.9788039, 0.9788039, 0.9788039, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1upeu"]
+frequency = 0.0327
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_os8pt"]
+noise = SubResource("FastNoiseLite_1upeu")
+color_ramp = SubResource("Gradient_6l05r")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_6emda"]
+offsets = PackedFloat32Array(0, 0.425, 0.5708333, 0.875, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.02075057, 0.08907395, 0.10705998, 0.13868614, 0.5609549, 0.5609549, 0.56095487, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mb4oy"]
+noise_type = 3
+frequency = 0.0067
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tnmem"]
+noise = SubResource("FastNoiseLite_mb4oy")
+color_ramp = SubResource("Gradient_6emda")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puceb"]
+albedo_texture = ExtResource("11_os8pt")
+detail_enabled = true
+detail_mask = SubResource("NoiseTexture2D_tnmem")
+detail_albedo = ExtResource("12_os8pt")
+uv1_scale = Vector3(0.44, 0.44, 0.44)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 144.89001
+grow = true
+grow_amount = 0.01
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l5e4d"]
+frequency = 0.0193
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6emda"]
+noise = SubResource("FastNoiseLite_l5e4d")
+invert = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb4oy"]
+next_pass = SubResource("StandardMaterial3D_puceb")
+albedo_texture = ExtResource("4_1alar")
+normal_enabled = true
+normal_scale = 0.35
+normal_texture = SubResource("NoiseTexture2D_6emda")
+heightmap_enabled = true
+heightmap_scale = 8.158
+heightmap_texture = SubResource("NoiseTexture2D_os8pt")
+uv1_triplanar = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1alar"]
-shader = ExtResource("1_3h75r")
+shader = ExtResource("16_os8pt")
+shader_parameter/jitter_intensity = 0.2150000102125
+shader_parameter/jitter_instability = 0.001
+shader_parameter/virtual_res_scale = 1.054000002565
 shader_parameter/grain_intensity = 0.1
 shader_parameter/min_lum = 0.0
-shader_parameter/max_lum = 1.0
+shader_parameter/max_lum = 0.7670000364325
 shader_parameter/time_scale = 0.5
 shader_parameter/vignette_darkness = 0.5
-shader_parameter/vignette_outer_radius = 1.05200004671012
-shader_parameter/vignette_inner_radius = 0.7750000368125
-shader_parameter/scanline_intensity = 0.2
-shader_parameter/barrel_distortion = 0.0
-shader_parameter/chromatic_aberration = 0.0010000000475
-shader_parameter/crt_vignette_power = 0.750000035625
-shader_parameter/pixel_resolution_x = 1280
-shader_parameter/pixel_resolution_y = 720
+shader_parameter/vignette_outer_radius = 0.82400003588012
+shader_parameter/vignette_inner_radius = 0.1550000073625
+shader_parameter/chromatic_aberration = 0.0
+shader_parameter/warble_amount = 0.002000000095
+shader_parameter/warble_speed = 0.0
 shader_parameter/enable_color_quantization = true
-shader_parameter/color_quant_steps = 9.0000003325
-shader_parameter/warble_amount = 0.002
-shader_parameter/warble_speed = 1.36400006479
+shader_parameter/color_quant_steps = 6.6890002227275
 
 [sub_resource type="Animation" id="Animation_rrcgd"]
 length = 0.001
@@ -173,7 +255,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Filters/CRT:material:shader_parameter/grain_intensity")
+tracks/2/path = NodePath("../Filters/PSX shader:material:shader_parameter/grain_intensity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -193,6 +275,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.3590000170525]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Filters/PSX shader:material:shader_parameter/chromatic_aberration")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_pkpk7"]
@@ -226,7 +320,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Filters/CRT:material:shader_parameter/grain_intensity")
+tracks/2/path = NodePath("../Filters/PSX shader:material:shader_parameter/grain_intensity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -247,73 +341,23 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.3590000170525, 0.3590000170525, 1.0, 0.3590000170525, 0.3590000170525]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Filters/PSX shader:material:shader_parameter/chromatic_aberration")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5.41, 5.76, 5.97, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.00999999977648, 0.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q6hi6"]
 _data = {
 &"RESET": SubResource("Animation_rrcgd"),
 &"glitch": SubResource("Animation_pkpk7")
-}
-
-[sub_resource type="Animation" id="Animation_jwu4y"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BackgroundScene/floor:material:uv1_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BackgroundScene/Camera3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.0160055, 3.4160366)]
-}
-
-[sub_resource type="Animation" id="Animation_q6hi6"]
-resource_name = "walking"
-length = 8.166667
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BackgroundScene/floor:material:uv1_offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 8.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -4)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BackgroundScene/Camera3D:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.90000004, 1.2, 1.5000001, 1.8000001, 2.1, 2.38, 2.68, 2.98, 3.2800002, 3.55, 3.85, 4.15, 4.45, 4.73, 5.03, 5.33, 5.63, 5.94, 6.2400002, 6.54, 6.84, 7.12, 7.42, 7.72, 8.0199995),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416), Vector3(0, 1.0160055, 3.4160366), Vector3(0, 0.976, 3.416)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_urwbv"]
-_data = {
-&"RESET": SubResource("Animation_jwu4y"),
-&"walking": SubResource("Animation_q6hi6")
 }
 
 [sub_resource type="Animation" id="Animation_urwbv"]
@@ -510,13 +554,13 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath(".:offset")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.66, 1.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.62, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 999), Vector2(0, 0)]
+"values": [Vector2(0, 9999), Vector2(0, 999), Vector2(0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -565,6 +609,7 @@ script = SubResource("GDScript_q6hi6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -575,7 +620,6 @@ alignment = 1
 
 [node name="BoxContainer" type="BoxContainer" parent="1_Menu/MarginContainer/VBoxContainer" unique_id=1111979629]
 layout_mode = 2
-alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="1_Menu/MarginContainer/VBoxContainer/BoxContainer" unique_id=46804567]
 clip_children = 2
@@ -668,7 +712,6 @@ layout_mode = 2
 
 [node name="play" type="HBoxContainer" parent="1_Menu/MarginContainer/VBoxContainer/selection" unique_id=1779324095]
 layout_mode = 2
-alignment = 1
 
 [node name="Play" type="Button" parent="1_Menu/MarginContainer/VBoxContainer/selection/play" unique_id=1817331672]
 layout_mode = 2
@@ -685,7 +728,6 @@ text = "play"
 
 [node name="options" type="HBoxContainer" parent="1_Menu/MarginContainer/VBoxContainer/selection" unique_id=372327302]
 layout_mode = 2
-alignment = 1
 
 [node name="options" type="Button" parent="1_Menu/MarginContainer/VBoxContainer/selection/options" unique_id=581749081]
 layout_mode = 2
@@ -703,7 +745,6 @@ text = "options"
 
 [node name="quit" type="HBoxContainer" parent="1_Menu/MarginContainer/VBoxContainer/selection" unique_id=1939095740]
 layout_mode = 2
-alignment = 1
 
 [node name="quit" type="Button" parent="1_Menu/MarginContainer/VBoxContainer/selection/quit" unique_id=1859631016]
 layout_mode = 2
@@ -769,6 +810,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="background_anim_player" type="AnimationPlayer" parent="BG" unique_id=1851345480]
+libraries/ = SubResource("AnimationLibrary_6emda")
+autoplay = &"walking"
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="BG" unique_id=2127860401]
 layout_mode = 1
 anchors_preset = 15
@@ -789,68 +834,39 @@ light_energy = 1.4
 shadow_enabled = true
 
 [node name="BackgroundScene" type="Node3D" parent="BG/SubViewportContainer/SubViewport" unique_id=1815383315]
-visible = false
 
 [node name="Camera3D" type="Camera3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1383454774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0160055, 3.4160366)
-fov = 98.519745
+transform = Transform3D(0.9792693, 0.19526856, 0.053869676, -0.19307804, 0.98022777, -0.04329488, -0.06125868, 0.031996287, 0.99760896, 0, 1.6827221, 3.493107)
+fov = 74.25544
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=373939453]
 environment = SubResource("Environment_1alar")
 
-[node name="floor" type="CSGBox3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1473547326]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19368744, -0.18079138, -0.31607056)
-size = Vector3(7.3364105, 1, 6.6558228)
-material = SubResource("StandardMaterial3D_jwu4y")
-
-[node name="fog" type="Node3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=1551392558]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 1.3630619)
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1548830721]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
-radius = 3.1428263
-material = SubResource("StandardMaterial3D_3h75r")
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=843745894]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
-radius = 3.6936347
-material = SubResource("StandardMaterial3D_3h75r")
-
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=2003326099]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
-radius = 4.0877376
-material = SubResource("StandardMaterial3D_3h75r")
-
-[node name="CSGSphere3D4" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=1658748875]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
-radius = 4.716187
-material = SubResource("StandardMaterial3D_3h75r")
-
-[node name="CSGSphere3D5" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/fog" unique_id=216473130]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0, 0)
-radius = 5.4354095
-material = SubResource("StandardMaterial3D_3h75r")
-
-[node name="Sprite3D" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=932455704]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9460968, 1.9948809)
+[node name="player" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=932455704]
+transform = Transform3D(0.93929076, -0.137652, -0.3143006, 0.13053788, 0.99048066, -0.043679904, 0.31732115, 8.204698e-09, 0.9483181, 1.3581328, 1.8098496, 0.75772685)
 double_sided = false
 alpha_cut = 2
 texture_filter = 0
 texture = SubResource("ViewportTexture_co37i")
 
-[node name="shadow" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/Sprite3D" unique_id=1924552696]
-transform = Transform3D(1.9679468, 0, 0, 0, -1.3696658e-07, 1.0000001, 0, -3.13343, -4.3711392e-08, 0, -0.6215163, 0)
-double_sided = false
-alpha_cut = 2
-texture_filter = 0
-texture = ExtResource("7_hshsc")
+[node name="Decal" type="Decal" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/player" unique_id=305471297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032162666, -0.7698324, 0.028166771)
+size = Vector3(0.64099884, 0.69903564, 0.3983822)
+texture_albedo = ExtResource("7_hshsc")
+normal_fade = 0.269
 
-[node name="shadow2" type="Sprite3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/Sprite3D" unique_id=1902807574]
-transform = Transform3D(1.9679468, 0, 0, 0, -1.3696658e-07, 1.0000001, 0, -3.13343, -4.3711392e-08, 0, -0.6215163, 0)
-double_sided = false
-alpha_cut = 2
-texture_filter = 0
-texture = ExtResource("7_hshsc")
+[node name="Decal2" type="Decal" parent="BG/SubViewportContainer/SubViewport/BackgroundScene/player" unique_id=723819022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032162666, -0.7698324, 0.028166771)
+size = Vector3(0.64099884, 0.69903564, 0.3983822)
+texture_albedo = ExtResource("7_hshsc")
+normal_fade = 0.269
+
+[node name="planet" type="CSGSphere3D" parent="BG/SubViewportContainer/SubViewport/BackgroundScene" unique_id=767229461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3351815, -1.5558468, -0.9244163)
+radius = 3.3501925
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_mb4oy")
 
 [node name="SubViewport" type="SubViewport" parent="BG" unique_id=1973158620]
 transparent_bg = true
@@ -859,7 +875,6 @@ size = Vector2i(128, 128)
 
 [node name="PlayerSkinManager" parent="BG/SubViewport" unique_id=1647972410 instance=ExtResource("7_urwbv")]
 position = Vector2(64, 95)
-is_backwards = true
 cur_action = 1
 skin = ExtResource("8_co37i")
 
@@ -882,7 +897,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CRT" type="ColorRect" parent="Filters" unique_id=1781847719]
+[node name="PSX shader" type="ColorRect" parent="Filters" unique_id=1781847719]
 z_index = 1
 material = SubResource("ShaderMaterial_1alar")
 layout_mode = 1
@@ -903,11 +918,6 @@ bus = &"Music"
 [node name="MusicGlith" type="AnimationPlayer" parent="MenuMusic" unique_id=1535157751]
 libraries/ = SubResource("AnimationLibrary_q6hi6")
 autoplay = &"glitch"
-
-[node name="Walking" type="AnimationPlayer" parent="." unique_id=1039804610]
-root_node = NodePath("../BG/SubViewportContainer/SubViewport")
-libraries/ = SubResource("AnimationLibrary_urwbv")
-autoplay = &"walking"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1144834030]
 root_node = NodePath("../2_SaveSelect")
