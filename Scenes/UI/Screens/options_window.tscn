@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://be61tupco3w6l"]
 
+[ext_resource type="Theme" uid="uid://b8qb0x2jgy0pv" path="res://Assets/Themes/menu_theme.tres" id="1_54cq6"]
+
 [sub_resource type="GDScript" id="GDScript_25sb4"]
 resource_name = "options"
 script/source = "extends Control
@@ -165,10 +167,13 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -310.0
-offset_right = 310.0
+offset_left = -350.0
+offset_top = 12.0
+offset_right = 350.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_54cq6")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=364134170]
 layout_mode = 1
@@ -179,33 +184,40 @@ offset_top = 25.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_54cq6")
 
 [node name="options" type="VBoxContainer" parent="MarginContainer" unique_id=156210220]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 
 [node name="options_label" type="Label" parent="MarginContainer/options" unique_id=210692831]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 theme_override_font_sizes/font_size = 39
 text = "Options"
 horizontal_alignment = 1
 
 [node name="AudioManager" type="VBoxContainer" parent="MarginContainer/options" unique_id=597129611]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 script = SubResource("GDScript_5fnky")
 
 [node name="Label" type="Label" parent="MarginContainer/options/AudioManager" unique_id=458886293]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 theme_override_font_sizes/font_size = 39
 text = "Audio"
 horizontal_alignment = 1
 
 [node name="MASTER" type="HBoxContainer" parent="MarginContainer/options/AudioManager" unique_id=1270968089]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/options/AudioManager/MASTER" unique_id=1651979465]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "Master Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -213,15 +225,18 @@ vertical_alignment = 1
 [node name="master_vol_slider" type="HSlider" parent="MarginContainer/options/AudioManager/MASTER" unique_id=1520489808]
 custom_minimum_size = Vector2(320, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 value = 50.0
 
 [node name="MUSIC" type="HBoxContainer" parent="MarginContainer/options/AudioManager" unique_id=1031159285]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/options/AudioManager/MUSIC" unique_id=1248816799]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "Music Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -229,15 +244,18 @@ vertical_alignment = 1
 [node name="music_vol_slider" type="HSlider" parent="MarginContainer/options/AudioManager/MUSIC" unique_id=1817075927]
 custom_minimum_size = Vector2(320, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 value = 50.0
 
 [node name="AMBIENCE" type="HBoxContainer" parent="MarginContainer/options/AudioManager" unique_id=1565361519]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/options/AudioManager/AMBIENCE" unique_id=1255488867]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "Ambience Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -245,15 +263,18 @@ vertical_alignment = 1
 [node name="ambience_vol_slider" type="HSlider" parent="MarginContainer/options/AudioManager/AMBIENCE" unique_id=1357607824]
 custom_minimum_size = Vector2(320, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 value = 50.0
 
 [node name="SFX" type="HBoxContainer" parent="MarginContainer/options/AudioManager" unique_id=1535970829]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/options/AudioManager/SFX" unique_id=1711452344]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "SFX Volume"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -261,34 +282,41 @@ vertical_alignment = 1
 [node name="sfx_vol_slider" type="HSlider" parent="MarginContainer/options/AudioManager/SFX" unique_id=1988395456]
 custom_minimum_size = Vector2(320, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 value = 50.0
 
 [node name="VideoManager" type="VBoxContainer" parent="MarginContainer/options" unique_id=957468423 node_paths=PackedStringArray("setting_manager")]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 script = SubResource("GDScript_54cq6")
 setting_manager = NodePath("../../..")
 
 [node name="video_options_label" type="Label" parent="MarginContainer/options/VideoManager" unique_id=1869616636]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 theme_override_font_sizes/font_size = 39
 text = "Video"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/options/VideoManager" unique_id=1007126914]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="1" type="VBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer" unique_id=442511536]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="resolution" type="HBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer/1" unique_id=338701624]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="resolution_label" type="Label" parent="MarginContainer/options/VideoManager/HBoxContainer/1/resolution" unique_id=1082009414]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "Resolution"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -296,6 +324,7 @@ vertical_alignment = 1
 [node name="resolution_options" type="OptionButton" parent="MarginContainer/options/VideoManager/HBoxContainer/1/resolution" unique_id=1228886051]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 selected = 0
 item_count = 7
 popup/item_0/text = "2560x1440"
@@ -315,11 +344,13 @@ popup/item_6/id = 4
 
 [node name="fullscreen" type="HBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer/1" unique_id=639720941]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="fullscreen_label" type="Label" parent="MarginContainer/options/VideoManager/HBoxContainer/1/fullscreen" unique_id=1765633510]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "Fullscreen "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -327,17 +358,22 @@ vertical_alignment = 1
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/options/VideoManager/HBoxContainer/1/fullscreen" unique_id=1318219730]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
+flat = true
 
 [node name="2" type="VBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer" unique_id=48256203]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 
 [node name="overlay" type="HBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer/2" unique_id=1441661669]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="overlay_label" type="Label" parent="MarginContainer/options/VideoManager/HBoxContainer/2/overlay" unique_id=1541437284]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "PSX filter"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -345,14 +381,18 @@ vertical_alignment = 1
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/options/VideoManager/HBoxContainer/2/overlay" unique_id=1247883950]
 custom_minimum_size = Vector2(20, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
+flat = true
 
 [node name="fps" type="HBoxContainer" parent="MarginContainer/options/VideoManager/HBoxContainer/2" unique_id=2053129948]
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="fps_label" type="Label" parent="MarginContainer/options/VideoManager/HBoxContainer/2/fps" unique_id=2027105118]
 custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 text = "Show FPS"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -360,16 +400,20 @@ vertical_alignment = 1
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/options/VideoManager/HBoxContainer/2/fps" unique_id=1571012407]
 custom_minimum_size = Vector2(20, 30)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
+flat = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/options" unique_id=1818868076]
 custom_minimum_size = Vector2(0, 99.345)
 layout_mode = 2
+theme = ExtResource("1_54cq6")
 alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/options/HBoxContainer" unique_id=627616881]
 custom_minimum_size = Vector2(130, 35)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_54cq6")
 text = "apply changes"
 
 [connection signal="value_changed" from="MarginContainer/options/AudioManager/MASTER/master_vol_slider" to="MarginContainer/options/AudioManager" method="_master_vol_slider_value_changed"]

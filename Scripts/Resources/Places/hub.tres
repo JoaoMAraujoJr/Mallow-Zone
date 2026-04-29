@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Place" format=3 uid="uid://bng06kxjbn5o7"]
+
+[ext_resource type="Texture2D" uid="uid://b2tj0oy6ac8a" path="res://Assets/Textures/floors/main_hub/menu_icon.png" id="1_7fgs6"]
+[ext_resource type="Script" uid="uid://cwb4yihnf1uiv" path="res://Scripts/Resources/Place.gd" id="1_welng"]
+
+[resource]
+script = ExtResource("1_welng")
+place_id = "ship"
+display_name = "The Explorer Ship"
+description = "There's no place like our own home. Even if you don't remember it so well, it's still yours..."
+menu_icon = ExtResource("1_7fgs6")
+level_path = "uid://dwa4u1un6myoy"
+metadata/_custom_type_script = "uid://cwb4yihnf1uiv"

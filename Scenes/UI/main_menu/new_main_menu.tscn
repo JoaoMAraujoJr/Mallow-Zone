@@ -879,13 +879,10 @@ cur_action = 1
 skin = ExtResource("8_co37i")
 
 [node name="mouse" type="CanvasLayer" parent="." unique_id=986388149]
-layer = 3
+layer = 5
 
 [node name="Cursor" parent="mouse" unique_id=2116295921 instance=ExtResource("7_rrcgd")]
-offset_left = -46.0
-offset_top = 46.0
-offset_right = -46.0
-offset_bottom = 46.0
+scale = Vector2(0.029113533, 0.029113533)
 mouse_filter = 2
 
 [node name="Filters" type="Control" parent="." unique_id=1312921980]

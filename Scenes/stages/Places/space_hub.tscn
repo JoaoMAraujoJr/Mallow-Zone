@@ -11,18 +11,33 @@
 [ext_resource type="Resource" uid="uid://bv26dvefxqww5" path="res://Scripts/Resources/items/mango.tres" id="7_pj7g0"]
 [ext_resource type="Resource" uid="uid://c84rkmlljtryb" path="res://Scripts/Resources/items/apple.tres" id="8_frost"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h7ett"]
-radius = 64.92
-
 [sub_resource type="CanvasTexture" id="CanvasTexture_hnp7k"]
 diffuse_texture = ExtResource("2_51j3x")
 normal_texture = ExtResource("7_hitij")
 texture_filter = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7ett"]
+radius = 34.0147
+
 [node name="space_hub" type="Node2D" unique_id=974604230]
 
 [node name="Interface" parent="." unique_id=1650993913 instance=ExtResource("1_lxo1e")]
 fisheye = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1292942181]
+z_index = -1
+scale = Vector2(0.8510244, 0.8510244)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=917615636]
+modulate = Color(0.27450982, 0.28627452, 0.29411766, 1)
+z_index = -2
+texture_filter = 1
+position = Vector2(-3, 134)
+scale = Vector2(1.1269207, 1.1269207)
+texture = SubResource("CanvasTexture_hnp7k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=363677098]
+polygon = PackedVector2Array(-744.9845, -204.45947, -285.53824, -203.28442, -278.4879, -207.98463, -266.73737, -243.23627, -262.03714, -245.58638, 238.95276, -245.58638, 249.11154, -239.7111, 262.03714, -209.15968, 267.9124, -204.45947, 666.0633, -202.12428, 670.95605, -200.93431, 781.5227, -153.0724, 784.93634, -150.40697, 1179, 537, 1180, 569, 1181, 40, 786, -649, 669, -695, -756, -689, -1170, 43, -1169, 565, -1166, 516, -752.03485, -200.93431)
 
 [node name="Player" parent="." unique_id=118340029 instance=ExtResource("2_lxo1e")]
 z_index = 1
@@ -41,7 +56,7 @@ texture_scale = 3.16
 height = 187.0
 
 [node name="teleporter" parent="." unique_id=1640721295 node_paths=PackedStringArray("area", "teleport_position") instance=ExtResource("4_51j3x")]
-position = Vector2(-20, 21)
+position = Vector2(-100, -25)
 can_tp = true
 area = NodePath("Area2D")
 teleport_position = NodePath("Marker2D")
@@ -96,17 +111,3 @@ item = ExtResource("8_frost")
 position = Vector2(178, 304)
 scale = Vector2(0.8510244, 0.8510244)
 item = ExtResource("8_frost")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1292942181]
-scale = Vector2(0.8510244, 0.8510244)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=917615636]
-modulate = Color(0.27450982, 0.28627452, 0.29411766, 1)
-z_index = -2
-texture_filter = 1
-position = Vector2(-3, 134)
-scale = Vector2(1.1269207, 1.1269207)
-texture = SubResource("CanvasTexture_hnp7k")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=363677098]
-polygon = PackedVector2Array(-744.9845, -204.45947, -285.53824, -203.28442, -278.4879, -207.98463, -266.73737, -243.23627, -262.03714, -245.58638, 238.95276, -245.58638, 249.11154, -239.7111, 262.03714, -209.15968, 267.9124, -204.45947, 666.0633, -202.12428, 670.95605, -200.93431, 781.5227, -153.0724, 784.93634, -150.40697, 1179, 537, 1180, 569, 1181, 40, 786, -649, 669, -695, -756, -689, -1170, 43, -1169, 565, -1166, 516, -752.03485, -200.93431)
