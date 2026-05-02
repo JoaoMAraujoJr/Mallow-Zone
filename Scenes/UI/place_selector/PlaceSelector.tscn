@@ -1,0 +1,342 @@
+[gd_scene format=3 uid="uid://bvcmko4mtco18"]
+
+[ext_resource type="Texture2D" uid="uid://tbmy0xox6703" path="res://Assets/Textures/UI/place_selector/planet_selector_360x256.png" id="1_avwju"]
+[ext_resource type="Texture2D" uid="uid://dye27il8cdnau" path="res://Assets/Textures/UI/place_selector/lever_360x256.png" id="2_61e8n"]
+[ext_resource type="Texture2D" uid="uid://grawbcrrfo2y" path="res://Assets/Textures/UI/place_selector/spark_particle.png" id="2_nath3"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="3_61e8n"]
+
+[sub_resource type="GDScript" id="GDScript_nath3"]
+resource_name = "lever"
+script/source = "extends Control
+signal lever_pushed_down
+
+@export var start_position :float= -30.0
+@export var finish_position : float = 156.0
+var is_dragging : bool = false
+var mouse_on_lever:bool = false
+@export var speed : float = 100.0
+@onready var lever_area : Button = $lever/lever_area
+@onready var lever_visual : Control = $lever
+@onready var anim_play : AnimationPlayer = $lever/lever_anim_player
+var is_on_cooldown : bool = false
+@onready var cooldown_timer:Timer = $lever/Timer
+@onready var particle_1 :GPUParticles2D = $lever/particle_l
+@onready var particle_2 :GPUParticles2D = $lever/particle_r
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	if is_dragging :
+		particle_1.emitting = true
+		particle_2.emitting = true
+		anim_play.play(\"wooble\")
+		lever_visual.position.y = move_toward(lever_visual.position.y,clamp(get_local_mouse_position().y,start_position,finish_position) , delta * speed*2)
+		#print(\"mouse y pos: \", str(snapped(get_local_mouse_position().y,0.01)))
+		#print(\"lever y pos: \", str(snapped(lever_visual.position.y,0.01)))
+	else:
+		particle_1.emitting = false
+		particle_2.emitting = false
+		anim_play.play(\"idle\")
+		lever_visual.position.y = move_toward(lever_visual.position.y,start_position,delta*speed)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"Mouse_left\") and mouse_on_lever:
+		cooldown_timer.stop()
+		is_dragging = true
+		print(\"Dragging :\" , str(is_dragging))
+	elif event.is_action_released(\"Mouse_left\"):
+		cooldown_timer.start()
+		print(\"Dragging :\" , str(is_dragging))
+
+
+
+func _on_lever_area_mouse_entered() -> void:
+	mouse_on_lever = true
+	print(\"mouse on lever\")
+
+func _on_lever_area_mouse_exited() -> void:
+	mouse_on_lever = false
+	print(\"mouse left lever\")
+
+func _cooldown_timer_timeout() -> void:
+	is_dragging = false
+
+
+func _on_pushed_area_entered(area: Area2D) -> void:
+	if area.is_in_group(\"lever\"):
+		print(\"lever pushed\")
+		lever_pushed_down.emit()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nath3"]
+size = Vector2(152, 56)
+
+[sub_resource type="Curve" id="Curve_krmc0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7051282, 1), 0.0, 0.0, 0, 0, Vector2(0.9871795, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qg6px"]
+curve = SubResource("Curve_krmc0")
+
+[sub_resource type="Curve" id="Curve_pe3sv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99358976, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tclvq"]
+curve = SubResource("Curve_pe3sv")
+
+[sub_resource type="Curve" id="Curve_jwbsl"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.7509727), 0.0, 0.0, 0, 0, Vector2(0.99358976, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3oxap"]
+curve = SubResource("Curve_jwbsl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_akgp7"]
+particle_flag_disable_z = true
+angle_min = -29.99999
+angle_max = 30.000011
+initial_velocity_min = -10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -10, 0)
+scale_curve = SubResource("CurveTexture_3oxap")
+alpha_curve = SubResource("CurveTexture_qg6px")
+emission_curve = SubResource("CurveTexture_tclvq")
+
+[sub_resource type="Animation" id="Animation_61e8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lever_texture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 4.1900063)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lever_texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nath3"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lever_texture:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 4), Vector2(0, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lever_texture:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.46666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_krmc0"]
+resource_name = "wooble"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("lever_texture:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.32333332, 0.49333334, 0.6333333, 0.81, 0.96666664),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(-1, 4), Vector2(0, 5), Vector2(1, 4), Vector2(0, 3), Vector2(-1, 4), Vector2(1, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("lever_texture:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.23333333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.05, 1.05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qg6px"]
+_data = {
+&"RESET": SubResource("Animation_61e8n"),
+&"idle": SubResource("Animation_nath3"),
+&"wooble": SubResource("Animation_krmc0")
+}
+
+[node name="Control" type="Control" unique_id=1379822836]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="place_selector" type="Control" parent="." unique_id=1654195802]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.5
+offset_top = -217.50002
+offset_right = 301.5
+offset_bottom = 217.50002
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="display_texture" type="TextureRect" parent="place_selector" unique_id=1938931786]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -128.0
+offset_right = 180.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.639291, 1.639291)
+pivot_offset = Vector2(180, 128)
+mouse_filter = 2
+texture = ExtResource("1_avwju")
+
+[node name="lever_controller" type="Control" parent="place_selector" unique_id=746831484]
+layout_mode = 1
+anchor_left = 0.65400004
+anchor_top = 0.344
+anchor_right = 0.86300004
+anchor_bottom = 0.86800003
+offset_left = 0.13796997
+offset_top = -5.1399994
+offset_right = 5.110962
+offset_bottom = -0.08001709
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_nath3")
+
+[node name="pushed area" type="Area2D" parent="place_selector/lever_controller" unique_id=1834820227]
+position = Vector2(62, 213)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="place_selector/lever_controller/pushed area" unique_id=236709909]
+shape = SubResource("RectangleShape2D_nath3")
+
+[node name="lever" type="Control" parent="place_selector/lever_controller" unique_id=1668697134]
+layout_mode = 1
+anchor_left = 0.483
+anchor_right = 0.483
+offset_left = -80.273
+offset_right = 80.227
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="lever_area2" type="Area2D" parent="place_selector/lever_controller/lever" unique_id=964475979 groups=["lever"]]
+position = Vector2(79, 53)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="place_selector/lever_controller/lever/lever_area2" unique_id=575972867]
+shape = SubResource("RectangleShape2D_nath3")
+debug_color = Color(0.7806612, 0.40635398, 0.43775862, 0.41960785)
+
+[node name="particle_l" type="GPUParticles2D" parent="place_selector/lever_controller/lever" unique_id=1090980089]
+position = Vector2(44, 53)
+amount = 20
+texture = ExtResource("2_nath3")
+lifetime = 2.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_akgp7")
+
+[node name="particle_r" type="GPUParticles2D" parent="place_selector/lever_controller/lever" unique_id=380423167]
+position = Vector2(118, 53)
+amount = 20
+texture = ExtResource("2_nath3")
+lifetime = 2.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_akgp7")
+
+[node name="lever_texture" type="TextureRect" parent="place_selector/lever_controller/lever" unique_id=409266223]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.503
+anchor_top = 0.56
+anchor_right = 0.503
+anchor_bottom = 0.56
+offset_left = -80.48151
+offset_top = -35.009995
+offset_right = 80.404755
+offset_bottom = 34.99
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(80, 35)
+mouse_filter = 2
+texture = ExtResource("2_61e8n")
+
+[node name="lever_area" type="Button" parent="place_selector/lever_controller/lever" unique_id=784228367]
+z_index = 5
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.50200003
+anchor_bottom = 0.5
+offset_left = -80.25
+offset_top = -55.0
+offset_right = 80.42899
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="lever_anim_player" type="AnimationPlayer" parent="place_selector/lever_controller/lever" unique_id=1612014833]
+libraries/ = SubResource("AnimationLibrary_qg6px")
+
+[node name="Timer" type="Timer" parent="place_selector/lever_controller/lever" unique_id=1160160072]
+wait_time = 0.15
+
+[node name="Cursor" parent="." unique_id=2052081059 instance=ExtResource("3_61e8n")]
+layout_mode = 0
+
+[connection signal="area_entered" from="place_selector/lever_controller/pushed area" to="place_selector/lever_controller" method="_on_pushed_area_entered"]
+[connection signal="button_down" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_button_down"]
+[connection signal="mouse_entered" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_mouse_entered"]
+[connection signal="mouse_exited" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_mouse_exited"]
+[connection signal="timeout" from="place_selector/lever_controller/lever/Timer" to="place_selector/lever_controller" method="_cooldown_timer_timeout"]

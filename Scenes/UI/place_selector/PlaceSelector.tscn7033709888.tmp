@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://bvcmko4mtco18"]
+
+[ext_resource type="Texture2D" uid="uid://tbmy0xox6703" path="res://Assets/Textures/UI/place_selector/planet_selector_360x256.png" id="1_avwju"]
+[ext_resource type="Texture2D" uid="uid://dye27il8cdnau" path="res://Assets/Textures/UI/place_selector/lever_360x256.png" id="2_61e8n"]
+[ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="3_61e8n"]
+
+[sub_resource type="GDScript" id="GDScript_nath3"]
+resource_name = "lever"
+script/source = "extends Control
+
+@export var start_position :float= -30.0
+@export var finish_position : float = 156.0
+var is_dragging : bool = false
+var mouse_on_lever:bool = false
+@export var speed : float = 100.0
+@onready var lever_area : Button = $lever/lever_area
+@onready var lever_visual : Control = $lever
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	if is_dragging :
+		lever_visual.position.y = move_toward(lever_visual.position.y,clamp(get_global_mouse_position().y,start_position,finish_position) , delta * speed*1.5)
+		print(\"mouse_pos: \", str(get_global_mouse_position().y))
+		print(\"lever pos: \", str(lever_visual.position.y))
+	else:
+		lever_visual.position.y = move_toward(lever_visual.position.y,start_position,delta*speed)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"Mouse_left\") and mouse_on_lever:
+		is_dragging = true
+	elif event.is_action_released(\"Mouse_left\") or !mouse_on_lever:
+		is_dragging = false
+	print(\"Dragging :\" , str(is_dragging))
+func _on_lever_area_mouse_entered() -> void:
+	mouse_on_lever = true
+	print(\"mouse on lever\")
+
+
+func _on_lever_area_mouse_exited() -> void:
+	mouse_on_lever = false
+	print(\"mouse left lever\")
+"
+
+[node name="Control" type="Control" unique_id=1379822836]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="place_selector" type="Control" parent="." unique_id=1654195802]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.5
+offset_top = -217.50002
+offset_right = 301.5
+offset_bottom = 217.50002
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="display_texture" type="TextureRect" parent="place_selector" unique_id=1938931786]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -128.0
+offset_right = 180.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.639291, 1.639291)
+pivot_offset = Vector2(180, 128)
+mouse_filter = 2
+texture = ExtResource("1_avwju")
+
+[node name="lever_controller" type="Control" parent="place_selector" unique_id=746831484]
+layout_mode = 1
+anchor_left = 0.65400004
+anchor_top = 0.344
+anchor_right = 0.86300004
+anchor_bottom = 0.86800003
+offset_left = 0.13796997
+offset_top = -5.1399994
+offset_right = 5.110962
+offset_bottom = -0.08001709
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_nath3")
+
+[node name="lever" type="Control" parent="place_selector/lever_controller" unique_id=1668697134]
+layout_mode = 1
+anchor_left = 0.483
+anchor_right = 0.483
+offset_left = -80.273
+offset_top = 156.0
+offset_right = 80.227
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="lever_texture" type="TextureRect" parent="place_selector/lever_controller/lever" unique_id=409266223]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.503
+anchor_top = 0.56
+anchor_right = 0.503
+anchor_bottom = 0.56
+offset_left = -80.48151
+offset_top = -35.009995
+offset_right = 80.404755
+offset_bottom = 34.99
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(80, 35)
+mouse_filter = 2
+texture = ExtResource("2_61e8n")
+
+[node name="lever_area" type="Button" parent="place_selector/lever_controller/lever" unique_id=784228367]
+z_index = 5
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.50200003
+anchor_bottom = 0.5
+offset_left = -80.25
+offset_top = -55.0
+offset_right = 80.42899
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cursor" parent="." unique_id=2052081059 instance=ExtResource("3_61e8n")]
+layout_mode = 0
+
+[connection signal="button_down" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_button_down"]
+[connection signal="mouse_entered" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_mouse_entered"]
+[connection signal="mouse_exited" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_mouse_exited"]
