@@ -1,9 +1,99 @@
 [gd_scene format=3 uid="uid://bvcmko4mtco18"]
 
-[ext_resource type="Texture2D" uid="uid://tbmy0xox6703" path="res://Assets/Textures/UI/place_selector/planet_selector_360x256.png" id="1_avwju"]
+[ext_resource type="Theme" uid="uid://b8qb0x2jgy0pv" path="res://Assets/Themes/menu_theme.tres" id="1_pe3sv"]
+[ext_resource type="FontFile" uid="uid://rbecbd6xyer6" path="res://Assets/fonts/Jersey20-Regular.ttf" id="2_3oxap"]
 [ext_resource type="Texture2D" uid="uid://dye27il8cdnau" path="res://Assets/Textures/UI/place_selector/lever_360x256.png" id="2_61e8n"]
 [ext_resource type="Texture2D" uid="uid://grawbcrrfo2y" path="res://Assets/Textures/UI/place_selector/spark_particle.png" id="2_nath3"]
+[ext_resource type="Texture2D" uid="uid://bq3kolnssr225" path="res://Assets/Textures/UI/place_selector/placeholder_place_display.png" id="2_tclvq"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="3_61e8n"]
+[ext_resource type="Texture2D" uid="uid://x1pwur5se34v" path="res://Assets/Textures/floors/grass/menu_icon.png" id="3_jwbsl"]
+[ext_resource type="Shader" uid="uid://bamjvjfvh5yoj" path="res://Scripts/shaders/MyPSXShader.gdshader" id="4_jwbsl"]
+[ext_resource type="Texture2D" uid="uid://cw23ic2oqkueq" path="res://Assets/Textures/UI/place_selector/display_overlay.png" id="5_3oxap"]
+[ext_resource type="Texture2D" uid="uid://bp6hln17ncy2c" path="res://Assets/Textures/UI/place_selector/arron_l.png" id="5_iisaj"]
+[ext_resource type="Texture2D" uid="uid://bacc4wiscrk7w" path="res://Assets/Textures/UI/place_selector/planet_selector_360x256_transperent.png" id="6_jwbsl"]
+[ext_resource type="Texture2D" uid="uid://f5x8trccnxjt" path="res://Assets/Textures/UI/place_selector/arron_l_pressed.png" id="6_spxky"]
+[ext_resource type="Texture2D" uid="uid://bhbndqe6hy3w5" path="res://Assets/Textures/UI/place_selector/arron_l_hover.png" id="7_75w53"]
+[ext_resource type="Texture2D" uid="uid://c7wg3s0kep4tj" path="res://Assets/Textures/UI/place_selector/arron_r.png" id="9_8xmmg"]
+[ext_resource type="Texture2D" uid="uid://smvokjs1la56" path="res://Assets/Textures/UI/place_selector/arron_r_pressed.png" id="10_r48m7"]
+[ext_resource type="Texture2D" uid="uid://b67fmskqlntq2" path="res://Assets/Textures/UI/place_selector/arron_r_hover.png" id="11_oyf4r"]
+
+[sub_resource type="GDScript" id="GDScript_8xmmg"]
+resource_name = "PlaceSelector"
+script/source = "extends Control
+
+@export_category(\"Initial Catalogue\")
+@export var initial_catalogue_list :Array[AcquiredPlace]
+
+@export_category(\"Current_Catalogue\")
+var cur_catalogue_list :Array[AcquiredPlace]
+var cur_index :int = 0
+
+@export_category(\"Debug\")
+@export var place_name :Label
+@export var place_description :Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if SaveManager.current_save:
+		var saved_acquired_places :Array[AcquiredPlace]= SaveManager.current_save.acquired_places
+		if saved_acquired_places.is_empty():
+			SaveManager.current_save.acquired_places = initial_catalogue_list
+			save_catalogue()
+		elif !saved_acquired_places.is_empty() and saved_acquired_places != cur_catalogue_list:
+			cur_catalogue_list = saved_acquired_places
+			save_catalogue()
+
+
+func save_catalogue():
+	if SaveManager.current_save == null or SaveManager.current_slot == null:
+		return
+	SaveManager.current_save.acquired_places = cur_catalogue_list
+	SaveManager.save_game(SaveManager.current_slot)
+	
+func display_index(i:int):
+	if !cur_catalogue_list[i]:
+		return
+	var selected_place :AcquiredPlace= cur_catalogue_list[i]
+	var purchases_till_freepass : int
+	var name :String = selected_place.place.display_name
+	var description: String = selected_place.place.description
+	var color : Color = selected_place.place.color
+	var price : int = selected_place.place.price
+	var extra_info :String = \"Missing Exclusive Information\"
+	if selected_place.place.count_till_freepass == -1:
+		extra_info = \"+ This place free-pass is out of reach or doesnt exist\"
+	elif selected_place.freepass or (selected_place.count_purchases - selected_place.place.count_till_freepass)>=0:
+		cur_catalogue_list[i].freepass = true
+		extra_info = \"+ You already have this place free-pass\"
+	elif (selected_place.place.count_till_freepass - selected_place.count_purchases) > 0:
+		var times_left_to_buy : int = selected_place.place.count_till_freepass - selected_place.count_purchases
+		if times_left_to_buy > 1 :
+			extra_info = \"+ This place needs to be bought %d more times in order to get its free-pass.\" % times_left_to_buy
+		else:
+			extra_info = \"+ This place needs to be bought %d more time in order to get its free-pass.\" % times_left_to_buy
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akgp7"]
+shader = ExtResource("4_jwbsl")
+shader_parameter/jitter_intensity = 0.0710000033725
+shader_parameter/jitter_instability = 0.001
+shader_parameter/virtual_res_scale = 1.0
+shader_parameter/grain_intensity = 0.0290000013775
+shader_parameter/min_lum = 0.0
+shader_parameter/max_lum = 1.0
+shader_parameter/time_scale = 0.5
+shader_parameter/vignette_darkness = 0.0
+shader_parameter/vignette_outer_radius = 0.10000000149012
+shader_parameter/vignette_inner_radius = 0.2
+shader_parameter/chromatic_aberration = 0.0
+shader_parameter/warble_amount = 0.002
+shader_parameter/warble_speed = 0.7070000335825
+shader_parameter/enable_color_quantization = true
+shader_parameter/color_quant_steps = 32.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4r577"]
+blend_mode = 3
 
 [sub_resource type="GDScript" id="GDScript_nath3"]
 resource_name = "lever"
@@ -197,7 +287,139 @@ _data = {
 &"wooble": SubResource("Animation_krmc0")
 }
 
-[node name="Control" type="Control" unique_id=1379822836]
+[sub_resource type="Animation" id="Animation_8xmmg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/place_name:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/description_box/description:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/extra_info_box/extra_info:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer/place icon:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/place_img_texture:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_r48m7"]
+resource_name = "display"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/place_name:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/description_box/description:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/extra_info_box/extra_info:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer/place icon:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/place_img_texture:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oyf4r"]
+_data = {
+&"RESET": SubResource("Animation_8xmmg"),
+&"display": SubResource("Animation_r48m7")
+}
+
+[node name="PlaceSelector" type="Control" unique_id=1379822836]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,6 +427,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = SubResource("GDScript_8xmmg")
 
 [node name="place_selector" type="Control" parent="." unique_id=1654195802]
 layout_mode = 1
@@ -220,6 +443,282 @@ offset_bottom = 217.50002
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="press_lcd_display" type="Control" parent="place_selector" unique_id=2132255680]
+layout_mode = 1
+anchor_left = 0.924
+anchor_top = 0.657
+anchor_right = 0.924
+anchor_bottom = 0.657
+offset_left = -24.671997
+offset_top = -75.295
+offset_right = 24.328003
+offset_bottom = 75.70499
+pivot_offset = Vector2(25, 76)
+
+[node name="BG_display_2" type="ColorRect" parent="place_selector/press_lcd_display" unique_id=1099072636]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 76)
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="place_selector/press_lcd_display" unique_id=336494971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = 51.0
+offset_right = 51.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+pivot_offset = Vector2(75.5, 24.5)
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="lcd_text" type="RichTextLabel" parent="place_selector/press_lcd_display/MarginContainer" unique_id=992662822]
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_fonts/normal_font = ExtResource("2_3oxap")
+theme_override_font_sizes/normal_font_size = 37
+bbcode_enabled = true
+text = "ERROR404"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 3
+
+[node name="lines" type="TextureRect" parent="place_selector/press_lcd_display" unique_id=2244471]
+modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_right = 151.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("5_3oxap")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="info" type="Control" parent="place_selector" unique_id=1224741961]
+layout_mode = 1
+anchor_left = 0.34
+anchor_top = 0.483
+anchor_right = 0.34
+anchor_bottom = 0.483
+offset_left = -155.52
+offset_top = -150.605
+offset_right = 155.48
+offset_bottom = 150.39499
+
+[node name="BG_display_1" type="ColorRect" parent="place_selector/info" unique_id=294434599]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -5.0
+offset_right = 3.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="place_selector/info" unique_id=1434323887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="BoxContainer" type="BoxContainer" parent="place_selector/info/MarginContainer" unique_id=1932826725]
+layout_mode = 2
+
+[node name="name" type="VBoxContainer" parent="place_selector/info/MarginContainer/BoxContainer" unique_id=1785859123]
+layout_mode = 2
+
+[node name="top_label" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name" unique_id=1142643097]
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+text = "place name:"
+
+[node name="place_name" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name" unique_id=1861556422]
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_font_sizes/font_size = 32
+text = "Grasslands"
+
+[node name="selector" type="HBoxContainer" parent="place_selector/info/MarginContainer/BoxContainer/name" unique_id=544109202]
+layout_mode = 2
+
+[node name="place_img_texture" type="TextureRect" parent="place_selector/info/MarginContainer/BoxContainer/name/selector" unique_id=1400204480]
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
+texture = ExtResource("2_tclvq")
+
+[node name="MarginContainer" type="MarginContainer" parent="place_selector/info/MarginContainer/BoxContainer/name/selector" unique_id=636542931]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer" unique_id=605263324]
+layout_mode = 2
+
+[node name="description_box" type="VBoxContainer" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer" unique_id=1677176508]
+custom_minimum_size = Vector2(118, 120)
+layout_mode = 2
+theme_override_constants/separation = -7
+
+[node name="separator_over" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/description_box" unique_id=1307309414]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_constants/line_spacing = -20
+theme_override_font_sizes/font_size = 13
+text = "=================
+"
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/description_box" unique_id=1764907493]
+custom_minimum_size = Vector2(118, 0)
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_constants/line_spacing = -5
+theme_override_constants/paragraph_spacing = 0
+theme_override_font_sizes/font_size = 13
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt volutpat augue non mollis. Fusce non laoreet tortor. Maecenas maximus nunc a eleifend tincidunt.
+"
+horizontal_alignment = 3
+autowrap_mode = 3
+max_lines_visible = 10
+
+[node name="separator_under" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/description_box" unique_id=1820921834]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_constants/line_spacing = -20
+theme_override_font_sizes/font_size = 13
+text = "=================
+"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer" unique_id=1890061879]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+alignment = 1
+
+[node name="arrow_l" type="TextureButton" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer" unique_id=332431060]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_iisaj")
+texture_pressed = ExtResource("6_spxky")
+texture_hover = ExtResource("7_75w53")
+stretch_mode = 0
+
+[node name="place icon" type="TextureRect" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer" unique_id=284189839]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_jwbsl")
+stretch_mode = 5
+
+[node name="arrow_r" type="TextureButton" parent="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer" unique_id=207328169]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("9_8xmmg")
+texture_pressed = ExtResource("10_r48m7")
+texture_hover = ExtResource("11_oyf4r")
+stretch_mode = 0
+
+[node name="extra_info_box" type="VBoxContainer" parent="place_selector/info/MarginContainer/BoxContainer/name" unique_id=1117628756]
+layout_mode = 2
+theme_override_constants/separation = -7
+
+[node name="separator_over" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name/extra_info_box" unique_id=957925964]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_constants/line_spacing = -20
+theme_override_font_sizes/font_size = 13
+text = "==========================================
+"
+horizontal_alignment = 1
+
+[node name="extra_info" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name/extra_info_box" unique_id=467300440]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_constants/line_spacing = -5
+theme_override_constants/paragraph_spacing = 0
+theme_override_font_sizes/font_size = 13
+text = "+ this place needs to be bought 2 more times to get the free-pass."
+autowrap_mode = 3
+max_lines_visible = 11
+
+[node name="separator_under" type="Label" parent="place_selector/info/MarginContainer/BoxContainer/name/extra_info_box" unique_id=356417984]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+theme = ExtResource("1_pe3sv")
+theme_override_constants/line_spacing = -20
+theme_override_font_sizes/font_size = 13
+text = "==========================================
+"
+autowrap_mode = 2
+
+[node name="shader" type="ColorRect" parent="place_selector/info" unique_id=864610474]
+material = SubResource("ShaderMaterial_akgp7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="lcd_color" type="ColorRect" parent="place_selector/info" unique_id=583102784]
+material = SubResource("CanvasItemMaterial_4r577")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.72827196, 0.28894246, 1)
+
+[node name="lines" type="TextureRect" parent="place_selector/info" unique_id=812519583]
+modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_3oxap")
+expand_mode = 5
+stretch_mode = 1
 
 [node name="display_texture" type="TextureRect" parent="place_selector" unique_id=1938931786]
 layout_mode = 1
@@ -237,7 +736,7 @@ grow_vertical = 2
 scale = Vector2(1.639291, 1.639291)
 pivot_offset = Vector2(180, 128)
 mouse_filter = 2
-texture = ExtResource("1_avwju")
+texture = ExtResource("6_jwbsl")
 
 [node name="lever_controller" type="Control" parent="place_selector" unique_id=746831484]
 layout_mode = 1
@@ -334,6 +833,9 @@ wait_time = 0.15
 
 [node name="Cursor" parent="." unique_id=2052081059 instance=ExtResource("3_61e8n")]
 layout_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=587132252]
+libraries/ = SubResource("AnimationLibrary_oyf4r")
 
 [connection signal="area_entered" from="place_selector/lever_controller/pushed area" to="place_selector/lever_controller" method="_on_pushed_area_entered"]
 [connection signal="button_down" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_button_down"]

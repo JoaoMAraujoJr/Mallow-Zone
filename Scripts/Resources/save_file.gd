@@ -20,3 +20,4 @@ class_name SaveFile
 @export_group("Progress")
 @export var cur_place:Place = null
 @export var defeated_bosses:Array[String] =[]
+@export var acquired_places:Array[AcquiredPlace]=[]

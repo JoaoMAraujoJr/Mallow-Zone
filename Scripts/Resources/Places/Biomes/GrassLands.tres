@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cck47anyjtal5" path="res://Scenes/objects/forest/sunflower field.tscn" id="12_wmwkd"]
 [ext_resource type="PackedScene" uid="uid://tn1g7me5qb4l" path="res://Scenes/objects/forest/sunflower.tscn" id="13_qgh8n"]
 [ext_resource type="Texture2D" uid="uid://dt830ba28kiwq" path="res://Assets/Textures/floors/grass/Grassfloortexture_256.png" id="13_wmwkd"]
+[ext_resource type="Texture2D" uid="uid://bq3kolnssr225" path="res://Assets/Textures/UI/place_selector/placeholder_place_display.png" id="17_evm81"]
 [ext_resource type="Texture2D" uid="uid://cprythy3jbh1s" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_1.png" id="17_ra878"]
 [ext_resource type="Texture2D" uid="uid://cmjaal7y0dhei" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_2.png" id="18_hb8l3"]
 [ext_resource type="Texture2D" uid="uid://b8q3evsmf5672" path="res://Assets/Textures/floors/grass/Grassfloortexture_256_3.png" id="19_o5pq4"]
@@ -106,12 +107,9 @@ metadata/_custom_type_script = "uid://cfo3p3ue7dlo1"
 [resource]
 script = ExtResource("2_kklgl")
 weather = ExtResource("10_qgh8n")
-hasDayNightCycle = null
 warpArt = ExtResource("9_wmwkd")
 topTextureVariants = Array[Texture2D]([ExtResource("13_wmwkd"), ExtResource("13_wmwkd"), ExtResource("13_wmwkd"), ExtResource("17_ra878"), ExtResource("18_hb8l3"), ExtResource("19_o5pq4"), ExtResource("20_gog04"), ExtResource("21_stlos"), ExtResource("22_7yy0o")])
 bottomTexturesVariants = Array[Texture2D]([ExtResource("1_3uxnf")])
-has_trail = null
-trailParticles = null
 enemiesList = Array[ExtResource("1_cqk60")]([SubResource("Resource_fdx75")])
 itemDropsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_k5la2"), SubResource("Resource_7uiy4")])
 objectsList = Array[ExtResource("1_cqk60")]([SubResource("Resource_i7rku"), SubResource("Resource_ww40o"), SubResource("Resource_0afbt"), SubResource("Resource_o5pq4"), SubResource("Resource_pf4ip"), null, SubResource("Resource_ra878"), SubResource("Resource_hb8l3"), null])
@@ -121,5 +119,8 @@ place_id = "grassland"
 display_name = "Grassland"
 description = "strange plains landscape"
 menu_icon = ExtResource("8_vn8t5")
+selector_img = ExtResource("17_evm81")
+count_till_freepass = 4
+price = 100
 level_path = "uid://216kvumeoqpb"
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"

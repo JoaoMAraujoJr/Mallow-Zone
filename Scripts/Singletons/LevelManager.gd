@@ -4,6 +4,8 @@ var PlataforScene :PackedScene = preload("res://Scenes/stages/Plataform.tscn")
 var cur_place :Place 
 var last_cur_place :Place
 
+var cur_selected_place: AcquiredPlace
+
 var config :BiomeManagerConfig= load("res://Scripts/Resources/Data/BiomeManagerData.tres")
 var placeList := {}
 
