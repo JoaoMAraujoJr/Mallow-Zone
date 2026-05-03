@@ -3,9 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://cj83ggelb8xdd" path="res://Assets/Textures/floors/winter_forest/DeepWinter_bottom_spr_png.png" id="1_aqxu0"]
 [ext_resource type="Script" uid="uid://cfo3p3ue7dlo1" path="res://Scripts/Resources/SpawnEntry.gd" id="1_cwix2"]
 [ext_resource type="Script" uid="uid://eq8xeuv5a2or" path="res://Scripts/Resources/Biome.gd" id="2_tl7jt"]
+[ext_resource type="Texture2D" uid="uid://lbqhfsarrvyd" path="res://Assets/Textures/floors/winter_forest/menu_icon.png" id="2_yhiqs"]
 [ext_resource type="Resource" uid="uid://c7e4pxjbd4syb" path="res://Scripts/Resources/Weather/snowing.tres" id="3_tl7jt"]
 [ext_resource type="PackedScene" uid="uid://dqiecpoqsouu3" path="res://Scenes/objects/pine_tree.tscn" id="5_qefhv"]
 [ext_resource type="Texture2D" uid="uid://xtmguwro6tod" path="res://Assets/Textures/sprite_masks/player_mask/snow_mask.png" id="6_ddik0"]
+[ext_resource type="Texture2D" uid="uid://bq3kolnssr225" path="res://Assets/Textures/UI/place_selector/placeholder_place_display.png" id="6_icuy5"]
 [ext_resource type="Texture2D" uid="uid://bp3jy8kg8lv3k" path="res://Assets/Textures/floors/winter_forest/DeepWinter_upper_spr.png" id="6_qefhv"]
 [ext_resource type="PackedScene" uid="uid://bpoir3q5krjs7" path="res://Scenes/particles/trail/snow_trail_particle.tscn" id="8_skpwh"]
 
@@ -31,6 +33,11 @@ locatablesList = null
 nearbyBiomesList = null
 place_id = "deepwinter"
 display_name = "Deep Winter"
-description = null
+description = "A cold, unforgiving land full of strange surprises. The snow feels unnatural, almost alive. Could a human survive in a place like this?"
+menu_icon = ExtResource("2_yhiqs")
+selector_img = ExtResource("6_icuy5")
+count_till_freepass = 10
+price = 200
+color = Color(0.6117647, 1, 1, 1)
 level_path = "uid://216kvumeoqpb"
 metadata/_custom_type_script = "uid://eq8xeuv5a2or"

@@ -110,17 +110,48 @@ func save_and_apply_settings(new_settings: SavedSettings):
 	cur_settings = new_settings
 	var path:= "user://settings/saved_settings.tres"
 	ResourceSaver.save(new_settings,path)
+	apply_settings()
 func load_settings():
 	var path = "user://settings/saved_settings.tres"
 	if FileAccess.file_exists(path):
 		var loaded_res = ResourceLoader.load(path)
 		if loaded_res is SavedSettings:
 			cur_settings = loaded_res
+			apply_settings()
 			print("Settings loaded successfully")
 			return
 	# If file doesn't exist or load failed:
 	print("No settings found, creating default")
 	cur_settings = SavedSettings.new()
 	save_and_apply_settings(cur_settings)
-		
-		
+func apply_settings():
+	if not cur_settings: return
+	
+	# --- APLICAR VÍDEO ---
+	var res_parts = cur_settings.res.split("x")
+	if res_parts.size() == 2:
+		var width = int(res_parts[0])
+		var height = int(res_parts[1])
+		# Define o tamanho da janela e a escala interna
+		get_window().content_scale_size = Vector2i(width, height)
+		DisplayServer.window_set_size(Vector2i(width, height))
+	
+	# Fullscreen
+	var mode = DisplayServer.WINDOW_MODE_FULLSCREEN if cur_settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED
+	DisplayServer.window_set_mode(mode)
+	
+	# --- APLICAR ÁUDIO ---
+	_set_bus_volume("Master", cur_settings.master_vol)
+	_set_bus_volume("Music", cur_settings.music_vol)
+	_set_bus_volume("Ambience", cur_settings.ambience_vol)
+	_set_bus_volume("SFX", cur_settings.sfx_vol)
+	_set_bus_volume("SFXReverb", cur_settings.sfx_vol)
+
+	print("Settings applied to engine")
+
+# Função auxiliar para o áudio
+func _set_bus_volume(bus_name: String, value: float):
+	var bus_index = AudioServer.get_bus_index(bus_name)
+	if bus_index != -1:
+		var vol_linear = value / 100.0
+		AudioServer.set_bus_volume_linear(bus_index, vol_linear)

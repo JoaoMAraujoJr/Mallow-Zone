@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://bvcmko4mtco18"]
 
+[ext_resource type="Script" uid="uid://oef5vaxbfs7x" path="res://Scripts/Resources/AcquiredPlace.gd" id="1_oyf4r"]
 [ext_resource type="Theme" uid="uid://b8qb0x2jgy0pv" path="res://Assets/Themes/menu_theme.tres" id="1_pe3sv"]
 [ext_resource type="FontFile" uid="uid://rbecbd6xyer6" path="res://Assets/fonts/Jersey20-Regular.ttf" id="2_3oxap"]
 [ext_resource type="Texture2D" uid="uid://dye27il8cdnau" path="res://Assets/Textures/UI/place_selector/lever_360x256.png" id="2_61e8n"]
 [ext_resource type="Texture2D" uid="uid://grawbcrrfo2y" path="res://Assets/Textures/UI/place_selector/spark_particle.png" id="2_nath3"]
+[ext_resource type="Resource" uid="uid://d11kdady4lqr2" path="res://Scripts/Resources/Places/Biomes/GrassLands.tres" id="2_r8lkc"]
 [ext_resource type="Texture2D" uid="uid://bq3kolnssr225" path="res://Assets/Textures/UI/place_selector/placeholder_place_display.png" id="2_tclvq"]
 [ext_resource type="PackedScene" uid="uid://d18i2trwgehmc" path="res://Scenes/UI/cursor_v2.tscn" id="3_61e8n"]
+[ext_resource type="Resource" uid="uid://dmatsd422cqmg" path="res://Scripts/Resources/Places/Biomes/DeepWinter.tres" id="3_cidul"]
+[ext_resource type="Texture2D" uid="uid://c05nc1hf20mgi" path="res://Assets/Textures/UI/place_selector/question_mark_texture.png" id="3_hatxw"]
 [ext_resource type="Texture2D" uid="uid://x1pwur5se34v" path="res://Assets/Textures/floors/grass/menu_icon.png" id="3_jwbsl"]
+[ext_resource type="Texture2D" uid="uid://bd844dldwxjf6" path="res://Assets/Textures/UI/place_selector/missing_icon.png" id="4_cidul"]
 [ext_resource type="Shader" uid="uid://bamjvjfvh5yoj" path="res://Scripts/shaders/MyPSXShader.gdshader" id="4_jwbsl"]
 [ext_resource type="Texture2D" uid="uid://cw23ic2oqkueq" path="res://Assets/Textures/UI/place_selector/display_overlay.png" id="5_3oxap"]
 [ext_resource type="Texture2D" uid="uid://bp6hln17ncy2c" path="res://Assets/Textures/UI/place_selector/arron_l.png" id="5_iisaj"]
@@ -21,6 +26,7 @@
 resource_name = "PlaceSelector"
 script/source = "extends Control
 
+
 @export_category(\"Initial Catalogue\")
 @export var initial_catalogue_list :Array[AcquiredPlace]
 
@@ -28,11 +34,20 @@ script/source = "extends Control
 var cur_catalogue_list :Array[AcquiredPlace]
 var cur_index :int = 0
 
+var is_selected :bool=false
+
 @export_category(\"Debug\")
+@export var missing_place_img :Texture
+@export var missing_place_icon :Texture
 @export var place_name :Label
 @export var place_description :Label
+@export var lcd_lever_display : RichTextLabel
+@export var place_extra_info :Label
+@export var color_overlay :ColorRect
+@export var place_img:TextureRect
+@export var place_icon:TextureRect
 
-
+@onready var display_anim_player :AnimationPlayer = $AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if SaveManager.current_save:
@@ -43,7 +58,9 @@ func _ready() -> void:
 		elif !saved_acquired_places.is_empty() and saved_acquired_places != cur_catalogue_list:
 			cur_catalogue_list = saved_acquired_places
 			save_catalogue()
-
+	else:
+		cur_catalogue_list = initial_catalogue_list
+		display_index(cur_index)
 
 func save_catalogue():
 	if SaveManager.current_save == null or SaveManager.current_slot == null:
@@ -55,24 +72,116 @@ func display_index(i:int):
 	if !cur_catalogue_list[i]:
 		return
 	var selected_place :AcquiredPlace= cur_catalogue_list[i]
-	var purchases_till_freepass : int
-	var name :String = selected_place.place.display_name
+	#name and description:
+	var _name :String = selected_place.place.display_name
 	var description: String = selected_place.place.description
+	
+	place_name.text = _name
+	place_description.text = description
+	#color
 	var color : Color = selected_place.place.color
+	var colorHEX = color.to_html(false)
+	color_overlay.color = color
+	
+	#img and icon
+	if selected_place.place.menu_icon:
+		place_icon.texture = selected_place.place.menu_icon
+	else: place_img.texture = missing_place_img
+	if selected_place.place.selector_img:
+		place_img.texture = selected_place.place.selector_img
+	else: place_img.texture = missing_place_icon
+	
+	#extra info and price
 	var price : int = selected_place.place.price
+	lcd_lever_display.text = str(price) + \"$\"
 	var extra_info :String = \"Missing Exclusive Information\"
 	if selected_place.place.count_till_freepass == -1:
 		extra_info = \"+ This place free-pass is out of reach or doesnt exist\"
 	elif selected_place.freepass or (selected_place.count_purchases - selected_place.place.count_till_freepass)>=0:
 		cur_catalogue_list[i].freepass = true
 		extra_info = \"+ You already have this place free-pass\"
+		lcd_lever_display.text =\"[color=\"+colorHEX+\"][wave amp=30 freq=8]FREEPASS[/wave][/color]\"
 	elif (selected_place.place.count_till_freepass - selected_place.count_purchases) > 0:
 		var times_left_to_buy : int = selected_place.place.count_till_freepass - selected_place.count_purchases
 		if times_left_to_buy > 1 :
 			extra_info = \"+ This place needs to be bought %d more times in order to get its free-pass.\" % times_left_to_buy
 		else:
 			extra_info = \"+ This place needs to be bought %d more time in order to get its free-pass.\" % times_left_to_buy
+	place_extra_info.text = extra_info
+
+
+func _on_arrow_l_pressed() -> void:
+	is_selected = false
+	if (cur_index - 1)< 0:
+		cur_index = (cur_catalogue_list.size() - 1)
+	else:
+		cur_index -= 1
+	display_anim_player.play_backwards(\"display\")
+	await display_anim_player.animation_finished
+	display_index(cur_index)
+	LevelManager.cur_selected_place = (cur_catalogue_list[cur_index])
+	display_anim_player.play(\"display\")
+
+
+func _on_arrow_r_pressed() -> void:
+	is_selected = false
+	if (cur_index + 1) > cur_catalogue_list.size() - 1:
+		cur_index = 0
+	else:
+		cur_index += 1
+	display_anim_player.play_backwards(\"display\")
+	await display_anim_player.animation_finished
+	display_index(cur_index)
+	LevelManager.cur_selected_place = (cur_catalogue_list[cur_index])
+	display_anim_player.play(\"display\")
+
+func update_extra_info():
+	var selected_place = cur_catalogue_list[cur_index]
+	var price : int = selected_place.place.price
+	lcd_lever_display.text = str(price) + \"$\"
+	var extra_info :String = \"Missing Exclusive Information\"
+	if selected_place.place.count_till_freepass == -1:
+		extra_info = \"+ This place free-pass is out of reach or doesnt exist\"
+	elif selected_place.freepass or (selected_place.count_purchases - selected_place.place.count_till_freepass)>=0:
+		cur_catalogue_list[cur_index].freepass = true
+		extra_info = \"+ You already have this place free-pass\"
+		var color : Color = selected_place.place.color
+		var colorHEX = color.to_html(false)
+		lcd_lever_display.text =\"[color=\"+colorHEX+\"][wave amp=30 freq=8]FREEPASS[/wave][/color]\"
+	elif (selected_place.place.count_till_freepass - selected_place.count_purchases) > 0:
+		var times_left_to_buy : int = selected_place.place.count_till_freepass - selected_place.count_purchases
+		if times_left_to_buy > 1 :
+			extra_info = \"+ This place needs to be bought %d more times in order to get its free-pass.\" % times_left_to_buy
+		else:
+			extra_info = \"+ This place needs to be bought %d more time in order to get its free-pass.\" % times_left_to_buy
+	place_extra_info.text = extra_info
+	
+func _upon_lever_pushed_down() -> void:
+	if is_selected:
+		return
+	
+	cur_catalogue_list[cur_index].count_purchases +=1
+	update_extra_info()
+	
+	if SaveManager.current_save:
+		SaveManager.current_save.acquired_places = cur_catalogue_list
+	is_selected = true
+	lcd_lever_display.text = \"[wave amp=20 freq=8][rainbow freq=0.3 sat=0.7 val=0.8]SELECTED[/rainbow][/wave]\"
+	
+	
 "
+
+[sub_resource type="Resource" id="Resource_hatxw"]
+script = ExtResource("1_oyf4r")
+place = ExtResource("2_r8lkc")
+count_purchases = 4
+metadata/_custom_type_script = "uid://oef5vaxbfs7x"
+
+[sub_resource type="Resource" id="Resource_5akpt"]
+script = ExtResource("1_oyf4r")
+place = ExtResource("3_cidul")
+count_purchases = 3
+metadata/_custom_type_script = "uid://oef5vaxbfs7x"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_akgp7"]
 shader = ExtResource("4_jwbsl")
@@ -359,7 +468,7 @@ tracks/0/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6666667),
+"times": PackedFloat32Array(0.033333335, 0.6666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -371,7 +480,7 @@ tracks/1/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.033333335, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -383,7 +492,7 @@ tracks/2/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.033333335, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -395,7 +504,7 @@ tracks/3/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.8666667),
+"times": PackedFloat32Array(0.033333335, 0.8666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -407,7 +516,7 @@ tracks/4/path = NodePath("place_selector/info/MarginContainer/BoxContainer/name/
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.93333334),
+"times": PackedFloat32Array(0.033333335, 0.93333334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -419,7 +528,7 @@ _data = {
 &"display": SubResource("Animation_r48m7")
 }
 
-[node name="PlaceSelector" type="Control" unique_id=1379822836]
+[node name="PlaceSelector" type="Control" unique_id=1379822836 node_paths=PackedStringArray("place_name", "place_description", "lcd_lever_display", "place_extra_info", "color_overlay", "place_img", "place_icon")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -428,6 +537,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = SubResource("GDScript_8xmmg")
+initial_catalogue_list = Array[ExtResource("1_oyf4r")]([SubResource("Resource_hatxw"), SubResource("Resource_5akpt")])
+missing_place_img = ExtResource("3_hatxw")
+missing_place_icon = ExtResource("4_cidul")
+place_name = NodePath("place_selector/info/MarginContainer/BoxContainer/name/place_name")
+place_description = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/description_box/description")
+lcd_lever_display = NodePath("place_selector/press_lcd_display/MarginContainer/lcd_text")
+place_extra_info = NodePath("place_selector/info/MarginContainer/BoxContainer/name/extra_info_box/extra_info")
+color_overlay = NodePath("place_selector/info/lcd_color")
+place_img = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/place_img_texture")
+place_icon = NodePath("place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer/place icon")
 
 [node name="place_selector" type="Control" parent="." unique_id=1654195802]
 layout_mode = 1
@@ -439,9 +558,10 @@ anchor_bottom = 0.5
 offset_left = -301.5
 offset_top = -217.50002
 offset_right = 301.5
-offset_bottom = 217.50002
+offset_bottom = 217.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(301.5, 214.50002)
 mouse_filter = 1
 
 [node name="press_lcd_display" type="Control" parent="place_selector" unique_id=2132255680]
@@ -490,10 +610,10 @@ theme = ExtResource("1_pe3sv")
 theme_override_fonts/normal_font = ExtResource("2_3oxap")
 theme_override_font_sizes/normal_font_size = 37
 bbcode_enabled = true
-text = "ERROR404"
+text = "[color=00AD3C][wave amp=30 freq=8]FREEPASS[/wave][/color]"
 scroll_active = false
 autowrap_mode = 0
-horizontal_alignment = 3
+horizontal_alignment = 1
 
 [node name="lines" type="TextureRect" parent="place_selector/press_lcd_display" unique_id=2244471]
 modulate = Color(1, 1, 1, 0.5882353)
@@ -837,6 +957,9 @@ layout_mode = 0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=587132252]
 libraries/ = SubResource("AnimationLibrary_oyf4r")
 
+[connection signal="pressed" from="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer/arrow_l" to="." method="_on_arrow_l_pressed"]
+[connection signal="pressed" from="place_selector/info/MarginContainer/BoxContainer/name/selector/MarginContainer/VBoxContainer/HBoxContainer/arrow_r" to="." method="_on_arrow_r_pressed"]
+[connection signal="lever_pushed_down" from="place_selector/lever_controller" to="." method="_upon_lever_pushed_down"]
 [connection signal="area_entered" from="place_selector/lever_controller/pushed area" to="place_selector/lever_controller" method="_on_pushed_area_entered"]
 [connection signal="button_down" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_button_down"]
 [connection signal="mouse_entered" from="place_selector/lever_controller/lever/lever_area" to="place_selector/lever_controller" method="_on_lever_area_mouse_entered"]
